@@ -638,6 +638,7 @@ export async function fetchLanguageStats(): Promise<LanguageStat[]> {
 				percentage: totalBytes > 0 ? (bytes / totalBytes) * 100 : 0,
 				color: LANGUAGE_COLORS[name] ?? LANGUAGE_COLORS.Other ?? "#8b949e",
 			}))
+			.filter((lang) => lang.percentage >= 1) // Filter out languages below 1%
 			.sort((a, b) => b.bytes - a.bytes);
 
 		return stats;

@@ -1,6 +1,6 @@
 "use client";
 
-import { GitBranch, GitPullRequest, AlertCircle, Star, Users, FolderGit2 } from "lucide-react";
+import { GitBranch, type Star as StarIcon, GitPullRequest, Users, FolderGit2, UserPlus } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
@@ -11,7 +11,7 @@ interface StatCard {
     id: string;
     label: string;
     value: number;
-    icon: typeof Star;
+    icon: typeof StarIcon;
     color: string;
     gradient: string;
 }
@@ -93,10 +93,10 @@ export function GitHubStats() {
         return (
             <div className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6">
                 <h3 className="mb-6 text-center font-semibold text-xl">GitHub Statistics</h3>
-                <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
-                    {Array.from({ length: 6 }).map((_, i) => (
+                <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
+                    {Array.from({ length: 5 }).map((_, i) => (
                         <div
-                            key={`skeleton-${i}`}
+                            key={`skeleton-${i + Math.random()}`}
                             className="h-24 animate-pulse rounded-lg bg-[var(--border)]"
                         />
                     ))}
@@ -134,22 +134,6 @@ export function GitHubStats() {
             gradient: "from-purple-500/20 to-purple-600/5",
         },
         {
-            id: "issues",
-            label: "Issues",
-            value: stats?.totalIssues ?? 0,
-            icon: AlertCircle,
-            color: "#f59e0b",
-            gradient: "from-amber-500/20 to-amber-600/5",
-        },
-        {
-            id: "stars",
-            label: "Total Stars",
-            value: stats?.totalStars ?? 0,
-            icon: Star,
-            color: "#eab308",
-            gradient: "from-yellow-500/20 to-yellow-600/5",
-        },
-        {
             id: "repos",
             label: "Repositories",
             value: stats?.totalRepos ?? 0,
@@ -164,6 +148,14 @@ export function GitHubStats() {
             icon: Users,
             color: "#ec4899",
             gradient: "from-pink-500/20 to-pink-600/5",
+        },
+        {
+            id: "following",
+            label: "Following",
+            value: stats?.following ?? 0,
+            icon: UserPlus,
+            color: "#06b6d4",
+            gradient: "from-cyan-500/20 to-cyan-600/5",
         },
     ];
 
@@ -181,7 +173,7 @@ export function GitHubStats() {
                 </span>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6" ref={cardsRef}>
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5" ref={cardsRef}>
                 {statCards.map((stat) => {
                     const Icon = stat.icon;
                     return (

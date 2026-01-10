@@ -1,11 +1,10 @@
 "use client";
 
-import { Briefcase, Code, FolderGit2, Star } from "lucide-react";
+import { Code, FolderGit2, GitCommit, GitPullRequest } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
-import { experiences } from "~/lib/data/experience";
 import { api } from "~/trpc/react";
 
 interface Metric {
@@ -67,25 +66,9 @@ export function PerformanceMetrics() {
 
 	// Calculate metrics
 	const totalRepos = projects?.length ?? 0;
-	const totalStars =
-		projects?.reduce((sum, p) => sum + (p.stargazers_count ?? 0), 0) ?? 0;
-
-	// Calculate years of experience from earliest start date
-	const yearsOfExperience = (() => {
-		if (experiences.length === 0) return 0;
-		const earliestDate = experiences.reduce(
-			(earliest, exp) => {
-				const startDate = new Date(exp.startDate);
-				return startDate < earliest ? startDate : earliest;
-			},
-			new Date(experiences[0]?.startDate ?? Date.now()),
-		);
-
-		const now = new Date();
-		const diffMs = now.getTime() - earliestDate.getTime();
-		const diffYears = diffMs / (1000 * 60 * 60 * 24 * 365);
-		return Math.round(diffYears * 10) / 10; // Round to 1 decimal
-	})();
+	const { data: githubStats } = api.githubStats.getUserStats.useQuery();
+	const totalCommits = githubStats?.totalCommits ?? 0;
+	const totalPRs = githubStats?.totalPRs ?? 0;
 
 	const projectsCompleted = totalRepos;
 
@@ -97,17 +80,16 @@ export function PerformanceMetrics() {
 			icon: FolderGit2,
 		},
 		{
-			id: "stars",
-			label: "Total Stars",
-			value: totalStars,
-			icon: Star,
+			id: "commits",
+			label: "Total Commits",
+			value: totalCommits,
+			icon: GitCommit,
 		},
 		{
-			id: "experience",
-			label: "Years of Experience",
-			value: yearsOfExperience,
-			icon: Briefcase,
-			suffix: "+",
+			id: "prs",
+			label: "Pull Requests",
+			value: totalPRs,
+			icon: GitPullRequest,
 		},
 		{
 			id: "projects",
