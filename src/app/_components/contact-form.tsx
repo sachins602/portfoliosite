@@ -134,17 +134,17 @@ export function ContactForm() {
 		<form className="space-y-6" onSubmit={handleSubmit} ref={formRef}>
 			<div>
 				<label
-					className="mb-2 block font-medium text-[var(--text-secondary)] text-sm"
+					className="mb-2 block font-medium text-(--text-secondary) text-sm"
 					htmlFor="name"
 				>
 					Name
 				</label>
 				<input
-					className={`w-full rounded-lg border bg-[var(--bg-secondary)] px-4 py-3 ${
+					className={`w-full rounded-lg border bg-(--bg-secondary) px-4 py-3 ${
 						errors.name
 							? "border-red-500"
-							: "border-[var(--border)] focus:border-[var(--accent)]"
-					} transition-all focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/20`}
+							: "border-(--border) focus:border-(--accent)"
+					} transition-all focus:outline-none focus:ring-(--accent)/20 focus:ring-2`}
 					id="name"
 					onBlur={handleInputBlur}
 					onChange={(e) => setName(e.target.value)}
@@ -160,17 +160,17 @@ export function ContactForm() {
 
 			<div>
 				<label
-					className="mb-2 block font-medium text-[var(--text-secondary)] text-sm"
+					className="mb-2 block font-medium text-(--text-secondary) text-sm"
 					htmlFor="email"
 				>
 					Email
 				</label>
 				<input
-					className={`w-full rounded-lg border bg-[var(--bg-secondary)] px-4 py-3 ${
+					className={`w-full rounded-lg border bg-(--bg-secondary) px-4 py-3 ${
 						errors.email
 							? "border-red-500"
-							: "border-[var(--border)] focus:border-[var(--accent)]"
-					} transition-all focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/20`}
+							: "border-(--border) focus:border-(--accent)"
+					} transition-all focus:outline-none focus:ring-(--accent)/20 focus:ring-2`}
 					id="email"
 					onBlur={handleInputBlur}
 					onChange={(e) => setEmail(e.target.value)}
@@ -186,17 +186,17 @@ export function ContactForm() {
 
 			<div>
 				<label
-					className="mb-2 block font-medium text-[var(--text-secondary)] text-sm"
+					className="mb-2 block font-medium text-(--text-secondary) text-sm"
 					htmlFor="message"
 				>
 					Message
 				</label>
 				<textarea
-					className={`w-full rounded-lg border bg-[var(--bg-secondary)] px-4 py-3 ${
+					className={`w-full rounded-lg border bg-(--bg-secondary) px-4 py-3 ${
 						errors.message
 							? "border-red-500"
-							: "border-[var(--border)] focus:border-[var(--accent)]"
-					} resize-none transition-all focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/20`}
+							: "border-(--border) focus:border-(--accent)"
+					} resize-none transition-all focus:outline-none focus:ring-(--accent)/20 focus:ring-2`}
 					id="message"
 					onBlur={handleInputBlur}
 					onChange={(e) => setMessage(e.target.value)}
@@ -211,7 +211,7 @@ export function ContactForm() {
 			</div>
 
 			<button
-				className="flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-8 py-4 font-semibold text-white transition-colors hover:bg-[var(--accent-hover)] disabled:cursor-not-allowed disabled:opacity-50"
+				className="flex w-full items-center justify-center gap-2 rounded-lg bg-(--accent) px-8 py-4 font-semibold text-white transition-colors hover:bg-(--accent-hover) disabled:cursor-not-allowed disabled:opacity-50"
 				disabled={isSubmitting}
 				type="submit"
 			>

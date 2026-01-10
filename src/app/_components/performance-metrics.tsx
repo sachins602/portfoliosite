@@ -39,7 +39,9 @@ function AnimatedCounter({
 			count: value,
 			duration,
 			easing: easing.easeOut,
-			update: (anim: { animatables?: Array<{ target: { count: number } }> }) => {
+			update: (anim: {
+				animatables?: Array<{ target: { count: number } }>;
+			}) => {
 				setDisplayValue(Math.floor(anim.animatables?.[0]?.target.count ?? 0));
 			},
 		});

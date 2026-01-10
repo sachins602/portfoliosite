@@ -133,7 +133,7 @@ export function Hero() {
 				<div className="text-center">
 					{/* Greeting */}
 					<div
-						className="mb-4 text-[var(--text-secondary)] text-lg sm:text-xl"
+						className="mb-4 text-(--text-secondary) text-lg sm:text-xl"
 						ref={greetingRef}
 						style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 					>
@@ -145,31 +145,35 @@ export function Hero() {
 						className="mb-6 font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-8xl"
 						ref={nameRef}
 					>
-						{name.split("").map((char, index) => (
-							<span
-								className="inline-block"
-								key={index}
-								style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
-							>
-								{char === " " ? "\u00A0" : char}
-							</span>
-						))}
+						{name.split("").map((char, index) => {
+							// Use position-based key since each character position is unique
+							const uniqueKey = `char-${index}-${char.charCodeAt(0)}`;
+							return (
+								<span
+									className="inline-block"
+									key={uniqueKey}
+									style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
+								>
+									{char === " " ? "\u00A0" : char}
+								</span>
+							);
+						})}
 					</h1>
 
 					{/* Subtitle with typing effect */}
 					<div
-						className="mb-4 min-h-[2em] font-medium text-[var(--text-secondary)] text-xl sm:text-2xl md:text-3xl"
+						className="mb-4 min-h-[2em] font-medium text-(--text-secondary) text-xl sm:text-2xl md:text-3xl"
 						ref={subtitleRef}
 					>
 						{subtitleText}
 						{showCursor && (
-							<span className="ml-1 inline-block h-[1em] w-0.5 animate-pulse bg-[var(--accent)]" />
+							<span className="ml-1 inline-block h-[1em] w-0.5 animate-pulse bg-(--accent)" />
 						)}
 					</div>
 
 					{/* Tagline */}
 					<p
-						className="mb-12 text-[var(--text-secondary)] text-lg sm:text-xl"
+						className="mb-12 text-(--text-secondary) text-lg sm:text-xl"
 						ref={taglineRef}
 						style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 					>
@@ -182,7 +186,7 @@ export function Hero() {
 						ref={buttonsRef}
 					>
 						<button
-							className="transform rounded-lg bg-[var(--accent)] px-8 py-4 font-semibold text-white transition-colors hover:scale-105 hover:bg-[var(--accent-hover)] active:scale-95"
+							className="transform rounded-lg bg-(--accent) px-8 py-4 font-semibold text-white transition-colors hover:scale-105 hover:bg-(--accent-hover) active:scale-95"
 							onClick={() => scrollToSection("projects")}
 							style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 							type="button"
@@ -190,7 +194,7 @@ export function Hero() {
 							View Projects
 						</button>
 						<button
-							className="transform rounded-lg border-2 border-[var(--accent)] px-8 py-4 font-semibold text-[var(--accent)] transition-colors hover:scale-105 hover:bg-[var(--accent)]/10 active:scale-95"
+							className="transform rounded-lg border-(--accent) border-2 px-8 py-4 font-semibold text-(--accent) transition-colors hover:scale-105 hover:bg-(--accent)/10 active:scale-95"
 							onClick={() => scrollToSection("contact")}
 							style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 							type="button"
@@ -201,7 +205,7 @@ export function Hero() {
 
 					{/* Scroll indicator */}
 					<div className="mt-16 animate-bounce">
-						<ArrowDown className="mx-auto h-6 w-6 text-[var(--text-secondary)]" />
+						<ArrowDown className="mx-auto h-6 w-6 text-(--text-secondary)" />
 					</div>
 				</div>
 			</div>

@@ -59,29 +59,18 @@ export function SkillsGrid() {
 			className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4"
 			ref={containerRef}
 		>
-			{skills.map((skill, index) => {
+			{skills.map((skill) => {
 				const Icon = skill.icon;
 				return (
 					<div
-						className="skill-item group cursor-pointer rounded-lg border p-4 transition-colors"
-						key={index}
-						onMouseEnter={(e) => {
-							e.currentTarget.style.borderColor = "var(--accent)";
-						}}
-						onMouseLeave={(e) => {
-							e.currentTarget.style.borderColor = "var(--border)";
-						}}
+						className="skill-item group cursor-pointer rounded-lg border border-(--border) bg-(--bg-secondary) p-4 transition-colors hover:border-(--accent)"
+						key={skill.name}
 						style={{
 							opacity: prefersReducedMotion() ? 1 : 0,
-							backgroundColor: "var(--bg-secondary)",
-							borderColor: "var(--border)",
 						}}
 					>
 						<div className="flex flex-col items-center gap-2">
-							<Icon
-								className="h-6 w-6 transition-transform group-hover:scale-110"
-								style={{ color: "var(--accent)" }}
-							/>
+							<Icon className="h-6 w-6 text-(--accent) transition-transform group-hover:scale-110" />
 							<span className="text-center font-medium text-sm">
 								{skill.name}
 							</span>

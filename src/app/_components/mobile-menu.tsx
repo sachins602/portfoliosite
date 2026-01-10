@@ -90,7 +90,7 @@ export function MobileMenu() {
 			<button
 				aria-expanded={isOpen}
 				aria-label="Toggle menu"
-				className="rounded-lg p-2 transition-colors hover:bg-[var(--bg-secondary)] md:hidden"
+				className="rounded-lg p-2 transition-colors hover:bg-(--bg-secondary) md:hidden"
 				onClick={() => setIsOpen(!isOpen)}
 				type="button"
 			>
@@ -106,14 +106,14 @@ export function MobileMenu() {
 						ref={overlayRef}
 					/>
 					<div
-						className="fixed top-0 right-0 z-50 h-full w-80 max-w-[85vw] bg-[var(--bg-secondary)] shadow-2xl md:hidden"
+						className="fixed top-0 right-0 z-50 h-full w-80 max-w-[85vw] bg-(--bg-secondary) shadow-2xl md:hidden"
 						ref={menuRef}
 					>
 						<div className="p-8 pt-20">
 							<nav className="flex flex-col gap-6" ref={linksRef}>
 								{navLinks.map((link) => (
 									<Link
-										className="font-medium text-xl transition-colors hover:text-[var(--accent)]"
+										className="font-medium text-xl transition-colors hover:text-(--accent)"
 										href={link.href}
 										key={link.href}
 										onClick={handleLinkClick}
