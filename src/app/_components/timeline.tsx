@@ -13,6 +13,8 @@ export function Timeline({ itemCount }: TimelineProps) {
 	const nodesRef = useRef<HTMLDivElement>(null);
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [nodePositions, setNodePositions] = useState<number[]>([]);
+	const hasAnimatedRef = useRef(false);
+	const observerRef = useRef<IntersectionObserver | null>(null);
 
 	// Calculate node positions based on actual card positions
 	useEffect(() => {
@@ -89,6 +91,7 @@ export function Timeline({ itemCount }: TimelineProps) {
 		};
 	}, []);
 
+	// Animation effect - only run once when nodes are ready
 	useEffect(() => {
 		if (!lineRef.current || !nodesRef.current || prefersReducedMotion()) {
 			if (lineRef.current && nodePositions.length > 0) {
@@ -97,10 +100,26 @@ export function Timeline({ itemCount }: TimelineProps) {
 			return;
 		}
 
+		// Don't set up observer if already animated or if positions aren't ready
+		if (hasAnimatedRef.current || nodePositions.length === 0) return;
+
+		// Clean up any existing observer
+		if (observerRef.current) {
+			observerRef.current.disconnect();
+			observerRef.current = null;
+		}
+
 		const observer = new IntersectionObserver(
 			(entries) => {
 				entries.forEach((entry) => {
-					if (entry.isIntersecting && lineRef.current && nodePositions.length > 0) {
+					if (
+						entry.isIntersecting &&
+						lineRef.current &&
+						nodePositions.length > 0 &&
+						!hasAnimatedRef.current
+					) {
+						hasAnimatedRef.current = true;
+
 						const line = lineRef.current;
 						const lineLength = line.getTotalLength();
 						line.style.strokeDasharray = `${lineLength}`;
@@ -129,20 +148,27 @@ export function Timeline({ itemCount }: TimelineProps) {
 							});
 						}
 
-						observer.unobserve(entry.target);
+						// Disconnect observer after animation starts
+						if (observerRef.current) {
+							observerRef.current.disconnect();
+							observerRef.current = null;
+						}
 					}
 				});
 			},
 			{ threshold: 0.1 },
 		);
 
+		observerRef.current = observer;
+
 		if (nodesRef.current) {
 			observer.observe(nodesRef.current);
 		}
 
 		return () => {
-			if (nodesRef.current) {
-				observer.unobserve(nodesRef.current);
+			if (observerRef.current) {
+				observerRef.current.disconnect();
+				observerRef.current = null;
 			}
 		};
 	}, [nodePositions]);
