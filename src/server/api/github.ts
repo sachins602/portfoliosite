@@ -30,7 +30,8 @@ export async function fetchGitHubRepos(): Promise<Project[]> {
 			"https://api.github.com/users/sachins602/repos?sort=updated&per_page=100",
 			{
 				headers,
-				next: { revalidate: 3600 }, // Cache for 1 hour
+				// TODO: Change to 3 days for production
+				next: { revalidate: 0 }, // Cache for 3 days
 			},
 		);
 
@@ -40,18 +41,8 @@ export async function fetchGitHubRepos(): Promise<Project[]> {
 
 		const repos: GitHubRepo[] = await response.json();
 
-		// Filter and process repos
+		// Process repos (no filtering - show all repos)
 		const filtered = repos
-			.filter((repo) => {
-				// Filter out forks
-				if (repo.fork) return false;
-				// Filter out very small repos (less than 100 lines)
-				if (repo.size < 100) return false;
-				// Must have description
-				if (!repo.description || repo.description.trim().length === 0)
-					return false;
-				return true;
-			})
 			.sort((a, b) => {
 				// Sort by stars first, then by updated date
 				if (b.stargazers_count !== a.stargazers_count) {
@@ -61,7 +52,6 @@ export async function fetchGitHubRepos(): Promise<Project[]> {
 					new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
 				);
 			})
-			.slice(0, 8) // Top 8 repos
 			.map((repo) => ({
 				id: repo.id,
 				name: repo.name,
