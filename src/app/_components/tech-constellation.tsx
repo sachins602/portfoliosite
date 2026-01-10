@@ -25,9 +25,7 @@ interface HoveredNode {
 
 export function TechConstellation() {
 	const svgRef = useRef<SVGSVGElement>(null);
-	const [nodePositions, setNodePositions] = useState<Map<string, NodePosition>>(
-		new Map(),
-	);
+	const [nodePositions, setNodePositions] = useState<Map<string, NodePosition>>(new Map());
 	const [hoveredNode, setHoveredNode] = useState<HoveredNode | null>(null);
 	const [selectedNode, setSelectedNode] = useState<TechNode | null>(null);
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -41,13 +39,7 @@ export function TechConstellation() {
 		const height = Math.max(600, container.clientHeight || 600);
 
 		const positions = new Map<string, NodePosition>();
-		const categories: TechNode["category"][] = [
-			"Frontend",
-			"Backend",
-			"Database",
-			"DevOps",
-			"Tools",
-		];
+		const categories: TechNode["category"][] = ["Frontend", "Backend", "Database", "DevOps", "Tools"];
 
 		// Cluster positions
 		const clusterPositions: Record<string, { x: number; y: number }> = {
@@ -85,9 +77,7 @@ export function TechConstellation() {
 				techNodes.forEach((node, index) => {
 					const pos = positions.get(node.id);
 					if (pos && svgRef.current) {
-						const element = svgRef.current.querySelector(
-							`[data-node-id="${node.id}"]`,
-						);
+						const element = svgRef.current.querySelector(`[data-node-id="${node.id}"]`);
 						if (element) {
 							anime({
 								targets: element,
@@ -117,9 +107,7 @@ export function TechConstellation() {
 		});
 
 		// Pulse animation
-		const element = svgRef.current?.querySelector(
-			`[data-node-id="${node.id}"]`,
-		);
+		const element = svgRef.current?.querySelector(`[data-node-id="${node.id}"]`);
 		if (element) {
 			anime({
 				targets: element,
@@ -190,10 +178,7 @@ export function TechConstellation() {
 						if (!fromPos || !toPos) return null;
 
 						const lineId = `${conn.from}-${conn.to}`;
-						const isHovered =
-							hoveredNode &&
-							(hoveredNode.node.id === conn.from ||
-								hoveredNode.node.id === conn.to);
+						const isHovered = hoveredNode && (hoveredNode.node.id === conn.from || hoveredNode.node.id === conn.to);
 
 						return (
 							<line
@@ -203,9 +188,7 @@ export function TechConstellation() {
 								stroke="var(--accent)"
 								strokeWidth={isHovered ? 3 : 2}
 								style={{
-									transition: prefersReducedMotion()
-										? "none"
-										: "opacity 0.3s, stroke-width 0.3s",
+									transition: prefersReducedMotion() ? "none" : "opacity 0.3s, stroke-width 0.3s",
 								}}
 								x1={fromPos.x}
 								x2={toPos.x}
@@ -238,22 +221,12 @@ export function TechConstellation() {
 									strokeWidth={isHovered || isSelected ? 3 : 2}
 									style={{
 										opacity: prefersReducedMotion() ? 1 : 0,
-										transition: prefersReducedMotion()
-											? "none"
-											: "r 0.3s, stroke-width 0.3s",
+										transition: prefersReducedMotion() ? "none" : "r 0.3s, stroke-width 0.3s",
 									}}
 								/>
 								{/* Icon */}
-								<foreignObject
-									height="24"
-									width="24"
-									x={pos.x - 12}
-									y={pos.y - 12}
-								>
-									<Icon
-										className="pointer-events-none"
-										style={{ color: "var(--accent)" }}
-									/>
+								<foreignObject height="24" width="24" x={pos.x - 12} y={pos.y - 12}>
+									<Icon className="pointer-events-none" style={{ color: "var(--accent)" }} />
 								</foreignObject>
 								{/* Node label */}
 								<text
@@ -269,12 +242,7 @@ export function TechConstellation() {
 									{node.name}
 								</text>
 								{/* Interactive button overlay */}
-								<foreignObject
-									height="80"
-									width="80"
-									x={pos.x - 40}
-									y={pos.y - 40}
-								>
+								<foreignObject height="80" width="80" x={pos.x - 40} y={pos.y - 40}>
 									<button
 										aria-label={`${node.name} technology node`}
 										className="h-full w-full cursor-pointer bg-transparent"
@@ -307,9 +275,7 @@ export function TechConstellation() {
 						}}
 					>
 						<div className="font-semibold">{hoveredNode.node.name}</div>
-						<div className="text-(--text-secondary) text-sm">
-							Proficiency: {hoveredNode.node.proficiency}%
-						</div>
+						<div className="text-(--text-secondary) text-sm">Proficiency: {hoveredNode.node.proficiency}%</div>
 						{hoveredNode.node.relatedProjects.length > 0 && (
 							<div className="mt-2 text-(--text-secondary) text-xs">
 								Projects: {hoveredNode.node.relatedProjects.join(", ")}
@@ -335,9 +301,7 @@ export function TechConstellation() {
 							<p>Category: {selectedNode.category}</p>
 							<p>Proficiency: {selectedNode.proficiency}%</p>
 							{selectedNode.relatedProjects.length > 0 && (
-								<p className="mt-2">
-									Related Projects: {selectedNode.relatedProjects.join(", ")}
-								</p>
+								<p className="mt-2">Related Projects: {selectedNode.relatedProjects.join(", ")}</p>
 							)}
 						</div>
 					</div>

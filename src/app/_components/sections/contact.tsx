@@ -41,11 +41,7 @@ export function Contact() {
 	const resumeRef = useElasticHover<HTMLAnchorElement>();
 
 	return (
-		<section
-			className="bg-(--bg-secondary) py-20 md:py-32"
-			id="contact"
-			ref={sectionRef}
-		>
+		<section className="bg-(--bg-secondary) py-20 md:py-32" id="contact" ref={sectionRef}>
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
 				<h2
 					className="section-title mb-16 text-center font-bold text-4xl md:text-5xl"
@@ -65,9 +61,8 @@ export function Contact() {
 						<div>
 							<h3 className="mb-4 font-semibold text-2xl">Get in Touch</h3>
 							<p className="mb-6 text-(--text-secondary)">
-								I'm always open to discussing new projects, creative ideas, or
-								opportunities to be part of your visions. Feel free to reach out
-								through the form or any of the links below.
+								I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions. Feel
+								free to reach out through the form or any of the links below.
 							</p>
 						</div>
 
@@ -80,9 +75,7 @@ export function Contact() {
 								<Mail className="h-6 w-6 text-(--accent) transition-transform group-hover:scale-110" />
 								<div>
 									<p className="font-medium">Email</p>
-									<p className="text-(--text-secondary) text-sm">
-										sachinsapkota4@gmail.com
-									</p>
+									<p className="text-(--text-secondary) text-sm">sachinsapkota4@gmail.com</p>
 								</div>
 							</a>
 
@@ -96,9 +89,7 @@ export function Contact() {
 								<Github className="h-6 w-6 text-(--accent) transition-transform group-hover:scale-110" />
 								<div>
 									<p className="font-medium">GitHub</p>
-									<p className="text-(--text-secondary) text-sm">
-										github.com/sachins602
-									</p>
+									<p className="text-(--text-secondary) text-sm">github.com/sachins602</p>
 								</div>
 							</a>
 
@@ -112,9 +103,7 @@ export function Contact() {
 								<Linkedin className="h-6 w-6 text-(--accent) transition-transform group-hover:scale-110" />
 								<div>
 									<p className="font-medium">LinkedIn</p>
-									<p className="text-(--text-secondary) text-sm">
-										Connect with me
-									</p>
+									<p className="text-(--text-secondary) text-sm">Connect with me</p>
 								</div>
 							</a>
 						</div>

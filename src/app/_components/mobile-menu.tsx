@@ -3,12 +3,7 @@
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import {
-	easing,
-	prefersReducedMotion,
-	stagger,
-	timing,
-} from "~/lib/animations";
+import { easing, prefersReducedMotion, stagger, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
 
 const navLinks = [

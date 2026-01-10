@@ -1,12 +1,7 @@
 "use client";
 
 import { type RefObject, useEffect, useRef } from "react";
-import {
-	easing,
-	prefersReducedMotion,
-	stagger,
-	timing,
-} from "~/lib/animations";
+import { easing, prefersReducedMotion, stagger, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
 
 /**
@@ -181,10 +176,7 @@ export function useElasticHover<T extends HTMLElement>() {
 /**
  * Hook for SVG path drawing animation
  */
-export function usePathDraw<T extends SVGPathElement>(options?: {
-	duration?: number;
-	delay?: number;
-}) {
+export function usePathDraw<T extends SVGPathElement>(options?: { duration?: number; delay?: number }) {
 	const ref = useRef<T>(null);
 	const hasAnimated = useRef(false);
 

@@ -13,17 +13,10 @@ export default function SettingsPage() {
 		},
 	});
 
-	const [selectedStatus, setSelectedStatus] = useState<string>(
-		currentStatus ?? "Open to opportunities",
-	);
+	const [selectedStatus, setSelectedStatus] = useState<string>(currentStatus ?? "Open to opportunities");
 
 	const handleUpdate = () => {
-		updateMutation.mutate(
-			selectedStatus as
-				| "Available for hire"
-				| "Open to opportunities"
-				| "Currently employed",
-		);
+		updateMutation.mutate(selectedStatus as "Available for hire" | "Open to opportunities" | "Currently employed");
 	};
 
 	return (
@@ -37,10 +30,7 @@ export default function SettingsPage() {
 				</p>
 
 				<div className="mb-4">
-					<label
-						className="mb-2 block font-medium text-(--text-primary) text-sm"
-						htmlFor="status"
-					>
+					<label className="mb-2 block font-medium text-(--text-primary) text-sm" htmlFor="status">
 						Select Status
 					</label>
 					<select

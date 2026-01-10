@@ -9,11 +9,7 @@ interface ParallaxBackgroundProps {
 	className?: string;
 }
 
-export function ParallaxBackground({
-	layers = 3,
-	intensity = 0.5,
-	className = "",
-}: ParallaxBackgroundProps) {
+export function ParallaxBackground({ layers = 3, intensity = 0.5, className = "" }: ParallaxBackgroundProps) {
 	const containerRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -46,10 +42,7 @@ export function ParallaxBackground({
 	}
 
 	return (
-		<div
-			className={`pointer-events-none fixed inset-0 -z-10 overflow-hidden ${className}`}
-			ref={containerRef}
-		>
+		<div className={`pointer-events-none fixed inset-0 -z-10 overflow-hidden ${className}`} ref={containerRef}>
 			{Array.from({ length: layers }).map((_, index) => (
 				<div
 					className="absolute inset-0 opacity-20"

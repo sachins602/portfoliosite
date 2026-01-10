@@ -76,13 +76,9 @@ export function TechCube({ size = 150 }: TechCubeProps) {
 					<div className="flex flex-col items-center gap-2">
 						{(() => {
 							const Icon = techFaces[0]?.icon;
-							return Icon ? (
-								<Icon className={`h-8 w-8 ${techFaces[0]?.color}`} />
-							) : null;
+							return Icon ? <Icon className={`h-8 w-8 ${techFaces[0]?.color}`} /> : null;
 						})()}
-						<span className="font-medium text-(--text-primary) text-xs">
-							{techFaces[0]?.label}
-						</span>
+						<span className="font-medium text-(--text-primary) text-xs">{techFaces[0]?.label}</span>
 					</div>
 				</div>
 
@@ -98,13 +94,9 @@ export function TechCube({ size = 150 }: TechCubeProps) {
 					<div className="flex flex-col items-center gap-2">
 						{(() => {
 							const Icon = techFaces[1]?.icon;
-							return Icon ? (
-								<Icon className={`h-8 w-8 ${techFaces[1]?.color}`} />
-							) : null;
+							return Icon ? <Icon className={`h-8 w-8 ${techFaces[1]?.color}`} /> : null;
 						})()}
-						<span className="font-medium text-(--text-primary) text-xs">
-							{techFaces[1]?.label}
-						</span>
+						<span className="font-medium text-(--text-primary) text-xs">{techFaces[1]?.label}</span>
 					</div>
 				</div>
 
@@ -120,13 +112,9 @@ export function TechCube({ size = 150 }: TechCubeProps) {
 					<div className="flex flex-col items-center gap-2">
 						{(() => {
 							const Icon = techFaces[2]?.icon;
-							return Icon ? (
-								<Icon className={`h-8 w-8 ${techFaces[2]?.color}`} />
-							) : null;
+							return Icon ? <Icon className={`h-8 w-8 ${techFaces[2]?.color}`} /> : null;
 						})()}
-						<span className="font-medium text-(--text-primary) text-xs">
-							{techFaces[2]?.label}
-						</span>
+						<span className="font-medium text-(--text-primary) text-xs">{techFaces[2]?.label}</span>
 					</div>
 				</div>
 
@@ -142,13 +130,9 @@ export function TechCube({ size = 150 }: TechCubeProps) {
 					<div className="flex flex-col items-center gap-2">
 						{(() => {
 							const Icon = techFaces[3]?.icon;
-							return Icon ? (
-								<Icon className={`h-8 w-8 ${techFaces[3]?.color}`} />
-							) : null;
+							return Icon ? <Icon className={`h-8 w-8 ${techFaces[3]?.color}`} /> : null;
 						})()}
-						<span className="font-medium text-(--text-primary) text-xs">
-							{techFaces[3]?.label}
-						</span>
+						<span className="font-medium text-(--text-primary) text-xs">{techFaces[3]?.label}</span>
 					</div>
 				</div>
 
@@ -164,13 +148,9 @@ export function TechCube({ size = 150 }: TechCubeProps) {
 					<div className="flex flex-col items-center gap-2">
 						{(() => {
 							const Icon = techFaces[4]?.icon;
-							return Icon ? (
-								<Icon className={`h-8 w-8 ${techFaces[4]?.color}`} />
-							) : null;
+							return Icon ? <Icon className={`h-8 w-8 ${techFaces[4]?.color}`} /> : null;
 						})()}
-						<span className="font-medium text-(--text-primary) text-xs">
-							{techFaces[4]?.label}
-						</span>
+						<span className="font-medium text-(--text-primary) text-xs">{techFaces[4]?.label}</span>
 					</div>
 				</div>
 
@@ -186,13 +166,9 @@ export function TechCube({ size = 150 }: TechCubeProps) {
 					<div className="flex flex-col items-center gap-2">
 						{(() => {
 							const Icon = techFaces[5]?.icon;
-							return Icon ? (
-								<Icon className={`h-8 w-8 ${techFaces[5]?.color}`} />
-							) : null;
+							return Icon ? <Icon className={`h-8 w-8 ${techFaces[5]?.color}`} /> : null;
 						})()}
-						<span className="font-medium text-(--text-primary) text-xs">
-							{techFaces[5]?.label}
-						</span>
+						<span className="font-medium text-(--text-primary) text-xs">{techFaces[5]?.label}</span>
 					</div>
 				</div>
 			</div>

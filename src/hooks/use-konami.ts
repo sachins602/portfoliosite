@@ -27,9 +27,7 @@ export function useKonami(onActivate?: () => void) {
 		const handleKeyDown = (e: KeyboardEvent) => {
 			setSequence((prev) => {
 				const newSequence = [...prev, e.code].slice(-KONAMI_CODE.length);
-				const matches = newSequence.every(
-					(key, index) => key === KONAMI_CODE[index],
-				);
+				const matches = newSequence.every((key, index) => key === KONAMI_CODE[index]);
 
 				if (matches && newSequence.length === KONAMI_CODE.length) {
 					setIsActive(true);
@@ -98,8 +96,7 @@ function triggerMatrixEffect() {
 	});
 
 	// Create matrix characters
-	const chars =
-		"01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+	const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
 	const columns = Math.floor(window.innerWidth / 20);
 	const drops: number[] = Array(columns).fill(0);
 

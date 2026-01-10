@@ -26,13 +26,10 @@ export async function fetchGitHubRepos(): Promise<Project[]> {
 			headers.Authorization = `token ${env.GITHUB_TOKEN}`;
 		}
 
-		const response = await fetch(
-			"https://api.github.com/users/sachins602/repos?sort=updated&per_page=100",
-			{
-				headers,
-				next: { revalidate: 86400 }, // Cache for 1 day
-			},
-		);
+		const response = await fetch("https://api.github.com/users/sachins602/repos?sort=updated&per_page=100", {
+			headers,
+			next: { revalidate: 86400 }, // Cache for 1 day
+		});
 
 		if (!response.ok) {
 			throw new Error(`GitHub API error: ${response.status}`);
@@ -47,9 +44,7 @@ export async function fetchGitHubRepos(): Promise<Project[]> {
 				if (b.stargazers_count !== a.stargazers_count) {
 					return b.stargazers_count - a.stargazers_count;
 				}
-				return (
-					new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
-				);
+				return new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime();
 			})
 			.map((repo) => ({
 				id: repo.id,
@@ -179,10 +174,8 @@ export async function fetchGitHubEvents(): Promise<ActivityItem[]> {
 			const diffDays = Math.floor(diffMs / 86400000);
 
 			if (diffMins < 1) return "just now";
-			if (diffMins < 60)
-				return `${diffMins} minute${diffMins > 1 ? "s" : ""} ago`;
-			if (diffHours < 24)
-				return `${diffHours} hour${diffHours > 1 ? "s" : ""} ago`;
+			if (diffMins < 60) return `${diffMins} minute${diffMins > 1 ? "s" : ""} ago`;
+			if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? "s" : ""} ago`;
 			if (diffDays < 7) return `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
 			return date.toLocaleDateString();
 		};
@@ -238,10 +231,7 @@ export async function fetchGitHubEvents(): Promise<ActivityItem[]> {
 		}
 
 		// Sort by timestamp (most recent first)
-		return activities.sort(
-			(a, b) =>
-				new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime(),
-		);
+		return activities.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
 	} catch (error) {
 		console.error("Error fetching GitHub events:", error);
 		// Fallback to REST API
@@ -260,13 +250,10 @@ async function fetchGitHubEventsFallback(): Promise<ActivityItem[]> {
 			headers.Authorization = `token ${env.GITHUB_TOKEN}`;
 		}
 
-		const response = await fetch(
-			"https://api.github.com/users/sachins602/events?per_page=6",
-			{
-				headers,
-				next: { revalidate: 86400 },
-			},
-		);
+		const response = await fetch("https://api.github.com/users/sachins602/events?per_page=6", {
+			headers,
+			next: { revalidate: 86400 },
+		});
 
 		if (!response.ok) {
 			throw new Error(`GitHub API error: ${response.status}`);
@@ -283,10 +270,8 @@ async function fetchGitHubEventsFallback(): Promise<ActivityItem[]> {
 			const diffDays = Math.floor(diffMs / 86400000);
 
 			if (diffMins < 1) return "just now";
-			if (diffMins < 60)
-				return `${diffMins} minute${diffMins > 1 ? "s" : ""} ago`;
-			if (diffHours < 24)
-				return `${diffHours} hour${diffHours > 1 ? "s" : ""} ago`;
+			if (diffMins < 60) return `${diffMins} minute${diffMins > 1 ? "s" : ""} ago`;
+			if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? "s" : ""} ago`;
 			if (diffDays < 7) return `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
 			return date.toLocaleDateString();
 		};
@@ -408,8 +393,7 @@ export async function fetchGitHubContributions(): Promise<ContributionData> {
 			throw new Error(`GraphQL errors: ${JSON.stringify(result.errors)}`);
 		}
 
-		const calendar =
-			result.data?.user?.contributionsCollection?.contributionCalendar;
+		const calendar = result.data?.user?.contributionsCollection?.contributionCalendar;
 
 		if (!calendar) {
 			throw new Error("No contribution calendar data found");
@@ -513,8 +497,7 @@ export async function fetchGitHubUserStats(): Promise<GitHubUserStats> {
 		const contributions = user.contributionsCollection;
 		const totalStars =
 			user.repositories.nodes?.reduce(
-				(sum: number, repo: { stargazerCount: number }) =>
-					sum + (repo?.stargazerCount ?? 0),
+				(sum: number, repo: { stargazerCount: number }) => sum + (repo?.stargazerCount ?? 0),
 				0,
 			) ?? 0;
 
@@ -585,13 +568,10 @@ export async function fetchLanguageStats(): Promise<LanguageStat[]> {
 		}
 
 		// First, get all repos
-		const reposResponse = await fetch(
-			"https://api.github.com/users/sachins602/repos?per_page=100",
-			{
-				headers,
-				next: { revalidate: 86400 },
-			},
-		);
+		const reposResponse = await fetch("https://api.github.com/users/sachins602/repos?per_page=100", {
+			headers,
+			next: { revalidate: 86400 },
+		});
 
 		if (!reposResponse.ok) {
 			throw new Error(`GitHub API error: ${reposResponse.status}`);
@@ -605,13 +585,10 @@ export async function fetchLanguageStats(): Promise<LanguageStat[]> {
 		await Promise.all(
 			repos.map(async (repo) => {
 				try {
-					const langResponse = await fetch(
-						`https://api.github.com/repos/sachins602/${repo.name}/languages`,
-						{
-							headers,
-							next: { revalidate: 86400 },
-						},
-					);
+					const langResponse = await fetch(`https://api.github.com/repos/sachins602/${repo.name}/languages`, {
+						headers,
+						next: { revalidate: 86400 },
+					});
 
 					if (langResponse.ok) {
 						const languages: Record<string, number> = await langResponse.json();
@@ -626,10 +603,7 @@ export async function fetchLanguageStats(): Promise<LanguageStat[]> {
 		);
 
 		// Convert to array and calculate percentages
-		const totalBytes = Object.values(languageTotals).reduce(
-			(sum, bytes) => sum + bytes,
-			0,
-		);
+		const totalBytes = Object.values(languageTotals).reduce((sum, bytes) => sum + bytes, 0);
 
 		const stats: LanguageStat[] = Object.entries(languageTotals)
 			.map(([name, bytes]) => ({

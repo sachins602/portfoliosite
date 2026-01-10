@@ -57,9 +57,7 @@ export function Testimonials() {
 	};
 
 	const goToPrevious = () => {
-		setCurrentIndex(
-			(prev) => (prev - 1 + testimonials.length) % testimonials.length,
-		);
+		setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 	};
 
 	const goToIndex = (index: number) => {
@@ -71,11 +69,7 @@ export function Testimonials() {
 	}
 
 	return (
-		<section
-			className="section-content min-h-screen py-20"
-			id="testimonials"
-			ref={sectionRef}
-		>
+		<section className="section-content min-h-screen py-20" id="testimonials" ref={sectionRef}>
 			<div className="container mx-auto px-4">
 				<h2 className="section-title mb-12 text-center font-bold text-4xl">
 					<span className="relative inline-block">
@@ -132,9 +126,7 @@ export function Testimonials() {
 								<button
 									aria-label={`Go to testimonial ${index + 1}`}
 									className={`h-2 rounded-full transition-all ${
-										index === currentIndex
-											? "w-8 bg-(--accent)"
-											: "w-2 bg-(--border)"
+										index === currentIndex ? "w-8 bg-(--accent)" : "w-2 bg-(--border)"
 									}`}
 									key={`testimonial-dot-${testimonial.id}`}
 									onClick={() => {

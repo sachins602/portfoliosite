@@ -22,8 +22,7 @@ export function ScrollProgress() {
 			const windowHeight = window.innerHeight;
 			const documentHeight = document.documentElement.scrollHeight;
 			const scrollTop = window.scrollY;
-			const scrollPercentage =
-				(scrollTop / (documentHeight - windowHeight)) * 100;
+			const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
 
 			setProgress(Math.min(100, Math.max(0, scrollPercentage)));
 
@@ -33,10 +32,7 @@ export function ScrollProgress() {
 				const element = document.getElementById(section.id);
 				if (element) {
 					const { offsetTop, offsetHeight } = element;
-					if (
-						scrollPosition >= offsetTop &&
-						scrollPosition < offsetTop + offsetHeight
-					) {
+					if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
 						setCurrentSection(section.name);
 						break;
 					}
@@ -83,11 +79,7 @@ export function ScrollProgress() {
 					width: prefersReducedMotion() ? `${progress}%` : "0%",
 				}}
 			/>
-			{currentSection && (
-				<div className="absolute top-2 right-4 text-(--text-secondary) text-xs">
-					{currentSection}
-				</div>
-			)}
+			{currentSection && <div className="absolute top-2 right-4 text-(--text-secondary) text-xs">{currentSection}</div>}
 		</div>
 	);
 }

@@ -1,14 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import {
-	Box,
-	Cloud,
-	Code,
-	Database,
-	Globe,
-	Server,
-	Type,
-	Wrench,
-} from "lucide-react";
+import { Box, Cloud, Code, Database, Globe, Server, Type, Wrench } from "lucide-react";
 
 export interface TechNode {
 	id: string;
@@ -49,12 +40,7 @@ export const techNodes: TechNode[] = [
 		icon: Type,
 		category: "Frontend",
 		proficiency: 90,
-		relatedProjects: [
-			"WeDrive",
-			"B2B Marketplace",
-			"Portfolio Website",
-			"API Gateway Service",
-		],
+		relatedProjects: ["WeDrive", "B2B Marketplace", "Portfolio Website", "API Gateway Service"],
 	},
 	{
 		id: "tailwind",
@@ -96,11 +82,7 @@ export const techNodes: TechNode[] = [
 		icon: Database,
 		category: "Database",
 		proficiency: 90,
-		relatedProjects: [
-			"WPF Employee Management System",
-			"WeDrive",
-			"B2B Marketplace",
-		],
+		relatedProjects: ["WPF Employee Management System", "WeDrive", "B2B Marketplace"],
 	},
 	{
 		id: "mongodb",
@@ -177,16 +159,12 @@ export function getNodesByCategory(category: TechNode["category"]): TechNode[] {
 
 // Get connections for a node
 export function getConnectionsForNode(nodeId: string): TechConnection[] {
-	return techConnections.filter(
-		(conn) => conn.from === nodeId || conn.to === nodeId,
-	);
+	return techConnections.filter((conn) => conn.from === nodeId || conn.to === nodeId);
 }
 
 // Get related nodes
 export function getRelatedNodes(nodeId: string): TechNode[] {
 	const connections = getConnectionsForNode(nodeId);
-	const relatedIds = connections.map((conn) =>
-		conn.from === nodeId ? conn.to : conn.from,
-	);
+	const relatedIds = connections.map((conn) => (conn.from === nodeId ? conn.to : conn.from));
 	return techNodes.filter((node) => relatedIds.includes(node.id));
 }

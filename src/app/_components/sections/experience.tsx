@@ -24,11 +24,7 @@ export function Experience() {
 	});
 
 	return (
-		<section
-			className="bg-(--bg-secondary) py-20 md:py-32"
-			id="experience"
-			ref={sectionRef}
-		>
+		<section className="bg-(--bg-secondary) py-20 md:py-32" id="experience" ref={sectionRef}>
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
 				<h2
 					className="section-title mb-16 text-center font-bold text-4xl md:text-5xl"
@@ -50,11 +46,7 @@ export function Experience() {
 									data-experience-card
 									key={experience.id}
 								>
-									<div
-										className={`md:w-1/2 ${
-											index % 2 === 0 ? "md:pr-12" : "md:pl-12"
-										}`}
-									>
+									<div className={`md:w-1/2 ${index % 2 === 0 ? "md:pr-12" : "md:pl-12"}`}>
 										<ExperienceCard experience={experience} index={index} />
 									</div>
 								</div>

@@ -12,9 +12,7 @@ export function ContactForm() {
 	const [message, setMessage] = useState("");
 	const [errors, setErrors] = useState<Record<string, string>>({});
 	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [submitStatus, setSubmitStatus] = useState<
-		"idle" | "success" | "error"
-	>("idle");
+	const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 	const [submitMessage, setSubmitMessage] = useState("");
 
 	const formRef = useRef<HTMLFormElement>(null);
@@ -42,9 +40,7 @@ export function ContactForm() {
 		},
 		onError: (error) => {
 			setSubmitStatus("error");
-			setSubmitMessage(
-				error.message || "Something went wrong. Please try again.",
-			);
+			setSubmitMessage(error.message || "Something went wrong. Please try again.");
 
 			if (!prefersReducedMotion() && errorRef.current) {
 				anime({
@@ -104,9 +100,7 @@ export function ContactForm() {
 		submitMutation.mutate({ name, email, message });
 	};
 
-	const handleInputFocus = (
-		e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
-	) => {
+	const handleInputFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		if (!prefersReducedMotion()) {
 			anime({
 				targets: e.target,
@@ -117,9 +111,7 @@ export function ContactForm() {
 		}
 	};
 
-	const handleInputBlur = (
-		e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
-	) => {
+	const handleInputBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		if (!prefersReducedMotion()) {
 			anime({
 				targets: e.target,
@@ -133,17 +125,12 @@ export function ContactForm() {
 	return (
 		<form className="space-y-6" onSubmit={handleSubmit} ref={formRef}>
 			<div>
-				<label
-					className="mb-2 block font-medium text-(--text-secondary) text-sm"
-					htmlFor="name"
-				>
+				<label className="mb-2 block font-medium text-(--text-secondary) text-sm" htmlFor="name">
 					Name
 				</label>
 				<input
 					className={`w-full rounded-lg border bg-(--bg-secondary) px-4 py-3 ${
-						errors.name
-							? "border-red-500"
-							: "border-(--border) focus:border-(--accent)"
+						errors.name ? "border-red-500" : "border-(--border) focus:border-(--accent)"
 					} transition-all focus:outline-none focus:ring-(--accent)/20 focus:ring-2`}
 					id="name"
 					onBlur={handleInputBlur}
@@ -153,23 +140,16 @@ export function ContactForm() {
 					type="text"
 					value={name}
 				/>
-				{errors.name && (
-					<p className="mt-1 text-red-500 text-sm">{errors.name}</p>
-				)}
+				{errors.name && <p className="mt-1 text-red-500 text-sm">{errors.name}</p>}
 			</div>
 
 			<div>
-				<label
-					className="mb-2 block font-medium text-(--text-secondary) text-sm"
-					htmlFor="email"
-				>
+				<label className="mb-2 block font-medium text-(--text-secondary) text-sm" htmlFor="email">
 					Email
 				</label>
 				<input
 					className={`w-full rounded-lg border bg-(--bg-secondary) px-4 py-3 ${
-						errors.email
-							? "border-red-500"
-							: "border-(--border) focus:border-(--accent)"
+						errors.email ? "border-red-500" : "border-(--border) focus:border-(--accent)"
 					} transition-all focus:outline-none focus:ring-(--accent)/20 focus:ring-2`}
 					id="email"
 					onBlur={handleInputBlur}
@@ -179,23 +159,16 @@ export function ContactForm() {
 					type="email"
 					value={email}
 				/>
-				{errors.email && (
-					<p className="mt-1 text-red-500 text-sm">{errors.email}</p>
-				)}
+				{errors.email && <p className="mt-1 text-red-500 text-sm">{errors.email}</p>}
 			</div>
 
 			<div>
-				<label
-					className="mb-2 block font-medium text-(--text-secondary) text-sm"
-					htmlFor="message"
-				>
+				<label className="mb-2 block font-medium text-(--text-secondary) text-sm" htmlFor="message">
 					Message
 				</label>
 				<textarea
 					className={`w-full rounded-lg border bg-(--bg-secondary) px-4 py-3 ${
-						errors.message
-							? "border-red-500"
-							: "border-(--border) focus:border-(--accent)"
+						errors.message ? "border-red-500" : "border-(--border) focus:border-(--accent)"
 					} resize-none transition-all focus:outline-none focus:ring-(--accent)/20 focus:ring-2`}
 					id="message"
 					onBlur={handleInputBlur}
@@ -205,9 +178,7 @@ export function ContactForm() {
 					rows={6}
 					value={message}
 				/>
-				{errors.message && (
-					<p className="mt-1 text-red-500 text-sm">{errors.message}</p>
-				)}
+				{errors.message && <p className="mt-1 text-red-500 text-sm">{errors.message}</p>}
 			</div>
 
 			<button

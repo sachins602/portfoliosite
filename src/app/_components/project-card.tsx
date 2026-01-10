@@ -119,8 +119,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 	const handleMouseLeave = () => {
 		if (!prefersReducedMotion() && cardRef.current && !isTouchDevice.current) {
 			cardRef.current.style.transition = "transform 0.3s ease-out";
-			cardRef.current.style.transform =
-				"perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) scale(1)";
+			cardRef.current.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) scale(1)";
 		}
 	};
 
@@ -134,9 +133,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 			style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 		>
 			<div className="mb-4 flex items-start justify-between">
-				<h3 className="flex-1 font-semibold text-(--accent) text-xl">
-					{project.name}
-				</h3>
+				<h3 className="flex-1 font-semibold text-(--accent) text-xl">{project.name}</h3>
 				<div className="flex gap-2">
 					<a
 						aria-label="View on GitHub"
@@ -161,17 +158,14 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 				</div>
 			</div>
 
-			<p className="mb-4 line-clamp-3 text-(--text-secondary)">
-				{project.description}
-			</p>
+			<p className="mb-4 line-clamp-3 text-(--text-secondary)">{project.description}</p>
 
 			<div className="mb-4 flex items-center gap-4 text-(--text-secondary) text-sm">
 				<div className="flex items-center gap-1">
 					<span
 						className="h-3 w-3 rounded-full"
 						style={{
-							backgroundColor:
-								languageColors[project.language] ?? languageColors.Other,
+							backgroundColor: languageColors[project.language] ?? languageColors.Other,
 						}}
 					/>
 					<span>{project.language}</span>

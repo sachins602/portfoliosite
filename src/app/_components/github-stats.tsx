@@ -1,13 +1,6 @@
 "use client";
 
-import {
-	FolderGit2,
-	GitBranch,
-	GitPullRequest,
-	type Star as StarIcon,
-	UserPlus,
-	Users,
-} from "lucide-react";
+import { FolderGit2, GitBranch, GitPullRequest, type Star as StarIcon, UserPlus, Users } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
@@ -23,13 +16,7 @@ interface StatCard {
 	gradient: string;
 }
 
-function AnimatedNumber({
-	value,
-	duration = 2000,
-}: {
-	value: number;
-	duration?: number;
-}) {
+function AnimatedNumber({ value, duration = 2000 }: { value: number; duration?: number }) {
 	const [displayValue, setDisplayValue] = useState(0);
 	const hasAnimated = useRef(false);
 	const previousValue = useRef<number | null>(null);
@@ -62,9 +49,7 @@ function AnimatedNumber({
 				count: value,
 				duration,
 				easing: easing.easeOut,
-				update: (anim: {
-					animatables?: Array<{ target: { count: number } }>;
-				}) => {
+				update: (anim: { animatables?: Array<{ target: { count: number } }> }) => {
 					setDisplayValue(Math.floor(anim.animatables?.[0]?.target.count ?? 0));
 				},
 				complete: () => {
@@ -83,12 +68,8 @@ function AnimatedNumber({
 					count: value,
 					duration: duration * 0.5, // Shorter duration for updates
 					easing: easing.easeOut,
-					update: (anim: {
-						animatables?: Array<{ target: { count: number } }>;
-					}) => {
-						setDisplayValue(
-							Math.floor(anim.animatables?.[0]?.target.count ?? 0),
-						);
+					update: (anim: { animatables?: Array<{ target: { count: number } }> }) => {
+						setDisplayValue(Math.floor(anim.animatables?.[0]?.target.count ?? 0));
 					},
 					complete: () => {
 						setDisplayValue(value);
@@ -104,11 +85,7 @@ function AnimatedNumber({
 }
 
 export function GitHubStats() {
-	const {
-		data: stats,
-		isLoading,
-		error,
-	} = api.githubStats.getUserStats.useQuery();
+	const { data: stats, isLoading, error } = api.githubStats.getUserStats.useQuery();
 
 	const containerRef = useScrollTrigger<HTMLDivElement>((element) => {
 		if (prefersReducedMotion()) return;
@@ -126,12 +103,7 @@ export function GitHubStats() {
 	const hasAnimatedCards = useRef(false);
 
 	useEffect(() => {
-		if (
-			!stats ||
-			!cardsRef.current ||
-			hasAnimatedCards.current ||
-			prefersReducedMotion()
-		) {
+		if (!stats || !cardsRef.current || hasAnimatedCards.current || prefersReducedMotion()) {
 			return;
 		}
 
@@ -153,15 +125,10 @@ export function GitHubStats() {
 	if (isLoading) {
 		return (
 			<div className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6">
-				<h3 className="mb-6 text-center font-semibold text-xl">
-					GitHub Statistics
-				</h3>
+				<h3 className="mb-6 text-center font-semibold text-xl">GitHub Statistics</h3>
 				<div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
 					{Array.from({ length: 5 }).map((_, i) => (
-						<div
-							className="h-24 animate-pulse rounded-lg bg-(--border)"
-							key={`skeleton-${i + Math.random()}`}
-						/>
+						<div className="h-24 animate-pulse rounded-lg bg-(--border)" key={`skeleton-${i + Math.random()}`} />
 					))}
 				</div>
 			</div>
@@ -171,9 +138,7 @@ export function GitHubStats() {
 	if (error) {
 		return (
 			<div className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6">
-				<h3 className="mb-4 text-center font-semibold text-xl">
-					GitHub Statistics
-				</h3>
+				<h3 className="mb-4 text-center font-semibold text-xl">GitHub Statistics</h3>
 				<p className="text-center text-(--text-secondary)">
 					Unable to load GitHub statistics. Please check your GitHub token.
 				</p>
@@ -225,21 +190,13 @@ export function GitHubStats() {
 	];
 
 	return (
-		<div
-			className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6"
-			ref={containerRef}
-		>
+		<div className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6" ref={containerRef}>
 			<div className="mb-6 flex items-center justify-between">
-				<h3 className="flex-1 text-center font-semibold text-xl">
-					GitHub Statistics
-				</h3>
+				<h3 className="flex-1 text-center font-semibold text-xl">GitHub Statistics</h3>
 				<span className="text-(--text-secondary) text-xs">Last 12 months</span>
 			</div>
 
-			<div
-				className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5"
-				ref={cardsRef}
-			>
+			<div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5" ref={cardsRef}>
 				{statCards.map((stat) => {
 					const Icon = stat.icon;
 					return (
@@ -264,9 +221,7 @@ export function GitHubStats() {
 								<div className="font-bold text-(--text-primary) text-2xl">
 									<AnimatedNumber value={stat.value} />
 								</div>
-								<div className="mt-1 text-(--text-secondary) text-xs">
-									{stat.label}
-								</div>
+								<div className="mt-1 text-(--text-secondary) text-xs">{stat.label}</div>
 							</div>
 						</div>
 					);

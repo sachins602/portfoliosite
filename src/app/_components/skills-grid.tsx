@@ -1,15 +1,6 @@
 "use client";
 
-import {
-	Box,
-	Cloud,
-	Code,
-	Database,
-	Globe,
-	Server,
-	Type,
-	Wrench,
-} from "lucide-react";
+import { Box, Cloud, Code, Database, Globe, Server, Type, Wrench } from "lucide-react";
 import { useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
@@ -55,10 +46,7 @@ export function SkillsGrid() {
 	});
 
 	return (
-		<div
-			className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4"
-			ref={containerRef}
-		>
+		<div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4" ref={containerRef}>
 			{skills.map((skill) => {
 				const Icon = skill.icon;
 				return (
@@ -71,9 +59,7 @@ export function SkillsGrid() {
 					>
 						<div className="flex flex-col items-center gap-2">
 							<Icon className="h-6 w-6 text-(--accent) transition-transform group-hover:scale-110" />
-							<span className="text-center font-medium text-sm">
-								{skill.name}
-							</span>
+							<span className="text-center font-medium text-sm">{skill.name}</span>
 						</div>
 					</div>
 				);

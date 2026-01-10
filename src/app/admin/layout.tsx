@@ -2,11 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export default function AdminLayout({
-	children,
-}: {
-	children: React.ReactNode;
-}) {
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
 	const [password, setPassword] = useState("");
@@ -55,10 +51,7 @@ export default function AdminLayout({
 					<h1 className="mb-6 text-center font-bold text-2xl">Admin Login</h1>
 					<form onSubmit={handleLogin}>
 						<div className="mb-4">
-							<label
-								className="mb-2 block font-medium text-(--text-primary) text-sm"
-								htmlFor="password"
-							>
+							<label className="mb-2 block font-medium text-(--text-primary) text-sm" htmlFor="password">
 								Password
 							</label>
 							<input
@@ -92,10 +85,7 @@ export default function AdminLayout({
 						<a className="text-(--accent) hover:underline" href="/admin">
 							Dashboard
 						</a>
-						<a
-							className="text-(--accent) hover:underline"
-							href="/admin/submissions"
-						>
+						<a className="text-(--accent) hover:underline" href="/admin/submissions">
 							Submissions
 						</a>
 						<button

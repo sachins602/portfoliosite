@@ -125,10 +125,7 @@ export function Terminal() {
 		if (e.key === "ArrowUp") {
 			e.preventDefault();
 			if (commandHistory.length > 0) {
-				const newIndex =
-					historyIndex === -1
-						? commandHistory.length - 1
-						: Math.max(0, historyIndex - 1);
+				const newIndex = historyIndex === -1 ? commandHistory.length - 1 : Math.max(0, historyIndex - 1);
 				setHistoryIndex(newIndex);
 				const cmd = commandHistory[newIndex];
 				if (cmd) setInput(cmd);
@@ -166,18 +163,12 @@ export function Terminal() {
 			</div>
 
 			{/* Terminal Content */}
-			<div
-				className="h-[400px] overflow-y-auto p-4 font-mono text-sm"
-				ref={outputRef}
-				style={{ scrollbarWidth: "thin" }}
-			>
+			<div className="h-[400px] overflow-y-auto p-4 font-mono text-sm" ref={outputRef} style={{ scrollbarWidth: "thin" }}>
 				{lines.length === 0 && (
 					<div className="text-(--text-secondary)">
 						<p>Welcome to my portfolio terminal!</p>
 						<p>Type 'help' to see available commands.</p>
-						<p className="mt-2 text-xs opacity-70">
-							Demo commands will run automatically...
-						</p>
+						<p className="mt-2 text-xs opacity-70">Demo commands will run automatically...</p>
 					</div>
 				)}
 
@@ -199,10 +190,7 @@ export function Terminal() {
 								<span className="text-white">{line.content}</span>
 							</div>
 						) : (
-							<div
-								className="text-(--text-secondary)"
-								style={{ whiteSpace: "pre-wrap" }}
-							>
+							<div className="text-(--text-secondary)" style={{ whiteSpace: "pre-wrap" }}>
 								{line.content || " "}
 							</div>
 						)}
@@ -211,10 +199,7 @@ export function Terminal() {
 			</div>
 
 			{/* Input Area */}
-			<form
-				className="flex items-center gap-2 border-(--border) border-t bg-[#1e1e1e] px-4 py-2"
-				onSubmit={handleSubmit}
-			>
+			<form className="flex items-center gap-2 border-(--border) border-t bg-[#1e1e1e] px-4 py-2" onSubmit={handleSubmit}>
 				<span className="text-[#4ec9b0]">sachin@portfolio</span>
 				<span className="text-(--text-secondary)">:</span>
 				<span className="text-[#4fc1ff]">~</span>

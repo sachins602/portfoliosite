@@ -13,18 +13,10 @@ interface ProjectFilterProps {
 		tags: string[];
 		years: number[];
 	};
-	onFiltersChange: (filters: {
-		languages: string[];
-		tags: string[];
-		years: number[];
-	}) => void;
+	onFiltersChange: (filters: { languages: string[]; tags: string[]; years: number[] }) => void;
 }
 
-export function ProjectFilter({
-	projects,
-	activeFilters,
-	onFiltersChange,
-}: ProjectFilterProps) {
+export function ProjectFilter({ projects, activeFilters, onFiltersChange }: ProjectFilterProps) {
 	// Extract unique filter options from projects
 	const availableLanguages = useMemo(() => {
 		const langs = new Set(projects.map((p) => p.language));
@@ -37,36 +29,25 @@ export function ProjectFilter({
 	}, [projects]);
 
 	const availableYears = useMemo(() => {
-		const years = new Set(
-			projects.map((p) => new Date(p.updated_at).getFullYear()),
-		);
+		const years = new Set(projects.map((p) => new Date(p.updated_at).getFullYear()));
 		return Array.from(years).sort((a, b) => b - a);
 	}, [projects]);
 
 	// Count projects per filter
-	const getCount = (
-		type: "language" | "tag" | "year",
-		value: string | number,
-	) => {
+	const getCount = (type: "language" | "tag" | "year", value: string | number) => {
 		return projects.filter((p) => {
 			if (type === "language") return p.language === value;
 			if (type === "tag") return p.topics.includes(value as string);
-			if (type === "year")
-				return new Date(p.updated_at).getFullYear() === value;
+			if (type === "year") return new Date(p.updated_at).getFullYear() === value;
 			return false;
 		}).length;
 	};
 
-	const toggleFilter = (
-		type: "languages" | "tags" | "years",
-		value: string | number,
-	) => {
+	const toggleFilter = (type: "languages" | "tags" | "years", value: string | number) => {
 		const current = activeFilters[type];
 		const newFilters = {
 			...activeFilters,
-			[type]: current.includes(value as never)
-				? current.filter((v) => v !== value)
-				: [...current, value as never],
+			[type]: current.includes(value as never) ? current.filter((v) => v !== value) : [...current, value as never],
 		};
 		onFiltersChange(newFilters);
 	};
@@ -76,17 +57,13 @@ export function ProjectFilter({
 	};
 
 	const hasActiveFilters =
-		activeFilters.languages.length > 0 ||
-		activeFilters.tags.length > 0 ||
-		activeFilters.years.length > 0;
+		activeFilters.languages.length > 0 || activeFilters.tags.length > 0 || activeFilters.years.length > 0;
 
 	return (
 		<div className="mb-8 space-y-6">
 			{/* Languages */}
 			<div>
-				<h3 className="mb-3 font-semibold text-(--text-secondary) text-sm">
-					Languages
-				</h3>
+				<h3 className="mb-3 font-semibold text-(--text-secondary) text-sm">Languages</h3>
 				<div className="flex flex-wrap gap-2">
 					{availableLanguages.map((lang) => {
 						const isActive = activeFilters.languages.includes(lang);
@@ -121,9 +98,7 @@ export function ProjectFilter({
 
 			{/* Tags */}
 			<div>
-				<h3 className="mb-3 font-semibold text-(--text-secondary) text-sm">
-					Tech Stack
-				</h3>
+				<h3 className="mb-3 font-semibold text-(--text-secondary) text-sm">Tech Stack</h3>
 				<div className="flex flex-wrap gap-2">
 					{availableTags.slice(0, 15).map((tag) => {
 						const isActive = activeFilters.tags.includes(tag);
@@ -158,9 +133,7 @@ export function ProjectFilter({
 
 			{/* Years */}
 			<div>
-				<h3 className="mb-3 font-semibold text-(--text-secondary) text-sm">
-					Year
-				</h3>
+				<h3 className="mb-3 font-semibold text-(--text-secondary) text-sm">Year</h3>
 				<div className="flex flex-wrap gap-2">
 					{availableYears.map((year) => {
 						const isActive = activeFilters.years.includes(year);

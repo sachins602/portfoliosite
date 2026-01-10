@@ -38,10 +38,7 @@ export function prefersReducedMotion(): boolean {
 /**
  * Animation factory for fade + translate animations
  */
-export function createFadeTranslate(
-	translateY: number = 30,
-	duration: number = timing.normal,
-) {
+export function createFadeTranslate(translateY: number = 30, duration: number = timing.normal) {
 	return {
 		opacity: [0, 1],
 		translateY: [translateY, 0],
@@ -53,10 +50,7 @@ export function createFadeTranslate(
 /**
  * Animation factory for scale animations
  */
-export function createScale(
-	scale: number = 0.8,
-	duration: number = timing.normal,
-) {
+export function createScale(scale: number = 0.8, duration: number = timing.normal) {
 	return {
 		scale: [scale, 1],
 		opacity: [0, 1],

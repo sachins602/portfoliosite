@@ -1,12 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import {
-	easing,
-	prefersReducedMotion,
-	stagger,
-	timing,
-} from "~/lib/animations";
+import { easing, prefersReducedMotion, stagger, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
 import type { Experience } from "~/lib/data/experience";
 
@@ -90,20 +85,7 @@ export function ExperienceCard({ experience, index }: ExperienceCardProps) {
 		const year = parts[0];
 		const month = parts[1];
 		if (!year || !month) return "Present";
-		const monthNames = [
-			"Jan",
-			"Feb",
-			"Mar",
-			"Apr",
-			"May",
-			"Jun",
-			"Jul",
-			"Aug",
-			"Sep",
-			"Oct",
-			"Nov",
-			"Dec",
-		];
+		const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 		const monthIndex = parseInt(month, 10) - 1;
 		if (monthIndex < 0 || monthIndex >= monthNames.length) return "Present";
 		return `${monthNames[monthIndex]} ${year}`;
@@ -117,15 +99,9 @@ export function ExperienceCard({ experience, index }: ExperienceCardProps) {
 		>
 			<div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
 				<div>
-					<h3 className="mb-1 font-semibold text-(--accent) text-xl">
-						{experience.title}
-					</h3>
-					<p className="mb-1 font-medium text-(--text-primary) text-lg">
-						{experience.company}
-					</p>
-					<p className="text-(--text-secondary) text-sm">
-						{experience.location}
-					</p>
+					<h3 className="mb-1 font-semibold text-(--accent) text-xl">{experience.title}</h3>
+					<p className="mb-1 font-medium text-(--text-primary) text-lg">{experience.company}</p>
+					<p className="text-(--text-secondary) text-sm">{experience.location}</p>
 				</div>
 				<div className="whitespace-nowrap text-(--text-secondary) text-sm">
 					{formatDate(experience.startDate)} - {formatDate(experience.endDate)}

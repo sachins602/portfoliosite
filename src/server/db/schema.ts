@@ -10,9 +10,7 @@ import { sqliteTableCreator } from "drizzle-orm/sqlite-core";
  *
  * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
  */
-export const createTable = sqliteTableCreator(
-	(name) => `portfoliosite_${name}`,
-);
+export const createTable = sqliteTableCreator((name) => `portfoliosite_${name}`);
 
 export const contactSubmissions = createTable("contact_submission", (d) => ({
 	id: d.integer({ mode: "number" }).primaryKey({ autoIncrement: true }),
@@ -20,10 +18,7 @@ export const contactSubmissions = createTable("contact_submission", (d) => ({
 	email: d.text({ length: 256 }).notNull(),
 	message: d.text().notNull(),
 	isRead: d.integer({ mode: "boolean" }).default(false).notNull(),
-	createdAt: d
-		.integer({ mode: "timestamp" })
-		.default(sql`(unixepoch())`)
-		.notNull(),
+	createdAt: d.integer({ mode: "timestamp" }).default(sql`(unixepoch())`).notNull(),
 }));
 
 export const settings = createTable("setting", (d) => ({

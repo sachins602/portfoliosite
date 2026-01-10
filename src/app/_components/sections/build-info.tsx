@@ -44,15 +44,7 @@ const stats: Stat[] = [
 	},
 ];
 
-function AnimatedStatCounter({
-	value,
-	suffix,
-	decimals = 0,
-}: {
-	value: number;
-	suffix?: string;
-	decimals?: number;
-}) {
+function AnimatedStatCounter({ value, suffix, decimals = 0 }: { value: number; suffix?: string; decimals?: number }) {
 	const [displayValue, setDisplayValue] = useState(0);
 	const hasAnimated = useRef(false);
 
@@ -69,15 +61,9 @@ function AnimatedStatCounter({
 			count: value,
 			duration: timing.slow,
 			easing: easing.easeOut,
-			update: (anim: {
-				animatables?: Array<{ target: { count: number } }>;
-			}) => {
+			update: (anim: { animatables?: Array<{ target: { count: number } }> }) => {
 				const current = anim.animatables?.[0]?.target.count ?? 0;
-				setDisplayValue(
-					decimals > 0
-						? Number.parseFloat(current.toFixed(decimals))
-						: Math.floor(current),
-				);
+				setDisplayValue(decimals > 0 ? Number.parseFloat(current.toFixed(decimals)) : Math.floor(current));
 			},
 		});
 	}, [value, decimals]);
@@ -131,11 +117,7 @@ export function BuildInfo() {
 	];
 
 	return (
-		<section
-			className="bg-(--bg-primary) py-20 md:py-32"
-			id="build-info"
-			ref={sectionRef}
-		>
+		<section className="bg-(--bg-primary) py-20 md:py-32" id="build-info" ref={sectionRef}>
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
 				<h2
 					className="section-title mb-12 text-center font-bold text-4xl md:text-5xl"
@@ -150,10 +132,7 @@ export function BuildInfo() {
 						<h3 className="mb-4 font-semibold text-2xl">Tech Stack</h3>
 						<div className="flex flex-wrap gap-2">
 							{techStack.map((tech) => (
-								<span
-									className="rounded-lg border border-(--border) bg-(--bg-secondary) px-3 py-1.5 text-sm"
-									key={tech}
-								>
+								<span className="rounded-lg border border-(--border) bg-(--bg-secondary) px-3 py-1.5 text-sm" key={tech}>
 									{tech}
 								</span>
 							))}
@@ -173,15 +152,9 @@ export function BuildInfo() {
 									>
 										<Icon className="mb-2 h-6 w-6 text-(--accent)" />
 										<div className="mb-1 font-bold text-(--text-primary) text-xl">
-											<AnimatedStatCounter
-												decimals={stat.id === "load-time" ? 1 : 0}
-												suffix={stat.suffix}
-												value={stat.value}
-											/>
+											<AnimatedStatCounter decimals={stat.id === "load-time" ? 1 : 0} suffix={stat.suffix} value={stat.value} />
 										</div>
-										<div className="text-center text-(--text-secondary) text-xs">
-											{stat.label}
-										</div>
+										<div className="text-center text-(--text-secondary) text-xs">{stat.label}</div>
 									</div>
 								);
 							})}

@@ -13,11 +13,7 @@ interface TestimonialCardProps {
 	isActive: boolean;
 }
 
-export function TestimonialCard({
-	testimonial,
-	index: _index,
-	isActive,
-}: TestimonialCardProps) {
+export function TestimonialCard({ testimonial, index: _index, isActive }: TestimonialCardProps) {
 	const cardRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -51,9 +47,7 @@ export function TestimonialCard({
 	return (
 		<div
 			className={`absolute inset-0 flex flex-col justify-between rounded-lg border border-(--border) bg-(--bg-secondary) p-6 shadow-lg transition-all ${
-				isActive
-					? "pointer-events-auto opacity-100"
-					: "pointer-events-none opacity-0"
+				isActive ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
 			}`}
 			ref={cardRef}
 			style={{
@@ -64,9 +58,7 @@ export function TestimonialCard({
 				<div className="mb-4 text-(--accent)">
 					<Quote className="h-8 w-8" />
 				</div>
-				<blockquote className="mb-4 text-(--text-primary) text-lg italic">
-					"{testimonial.quote}"
-				</blockquote>
+				<blockquote className="mb-4 text-(--text-primary) text-lg italic">"{testimonial.quote}"</blockquote>
 			</div>
 
 			<div className="flex items-center gap-4">
@@ -84,9 +76,7 @@ export function TestimonialCard({
 					</div>
 				)}
 				<div className="flex-1">
-					<div className="font-semibold text-(--text-primary)">
-						{testimonial.author}
-					</div>
+					<div className="font-semibold text-(--text-primary)">{testimonial.author}</div>
 					<div className="text-(--text-secondary) text-sm">
 						{testimonial.title} at {testimonial.company}
 					</div>

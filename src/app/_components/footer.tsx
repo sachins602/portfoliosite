@@ -41,9 +41,7 @@ export function Footer() {
 					{/* Brand */}
 					<div>
 						<h3 className="mb-4 font-bold text-xl">Sachin Sapkota</h3>
-						<p className="text-(--text-secondary) text-sm">
-							Full-Stack Developer building scalable web applications.
-						</p>
+						<p className="text-(--text-secondary) text-sm">Full-Stack Developer building scalable web applications.</p>
 					</div>
 
 					{/* Quick Links */}

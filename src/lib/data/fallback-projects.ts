@@ -67,8 +67,7 @@ export const fallbackProjects: Project[] = [
 	{
 		id: 5,
 		name: "Portfolio Website",
-		description:
-			"This portfolio website built with Next.js 16, React 19, and anime.js animations.",
+		description: "This portfolio website built with Next.js 16, React 19, and anime.js animations.",
 		language: "TypeScript",
 		stargazers_count: 0,
 		forks_count: 0,
@@ -80,8 +79,7 @@ export const fallbackProjects: Project[] = [
 	{
 		id: 6,
 		name: "API Gateway Service",
-		description:
-			"A microservices API gateway built with Golang, handling routing, authentication, and rate limiting.",
+		description: "A microservices API gateway built with Golang, handling routing, authentication, and rate limiting.",
 		language: "Go",
 		stargazers_count: 10,
 		forks_count: 2,

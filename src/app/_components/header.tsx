@@ -57,10 +57,7 @@ export function Header() {
 				const element = document.getElementById(section);
 				if (element) {
 					const { offsetTop, offsetHeight } = element;
-					if (
-						scrollPosition >= offsetTop &&
-						scrollPosition < offsetTop + offsetHeight
-					) {
+					if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
 						setActiveSection(section);
 						break;
 					}
@@ -74,10 +71,7 @@ export function Header() {
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
 
-	const handleNavClick = (
-		e: React.MouseEvent<HTMLAnchorElement>,
-		href: string,
-	) => {
+	const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
 		e.preventDefault();
 		const targetId = href.slice(1);
 		const element = document.getElementById(targetId);
@@ -147,9 +141,7 @@ export function Header() {
 
 				particle.element.style.left = `${particle.x}px`;
 				particle.element.style.top = `${particle.y}px`;
-				particle.element.style.opacity = String(
-					Math.max(0, 1 - (particle.y / window.innerHeight) * 2),
-				);
+				particle.element.style.opacity = String(Math.max(0, 1 - (particle.y / window.innerHeight) * 2));
 			});
 
 			if (confetti.some((p) => p.y < window.innerHeight + 100)) {
@@ -243,17 +235,13 @@ export function Header() {
 							const isActive = activeSection === sectionId;
 							return (
 								<Link
-									className={`relative font-medium transition-colors hover:text-(--accent) ${
-										isActive ? "text-(--accent)" : ""
-									}`}
+									className={`relative font-medium transition-colors hover:text-(--accent) ${isActive ? "text-(--accent)" : ""}`}
 									href={link.href}
 									key={link.href}
 									onClick={(e) => handleNavClick(e, link.href)}
 								>
 									{link.label}
-									{isActive && (
-										<span className="absolute right-0 -bottom-1 left-0 h-0.5 bg-(--accent)" />
-									)}
+									{isActive && <span className="absolute right-0 -bottom-1 left-0 h-0.5 bg-(--accent)" />}
 								</Link>
 							);
 						})}

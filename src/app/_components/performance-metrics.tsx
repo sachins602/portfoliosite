@@ -15,13 +15,7 @@ interface Metric {
 	suffix?: string;
 }
 
-function AnimatedCounter({
-	value,
-	duration = 2000,
-}: {
-	value: number;
-	duration?: number;
-}) {
+function AnimatedCounter({ value, duration = 2000 }: { value: number; duration?: number }) {
 	const [displayValue, setDisplayValue] = useState(0);
 	const hasAnimated = useRef(false);
 
@@ -38,9 +32,7 @@ function AnimatedCounter({
 			count: value,
 			duration,
 			easing: easing.easeOut,
-			update: (anim: {
-				animatables?: Array<{ target: { count: number } }>;
-			}) => {
+			update: (anim: { animatables?: Array<{ target: { count: number } }> }) => {
 				setDisplayValue(Math.floor(anim.animatables?.[0]?.target.count ?? 0));
 			},
 		});
@@ -100,13 +92,8 @@ export function PerformanceMetrics() {
 	];
 
 	return (
-		<div
-			className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6"
-			ref={containerRef}
-		>
-			<h3 className="mb-6 text-center font-semibold text-xl">
-				Performance Metrics
-			</h3>
+		<div className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6" ref={containerRef}>
+			<h3 className="mb-6 text-center font-semibold text-xl">Performance Metrics</h3>
 			<div className="grid grid-cols-2 gap-4 md:grid-cols-4">
 				{metrics.map((metric) => {
 					const Icon = metric.icon;
@@ -120,9 +107,7 @@ export function PerformanceMetrics() {
 								<AnimatedCounter value={metric.value} />
 								{metric.suffix}
 							</div>
-							<div className="text-center text-(--text-secondary) text-xs">
-								{metric.label}
-							</div>
+							<div className="text-center text-(--text-secondary) text-xs">{metric.label}</div>
 						</div>
 					);
 				})}

@@ -15,11 +15,7 @@ const getContributionColor = (count: number): string => {
 };
 
 export function ContributionHeatmap() {
-	const {
-		data: contributions,
-		isLoading,
-		error,
-	} = api.githubContributions.getContributions.useQuery();
+	const { data: contributions, isLoading, error } = api.githubContributions.getContributions.useQuery();
 
 	const [hoveredCell, setHoveredCell] = useState<{
 		date: string;
@@ -57,9 +53,7 @@ export function ContributionHeatmap() {
 		hasAnimated.current = true;
 
 		// Get all cells
-		const cells = Array.from(
-			gridRef.current.querySelectorAll<HTMLElement>(".contribution-cell"),
-		);
+		const cells = Array.from(gridRef.current.querySelectorAll<HTMLElement>(".contribution-cell"));
 
 		// Animate cells in diagonal pattern (past to present)
 		anime({
@@ -95,8 +89,7 @@ export function ContributionHeatmap() {
 					<h3 className="font-semibold text-lg">GitHub Contributions</h3>
 				</div>
 				<p className="py-8 text-center text-(--text-secondary)">
-					Unable to load contributions. Please check your GitHub token
-					configuration.
+					Unable to load contributions. Please check your GitHub token configuration.
 				</p>
 			</div>
 		);
@@ -110,8 +103,7 @@ export function ContributionHeatmap() {
 					<h3 className="font-semibold text-lg">GitHub Contributions</h3>
 				</div>
 				<p className="py-8 text-center text-(--text-secondary)">
-					No contribution data available. Add a GITHUB_TOKEN to your .env file
-					to see your contributions.
+					No contribution data available. Add a GITHUB_TOKEN to your .env file to see your contributions.
 				</p>
 			</div>
 		);
@@ -144,10 +136,7 @@ export function ContributionHeatmap() {
 	};
 
 	return (
-		<div
-			className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6"
-			ref={containerRef}
-		>
+		<div className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6" ref={containerRef}>
 			<div className="mb-4 flex items-center justify-between">
 				<div className="flex items-center gap-2">
 					<Github className="h-5 w-5 text-(--accent)" />
@@ -167,18 +156,9 @@ export function ContributionHeatmap() {
 				<span>Less</span>
 				<div className="flex gap-1">
 					<div className="h-3 w-3 rounded bg-(--bg-secondary)" />
-					<div
-						className="h-3 w-3 rounded"
-						style={{ backgroundColor: "rgba(13, 71, 161, 0.3)" }}
-					/>
-					<div
-						className="h-3 w-3 rounded"
-						style={{ backgroundColor: "rgba(13, 71, 161, 0.5)" }}
-					/>
-					<div
-						className="h-3 w-3 rounded"
-						style={{ backgroundColor: "rgba(13, 71, 161, 0.8)" }}
-					/>
+					<div className="h-3 w-3 rounded" style={{ backgroundColor: "rgba(13, 71, 161, 0.3)" }} />
+					<div className="h-3 w-3 rounded" style={{ backgroundColor: "rgba(13, 71, 161, 0.5)" }} />
+					<div className="h-3 w-3 rounded" style={{ backgroundColor: "rgba(13, 71, 161, 0.8)" }} />
 				</div>
 				<span>More</span>
 			</div>
@@ -235,18 +215,14 @@ export function ContributionHeatmap() {
 							{hoveredCell.count} contribution
 							{hoveredCell.count !== 1 ? "s" : ""}
 						</div>
-						<div className="text-(--text-secondary)">
-							{formatDate(hoveredCell.date)}
-						</div>
+						<div className="text-(--text-secondary)">{formatDate(hoveredCell.date)}</div>
 					</div>
 				)}
 			</div>
 
 			<div className="mt-4 text-center text-(--text-secondary) text-sm">
-				<span className="font-semibold text-(--text-primary)">
-					{contributions.totalContributions}
-				</span>{" "}
-				contributions in the last year
+				<span className="font-semibold text-(--text-primary)">{contributions.totalContributions}</span> contributions in the
+				last year
 			</div>
 		</div>
 	);

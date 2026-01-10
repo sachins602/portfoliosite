@@ -19,9 +19,7 @@ export function CursorTrail() {
 
 	useEffect(() => {
 		// Check if enabled in localStorage
-		const enabled =
-			typeof window !== "undefined" &&
-			localStorage.getItem("cursorTrailEnabled") === "true";
+		const enabled = typeof window !== "undefined" && localStorage.getItem("cursorTrailEnabled") === "true";
 		setIsEnabled(enabled);
 
 		// Check if touch device

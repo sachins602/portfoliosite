@@ -81,32 +81,16 @@ function CircularProgress({
 
 		anime({
 			targets: circle,
-			strokeDashoffset: [
-				circumference,
-				circumference - (score / 100) * circumference,
-			],
+			strokeDashoffset: [circumference, circumference - (score / 100) * circumference],
 			duration: timing.slow,
 			easing: easing.easeOut,
 		});
 	}, [score, circumference]);
 
 	return (
-		<svg
-			aria-label={`${label} score: ${score}%`}
-			className="-rotate-90 transform"
-			height={size}
-			role="img"
-			width={size}
-		>
+		<svg aria-label={`${label} score: ${score}%`} className="-rotate-90 transform" height={size} role="img" width={size}>
 			{/* Background circle */}
-			<circle
-				cx={size / 2}
-				cy={size / 2}
-				fill="none"
-				r={radius}
-				stroke="var(--border)"
-				strokeWidth={strokeWidth}
-			/>
+			<circle cx={size / 2} cy={size / 2} fill="none" r={radius} stroke="var(--border)" strokeWidth={strokeWidth} />
 			{/* Progress circle */}
 			<circle
 				cx={size / 2}
@@ -140,39 +124,24 @@ export function LighthouseScores() {
 	});
 
 	return (
-		<div
-			className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6"
-			ref={containerRef}
-		>
-			<h3 className="mb-6 text-center font-semibold text-xl">
-				Lighthouse Scores
-			</h3>
+		<div className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6" ref={containerRef}>
+			<h3 className="mb-6 text-center font-semibold text-xl">Lighthouse Scores</h3>
 			<div className="grid grid-cols-2 gap-6 md:grid-cols-4">
 				{scores.map((score) => {
 					const Icon = score.icon;
 					return (
 						<div className="flex flex-col items-center" key={score.id}>
 							<div className="relative mb-4">
-								<CircularProgress
-									color={score.color}
-									label={score.label}
-									score={score.value}
-									size={100}
-									strokeWidth={8}
-								/>
+								<CircularProgress color={score.color} label={score.label} score={score.value} size={100} strokeWidth={8} />
 								<div className="absolute inset-0 flex items-center justify-center">
 									<div className="text-center">
-										<div className="font-bold text-(--text-primary) text-lg">
-											{score.value}
-										</div>
+										<div className="font-bold text-(--text-primary) text-lg">{score.value}</div>
 									</div>
 								</div>
 							</div>
 							<div className="flex items-center gap-2">
 								<Icon className="h-4 w-4 text-(--accent)" />
-								<div className="font-medium text-(--text-primary) text-sm">
-									{score.label}
-								</div>
+								<div className="font-medium text-(--text-primary) text-sm">{score.label}</div>
 							</div>
 						</div>
 					);

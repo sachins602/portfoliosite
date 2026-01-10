@@ -24,14 +24,7 @@ export const experiences: Experience[] = [
 			"Collaborated with cross-functional teams to deliver high-quality software solutions",
 			"Optimized application performance and implemented best practices for scalability",
 		],
-		technologies: [
-			"Next.js",
-			"React",
-			"TypeScript",
-			"Tailwind CSS",
-			"Node.js",
-			"SQL",
-		],
+		technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Node.js", "SQL"],
 	},
 	{
 		id: "2",

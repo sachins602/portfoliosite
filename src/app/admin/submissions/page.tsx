@@ -20,9 +20,7 @@ export default function SubmissionsPage() {
 		},
 	});
 
-	const [selectedSubmission, setSelectedSubmission] = useState<number | null>(
-		null,
-	);
+	const [selectedSubmission, setSelectedSubmission] = useState<number | null>(null);
 
 	const formatDate = (timestamp: Date | null) => {
 		if (!timestamp) return "N/A";
@@ -50,9 +48,7 @@ export default function SubmissionsPage() {
 					{submissions?.map((submission) => (
 						<div
 							className={`rounded-lg border p-6 ${
-								submission.isRead
-									? "border-(--border) bg-(--bg-secondary)"
-									: "border-(--accent) bg-(--bg-secondary)"
+								submission.isRead ? "border-(--border) bg-(--bg-secondary)" : "border-(--accent) bg-(--bg-secondary)"
 							}`}
 							key={submission.id}
 						>
@@ -60,11 +56,7 @@ export default function SubmissionsPage() {
 								<div className="flex-1">
 									<div className="mb-2 flex items-center gap-4">
 										<h3 className="font-semibold text-lg">{submission.name}</h3>
-										{!submission.isRead && (
-											<span className="rounded-full bg-(--accent) px-2 py-1 text-white text-xs">
-												New
-											</span>
-										)}
+										{!submission.isRead && <span className="rounded-full bg-(--accent) px-2 py-1 text-white text-xs">New</span>}
 									</div>
 									<div className="mb-2 flex items-center gap-2 text-(--text-secondary) text-sm">
 										<Mail className="h-4 w-4" />
@@ -90,11 +82,7 @@ export default function SubmissionsPage() {
 									<button
 										className="rounded border border-red-500 bg-red-500/10 px-3 py-1 text-red-500 text-sm transition-colors hover:bg-red-500/20"
 										onClick={() => {
-											if (
-												confirm(
-													"Are you sure you want to delete this submission?",
-												)
-											) {
+											if (confirm("Are you sure you want to delete this submission?")) {
 												deleteMutation.mutate({ id: submission.id });
 											}
 										}}
@@ -109,15 +97,11 @@ export default function SubmissionsPage() {
 									selectedSubmission === submission.id ? "" : "line-clamp-3"
 								}`}
 								onClick={() => {
-									setSelectedSubmission(
-										selectedSubmission === submission.id ? null : submission.id,
-									);
+									setSelectedSubmission(selectedSubmission === submission.id ? null : submission.id);
 								}}
 								type="button"
 							>
-								<p className="whitespace-pre-wrap text-(--text-primary)">
-									{submission.message}
-								</p>
+								<p className="whitespace-pre-wrap text-(--text-primary)">{submission.message}</p>
 							</button>
 						</div>
 					))}

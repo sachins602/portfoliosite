@@ -2,8 +2,8 @@
 
 @theme {
 	--font-sans:
-		var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
-		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+		var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+		"Segoe UI Symbol", "Noto Color Emoji";
 }
 
 /* Theme Variables */
@@ -19,11 +19,7 @@
 
 	/* Gradients */
 	--gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-	--gradient-card: linear-gradient(
-		135deg,
-		rgba(129, 140, 248, 0.1) 0%,
-		rgba(139, 92, 246, 0.1) 100%
-	);
+	--gradient-card: linear-gradient(135deg, rgba(129, 140, 248, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
 
 	/* Typography */
 	--font-weight-light: 300;

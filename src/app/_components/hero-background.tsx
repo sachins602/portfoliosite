@@ -33,14 +33,8 @@ export function HeroBackground() {
 
 			anime({
 				targets: particle,
-				translateX: [
-					{ value: Math.random() * 200 - 100 },
-					{ value: Math.random() * 200 - 100 },
-				],
-				translateY: [
-					{ value: Math.random() * 200 - 100 },
-					{ value: Math.random() * 200 - 100 },
-				],
+				translateX: [{ value: Math.random() * 200 - 100 }, { value: Math.random() * 200 - 100 }],
+				translateY: [{ value: Math.random() * 200 - 100 }, { value: Math.random() * 200 - 100 }],
 				opacity: [{ value: 0.1 }, { value: 0.3 }, { value: 0.1 }],
 				duration,
 				delay,
@@ -57,11 +51,5 @@ export function HeroBackground() {
 		};
 	}, []);
 
-	return (
-		<div
-			aria-hidden="true"
-			className="pointer-events-none absolute inset-0 overflow-hidden"
-			ref={containerRef}
-		/>
-	);
+	return <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden" ref={containerRef} />;
 }

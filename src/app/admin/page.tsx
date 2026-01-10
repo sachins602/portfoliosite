@@ -19,9 +19,7 @@ export default function AdminDashboard() {
 						<MessageSquare className="h-5 w-5 text-(--accent)" />
 						<h2 className="font-semibold text-lg">Total Submissions</h2>
 					</div>
-					<p className="font-bold text-(--text-primary) text-3xl">
-						{isLoading ? "..." : (stats?.total ?? 0)}
-					</p>
+					<p className="font-bold text-(--text-primary) text-3xl">{isLoading ? "..." : (stats?.total ?? 0)}</p>
 				</div>
 
 				<div className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6">
@@ -29,9 +27,7 @@ export default function AdminDashboard() {
 						<Mail className="h-5 w-5 text-(--accent)" />
 						<h2 className="font-semibold text-lg">Unread</h2>
 					</div>
-					<p className="font-bold text-(--text-primary) text-3xl">
-						{isLoading ? "..." : (stats?.unread ?? 0)}
-					</p>
+					<p className="font-bold text-(--text-primary) text-3xl">{isLoading ? "..." : (stats?.unread ?? 0)}</p>
 				</div>
 
 				<div className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6">
@@ -39,9 +35,7 @@ export default function AdminDashboard() {
 						<TrendingUp className="h-5 w-5 text-(--accent)" />
 						<h2 className="font-semibold text-lg">Read</h2>
 					</div>
-					<p className="font-bold text-(--text-primary) text-3xl">
-						{isLoading ? "..." : (stats?.read ?? 0)}
-					</p>
+					<p className="font-bold text-(--text-primary) text-3xl">{isLoading ? "..." : (stats?.read ?? 0)}</p>
 				</div>
 			</div>
 

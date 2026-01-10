@@ -37,8 +37,7 @@ export const metadata: Metadata = {
 	twitter: {
 		card: "summary_large_image",
 		title: "Sachin Sapkota | Full-Stack Developer",
-		description:
-			"Full-Stack Developer specializing in Next.js, TypeScript, and Golang.",
+		description: "Full-Stack Developer specializing in Next.js, TypeScript, and Golang.",
 	},
 	robots: {
 		index: true,
@@ -52,15 +51,9 @@ const geist = Geist({
 	variable: "--font-geist-sans",
 });
 
-export default function RootLayout({
-	children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
 	return (
-		<html
-			className={`${geist.variable} dark`}
-			lang="en"
-			suppressHydrationWarning
-		>
+		<html className={`${geist.variable} dark`} lang="en" suppressHydrationWarning>
 			<head>
 				<script
 					// biome-ignore lint/security/noDangerouslySetInnerHtml: Theme initialization script must run before React hydration to prevent flash of wrong theme. Content is static and safe.

@@ -141,19 +141,12 @@ export function Hero() {
 					</div>
 
 					{/* Name */}
-					<h1
-						className="mb-6 font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-8xl"
-						ref={nameRef}
-					>
+					<h1 className="mb-6 font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-8xl" ref={nameRef}>
 						{name.split("").map((char, index) => {
 							// Use position-based key since each character position is unique
 							const uniqueKey = `char-${index}-${char.charCodeAt(0)}`;
 							return (
-								<span
-									className="inline-block"
-									key={uniqueKey}
-									style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
-								>
+								<span className="inline-block" key={uniqueKey} style={{ opacity: prefersReducedMotion() ? 1 : 0 }}>
 									{char === " " ? "\u00A0" : char}
 								</span>
 							);
@@ -166,9 +159,7 @@ export function Hero() {
 						ref={subtitleRef}
 					>
 						{subtitleText}
-						{showCursor && (
-							<span className="ml-1 inline-block h-[1em] w-0.5 animate-pulse bg-(--accent)" />
-						)}
+						{showCursor && <span className="ml-1 inline-block h-[1em] w-0.5 animate-pulse bg-(--accent)" />}
 					</div>
 
 					{/* Tagline */}
@@ -181,10 +172,7 @@ export function Hero() {
 					</p>
 
 					{/* CTA Buttons */}
-					<div
-						className="flex flex-col items-center justify-center gap-4 sm:flex-row"
-						ref={buttonsRef}
-					>
+					<div className="flex flex-col items-center justify-center gap-4 sm:flex-row" ref={buttonsRef}>
 						<button
 							className="transform rounded-lg bg-(--accent) px-8 py-4 font-semibold text-white transition-colors hover:scale-105 hover:bg-(--accent-hover) active:scale-95"
 							onClick={() => scrollToSection("projects")}

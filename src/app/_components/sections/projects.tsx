@@ -40,11 +40,7 @@ export function Projects() {
 		}
 	});
 
-	const {
-		data: projects,
-		isLoading,
-		error,
-	} = api.projects.getProjects.useQuery();
+	const { data: projects, isLoading, error } = api.projects.getProjects.useQuery();
 
 	// Filter projects
 	const filteredProjects = useMemo(() => {
@@ -68,9 +64,7 @@ export function Projects() {
 
 			// Tag filter
 			if (filters.tags.length > 0) {
-				const hasMatchingTag = filters.tags.some((tag) =>
-					project.topics.includes(tag),
-				);
+				const hasMatchingTag = filters.tags.some((tag) => project.topics.includes(tag));
 				if (!hasMatchingTag) return false;
 			}
 
@@ -108,9 +102,7 @@ export function Projects() {
 		const cards = document.querySelectorAll(".project-card");
 		cards.forEach((card, index) => {
 			const isVisible = displayedProjects.some(
-				(p) =>
-					p.id ===
-					Number.parseInt(card.getAttribute("data-project-id") ?? "0", 10),
+				(p) => p.id === Number.parseInt(card.getAttribute("data-project-id") ?? "0", 10),
 			);
 
 			if (isVisible) {
@@ -136,11 +128,7 @@ export function Projects() {
 	}, [displayedProjects, projects]);
 
 	return (
-		<section
-			className="bg-(--bg-primary) py-20 md:py-32"
-			id="projects"
-			ref={sectionRef}
-		>
+		<section className="bg-(--bg-primary) py-20 md:py-32" id="projects" ref={sectionRef}>
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
 				<h2
 					className="section-title mb-16 text-center font-bold text-4xl md:text-5xl"
@@ -152,11 +140,7 @@ export function Projects() {
 				{!isLoading && projects && projects.length > 0 && (
 					<>
 						<ProjectSearch onSearchChange={setSearchQuery} />
-						<ProjectFilter
-							activeFilters={filters}
-							onFiltersChange={setFilters}
-							projects={projects}
-						/>
+						<ProjectFilter activeFilters={filters} onFiltersChange={setFilters} projects={projects} />
 					</>
 				)}
 
@@ -185,11 +169,7 @@ export function Projects() {
 					<>
 						<div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
 							{displayedProjects.map((project, index) => (
-								<div
-									className="project-card"
-									data-project-id={project.id}
-									key={project.id}
-								>
+								<div className="project-card" data-project-id={project.id} key={project.id}>
 									<ProjectCard index={index} project={project} />
 								</div>
 							))}
@@ -198,8 +178,7 @@ export function Projects() {
 						{hasMore && (
 							<div className="mt-12 flex flex-col items-center gap-4">
 								<p className="text-(--text-secondary) text-sm">
-									Showing {displayedProjects.length} of{" "}
-									{filteredProjects.length} projects
+									Showing {displayedProjects.length} of {filteredProjects.length} projects
 								</p>
 								<button
 									className="rounded-lg border border-(--accent) bg-(--accent)/10 px-6 py-3 font-semibold text-(--accent) transition-all duration-300 hover:bg-(--accent)/20 hover:shadow-lg"
@@ -213,24 +192,18 @@ export function Projects() {
 
 						{!hasMore && filteredProjects.length > INITIAL_DISPLAY_COUNT && (
 							<div className="mt-8 text-center">
-								<p className="text-(--text-secondary) text-sm">
-									Showing all {filteredProjects.length} projects
-								</p>
+								<p className="text-(--text-secondary) text-sm">Showing all {filteredProjects.length} projects</p>
 							</div>
 						)}
 					</>
 				)}
 
-				{!isLoading &&
-					!error &&
-					projects &&
-					projects.length > 0 &&
-					filteredProjects.length === 0 && (
-						<div className="text-center text-(--text-secondary)">
-							<p className="mb-4 text-lg">No projects match your filters.</p>
-							<p className="text-sm">Try adjusting your search or filters.</p>
-						</div>
-					)}
+				{!isLoading && !error && projects && projects.length > 0 && filteredProjects.length === 0 && (
+					<div className="text-center text-(--text-secondary)">
+						<p className="mb-4 text-lg">No projects match your filters.</p>
+						<p className="text-sm">Try adjusting your search or filters.</p>
+					</div>
+				)}
 
 				{!isLoading && !error && (!projects || projects.length === 0) && (
 					<div className="text-center text-(--text-secondary)">

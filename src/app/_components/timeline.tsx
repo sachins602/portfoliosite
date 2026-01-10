@@ -26,14 +26,11 @@ export function Timeline({ itemCount }: TimelineProps) {
 			if (!wrapperDiv) return;
 
 			// Get the cards container (the div with space-y-12) - it's a sibling of timelineContainer
-			const cardsContainer = wrapperDiv.querySelector(
-				".space-y-12",
-			) as HTMLElement;
+			const cardsContainer = wrapperDiv.querySelector(".space-y-12") as HTMLElement;
 			if (!cardsContainer) return;
 
 			// Set timeline container height to match cards container
-			const cardsContainerHeight =
-				cardsContainer.scrollHeight || cardsContainer.offsetHeight;
+			const cardsContainerHeight = cardsContainer.scrollHeight || cardsContainer.offsetHeight;
 			if (cardsContainerHeight === 0) return;
 
 			// Update timeline container height to match cards
@@ -42,9 +39,7 @@ export function Timeline({ itemCount }: TimelineProps) {
 			const positions: number[] = [];
 
 			// Find all experience card containers within the wrapper
-			const cards = Array.from(
-				wrapperDiv.querySelectorAll<HTMLElement>("[data-experience-card]"),
-			);
+			const cards = Array.from(wrapperDiv.querySelectorAll<HTMLElement>("[data-experience-card]"));
 
 			cards.forEach((card) => {
 				// Calculate position relative to cards container
@@ -115,12 +110,7 @@ export function Timeline({ itemCount }: TimelineProps) {
 		const observer = new IntersectionObserver(
 			(entries) => {
 				entries.forEach((entry) => {
-					if (
-						entry.isIntersecting &&
-						lineRef.current &&
-						nodePositions.length > 0 &&
-						!hasAnimatedRef.current
-					) {
+					if (entry.isIntersecting && lineRef.current && nodePositions.length > 0 && !hasAnimatedRef.current) {
 						hasAnimatedRef.current = true;
 
 						const line = lineRef.current;
@@ -203,11 +193,7 @@ export function Timeline({ itemCount }: TimelineProps) {
 			</svg>
 
 			{/* Nodes */}
-			<div
-				className="absolute inset-0"
-				ref={nodesRef}
-				style={{ height: "100%" }}
-			>
+			<div className="absolute inset-0" ref={nodesRef} style={{ height: "100%" }}>
 				{nodePositions.length > 0
 					? nodePositions.map((position, index) => (
 							<div
@@ -216,9 +202,7 @@ export function Timeline({ itemCount }: TimelineProps) {
 								style={{
 									top: `${position}%`,
 									opacity: prefersReducedMotion() ? 1 : 0,
-									transform: prefersReducedMotion()
-										? "scale(1) translateY(-50%)"
-										: "scale(0) translateY(-50%)",
+									transform: prefersReducedMotion() ? "scale(1) translateY(-50%)" : "scale(0) translateY(-50%)",
 								}}
 							/>
 						))
@@ -229,9 +213,7 @@ export function Timeline({ itemCount }: TimelineProps) {
 								style={{
 									top: `${(index / (itemCount - 1 || 1)) * 100}%`,
 									opacity: prefersReducedMotion() ? 1 : 0,
-									transform: prefersReducedMotion()
-										? "scale(1) translateY(-50%)"
-										: "scale(0) translateY(-50%)",
+									transform: prefersReducedMotion() ? "scale(1) translateY(-50%)" : "scale(0) translateY(-50%)",
 								}}
 							/>
 						))}

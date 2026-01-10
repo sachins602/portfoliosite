@@ -13,15 +13,10 @@ export function ThemeToggle() {
 	useEffect(() => {
 		setMounted(true);
 		const stored = localStorage.getItem("theme") as "light" | "dark" | null;
-		const systemPrefersDark = window.matchMedia(
-			"(prefers-color-scheme: dark)",
-		).matches;
+		const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 		const initialTheme = stored ?? (systemPrefersDark ? "dark" : "light");
 		setTheme(initialTheme);
-		document.documentElement.classList.toggle(
-			"light",
-			initialTheme === "light",
-		);
+		document.documentElement.classList.toggle("light", initialTheme === "light");
 		document.documentElement.classList.toggle("dark", initialTheme === "dark");
 	}, []);
 
@@ -66,11 +61,7 @@ export function ThemeToggle() {
 			type="button"
 		>
 			<div className="relative h-5 w-5" ref={iconRef}>
-				{theme === "dark" ? (
-					<Moon className="absolute inset-0 h-5 w-5" />
-				) : (
-					<Sun className="absolute inset-0 h-5 w-5" />
-				)}
+				{theme === "dark" ? <Moon className="absolute inset-0 h-5 w-5" /> : <Sun className="absolute inset-0 h-5 w-5" />}
 			</div>
 		</button>
 	);

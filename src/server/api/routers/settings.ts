@@ -6,11 +6,7 @@ import { settings } from "~/server/db/schema";
 
 export const settingsRouter = createTRPCRouter({
 	getAvailabilityStatus: publicProcedure.query(async () => {
-		const result = await db
-			.select()
-			.from(settings)
-			.where(eq(settings.key, "availability_status"))
-			.limit(1);
+		const result = await db.select().from(settings).where(eq(settings.key, "availability_status")).limit(1);
 
 		if (result.length === 0) {
 			// Default status if not set
@@ -21,19 +17,9 @@ export const settingsRouter = createTRPCRouter({
 	}),
 
 	updateAvailabilityStatus: publicProcedure
-		.input(
-			z.enum([
-				"Available for hire",
-				"Open to opportunities",
-				"Currently employed",
-			]),
-		)
+		.input(z.enum(["Available for hire", "Open to opportunities", "Currently employed"]))
 		.mutation(async ({ input }) => {
-			const existing = await db
-				.select()
-				.from(settings)
-				.where(eq(settings.key, "availability_status"))
-				.limit(1);
+			const existing = await db.select().from(settings).where(eq(settings.key, "availability_status")).limit(1);
 
 			if (existing.length > 0) {
 				await db

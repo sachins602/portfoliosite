@@ -50,11 +50,7 @@ export function About() {
 	const linkedinRef = useElasticHover<HTMLAnchorElement>();
 
 	return (
-		<section
-			className="bg-(--bg-primary) py-20 md:py-32"
-			id="about"
-			ref={sectionRef}
-		>
+		<section className="bg-(--bg-primary) py-20 md:py-32" id="about" ref={sectionRef}>
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
 				<h2
 					className="section-title mb-12 text-center font-bold text-4xl md:text-5xl"
@@ -68,21 +64,18 @@ export function About() {
 					<div>
 						<div className="space-y-4 text-(--text-secondary)">
 							<p>
-								I'm a passionate Full-Stack Developer with expertise in building
-								scalable web applications using modern technologies. My primary
-								focus is on Next.js, React, TypeScript, and Golang, creating
-								performant and user-friendly solutions.
+								I'm a passionate Full-Stack Developer with expertise in building scalable web applications using modern
+								technologies. My primary focus is on Next.js, React, TypeScript, and Golang, creating performant and
+								user-friendly solutions.
 							</p>
 							<p>
-								With experience in both frontend and backend development, I
-								specialize in creating seamless user experiences while ensuring
-								robust server-side architecture. I'm well-versed in cloud
-								integrations, database design, and DevOps practices.
+								With experience in both frontend and backend development, I specialize in creating seamless user experiences
+								while ensuring robust server-side architecture. I'm well-versed in cloud integrations, database design, and
+								DevOps practices.
 							</p>
 							<p>
-								Based in Ontario, Canada, I'm open to remote opportunities and
-								ready to contribute to innovative projects that push the
-								boundaries of web development.
+								Based in Ontario, Canada, I'm open to remote opportunities and ready to contribute to innovative projects that
+								push the boundaries of web development.
 							</p>
 						</div>
 

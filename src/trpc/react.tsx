@@ -68,9 +68,7 @@ function getBaseUrl(): string {
 function getVendorBaseUrl(): string | undefined {
 	// Use NEXT_PUBLIC_ prefixed env vars (safe for client components)
 	// These are available at build time and embedded in the bundle
-	const publicVercel = process.env.NEXT_PUBLIC_VERCEL_URL
-		? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-		: undefined;
+	const publicVercel = process.env.NEXT_PUBLIC_VERCEL_URL ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` : undefined;
 	const publicNetlify = process.env.NEXT_PUBLIC_NETLIFY_URL;
 	const publicRender = process.env.NEXT_PUBLIC_RENDER_URL;
 	const publicRailway = process.env.NEXT_PUBLIC_RAILWAY_URL
@@ -99,15 +97,13 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
 		// Detect dev mode safely (using window.location on client, or NEXT_PUBLIC_NODE_ENV)
 		const isDev =
 			typeof window !== "undefined"
-				? window.location.hostname === "localhost" ||
-					window.location.hostname === "127.0.0.1"
+				? window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
 				: process.env.NEXT_PUBLIC_NODE_ENV === "development";
 
 		const client = api.createClient({
 			links: [
 				loggerLink({
-					enabled: (op) =>
-						isDev || (op.direction === "down" && op.result instanceof Error),
+					enabled: (op) => isDev || (op.direction === "down" && op.result instanceof Error),
 				}),
 				httpBatchStreamLink({
 					transformer: SuperJSON,

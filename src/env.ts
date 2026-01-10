@@ -8,9 +8,7 @@ export const env = createEnv({
 	 */
 	server: {
 		DATABASE_URL: z.string().url(),
-		NODE_ENV: z
-			.enum(["development", "test", "production"])
-			.default("development"),
+		NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
 		GITHUB_TOKEN: z.string().optional(),
 		RESEND_API_KEY: z.string().min(1).optional(),
 		CONTACT_EMAIL: z.string().email().default("sachinsapkota4@gmail.com"),

@@ -167,8 +167,5 @@ export function processCommand(input: string): string[] {
 	}
 
 	// Unknown command
-	return [
-		`Command not found: ${input}`,
-		"Type 'help' to see available commands.",
-	];
+	return [`Command not found: ${input}`, "Type 'help' to see available commands."];
 }

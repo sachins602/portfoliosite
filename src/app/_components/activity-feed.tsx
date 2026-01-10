@@ -23,11 +23,7 @@ const getEventIcon = (type: string) => {
 };
 
 export function ActivityFeed() {
-	const {
-		data: activities,
-		isLoading,
-		error,
-	} = api.githubActivity.getActivity.useQuery();
+	const { data: activities, isLoading, error } = api.githubActivity.getActivity.useQuery();
 
 	const containerRef = useScrollTrigger<HTMLDivElement>((element) => {
 		if (prefersReducedMotion()) return;
@@ -53,9 +49,7 @@ export function ActivityFeed() {
 		if (!activities || prefersReducedMotion()) return;
 
 		const currentIds = activities.map((a) => a.id);
-		const newIds = currentIds.filter(
-			(id) => !prevActivitiesRef.current.includes(id),
-		);
+		const newIds = currentIds.filter((id) => !prevActivitiesRef.current.includes(id));
 
 		if (newIds.length > 0 && listRef.current) {
 			const items = Array.from(listRef.current.children);
@@ -86,10 +80,7 @@ export function ActivityFeed() {
 				</div>
 				<div className="space-y-2">
 					{Array.from({ length: 3 }).map((_, i) => (
-						<div
-							className="animate-pulse rounded bg-(--border) p-2"
-							key={`activity-skeleton-${i + Math.random()}`}
-						>
+						<div className="animate-pulse rounded bg-(--border) p-2" key={`activity-skeleton-${i + Math.random()}`}>
 							<div className="h-4 w-3/4 rounded bg-(--bg-primary)" />
 						</div>
 					))}
@@ -105,9 +96,7 @@ export function ActivityFeed() {
 					<Github className="h-5 w-5 text-(--accent)" />
 					<h3 className="font-semibold text-lg">Recent Activity</h3>
 				</div>
-				<p className="py-4 text-center text-(--text-secondary)">
-					Unable to load activity. Please check your GitHub token.
-				</p>
+				<p className="py-4 text-center text-(--text-secondary)">Unable to load activity. Please check your GitHub token.</p>
 			</div>
 		);
 	}
@@ -120,18 +109,14 @@ export function ActivityFeed() {
 					<h3 className="font-semibold text-lg">Recent Activity</h3>
 				</div>
 				<p className="py-4 text-center text-(--text-secondary)">
-					No recent activity found. Add a GITHUB_TOKEN to your .env to see
-					activity.
+					No recent activity found. Add a GITHUB_TOKEN to your .env to see activity.
 				</p>
 			</div>
 		);
 	}
 
 	return (
-		<div
-			className="rounded-lg border border-(--border) bg-(--bg-secondary) p-4"
-			ref={containerRef}
-		>
+		<div className="rounded-lg border border-(--border) bg-(--bg-secondary) p-4" ref={containerRef}>
 			<div className="mb-3 flex items-center justify-between">
 				<div className="flex items-center gap-2">
 					<Github className="h-5 w-5 text-(--accent)" />
@@ -150,10 +135,7 @@ export function ActivityFeed() {
 				{activities.map((activity) => {
 					const Icon = getEventIcon(activity.type);
 					return (
-						<li
-							className="flex items-center gap-3 rounded p-2 transition-colors hover:bg-(--bg-primary)"
-							key={activity.id}
-						>
+						<li className="flex items-center gap-3 rounded p-2 transition-colors hover:bg-(--bg-primary)" key={activity.id}>
 							<Icon className="h-4 w-4 shrink-0 text-(--accent)" />
 							<div className="min-w-0 flex-1">
 								<a
@@ -164,9 +146,7 @@ export function ActivityFeed() {
 								>
 									{activity.message}
 								</a>
-								<p className="text-(--text-secondary) text-xs">
-									{activity.timeAgo}
-								</p>
+								<p className="text-(--text-secondary) text-xs">{activity.timeAgo}</p>
 							</div>
 						</li>
 					);
