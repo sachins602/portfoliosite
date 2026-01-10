@@ -129,7 +129,7 @@ export function ActivityFeed() {
 							className="flex items-center gap-3 rounded p-2 transition-colors hover:bg-[var(--bg-primary)]"
 							key={activity.id}
 						>
-							<Icon className="h-4 w-4 flex-shrink-0 text-[var(--accent)]" />
+							<Icon className="h-4 w-4 shrink-0 text-[var(--accent)]" />
 							<div className="min-w-0 flex-1">
 								<a
 									className="block truncate font-medium text-[var(--text-primary)] text-sm transition-colors hover:text-[var(--accent)]"

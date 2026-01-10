@@ -50,10 +50,10 @@ export function ParallaxBackground({
 			className={`pointer-events-none fixed inset-0 -z-10 overflow-hidden ${className}`}
 			ref={containerRef}
 		>
-			{/* biome-ignore lint/suspicious/noArrayIndexKey: Static parallax layers, order never changes */}
 			{Array.from({ length: layers }).map((_, index) => (
 				<div
 					className="absolute inset-0 opacity-20"
+					// biome-ignore lint/suspicious/noArrayIndexKey: Static parallax layers, order never changes
 					key={`parallax-layer-${index}`}
 					style={{
 						background: `radial-gradient(circle at ${20 + index * 30}% ${30 + index * 20}%, var(--accent) 0%, transparent 50%)`,

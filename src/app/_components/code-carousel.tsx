@@ -109,7 +109,7 @@ export function CodeCarousel() {
 		if (!containerRef.current || prefersReducedMotion()) return;
 
 		const codeBlock = containerRef.current.querySelector(".code-block");
-		if (codeBlock) {
+		if (codeBlock && currentIndex >= 0) {
 			anime({
 				targets: codeBlock,
 				opacity: [0, 1],
@@ -118,7 +118,6 @@ export function CodeCarousel() {
 				easing: easing.easeOut,
 			});
 		}
-		// biome-ignore lint/correctness/useExhaustiveDependencies: currentIndex is needed to trigger animation on change
 	}, [currentIndex]);
 
 	const currentSnippet = snippets[currentIndex] ?? snippets[0];
