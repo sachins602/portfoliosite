@@ -148,7 +148,7 @@ export function ExperienceCard({ experience, index }: ExperienceCardProps) {
 			<div className="flex flex-wrap gap-2">
 				{experience.technologies.map((tech) => (
 					<span
-						className="rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/20 px-2.5 py-1 text-[var(--accent)] text-xs font-medium"
+						className="rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/20 px-2.5 py-1 font-medium text-[var(--accent)] text-xs"
 						key={`tech-${tech}`}
 					>
 						{tech}

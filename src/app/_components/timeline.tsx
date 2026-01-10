@@ -26,13 +26,16 @@ export function Timeline({ itemCount }: TimelineProps) {
 			if (!wrapperDiv) return;
 
 			// Get the cards container (the div with space-y-12) - it's a sibling of timelineContainer
-			const cardsContainer = wrapperDiv.querySelector(".space-y-12") as HTMLElement;
+			const cardsContainer = wrapperDiv.querySelector(
+				".space-y-12",
+			) as HTMLElement;
 			if (!cardsContainer) return;
 
 			// Set timeline container height to match cards container
-			const cardsContainerHeight = cardsContainer.scrollHeight || cardsContainer.offsetHeight;
+			const cardsContainerHeight =
+				cardsContainer.scrollHeight || cardsContainer.offsetHeight;
 			if (cardsContainerHeight === 0) return;
-			
+
 			// Update timeline container height to match cards
 			timelineContainer.style.height = `${cardsContainerHeight}px`;
 
@@ -178,14 +181,11 @@ export function Timeline({ itemCount }: TimelineProps) {
 	const lineEnd = nodePositions.length > 0 ? Math.max(...nodePositions) : 100;
 
 	return (
-		<div 
-			className="absolute left-0 right-0 top-0" 
-			ref={containerRef}
-		>
+		<div className="absolute top-0 right-0 left-0" ref={containerRef}>
 			{/* SVG Line */}
 			<svg
 				aria-label="Timeline line"
-				className="absolute bottom-0 left-[1.875rem] top-0 w-1 md:-translate-x-1/2 md:left-1/2"
+				className="absolute top-0 bottom-0 left-[1.875rem] w-1 md:left-1/2 md:-translate-x-1/2"
 				role="img"
 				style={{ height: "100%" }}
 			>
@@ -203,7 +203,11 @@ export function Timeline({ itemCount }: TimelineProps) {
 			</svg>
 
 			{/* Nodes */}
-			<div className="absolute inset-0" ref={nodesRef} style={{ height: "100%" }}>
+			<div
+				className="absolute inset-0"
+				ref={nodesRef}
+				style={{ height: "100%" }}
+			>
 				{nodePositions.length > 0
 					? nodePositions.map((position, index) => (
 							<div

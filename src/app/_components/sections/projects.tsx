@@ -165,7 +165,6 @@ export function Projects() {
 						{Array.from({ length: 6 }).map((_, i) => (
 							<div
 								className="animate-pulse rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6"
-								
 								key={`project-skeleton-${i + Math.random()}`}
 							>
 								<div className="mb-4 h-6 rounded bg-[var(--border)]" />

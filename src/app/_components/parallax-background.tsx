@@ -53,7 +53,7 @@ export function ParallaxBackground({
 			{Array.from({ length: layers }).map((_, index) => (
 				<div
 					className="absolute inset-0 opacity-20"
-					key={`parallax-layer-${index + Math.random()}`} 
+					key={`parallax-layer-${index + Math.random()}`}
 					style={{
 						background: `radial-gradient(circle at ${20 + index * 30}% ${30 + index * 20}%, var(--accent) 0%, transparent 50%)`,
 						transform: `translateY(0)`,
