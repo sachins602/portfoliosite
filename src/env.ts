@@ -14,6 +14,7 @@ export const env = createEnv({
 		GITHUB_TOKEN: z.string().optional(),
 		RESEND_API_KEY: z.string().min(1).optional(),
 		CONTACT_EMAIL: z.string().email().default("sachinsapkota4@gmail.com"),
+		ADMIN_PASSWORD: z.string().min(1).optional(),
 	},
 
 	/**
@@ -35,6 +36,7 @@ export const env = createEnv({
 		GITHUB_TOKEN: process.env.GITHUB_TOKEN,
 		RESEND_API_KEY: process.env.RESEND_API_KEY,
 		CONTACT_EMAIL: process.env.CONTACT_EMAIL ?? "sachinsapkota4@gmail.com",
+		ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
 		// NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
 	},
 	/**

@@ -17,6 +17,7 @@ export const easing = {
 	easeInOut: "easeInOutQuad",
 	easeOut: "easeOutQuad",
 	easeIn: "easeInQuad",
+	linear: "linear",
 } as const;
 
 // Stagger configurations

@@ -2,7 +2,7 @@
 
 **Project**: Sachin Sapkota — Full-Stack Developer Portfolio  
 **Created**: January 2026  
-**Status**: Phase 3 Complete
+**Status**: Phase 4 Complete
 
 ---
 
@@ -825,7 +825,7 @@
 
 ### 4.1 Blog/Articles Section
 
-- [ ] **4.1.1 Create blog section structure**
+- [x] **4.1.1 Create blog section structure**
   - **File**: `src/app/_components/sections/blog.tsx`
   - **Context**: Placeholder for future blog posts
   - **Details**:
@@ -833,7 +833,7 @@
     - "Coming Soon" state initially
     - Grid layout ready for article cards
 
-- [ ] **4.1.2 Create article card component**
+- [x] **4.1.2 Create article card component**
   - **File**: `src/app/_components/article-card.tsx`
   - **Context**: Display blog post preview
   - **Details**:
@@ -842,7 +842,7 @@
     - Tags/categories
     - Hover animations with anime.js
 
-- [ ] **4.1.3 Set up Dev.to/Medium API integration**
+- [x] **4.1.3 Set up Dev.to/Medium API integration**
   - **File**: `src/server/api/routers/articles.ts`
   - **Context**: Fetch articles from external platforms
   - **Details**:
@@ -855,7 +855,7 @@
 
 ### 4.2 Testimonials Section
 
-- [ ] **4.2.1 Create testimonials carousel**
+- [x] **4.2.1 Create testimonials carousel**
   - **File**: `src/app/_components/sections/testimonials.tsx`
   - **Context**: Display recommendations/testimonials
   - **Details**:
@@ -864,7 +864,7 @@
     - Navigation dots/arrows
     - Card flip or slide transitions
 
-- [ ] **4.2.2 Create testimonial card component**
+- [x] **4.2.2 Create testimonial card component**
   - **File**: `src/app/_components/testimonial-card.tsx`
   - **Context**: Individual testimonial display
   - **Details**:
@@ -873,7 +873,7 @@
     - Optional photo/avatar
     - Link to LinkedIn recommendation (if applicable)
 
-- [ ] **4.2.3 Add testimonial data**
+- [x] **4.2.3 Add testimonial data**
   - **File**: `src/lib/data/testimonials.ts`
   - **Context**: Store testimonial content
   - **Details**:
@@ -885,7 +885,7 @@
 
 ### 4.3 3D Elements
 
-- [ ] **4.3.1 Add 3D card tilt effect**
+- [x] **4.3.1 Add 3D card tilt effect**
   - **File**: Install `vanilla-tilt` or implement custom
   - **Context**: Subtle 3D tilt on project cards
   - **Details**:
@@ -894,7 +894,7 @@
     - Subtle effect (max 10-15 degree tilt)
     - Disable on mobile/touch
 
-- [ ] **4.3.2 Create 3D rotating tech cube**
+- [x] **4.3.2 Create 3D rotating tech cube**
   - **File**: `src/app/_components/tech-cube.tsx`
   - **Context**: Hero section eye-catching element
   - **Details**:
@@ -903,7 +903,7 @@
     - Anime.js controlled rotation
     - Alternative to particles background
 
-- [ ] **4.3.3 Add parallax depth layers**
+- [x] **4.3.3 Add parallax depth layers**
   - **File**: `src/app/_components/parallax-background.tsx`
   - **Context**: Background depth effect
   - **Details**:
@@ -915,7 +915,7 @@
 
 ### 4.4 Availability Status System
 
-- [ ] **4.4.1 Create availability badge component**
+- [x] **4.4.1 Create availability badge component**
   - **File**: `src/app/_components/availability-badge.tsx`
   - **Context**: Show current employment/availability status
   - **Details**:
@@ -923,7 +923,7 @@
     - Colored badge with pulse animation
     - Position: header or hero section
 
-- [ ] **4.4.2 Create admin toggle for status**
+- [x] **4.4.2 Create admin toggle for status**
   - **File**: `src/app/admin/page.tsx`
   - **Context**: Simple admin page to update status
   - **Details**:
@@ -932,7 +932,7 @@
     - Store in database
     - tRPC mutation for updating
 
-- [ ] **4.4.3 Add status to database schema**
+- [x] **4.4.3 Add status to database schema**
   - **File**: `src/server/db/schema.ts`
   - **Context**: Store availability status
   - **Details**:
@@ -944,7 +944,7 @@
 
 ### 4.5 Analytics Dashboard (Private Admin)
 
-- [ ] **4.5.1 Create admin layout and auth**
+- [x] **4.5.1 Create admin layout and auth**
   - **File**: `src/app/admin/layout.tsx`
   - **Context**: Protected admin area
   - **Details**:
@@ -952,7 +952,7 @@
     - Middleware to protect `/admin` routes
     - Basic admin navigation
 
-- [ ] **4.5.2 Create analytics dashboard page**
+- [x] **4.5.2 Create analytics dashboard page**
   - **File**: `src/app/admin/page.tsx`
   - **Context**: View portfolio metrics
   - **Details**:
@@ -961,7 +961,7 @@
     - Basic stats (total submissions, unread count)
     - Integration with Vercel Analytics (if set up)
 
-- [ ] **4.5.3 Add submission management**
+- [x] **4.5.3 Add submission management**
   - **File**: `src/app/admin/submissions/page.tsx`
   - **Context**: Manage contact form submissions
   - **Details**:

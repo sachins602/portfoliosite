@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { prefersReducedMotion, timing } from "~/lib/animations";
-import anime from "~/lib/anime";
+import { prefersReducedMotion } from "~/lib/animations";
 
 interface Particle {
 	id: number;

@@ -39,3 +39,13 @@ export const contactSubmissions = createTable("contact_submission", (d) => ({
 		.default(sql`(unixepoch())`)
 		.notNull(),
 }));
+
+export const settings = createTable("setting", (d) => ({
+	key: d.text({ length: 256 }).primaryKey().notNull(),
+	value: d.text().notNull(),
+	updatedAt: d
+		.integer({ mode: "timestamp" })
+		.default(sql`(unixepoch())`)
+		.notNull()
+		.$onUpdate(() => new Date()),
+}));

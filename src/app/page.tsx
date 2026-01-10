@@ -1,11 +1,13 @@
 import { Footer } from "~/app/_components/footer";
 import { Header } from "~/app/_components/header";
 import { About } from "~/app/_components/sections/about";
+import { Blog } from "~/app/_components/sections/blog";
 import { BuildInfo } from "~/app/_components/sections/build-info";
 import { Contact } from "~/app/_components/sections/contact";
 import { Experience } from "~/app/_components/sections/experience";
 import { Hero } from "~/app/_components/sections/hero";
 import { Projects } from "~/app/_components/sections/projects";
+import { Testimonials } from "~/app/_components/sections/testimonials";
 
 export default function Home() {
 	return (
@@ -16,6 +18,8 @@ export default function Home() {
 				<About />
 				<Experience />
 				<Projects />
+				<Blog />
+				<Testimonials />
 				<Contact />
 				<BuildInfo />
 			</main>

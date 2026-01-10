@@ -14,7 +14,6 @@ const getContributionColor = (count: number): string => {
 	return "rgba(13, 71, 161, 0.8)"; // High
 };
 
-
 export function ContributionHeatmap() {
 	const {
 		data: contributions,
@@ -166,7 +165,7 @@ export function ContributionHeatmap() {
 						gridTemplateColumns: `repeat(${weeks.length}, minmax(0, 1fr))`,
 					}}
 				>
-					{weeks.map((week, weekIndex) =>
+					{weeks.map((week) =>
 						week.map((day, dayIndex) => {
 							return (
 								<div

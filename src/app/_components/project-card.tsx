@@ -24,6 +24,16 @@ const languageColors: Record<string, string> = {
 export function ProjectCard({ project, index }: ProjectCardProps) {
 	const cardRef = useRef<HTMLDivElement>(null);
 	const tagsRef = useRef<HTMLDivElement>(null);
+	const isTouchDevice = useRef(false);
+
+	// Detect touch device
+	useEffect(() => {
+		isTouchDevice.current =
+			"ontouchstart" in window ||
+			navigator.maxTouchPoints > 0 ||
+			// @ts-expect-error - msMaxTouchPoints is IE specific
+			navigator.msMaxTouchPoints > 0;
+	}, []);
 
 	useEffect(() => {
 		if (!cardRef.current || prefersReducedMotion()) {
@@ -65,15 +75,32 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 		};
 	}, [index]);
 
+	const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+		if (prefersReducedMotion() || isTouchDevice.current || !cardRef.current) {
+			return;
+		}
+
+		const card = cardRef.current;
+		const rect = card.getBoundingClientRect();
+		const x = e.clientX - rect.left;
+		const y = e.clientY - rect.top;
+
+		const centerX = rect.width / 2;
+		const centerY = rect.height / 2;
+
+		const rotateX = ((y - centerY) / centerY) * -10; // Max 10 degrees
+		const rotateY = ((x - centerX) / centerX) * 10; // Max 10 degrees
+
+		// Clamp values
+		const clampedRotateX = Math.max(-15, Math.min(15, rotateX));
+		const clampedRotateY = Math.max(-15, Math.min(15, rotateY));
+
+		card.style.transform = `perspective(1000px) rotateX(${clampedRotateX}deg) rotateY(${clampedRotateY}deg) translateY(-10px) scale(1.02)`;
+	};
+
 	const handleMouseEnter = () => {
-		if (!prefersReducedMotion() && cardRef.current) {
-			anime({
-				targets: cardRef.current,
-				translateY: -10,
-				scale: 1.02,
-				duration: timing.fast,
-				easing: easing.elasticOut,
-			});
+		if (!prefersReducedMotion() && cardRef.current && !isTouchDevice.current) {
+			cardRef.current.style.transition = "transform 0.1s ease-out";
 
 			if (tagsRef.current) {
 				const tags = tagsRef.current.children;
@@ -90,14 +117,10 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 	};
 
 	const handleMouseLeave = () => {
-		if (!prefersReducedMotion() && cardRef.current) {
-			anime({
-				targets: cardRef.current,
-				translateY: 0,
-				scale: 1,
-				duration: timing.fast,
-				easing: easing.easeOut,
-			});
+		if (!prefersReducedMotion() && cardRef.current && !isTouchDevice.current) {
+			cardRef.current.style.transition = "transform 0.3s ease-out";
+			cardRef.current.style.transform =
+				"perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) scale(1)";
 		}
 	};
 
@@ -106,6 +129,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 			className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6 shadow-lg transition-all duration-300 hover:border-[var(--accent)] hover:shadow-xl"
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
+			onMouseMove={handleMouseMove}
 			ref={cardRef}
 			style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 		>
