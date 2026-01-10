@@ -168,7 +168,8 @@ export function ContributionHeatmap() {
 					{weeks.map((week) =>
 						week.map((day, dayIndex) => {
 							return (
-								<div
+								<button
+									aria-label={`${day.count} contributions on ${day.date}`}
 									className="contribution-cell group relative h-3 w-3 rounded transition-all hover:scale-125 hover:ring-2 hover:ring-[var(--accent)]"
 									key={`${day.date}-${dayIndex}`}
 									onMouseEnter={(e) => {
@@ -183,12 +184,11 @@ export function ContributionHeatmap() {
 									onMouseLeave={() => {
 										setHoveredCell(null);
 									}}
-									role="button"
 									style={{
 										backgroundColor: getContributionColor(day.count),
 										border: `1px solid ${day.count > 0 ? "rgba(13, 71, 161, 0.2)" : "var(--border)"}`,
 									}}
-									tabIndex={0}
+									type="button"
 								/>
 							);
 						}),

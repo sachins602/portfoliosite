@@ -89,7 +89,13 @@ function CircularProgress({
 	}, [score, circumference]);
 
 	return (
-		<svg className="-rotate-90 transform" height={size} width={size}>
+		<svg
+			aria-label={`${label} score: ${score}%`}
+			className="-rotate-90 transform"
+			height={size}
+			role="img"
+			width={size}
+		>
 			{/* Background circle */}
 			<circle
 				cx={size / 2}

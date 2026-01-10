@@ -147,10 +147,10 @@ export function ArticleCard({ article, index }: ArticleCardProps) {
 
 				{article.tags && article.tags.length > 0 && (
 					<div className="mb-4 flex flex-wrap gap-2">
-						{article.tags.slice(0, 3).map((tag, idx) => (
+						{article.tags.slice(0, 3).map((tag) => (
 							<span
 								className="rounded border border-[var(--accent)]/30 bg-[var(--accent)]/20 px-2 py-1 text-[var(--accent)] text-xs"
-								key={idx}
+								key={`tag-${tag}`}
 							>
 								{tag}
 							</span>

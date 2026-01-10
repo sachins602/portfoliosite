@@ -63,6 +63,7 @@ export default function RootLayout({
 		>
 			<head>
 				<script
+					// biome-ignore lint/security/noDangerouslySetInnerHtml: Theme initialization script must run before React hydration to prevent flash of wrong theme. Content is static and safe.
 					dangerouslySetInnerHTML={{
 						__html: `
 							(function() {

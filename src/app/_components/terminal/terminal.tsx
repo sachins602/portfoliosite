@@ -1,7 +1,7 @@
 "use client";
 
 import { Minus, Square, X } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
 import { processCommand } from "./commands";
@@ -23,57 +23,7 @@ export function Terminal() {
 	const cursorRef = useRef<HTMLSpanElement>(null);
 	const hasInitialized = useRef(false);
 
-	// Initial demo animation
-	useEffect(() => {
-		if (hasInitialized.current || prefersReducedMotion()) return;
-		hasInitialized.current = true;
-
-		const demoCommands = ["whoami", "skills", "projects"];
-		let currentCommand = 0;
-
-		const runDemo = () => {
-			if (currentCommand >= demoCommands.length) return;
-
-			const cmd = demoCommands[currentCommand];
-			if (!cmd) return;
-			setInput(cmd);
-			setTimeout(() => {
-				handleCommand(cmd);
-				currentCommand++;
-				if (currentCommand < demoCommands.length) {
-					setTimeout(runDemo, 2000);
-				} else {
-					setInput("");
-				}
-			}, 500);
-		};
-
-		setTimeout(runDemo, 1000);
-	}, []);
-
-	// Cursor blink animation
-	useEffect(() => {
-		if (!cursorRef.current || prefersReducedMotion()) return;
-
-		const cursor = cursorRef.current;
-		let isVisible = true;
-
-		const blink = setInterval(() => {
-			isVisible = !isVisible;
-			cursor.style.opacity = isVisible ? "1" : "0";
-		}, 530);
-
-		return () => clearInterval(blink);
-	}, []);
-
-	// Auto-scroll to bottom
-	useEffect(() => {
-		if (outputRef.current) {
-			outputRef.current.scrollTop = outputRef.current.scrollHeight;
-		}
-	}, [lines]);
-
-	const handleCommand = (cmd: string) => {
+	const handleCommand = useCallback((cmd: string) => {
 		if (!cmd.trim()) return;
 
 		const commandLine: TerminalLine = {
@@ -114,7 +64,58 @@ export function Terminal() {
 				});
 			}, 100);
 		}
-	};
+	}, []);
+
+	// Initial demo animation
+	useEffect(() => {
+		if (hasInitialized.current || prefersReducedMotion()) return;
+		hasInitialized.current = true;
+
+		const demoCommands = ["whoami", "skills", "projects"];
+		let currentCommand = 0;
+
+		const runDemo = () => {
+			if (currentCommand >= demoCommands.length) return;
+
+			const cmd = demoCommands[currentCommand];
+			if (!cmd) return;
+			setInput(cmd);
+			setTimeout(() => {
+				handleCommand(cmd);
+				currentCommand++;
+				if (currentCommand < demoCommands.length) {
+					setTimeout(runDemo, 2000);
+				} else {
+					setInput("");
+				}
+			}, 500);
+		};
+
+		setTimeout(runDemo, 1000);
+	}, [handleCommand]);
+
+	// Cursor blink animation
+	useEffect(() => {
+		if (!cursorRef.current || prefersReducedMotion()) return;
+
+		const cursor = cursorRef.current;
+		let isVisible = true;
+
+		const blink = setInterval(() => {
+			isVisible = !isVisible;
+			cursor.style.opacity = isVisible ? "1" : "0";
+		}, 530);
+
+		return () => clearInterval(blink);
+	}, []);
+
+	// Auto-scroll to bottom
+	useEffect(() => {
+		if (outputRef.current) {
+			outputRef.current.scrollTop = outputRef.current.scrollHeight;
+		}
+		// biome-ignore lint/correctness/useExhaustiveDependencies: lines.length is needed to trigger scroll on new lines
+	}, [lines.length]);
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();

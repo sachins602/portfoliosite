@@ -27,9 +27,11 @@ export function ExperienceCard({ experience, index }: ExperienceCardProps) {
 			return;
 		}
 
+		let mouseEnterHandler: (() => void) | null = null;
+
 		const observer = new IntersectionObserver(
 			(entries) => {
-				entries.forEach((entry) => {
+				for (const entry of entries) {
 					if (entry.isIntersecting && cardRef.current) {
 						// Animate card
 						anime({
@@ -44,7 +46,7 @@ export function ExperienceCard({ experience, index }: ExperienceCardProps) {
 
 						// Animate bullets on hover
 						if (bulletsRef.current) {
-							const handleMouseEnter = () => {
+							mouseEnterHandler = () => {
 								const items = bulletsRef.current?.children;
 								if (items) {
 									anime({
@@ -58,18 +60,12 @@ export function ExperienceCard({ experience, index }: ExperienceCardProps) {
 								}
 							};
 
-							cardRef.current.addEventListener("mouseenter", handleMouseEnter);
-							return () => {
-								cardRef.current?.removeEventListener(
-									"mouseenter",
-									handleMouseEnter,
-								);
-							};
+							cardRef.current.addEventListener("mouseenter", mouseEnterHandler);
 						}
 
 						observer.unobserve(entry.target);
 					}
-				});
+				}
 			},
 			{ threshold: 0.1 },
 		);
@@ -81,6 +77,9 @@ export function ExperienceCard({ experience, index }: ExperienceCardProps) {
 		return () => {
 			if (cardRef.current) {
 				observer.unobserve(cardRef.current);
+				if (mouseEnterHandler) {
+					cardRef.current.removeEventListener("mouseenter", mouseEnterHandler);
+				}
 			}
 		};
 	}, [index]);
@@ -135,7 +134,7 @@ export function ExperienceCard({ experience, index }: ExperienceCardProps) {
 				{experience.bullets.map((bullet, idx) => (
 					<li
 						className="flex items-start gap-2 text-[var(--text-secondary)]"
-						key={idx}
+						key={`bullet-${idx}-${bullet.slice(0, 10)}`}
 						style={{ opacity: prefersReducedMotion() ? 1 : 0.7 }}
 					>
 						<span className="mt-1.5 text-[var(--accent)]">•</span>
@@ -145,10 +144,10 @@ export function ExperienceCard({ experience, index }: ExperienceCardProps) {
 			</ul>
 
 			<div className="flex flex-wrap gap-2">
-				{experience.technologies.map((tech, idx) => (
+				{experience.technologies.map((tech) => (
 					<span
 						className="rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/20 px-3 py-1 text-[var(--accent)] text-xs"
-						key={idx}
+						key={`tech-${tech}`}
 					>
 						{tech}
 					</span>

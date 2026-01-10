@@ -1,6 +1,7 @@
 "use client";
 
 import { ExternalLink, Quote } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
@@ -14,7 +15,7 @@ interface TestimonialCardProps {
 
 export function TestimonialCard({
 	testimonial,
-	index,
+	index: _index,
 	isActive,
 }: TestimonialCardProps) {
 	const cardRef = useRef<HTMLDivElement>(null);
@@ -70,10 +71,12 @@ export function TestimonialCard({
 
 			<div className="flex items-center gap-4">
 				{testimonial.avatar ? (
-					<img
+					<Image
 						alt={testimonial.author}
 						className="h-12 w-12 rounded-full object-cover"
+						height={48}
 						src={testimonial.avatar}
+						width={48}
 					/>
 				) : (
 					<div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--accent)]/20 font-semibold text-[var(--accent)]">

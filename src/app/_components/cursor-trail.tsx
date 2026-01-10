@@ -76,7 +76,7 @@ export function CursorTrail() {
 				cancelAnimationFrame(rafRef.current);
 			}
 		};
-	}, [isEnabled]);
+	}, []);
 
 	// Enable via Konami code variant or localStorage
 	useEffect(() => {

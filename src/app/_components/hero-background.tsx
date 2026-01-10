@@ -51,7 +51,9 @@ export function HeroBackground() {
 		});
 
 		return () => {
-			particles.forEach((particle) => particle.remove());
+			for (const particle of particles) {
+				particle.remove();
+			}
 		};
 	}, []);
 

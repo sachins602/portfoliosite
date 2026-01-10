@@ -155,7 +155,9 @@ export function Header() {
 			if (confetti.some((p) => p.y < window.innerHeight + 100)) {
 				requestAnimationFrame(animate);
 			} else {
-				confetti.forEach((p) => p.element.remove());
+				for (const particle of confetti) {
+					particle.element.remove();
+				}
 			}
 		};
 
@@ -213,8 +215,10 @@ export function Header() {
 						ref={logoContainerRef}
 					>
 						<svg
+							aria-label="Portfolio logo"
 							className="text-[var(--accent)]"
 							height="32"
+							role="img"
 							viewBox="0 0 100 100"
 							width="32"
 						>

@@ -118,7 +118,7 @@ export function CodeCarousel() {
 				easing: easing.easeOut,
 			});
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps -- currentIndex is intentionally used to trigger animation
+		// biome-ignore lint/correctness/useExhaustiveDependencies: currentIndex is needed to trigger animation on change
 	}, [currentIndex]);
 
 	const currentSnippet = snippets[currentIndex] ?? snippets[0];

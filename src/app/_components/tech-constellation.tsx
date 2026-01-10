@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useElasticHover, useScrollTrigger } from "~/hooks/use-anime";
+import { useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
 import {
@@ -177,8 +177,10 @@ export function TechConstellation() {
 				ref={containerRef}
 			>
 				<svg
+					aria-label="Technology stack constellation visualization"
 					className="h-full w-full"
 					ref={svgRef}
+					role="img"
 					viewBox={`0 0 ${containerRef.current?.clientWidth ?? 800} 600`}
 				>
 					{/* Connection lines */}
@@ -226,15 +228,24 @@ export function TechConstellation() {
 							<g key={node.id}>
 								{/* Node circle */}
 								<circle
+									aria-label={`${node.name} technology node`}
 									className="cursor-pointer"
 									cx={pos.x}
 									cy={pos.y}
 									data-node-id={node.id}
 									fill="var(--bg-primary)"
 									onClick={() => handleNodeClick(node)}
+									onKeyDown={(e) => {
+										if (e.key === "Enter" || e.key === " ") {
+											e.preventDefault();
+											handleNodeClick(node);
+										}
+									}}
 									onMouseEnter={(e) => handleNodeHover(node, e)}
 									onMouseLeave={handleNodeLeave}
 									r={isHovered || isSelected ? 35 : 30}
+									// biome-ignore lint/a11y/useSemanticElements: SVG circle cannot be replaced with button element
+									role="button"
 									stroke="var(--accent)"
 									strokeWidth={isHovered || isSelected ? 3 : 2}
 									style={{
@@ -243,6 +254,7 @@ export function TechConstellation() {
 											? "none"
 											: "r 0.3s, stroke-width 0.3s",
 									}}
+									tabIndex={0}
 								/>
 								{/* Icon */}
 								<foreignObject

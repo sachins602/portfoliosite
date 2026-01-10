@@ -106,8 +106,8 @@ export default function SubmissionsPage() {
 									</button>
 								</div>
 							</div>
-							<div
-								className={`rounded border border-[var(--border)] bg-[var(--bg-primary)] p-4 ${
+							<button
+								className={`w-full rounded border border-[var(--border)] bg-[var(--bg-primary)] p-4 text-left ${
 									selectedSubmission === submission.id ? "" : "line-clamp-3"
 								}`}
 								onClick={() => {
@@ -115,11 +115,12 @@ export default function SubmissionsPage() {
 										selectedSubmission === submission.id ? null : submission.id,
 									);
 								}}
+								type="button"
 							>
 								<p className="whitespace-pre-wrap text-[var(--text-primary)]">
 									{submission.message}
 								</p>
-							</div>
+							</button>
 						</div>
 					))}
 				</div>

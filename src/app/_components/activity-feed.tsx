@@ -85,10 +85,11 @@ export function ActivityFeed() {
 					<h3 className="font-semibold text-lg">Recent Activity</h3>
 				</div>
 				<div className="space-y-2">
+					{/* biome-ignore lint/suspicious/noArrayIndexKey: Static skeleton array, order never changes */}
 					{Array.from({ length: 3 }).map((_, i) => (
 						<div
 							className="animate-pulse rounded bg-[var(--border)] p-2"
-							key={`skeleton-${i}`}
+							key={`activity-skeleton-${i}`}
 						>
 							<div className="h-4 w-3/4 rounded bg-[var(--bg-primary)]" />
 						</div>

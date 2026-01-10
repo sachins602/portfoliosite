@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
@@ -84,7 +84,8 @@ export function Testimonials() {
 					</span>
 				</h2>
 
-				<div
+				<section
+					aria-label="Testimonials carousel"
 					className="section-content relative mx-auto max-w-4xl"
 					onMouseEnter={() => {
 						setIsPaused(true);
@@ -127,7 +128,7 @@ export function Testimonials() {
 
 					{testimonials.length > 1 && (
 						<div className="mt-8 flex justify-center gap-2">
-							{testimonials.map((_, index) => (
+							{testimonials.map((testimonial, index) => (
 								<button
 									aria-label={`Go to testimonial ${index + 1}`}
 									className={`h-2 rounded-full transition-all ${
@@ -135,7 +136,7 @@ export function Testimonials() {
 											? "w-8 bg-[var(--accent)]"
 											: "w-2 bg-[var(--border)]"
 									}`}
-									key={index}
+									key={`testimonial-dot-${testimonial.id}`}
 									onClick={() => {
 										goToIndex(index);
 									}}
@@ -144,7 +145,7 @@ export function Testimonials() {
 							))}
 						</div>
 					)}
-				</div>
+				</section>
 			</div>
 		</section>
 	);

@@ -182,7 +182,7 @@ export async function fetchGitHubEvents(): Promise<ActivityItem[]> {
 		return events
 			.filter((event) => {
 				// Filter out private events or events we can't format
-				return event.repo && event.repo.name;
+				return event.repo?.name;
 			})
 			.slice(0, 10)
 			.map((event) => ({

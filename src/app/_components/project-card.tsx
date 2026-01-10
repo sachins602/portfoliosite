@@ -125,7 +125,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 	};
 
 	return (
-		<div
+		<article
 			className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6 shadow-lg transition-all duration-300 hover:border-[var(--accent)] hover:shadow-xl"
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
@@ -188,10 +188,10 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 
 			{project.topics.length > 0 && (
 				<div className="flex flex-wrap gap-2" ref={tagsRef}>
-					{project.topics.slice(0, 5).map((topic, idx) => (
+					{project.topics.slice(0, 5).map((topic) => (
 						<span
 							className="rounded border border-[var(--accent)]/30 bg-[var(--accent)]/20 px-2 py-1 text-[var(--accent)] text-xs"
-							key={idx}
+							key={`topic-${topic}`}
 							style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 						>
 							{topic}
@@ -199,6 +199,6 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 					))}
 				</div>
 			)}
-		</div>
+		</article>
 	);
 }
