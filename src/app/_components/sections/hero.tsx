@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowDown } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
@@ -27,8 +27,24 @@ export function Hero() {
 	const [subtitleText, setSubtitleText] = useState("");
 	const [showCursor, setShowCursor] = useState(true);
 	const [greeting] = useState(getGreeting);
-	const sectionRef = useScrollTrigger<HTMLElement>((_element) => {
-		if (prefersReducedMotion()) return;
+	const hasAnimated = useRef(false);
+	const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+	// Memoize the animation callback to prevent re-triggering
+	const animationCallback = useCallback((_element: HTMLElement) => {
+		if (prefersReducedMotion() || hasAnimated.current) return;
+		hasAnimated.current = true;
+
+		// Animate greeting
+		if (greetingRef.current) {
+			anime({
+				targets: greetingRef.current,
+				opacity: [0, 1],
+				translateY: [20, 0],
+				duration: timing.normal,
+				easing: easing.easeOut,
+			});
+		}
 
 		// Animate name letters
 		if (nameRef.current) {
@@ -44,7 +60,7 @@ export function Hero() {
 		}
 
 		// Start typing effect after name animation
-		setTimeout(() => {
+		typingTimeoutRef.current = setTimeout(() => {
 			if (subtitleRef.current) {
 				let currentIndex = 0;
 				const chars = subtitle.split("");
@@ -53,7 +69,7 @@ export function Hero() {
 					if (currentIndex < chars.length) {
 						setSubtitleText(subtitle.slice(0, currentIndex + 1));
 						currentIndex++;
-						setTimeout(typeChar, 50);
+						typingTimeoutRef.current = setTimeout(typeChar, 50);
 					} else {
 						setShowCursor(false);
 						// Animate tagline
@@ -83,7 +99,21 @@ export function Hero() {
 				typeChar();
 			}
 		}, 600);
+	}, []);
+
+	const sectionRef = useScrollTrigger<HTMLElement>(animationCallback, {
+		once: true,
+		threshold: 0.1,
 	});
+
+	// Cleanup typing timeout on unmount
+	useEffect(() => {
+		return () => {
+			if (typingTimeoutRef.current) {
+				clearTimeout(typingTimeoutRef.current);
+			}
+		};
+	}, []);
 
 	const scrollToSection = (id: string) => {
 		const element = document.getElementById(id);
