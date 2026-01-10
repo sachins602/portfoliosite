@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
@@ -8,6 +8,9 @@ import { api } from "~/trpc/react";
 import { ProjectCard } from "../project-card";
 import { ProjectFilter } from "../project-filter";
 import { ProjectSearch } from "../project-search";
+
+const INITIAL_DISPLAY_COUNT = 12;
+const LOAD_MORE_COUNT = 12;
 
 export function Projects() {
 	const [searchQuery, setSearchQuery] = useState("");
@@ -20,6 +23,7 @@ export function Projects() {
 		tags: [],
 		years: [],
 	});
+	const [displayCount, setDisplayCount] = useState(INITIAL_DISPLAY_COUNT);
 
 	const sectionRef = useScrollTrigger<HTMLElement>((element) => {
 		if (prefersReducedMotion()) return;
@@ -80,13 +84,30 @@ export function Projects() {
 		});
 	}, [projects, searchQuery, filters]);
 
-	// Animate project cards on filter change
+	// Reset display count when filters change
+	// biome-ignore lint/correctness/useExhaustiveDependencies: We need to reset when searchQuery or filters change
+	useEffect(() => {
+		setDisplayCount(INITIAL_DISPLAY_COUNT);
+	}, [searchQuery, filters]);
+
+	// Get projects to display (paginated)
+	const displayedProjects = useMemo(() => {
+		return filteredProjects.slice(0, displayCount);
+	}, [filteredProjects, displayCount]);
+
+	const hasMore = filteredProjects.length > displayCount;
+
+	const handleLoadMore = () => {
+		setDisplayCount((prev) => prev + LOAD_MORE_COUNT);
+	};
+
+	// Animate project cards on filter change or load more
 	useMemo(() => {
 		if (prefersReducedMotion() || !projects) return;
 
 		const cards = document.querySelectorAll(".project-card");
 		cards.forEach((card, index) => {
-			const isVisible = filteredProjects.some(
+			const isVisible = displayedProjects.some(
 				(p) =>
 					p.id ===
 					Number.parseInt(card.getAttribute("data-project-id") ?? "0", 10),
@@ -112,7 +133,7 @@ export function Projects() {
 				});
 			}
 		});
-	}, [filteredProjects, projects]);
+	}, [displayedProjects, projects]);
 
 	return (
 		<section
@@ -161,18 +182,44 @@ export function Projects() {
 					</div>
 				)}
 
-				{filteredProjects && filteredProjects.length > 0 && (
-					<div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-						{filteredProjects.map((project, index) => (
-							<div
-								className="project-card"
-								data-project-id={project.id}
-								key={project.id}
-							>
-								<ProjectCard index={index} project={project} />
+				{displayedProjects && displayedProjects.length > 0 && (
+					<>
+						<div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+							{displayedProjects.map((project, index) => (
+								<div
+									className="project-card"
+									data-project-id={project.id}
+									key={project.id}
+								>
+									<ProjectCard index={index} project={project} />
+								</div>
+							))}
+						</div>
+
+						{hasMore && (
+							<div className="mt-12 flex flex-col items-center gap-4">
+								<p className="text-[var(--text-secondary)] text-sm">
+									Showing {displayedProjects.length} of {filteredProjects.length}{" "}
+									projects
+								</p>
+								<button
+									className="rounded-lg border border-[var(--accent)] bg-[var(--accent)]/10 px-6 py-3 font-semibold text-[var(--accent)] transition-all duration-300 hover:bg-[var(--accent)]/20 hover:shadow-lg"
+									onClick={handleLoadMore}
+									type="button"
+								>
+									Load More Projects
+								</button>
 							</div>
-						))}
-					</div>
+						)}
+
+						{!hasMore && filteredProjects.length > INITIAL_DISPLAY_COUNT && (
+							<div className="mt-8 text-center">
+								<p className="text-[var(--text-secondary)] text-sm">
+									Showing all {filteredProjects.length} projects
+								</p>
+							</div>
+						)}
+					</>
 				)}
 
 				{!isLoading &&
