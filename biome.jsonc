@@ -18,12 +18,50 @@
 		}
 	},
 	"formatter": {
-		"enabled": true
+		"enabled": true,
+		"formatWithErrors": true,
+		"indentStyle": "tab",
+		"indentWidth": 1,
+		"lineWidth": 120
 	},
 	"linter": {
 		"enabled": true,
 		"rules": {
 			"recommended": true,
+			"correctness": {
+				"noUnusedVariables": {
+					"level": "warn",
+					"fix": "safe"
+				},
+				"useExhaustiveDependencies": {
+					"level": "warn"
+				},
+				"noUnusedImports": {
+					"level": "warn",
+					"fix": "safe"
+				}
+			},
+			"suspicious": {
+				"noExplicitAny": {
+					"level": "warn"
+				},
+				"noArrayIndexKey": {
+					"level": "warn"
+				}
+			},
+			"style": {
+				"noParameterAssign": {
+					"level": "warn"
+				},
+				"useConst": {
+					"level": "warn",
+					"fix": "safe"
+				},
+				"useImportType": {
+					"level": "warn",
+					"fix": "safe"
+				}
+			},
 			"nursery": {
 				"useSortedClasses": {
 					"level": "warn",
