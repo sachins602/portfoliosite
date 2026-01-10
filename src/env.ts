@@ -7,11 +7,12 @@ export const env = createEnv({
 	 * isn't built with invalid env vars.
 	 */
 	server: {
-		DATABASE_URL: z.string().url(),
+		DATABASE_URL: z.url(),
 		NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
 		GITHUB_TOKEN: z.string().optional(),
+		GITHUB_USERNAME: z.string(),
 		RESEND_API_KEY: z.string().min(1).optional(),
-		CONTACT_EMAIL: z.string().email().default("sachinsapkota4@gmail.com"),
+		CONTACT_EMAIL: z.email().default("sachinsapkota4@gmail.com"),
 		ADMIN_PASSWORD: z.string().min(1).optional(),
 	},
 
@@ -32,8 +33,9 @@ export const env = createEnv({
 		DATABASE_URL: process.env.DATABASE_URL,
 		NODE_ENV: process.env.NODE_ENV,
 		GITHUB_TOKEN: process.env.GITHUB_TOKEN,
+		GITHUB_USERNAME: process.env.GITHUB_USERNAME,
 		RESEND_API_KEY: process.env.RESEND_API_KEY,
-		CONTACT_EMAIL: process.env.CONTACT_EMAIL ?? "sachinsapkota4@gmail.com",
+		CONTACT_EMAIL: process.env.CONTACT_EMAIL,
 		ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
 		// NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
 	},

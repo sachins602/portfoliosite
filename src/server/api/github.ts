@@ -26,7 +26,7 @@ export async function fetchGitHubRepos(): Promise<Project[]> {
 			headers.Authorization = `token ${env.GITHUB_TOKEN}`;
 		}
 
-		const response = await fetch("https://api.github.com/users/sachins602/repos?sort=updated&per_page=100", {
+		const response = await fetch(`https://api.github.com/users/${env.GITHUB_USERNAME}/repos?sort=updated&per_page=100`, {
 			headers,
 			next: { revalidate: 86400 }, // Cache for 1 day
 		});
@@ -141,7 +141,7 @@ export async function fetchGitHubEvents(): Promise<ActivityItem[]> {
 		`;
 
 		const variables = {
-			username: "sachins602",
+			username: env.GITHUB_USERNAME,
 		};
 
 		const response = await fetch("https://api.github.com/graphql", {
@@ -250,7 +250,7 @@ async function fetchGitHubEventsFallback(): Promise<ActivityItem[]> {
 			headers.Authorization = `token ${env.GITHUB_TOKEN}`;
 		}
 
-		const response = await fetch("https://api.github.com/users/sachins602/events?per_page=6", {
+		const response = await fetch(`https://api.github.com/users/${env.GITHUB_USERNAME}/events?per_page=6`, {
 			headers,
 			next: { revalidate: 86400 },
 		});
@@ -560,57 +560,90 @@ const LANGUAGE_COLORS: Record<string, string> = {
 export async function fetchLanguageStats(): Promise<LanguageStat[]> {
 	try {
 		const headers: HeadersInit = {
-			Accept: "application/vnd.github.v3+json",
+			Accept: "application/vnd.github.v4+json",
+			"Content-Type": "application/json",
 		};
 
 		if (env.GITHUB_TOKEN) {
-			headers.Authorization = `token ${env.GITHUB_TOKEN}`;
+			headers.Authorization = `Bearer ${env.GITHUB_TOKEN}`;
 		}
 
-		// First, get all repos
-		const reposResponse = await fetch("https://api.github.com/users/sachins602/repos?per_page=100", {
-			headers,
-			next: { revalidate: 86400 },
-		});
-
-		if (!reposResponse.ok) {
-			throw new Error(`GitHub API error: ${reposResponse.status}`);
-		}
-
-		const repos: GitHubRepo[] = await reposResponse.json();
-
-		// Fetch languages for each repo and aggregate
-		const languageTotals: Record<string, number> = {};
-
-		await Promise.all(
-			repos.map(async (repo) => {
-				try {
-					const langResponse = await fetch(`https://api.github.com/repos/sachins602/${repo.name}/languages`, {
-						headers,
-						next: { revalidate: 86400 },
-					});
-
-					if (langResponse.ok) {
-						const languages: Record<string, number> = await langResponse.json();
-						for (const [lang, bytes] of Object.entries(languages)) {
-							languageTotals[lang] = (languageTotals[lang] ?? 0) + bytes;
+		// Use GraphQL to fetch repos and languages in a single request
+		const query = `
+			query($username: String!) {
+				user(login: $username) {
+					repositories(first: 100, ownerAffiliations: OWNER, orderBy: {field: UPDATED_AT, direction: DESC}) {
+						nodes {
+							name
+							languages(first: 10, orderBy: {field: SIZE, direction: DESC}) {
+								edges {
+									size
+									node {
+										name
+										color
+									}
+								}
+							}
 						}
 					}
-				} catch {
-					// Skip repos that fail
 				}
-			}),
-		);
+			}
+		`;
+
+		const variables = {
+			username: env.GITHUB_USERNAME,
+		};
+
+		const response = await fetch("https://api.github.com/graphql", {
+			method: "POST",
+			headers,
+			body: JSON.stringify({ query, variables }),
+			next: { revalidate: 86400 }, // Cache for 1 day
+		});
+
+		if (!response.ok) {
+			throw new Error(`GitHub GraphQL API error: ${response.status}`);
+		}
+
+		const result = await response.json();
+
+		if (result.errors) {
+			throw new Error(`GraphQL errors: ${JSON.stringify(result.errors)}`);
+		}
+
+		const repos = result.data?.user?.repositories?.nodes ?? [];
+
+		// Aggregate language data from all repos
+		const languageTotals: Record<string, { bytes: number; color: string }> = {};
+
+		for (const repo of repos) {
+			const languages = repo.languages?.edges ?? [];
+			for (const edge of languages) {
+				const langName = edge.node.name;
+				const langSize = edge.size;
+				const langColor = edge.node.color ?? LANGUAGE_COLORS[langName] ?? LANGUAGE_COLORS.Other ?? "#8b949e";
+
+				const existing = languageTotals[langName];
+				if (existing) {
+					existing.bytes += langSize;
+				} else {
+					languageTotals[langName] = {
+						bytes: langSize,
+						color: langColor,
+					};
+				}
+			}
+		}
 
 		// Convert to array and calculate percentages
-		const totalBytes = Object.values(languageTotals).reduce((sum, bytes) => sum + bytes, 0);
+		const totalBytes = Object.values(languageTotals).reduce((sum, lang) => sum + lang.bytes, 0);
 
 		const stats: LanguageStat[] = Object.entries(languageTotals)
-			.map(([name, bytes]) => ({
+			.map(([name, langData]) => ({
 				name,
-				bytes,
-				percentage: totalBytes > 0 ? (bytes / totalBytes) * 100 : 0,
-				color: LANGUAGE_COLORS[name] ?? LANGUAGE_COLORS.Other ?? "#8b949e",
+				bytes: langData.bytes,
+				percentage: totalBytes > 0 ? (langData.bytes / totalBytes) * 100 : 0,
+				color: langData.color,
 			}))
 			.filter((lang) => lang.percentage >= 1) // Filter out languages below 1%
 			.sort((a, b) => b.bytes - a.bytes);
