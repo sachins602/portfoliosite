@@ -100,9 +100,11 @@ export function GitHubLanguageChart() {
 				{/* Donut Chart */}
 				<div className="relative">
 					<svg
+						aria-label="GitHub Language Distribution"
 						className="-rotate-90 transform"
 						height={size}
 						ref={chartRef}
+						role="img"
 						width={size}
 					>
 						{/* Background circle */}
