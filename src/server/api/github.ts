@@ -30,8 +30,7 @@ export async function fetchGitHubRepos(): Promise<Project[]> {
 			"https://api.github.com/users/sachins602/repos?sort=updated&per_page=100",
 			{
 				headers,
-				// TODO: Change to 3 days for production
-				next: { revalidate: 0 }, // Cache for 3 days
+				next: { revalidate: 86400 }, // Cache for 1 day
 			},
 		);
 
@@ -154,7 +153,7 @@ export async function fetchGitHubEvents(): Promise<ActivityItem[]> {
 			method: "POST",
 			headers,
 			body: JSON.stringify({ query, variables }),
-			next: { revalidate: 0 }, // Cache for 30 minutes
+			next: { revalidate: 86400 }, // Cache for 1 day
 		});
 
 		if (!response.ok) {
@@ -264,7 +263,7 @@ async function fetchGitHubEventsFallback(): Promise<ActivityItem[]> {
 			"https://api.github.com/users/sachins602/events?per_page=6",
 			{
 				headers,
-				next: { revalidate: 1800 },
+				next: { revalidate: 86400 },
 			},
 		);
 
@@ -395,7 +394,7 @@ export async function fetchGitHubContributions(): Promise<ContributionData> {
 			method: "POST",
 			headers,
 			body: JSON.stringify({ query, variables }),
-			next: { revalidate: 3600 }, // Cache for 1 hour
+			next: { revalidate: 86400 }, // Cache for 1 day
 		});
 
 		if (!response.ok) {
@@ -492,7 +491,7 @@ export async function fetchGitHubUserStats(): Promise<GitHubUserStats> {
 			method: "POST",
 			headers,
 			body: JSON.stringify({ query, variables }),
-			next: { revalidate: 3600 }, // Cache for 1 hour
+			next: { revalidate: 86400 }, // Cache for 1 day
 		});
 
 		if (!response.ok) {
@@ -589,7 +588,7 @@ export async function fetchLanguageStats(): Promise<LanguageStat[]> {
 			"https://api.github.com/users/sachins602/repos?per_page=100",
 			{
 				headers,
-				next: { revalidate: 3600 },
+				next: { revalidate: 86400 },
 			},
 		);
 
@@ -609,7 +608,7 @@ export async function fetchLanguageStats(): Promise<LanguageStat[]> {
 						`https://api.github.com/repos/sachins602/${repo.name}/languages`,
 						{
 							headers,
-							next: { revalidate: 3600 },
+							next: { revalidate: 86400 },
 						},
 					);
 

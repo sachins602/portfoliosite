@@ -59,7 +59,7 @@ const snippets: CodeSnippet[] = [
     "https://api.github.com/users/sachins602/repos",
     {
       headers,
-      next: { revalidate: 3600 }
+      next: { revalidate: 86400 }
     }
   );
   
