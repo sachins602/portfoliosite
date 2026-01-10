@@ -159,7 +159,7 @@ export function Timeline({ itemCount }: TimelineProps) {
 			{/* SVG Line */}
 			<svg
 				aria-label="Timeline line"
-				className="absolute top-0 bottom-0 left-8 w-0.5 md:left-1/2 md:-translate-x-0.5"
+				className="absolute bottom-0 left-[1.875rem] top-0 w-1 md:-translate-x-1/2 md:left-1/2"
 				role="img"
 				style={{ height: "100%" }}
 			>
@@ -168,9 +168,9 @@ export function Timeline({ itemCount }: TimelineProps) {
 					stroke="var(--accent)"
 					strokeDasharray="0"
 					strokeDashoffset="0"
-					strokeWidth="2"
-					x1="0"
-					x2="0"
+					strokeWidth="3"
+					x1="2"
+					x2="2"
 					y1={`${lineStart}%`}
 					y2={`${lineEnd}%`}
 				/>
@@ -181,7 +181,7 @@ export function Timeline({ itemCount }: TimelineProps) {
 				{nodePositions.length > 0
 					? nodePositions.map((position, index) => (
 							<div
-								className="absolute left-6 z-10 h-4 w-4 rounded-full border-4 border-[var(--bg-primary)] bg-[var(--accent)] md:left-1/2 md:-translate-x-1/2"
+								className="absolute left-6 z-10 h-4 w-4 rounded-full border border-(--bg-primary) bg-(--accent) md:left-1/2 md:-translate-x-1/2"
 								// biome-ignore lint/suspicious/noArrayIndexKey: Static timeline nodes, order never changes
 								key={`timeline-node-${index}`}
 								style={{
@@ -195,7 +195,7 @@ export function Timeline({ itemCount }: TimelineProps) {
 						))
 					: Array.from({ length: itemCount }).map((_, index) => (
 							<div
-								className="absolute left-6 z-10 h-4 w-4 rounded-full border-4 border-[var(--bg-primary)] bg-[var(--accent)] md:left-1/2 md:-translate-x-1/2"
+								className="absolute left-6 z-10 h-4 w-4 rounded-full border border-(--bg-primary) bg-(--accent) md:left-1/2 md:-translate-x-1/2"
 								// biome-ignore lint/suspicious/noArrayIndexKey: Static timeline nodes, order never changes
 								key={`timeline-node-${index}`}
 								style={{
