@@ -69,8 +69,8 @@ function AnimatedStatCounter({
 			count: value,
 			duration: timing.slow,
 			easing: easing.easeOut,
-			update: (anim: { animatables: Array<{ target: { count: number } }> }) => {
-				const current = anim.animatables[0]?.target.count ?? 0;
+			update: (anim: { animatables?: Array<{ target: { count: number } }> }) => {
+				const current = anim.animatables?.[0]?.target.count ?? 0;
 				setDisplayValue(
 					decimals > 0
 						? Number.parseFloat(current.toFixed(decimals))
