@@ -37,7 +37,7 @@ export const experiences: Experience[] = [
 		id: "2",
 		title: "Software Developer",
 		company: "E-MultiTech Pvt. Ltd.",
-		location: "Remote",
+		location: "Hybrid",
 		startDate: "2022-06",
 		endDate: "2022-12",
 		bullets: [

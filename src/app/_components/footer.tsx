@@ -78,7 +78,7 @@ export function Footer() {
 							<a
 								aria-label="LinkedIn"
 								className="rounded-lg p-2 transition-colors hover:bg-[var(--bg-secondary)]"
-								href="https://linkedin.com/in/sachin-sapkota"
+								href="https://www.linkedin.com/in/sachin-sapkota-97b467107/"
 								rel="noopener noreferrer"
 								target="_blank"
 							>

@@ -104,7 +104,7 @@ export function Contact() {
 
 							<a
 								className="group flex items-center gap-4 rounded-lg bg-[var(--bg-primary)] p-4 transition-colors hover:bg-[var(--bg-primary)]/80"
-								href="https://linkedin.com/in/sachin-sapkota"
+								href="https://www.linkedin.com/in/sachin-sapkota-97b467107/"
 								ref={linkedinRef}
 								rel="noopener noreferrer"
 								target="_blank"

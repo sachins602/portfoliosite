@@ -112,7 +112,7 @@ export function About() {
 							</a>
 							<a
 								className="flex items-center gap-3 text-[var(--text-secondary)] transition-colors hover:text-[var(--accent)]"
-								href="https://linkedin.com/in/sachin-sapkota"
+								href="https://www.linkedin.com/in/sachin-sapkota-97b467107/"
 								ref={linkedinRef}
 								rel="noopener noreferrer"
 								target="_blank"

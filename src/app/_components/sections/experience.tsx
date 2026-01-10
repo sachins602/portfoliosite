@@ -37,7 +37,7 @@ export function Experience() {
 					Experience
 				</h2>
 
-				<div className="relative mx-auto max-w-4xl">
+				<div className="relative mx-auto max-w-4xl" data-timeline-container>
 					<Timeline itemCount={experiences.length} />
 
 					<div className="space-y-12">
@@ -47,6 +47,7 @@ export function Experience() {
 									index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
 								}`}
 								key={experience.id}
+								data-experience-card
 							>
 								<div
 									className={`md:w-1/2 ${
