@@ -194,23 +194,6 @@ export function BuildInfo() {
 						<CodeCarousel />
 					</div>
 
-					{/* Design Philosophy */}
-					<div>
-						<h3 className="mb-4 font-semibold text-2xl">Design Philosophy</h3>
-						<div className="space-y-3 text-(--text-secondary)">
-							<p>
-								This portfolio was built with performance and user experience in
-								mind. Every animation respects user preferences, and the site is
-								optimized for fast loading and smooth interactions.
-							</p>
-							<p>
-								The codebase follows modern React patterns with TypeScript for
-								type safety, and uses tRPC for end-to-end type-safe API calls.
-								All animations are powered by anime.js with careful attention to
-								accessibility.
-							</p>
-						</div>
-					</div>
 
 					{/* GitHub Link */}
 					<div className="flex justify-center">
