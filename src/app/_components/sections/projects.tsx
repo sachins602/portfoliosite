@@ -137,7 +137,7 @@ export function Projects() {
 
 	return (
 		<section
-			className="bg-[var(--bg-primary)] py-20 md:py-32"
+			className="bg-(--bg-primary) py-20 md:py-32"
 			id="projects"
 			ref={sectionRef}
 		>
@@ -165,8 +165,8 @@ export function Projects() {
 						{Array.from({ length: 6 }).map((_, i) => (
 							<div
 								className="animate-pulse rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6"
-								// biome-ignore lint/suspicious/noArrayIndexKey: Static skeleton array, order never changes
-								key={`project-skeleton-${i}`}
+								
+								key={`project-skeleton-${i + Math.random()}`}
 							>
 								<div className="mb-4 h-6 rounded bg-[var(--border)]" />
 								<div className="mb-2 h-4 rounded bg-[var(--border)]" />

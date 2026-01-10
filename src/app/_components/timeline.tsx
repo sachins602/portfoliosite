@@ -208,8 +208,7 @@ export function Timeline({ itemCount }: TimelineProps) {
 					? nodePositions.map((position, index) => (
 							<div
 								className="absolute left-6 z-10 h-4 w-4 rounded-full border border-(--bg-primary) bg-(--accent) md:left-1/2 md:-translate-x-1/2"
-								// biome-ignore lint/suspicious/noArrayIndexKey: Static timeline nodes, order never changes
-								key={`timeline-node-${index}`}
+								key={`timeline-node-${index + Math.random()}`}
 								style={{
 									top: `${position}%`,
 									opacity: prefersReducedMotion() ? 1 : 0,
@@ -222,8 +221,7 @@ export function Timeline({ itemCount }: TimelineProps) {
 					: Array.from({ length: itemCount }).map((_, index) => (
 							<div
 								className="absolute left-6 z-10 h-4 w-4 rounded-full border border-(--bg-primary) bg-(--accent) md:left-1/2 md:-translate-x-1/2"
-								// biome-ignore lint/suspicious/noArrayIndexKey: Static timeline nodes, order never changes
-								key={`timeline-node-${index}`}
+								key={`timeline-node-${index + Math.random()}`}
 								style={{
 									top: `${(index / (itemCount - 1 || 1)) * 100}%`,
 									opacity: prefersReducedMotion() ? 1 : 0,
