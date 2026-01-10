@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import anime from "animejs";
-import { useScrollTrigger } from "~/hooks/use-anime";
-import { prefersReducedMotion, timing, easing } from "~/lib/animations";
-import { HeroBackground } from "../hero-background";
 import { ArrowDown } from "lucide-react";
+import { useRef, useState } from "react";
+import { useScrollTrigger } from "~/hooks/use-anime";
+import { easing, prefersReducedMotion, timing } from "~/lib/animations";
+import anime from "~/lib/anime";
+import { HeroBackground } from "../hero-background";
 
 const name = "Sachin Sapkota";
 const subtitle = "Full-Stack Developer | Next.js & .NET Specialist";
@@ -18,7 +18,7 @@ export function Hero() {
 	const buttonsRef = useRef<HTMLDivElement>(null);
 	const [subtitleText, setSubtitleText] = useState("");
 	const [showCursor, setShowCursor] = useState(true);
-	const sectionRef = useScrollTrigger<HTMLElement>((element) => {
+	const sectionRef = useScrollTrigger<HTMLElement>((_element) => {
 		if (prefersReducedMotion()) return;
 
 		// Animate name letters
@@ -85,22 +85,22 @@ export function Hero() {
 
 	return (
 		<section
-			ref={sectionRef}
+			className="relative flex min-h-screen items-center justify-center overflow-hidden"
 			id="hero"
-			className="relative min-h-screen flex items-center justify-center overflow-hidden"
+			ref={sectionRef}
 		>
 			<HeroBackground />
-			<div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+			<div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="text-center">
 					{/* Name */}
 					<h1
+						className="mb-6 font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-8xl"
 						ref={nameRef}
-						className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold mb-6"
 					>
 						{name.split("").map((char, index) => (
 							<span
-								key={index}
 								className="inline-block"
+								key={index}
 								style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 							>
 								{char === " " ? "\u00A0" : char}
@@ -110,19 +110,19 @@ export function Hero() {
 
 					{/* Subtitle with typing effect */}
 					<div
+						className="mb-4 min-h-[2em] font-medium text-[var(--text-secondary)] text-xl sm:text-2xl md:text-3xl"
 						ref={subtitleRef}
-						className="text-xl sm:text-2xl md:text-3xl font-medium mb-4 text-[var(--text-secondary)] min-h-[2em]"
 					>
 						{subtitleText}
 						{showCursor && (
-							<span className="inline-block w-0.5 h-[1em] bg-[var(--accent)] ml-1 animate-pulse" />
+							<span className="ml-1 inline-block h-[1em] w-0.5 animate-pulse bg-[var(--accent)]" />
 						)}
 					</div>
 
 					{/* Tagline */}
 					<p
+						className="mb-12 text-[var(--text-secondary)] text-lg sm:text-xl"
 						ref={taglineRef}
-						className="text-lg sm:text-xl text-[var(--text-secondary)] mb-12"
 						style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 					>
 						{tagline}
@@ -130,22 +130,22 @@ export function Hero() {
 
 					{/* CTA Buttons */}
 					<div
+						className="flex flex-col items-center justify-center gap-4 sm:flex-row"
 						ref={buttonsRef}
-						className="flex flex-col sm:flex-row gap-4 justify-center items-center"
 					>
 						<button
-							type="button"
+							className="transform rounded-lg bg-[var(--accent)] px-8 py-4 font-semibold text-white transition-colors hover:scale-105 hover:bg-[var(--accent-hover)] active:scale-95"
 							onClick={() => scrollToSection("projects")}
-							className="px-8 py-4 bg-[var(--accent)] text-white rounded-lg font-semibold hover:bg-[var(--accent-hover)] transition-colors transform hover:scale-105 active:scale-95"
 							style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
+							type="button"
 						>
 							View Projects
 						</button>
 						<button
-							type="button"
+							className="transform rounded-lg border-2 border-[var(--accent)] px-8 py-4 font-semibold text-[var(--accent)] transition-colors hover:scale-105 hover:bg-[var(--accent)]/10 active:scale-95"
 							onClick={() => scrollToSection("contact")}
-							className="px-8 py-4 border-2 border-[var(--accent)] text-[var(--accent)] rounded-lg font-semibold hover:bg-[var(--accent)]/10 transition-colors transform hover:scale-105 active:scale-95"
 							style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
+							type="button"
 						>
 							Contact Me
 						</button>
@@ -153,7 +153,7 @@ export function Hero() {
 
 					{/* Scroll indicator */}
 					<div className="mt-16 animate-bounce">
-						<ArrowDown className="w-6 h-6 mx-auto text-[var(--text-secondary)]" />
+						<ArrowDown className="mx-auto h-6 w-6 text-[var(--text-secondary)]" />
 					</div>
 				</div>
 			</div>

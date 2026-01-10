@@ -1,11 +1,11 @@
 "use client";
 
 import { useScrollTrigger } from "~/hooks/use-anime";
-import { prefersReducedMotion, timing, easing } from "~/lib/animations";
-import anime from "animejs";
+import { easing, prefersReducedMotion, timing } from "~/lib/animations";
+import anime from "~/lib/anime";
 import { experiences } from "~/lib/data/experience";
-import { Timeline } from "../timeline";
 import { ExperienceCard } from "../experience-card";
+import { Timeline } from "../timeline";
 
 export function Experience() {
 	const sectionRef = useScrollTrigger<HTMLElement>((element) => {
@@ -25,28 +25,28 @@ export function Experience() {
 
 	return (
 		<section
-			ref={sectionRef}
+			className="bg-[var(--bg-secondary)] py-20 md:py-32"
 			id="experience"
-			className="py-20 md:py-32 bg-[var(--bg-secondary)]"
+			ref={sectionRef}
 		>
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
 				<h2
-					className="section-title text-4xl md:text-5xl font-bold mb-16 text-center"
+					className="section-title mb-16 text-center font-bold text-4xl md:text-5xl"
 					style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 				>
 					Experience
 				</h2>
 
-				<div className="relative max-w-4xl mx-auto">
+				<div className="relative mx-auto max-w-4xl">
 					<Timeline itemCount={experiences.length} />
 
 					<div className="space-y-12">
 						{experiences.map((experience, index) => (
 							<div
-								key={experience.id}
-								className={`relative pl-20 md:pl-0 md:flex md:items-center ${
+								className={`relative pl-20 md:flex md:items-center md:pl-0 ${
 									index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
 								}`}
+								key={experience.id}
 							>
 								<div
 									className={`md:w-1/2 ${

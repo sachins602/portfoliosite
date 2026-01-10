@@ -6,16 +6,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  reactCompiler: true,
-  cacheComponents: true,
-  experimental: {
-    turbopackFileSystemCacheForDev: true,
-    // For production builds too:
-    turbopackFileSystemCacheForBuild: true,
-    optimizeCss: true,
-  },
-  
+	/* config options here */
+	reactCompiler: true,
+	cacheComponents: true,
+	experimental: {
+		turbopackFileSystemCacheForDev: true,
+		// For production builds too:
+		turbopackFileSystemCacheForBuild: true,
+		optimizeCss: true,
+	},
 };
 
 export default nextConfig;

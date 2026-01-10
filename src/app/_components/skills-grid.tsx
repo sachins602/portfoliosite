@@ -1,18 +1,18 @@
 "use client";
 
-import { useStaggerReveal } from "~/hooks/use-anime";
-import { useScrollTrigger } from "~/hooks/use-anime";
-import { prefersReducedMotion, timing, easing } from "~/lib/animations";
 import {
+	Box,
+	Cloud,
 	Code,
 	Database,
-	Server,
-	Cloud,
-	Wrench,
-	Type,
 	Globe,
-	Box,
+	Server,
+	Type,
+	Wrench,
 } from "lucide-react";
+import { useScrollTrigger } from "~/hooks/use-anime";
+import { easing, prefersReducedMotion, timing } from "~/lib/animations";
+import anime from "~/lib/anime";
 
 const skills = [
 	// Frontend
@@ -55,18 +55,34 @@ export function SkillsGrid() {
 	});
 
 	return (
-		<div ref={containerRef} className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+		<div
+			className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4"
+			ref={containerRef}
+		>
 			{skills.map((skill, index) => {
 				const Icon = skill.icon;
 				return (
 					<div
+						className="skill-item group cursor-pointer rounded-lg border p-4 transition-colors"
 						key={index}
-						className="skill-item p-4 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border)] hover:border-[var(--accent)] transition-colors group cursor-pointer"
-						style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
+						onMouseEnter={(e) => {
+							e.currentTarget.style.borderColor = "var(--accent)";
+						}}
+						onMouseLeave={(e) => {
+							e.currentTarget.style.borderColor = "var(--border)";
+						}}
+						style={{
+							opacity: prefersReducedMotion() ? 1 : 0,
+							backgroundColor: "var(--bg-secondary)",
+							borderColor: "var(--border)",
+						}}
 					>
 						<div className="flex flex-col items-center gap-2">
-							<Icon className="w-6 h-6 text-[var(--accent)] group-hover:scale-110 transition-transform" />
-							<span className="text-sm font-medium text-center">
+							<Icon
+								className="h-6 w-6 transition-transform group-hover:scale-110"
+								style={{ color: "var(--accent)" }}
+							/>
+							<span className="text-center font-medium text-sm">
 								{skill.name}
 							</span>
 						</div>

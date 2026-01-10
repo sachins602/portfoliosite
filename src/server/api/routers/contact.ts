@@ -1,10 +1,10 @@
+import { Resend } from "resend";
 import { z } from "zod";
+import { env } from "~/env";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { contactSubmissions } from "~/server/db/schema";
-import { env } from "~/env";
-import { Resend } from "resend";
 
-const resend = new Resend(env.RESEND_API_KEY);
+const resend = env.RESEND_API_KEY ? new Resend(env.RESEND_API_KEY) : null;
 
 const contactSchema = z.object({
 	name: z.string().min(1, "Name is required"),
@@ -26,23 +26,27 @@ export const contactRouter = createTRPCRouter({
 				});
 
 				// Send email via Resend
-				try {
-					await resend.emails.send({
-						from: "Portfolio Contact <onboarding@resend.dev>",
-						to: env.CONTACT_EMAIL,
-						subject: `New Contact Form Submission from ${input.name}`,
-						html: `
+				if (resend) {
+					try {
+						await resend.emails.send({
+							from: "Portfolio Contact <onboarding@resend.dev>",
+							to: env.CONTACT_EMAIL,
+							subject: `New Contact Form Submission from ${input.name}`,
+							html: `
 							<h2>New Contact Form Submission</h2>
 							<p><strong>Name:</strong> ${input.name}</p>
 							<p><strong>Email:</strong> ${input.email}</p>
 							<p><strong>Message:</strong></p>
 							<p>${input.message.replace(/\n/g, "<br>")}</p>
 						`,
-						replyTo: input.email,
-					});
-				} catch (emailError) {
-					console.error("Failed to send email:", emailError);
-					// Don't fail the request if email fails, we still saved to DB
+							replyTo: input.email,
+						});
+					} catch (emailError) {
+						console.error("Failed to send email:", emailError);
+						// Don't fail the request if email fails, we still saved to DB
+					}
+				} else {
+					console.warn("RESEND_API_KEY not configured, skipping email send");
 				}
 
 				return {

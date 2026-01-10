@@ -1,11 +1,9 @@
 "use client";
 
-import { useRef } from "react";
-import { MapPin, Mail, Github, Linkedin } from "lucide-react";
-import { useScrollTrigger } from "~/hooks/use-anime";
-import { useElasticHover } from "~/hooks/use-anime";
-import { prefersReducedMotion, timing, easing } from "~/lib/animations";
-import anime from "animejs";
+import { Github, Linkedin, Mail, MapPin } from "lucide-react";
+import { useElasticHover, useScrollTrigger } from "~/hooks/use-anime";
+import { easing, prefersReducedMotion, timing } from "~/lib/animations";
+import anime from "~/lib/anime";
 import { SkillsGrid } from "../skills-grid";
 
 export function About() {
@@ -43,19 +41,19 @@ export function About() {
 
 	return (
 		<section
-			ref={sectionRef}
+			className="bg-[var(--bg-primary)] py-20 md:py-32"
 			id="about"
-			className="py-20 md:py-32 bg-[var(--bg-primary)]"
+			ref={sectionRef}
 		>
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
 				<h2
-					className="section-title text-4xl md:text-5xl font-bold mb-12 text-center"
+					className="section-title mb-12 text-center font-bold text-4xl md:text-5xl"
 					style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 				>
 					About Me
 				</h2>
 
-				<div className="section-content grid md:grid-cols-2 gap-12">
+				<div className="section-content grid gap-12 md:grid-cols-2">
 					{/* Bio */}
 					<div>
 						<div className="space-y-4 text-[var(--text-secondary)]">
@@ -73,43 +71,43 @@ export function About() {
 							</p>
 							<p>
 								Based in Brampton, Ontario, Canada, I'm open to remote
-								opportunities and ready to contribute to innovative projects that
-								push the boundaries of web development.
+								opportunities and ready to contribute to innovative projects
+								that push the boundaries of web development.
 							</p>
 						</div>
 
 						{/* Contact Info */}
 						<div className="mt-8 space-y-4">
 							<div className="flex items-center gap-3 text-[var(--text-secondary)]">
-								<MapPin className="w-5 h-5 text-[var(--accent)]" />
+								<MapPin className="h-5 w-5 text-[var(--accent)]" />
 								<span>Brampton, Ontario, Canada</span>
 							</div>
 							<a
-								ref={emailRef}
+								className="flex items-center gap-3 text-[var(--text-secondary)] transition-colors hover:text-[var(--accent)]"
 								href="mailto:sachinsapkota4@gmail.com"
-								className="flex items-center gap-3 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
+								ref={emailRef}
 							>
-								<Mail className="w-5 h-5 text-[var(--accent)]" />
+								<Mail className="h-5 w-5 text-[var(--accent)]" />
 								<span>sachinsapkota4@gmail.com</span>
 							</a>
 							<a
-								ref={githubRef}
+								className="flex items-center gap-3 text-[var(--text-secondary)] transition-colors hover:text-[var(--accent)]"
 								href="https://github.com/sachins602"
-								target="_blank"
+								ref={githubRef}
 								rel="noopener noreferrer"
-								className="flex items-center gap-3 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
+								target="_blank"
 							>
-								<Github className="w-5 h-5 text-[var(--accent)]" />
+								<Github className="h-5 w-5 text-[var(--accent)]" />
 								<span>github.com/sachins602</span>
 							</a>
 							<a
-								ref={linkedinRef}
+								className="flex items-center gap-3 text-[var(--text-secondary)] transition-colors hover:text-[var(--accent)]"
 								href="https://linkedin.com/in/sachin-sapkota"
-								target="_blank"
+								ref={linkedinRef}
 								rel="noopener noreferrer"
-								className="flex items-center gap-3 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
+								target="_blank"
 							>
-								<Linkedin className="w-5 h-5 text-[var(--accent)]" />
+								<Linkedin className="h-5 w-5 text-[var(--accent)]" />
 								<span>LinkedIn Profile</span>
 							</a>
 						</div>
@@ -117,7 +115,9 @@ export function About() {
 
 					{/* Skills */}
 					<div>
-						<h3 className="text-2xl font-semibold mb-6">Skills & Technologies</h3>
+						<h3 className="mb-6 font-semibold text-2xl">
+							Skills & Technologies
+						</h3>
 						<SkillsGrid />
 					</div>
 				</div>

@@ -1,11 +1,10 @@
 "use client";
 
-import { useScrollTrigger } from "~/hooks/use-anime";
-import { useElasticHover } from "~/hooks/use-anime";
-import { prefersReducedMotion, timing, easing } from "~/lib/animations";
-import anime from "animejs";
+import { Download, Github, Linkedin, Mail } from "lucide-react";
+import { useElasticHover, useScrollTrigger } from "~/hooks/use-anime";
+import { easing, prefersReducedMotion, timing } from "~/lib/animations";
+import anime from "~/lib/anime";
 import { ContactForm } from "../contact-form";
-import { Mail, Github, Linkedin, Download } from "lucide-react";
 
 export function Contact() {
 	const sectionRef = useScrollTrigger<HTMLElement>((element) => {
@@ -43,19 +42,19 @@ export function Contact() {
 
 	return (
 		<section
-			ref={sectionRef}
+			className="bg-[var(--bg-secondary)] py-20 md:py-32"
 			id="contact"
-			className="py-20 md:py-32 bg-[var(--bg-secondary)]"
+			ref={sectionRef}
 		>
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
 				<h2
-					className="section-title text-4xl md:text-5xl font-bold mb-16 text-center"
+					className="section-title mb-16 text-center font-bold text-4xl md:text-5xl"
 					style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 				>
 					Contact Me
 				</h2>
 
-				<div className="section-content grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+				<div className="section-content mx-auto grid max-w-5xl gap-12 md:grid-cols-2">
 					{/* Contact Form */}
 					<div>
 						<ContactForm />
@@ -64,8 +63,8 @@ export function Contact() {
 					{/* Contact Info & Social */}
 					<div className="space-y-8">
 						<div>
-							<h3 className="text-2xl font-semibold mb-4">Get in Touch</h3>
-							<p className="text-[var(--text-secondary)] mb-6">
+							<h3 className="mb-4 font-semibold text-2xl">Get in Touch</h3>
+							<p className="mb-6 text-[var(--text-secondary)]">
 								I'm always open to discussing new projects, creative ideas, or
 								opportunities to be part of your visions. Feel free to reach out
 								through the form or any of the links below.
@@ -74,46 +73,46 @@ export function Contact() {
 
 						<div className="space-y-4">
 							<a
-								ref={emailRef}
+								className="group flex items-center gap-4 rounded-lg bg-[var(--bg-primary)] p-4 transition-colors hover:bg-[var(--bg-primary)]/80"
 								href="mailto:sachinsapkota4@gmail.com"
-								className="flex items-center gap-4 p-4 rounded-lg bg-[var(--bg-primary)] hover:bg-[var(--bg-primary)]/80 transition-colors group"
+								ref={emailRef}
 							>
-								<Mail className="w-6 h-6 text-[var(--accent)] group-hover:scale-110 transition-transform" />
+								<Mail className="h-6 w-6 text-[var(--accent)] transition-transform group-hover:scale-110" />
 								<div>
 									<p className="font-medium">Email</p>
-									<p className="text-sm text-[var(--text-secondary)]">
+									<p className="text-[var(--text-secondary)] text-sm">
 										sachinsapkota4@gmail.com
 									</p>
 								</div>
 							</a>
 
 							<a
-								ref={githubRef}
+								className="group flex items-center gap-4 rounded-lg bg-[var(--bg-primary)] p-4 transition-colors hover:bg-[var(--bg-primary)]/80"
 								href="https://github.com/sachins602"
-								target="_blank"
+								ref={githubRef}
 								rel="noopener noreferrer"
-								className="flex items-center gap-4 p-4 rounded-lg bg-[var(--bg-primary)] hover:bg-[var(--bg-primary)]/80 transition-colors group"
+								target="_blank"
 							>
-								<Github className="w-6 h-6 text-[var(--accent)] group-hover:scale-110 transition-transform" />
+								<Github className="h-6 w-6 text-[var(--accent)] transition-transform group-hover:scale-110" />
 								<div>
 									<p className="font-medium">GitHub</p>
-									<p className="text-sm text-[var(--text-secondary)]">
+									<p className="text-[var(--text-secondary)] text-sm">
 										github.com/sachins602
 									</p>
 								</div>
 							</a>
 
 							<a
-								ref={linkedinRef}
+								className="group flex items-center gap-4 rounded-lg bg-[var(--bg-primary)] p-4 transition-colors hover:bg-[var(--bg-primary)]/80"
 								href="https://linkedin.com/in/sachin-sapkota"
-								target="_blank"
+								ref={linkedinRef}
 								rel="noopener noreferrer"
-								className="flex items-center gap-4 p-4 rounded-lg bg-[var(--bg-primary)] hover:bg-[var(--bg-primary)]/80 transition-colors group"
+								target="_blank"
 							>
-								<Linkedin className="w-6 h-6 text-[var(--accent)] group-hover:scale-110 transition-transform" />
+								<Linkedin className="h-6 w-6 text-[var(--accent)] transition-transform group-hover:scale-110" />
 								<div>
 									<p className="font-medium">LinkedIn</p>
-									<p className="text-sm text-[var(--text-secondary)]">
+									<p className="text-[var(--text-secondary)] text-sm">
 										Connect with me
 									</p>
 								</div>
@@ -121,12 +120,12 @@ export function Contact() {
 						</div>
 
 						<a
-							ref={resumeRef}
-							href="/resume.pdf"
+							className="group flex items-center justify-center gap-3 rounded-lg bg-[var(--accent)] px-6 py-4 font-semibold text-white transition-colors hover:bg-[var(--accent-hover)]"
 							download
-							className="flex items-center justify-center gap-3 px-6 py-4 rounded-lg bg-[var(--accent)] text-white font-semibold hover:bg-[var(--accent-hover)] transition-colors group"
+							href="/resume.pdf"
+							ref={resumeRef}
 						>
-							<Download className="w-5 h-5 group-hover:scale-110 transition-transform" />
+							<Download className="h-5 w-5 transition-transform group-hover:scale-110" />
 							<span>Download Resume</span>
 						</a>
 					</div>

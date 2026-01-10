@@ -1,9 +1,14 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import anime from "animejs";
+import {
+	easing,
+	prefersReducedMotion,
+	stagger,
+	timing,
+} from "~/lib/animations";
+import anime from "~/lib/anime";
 import type { Experience } from "~/lib/data/experience";
-import { prefersReducedMotion, timing, easing, stagger } from "~/lib/animations";
 
 interface ExperienceCardProps {
 	experience: Experience;
@@ -82,7 +87,10 @@ export function ExperienceCard({ experience, index }: ExperienceCardProps) {
 
 	const formatDate = (date: string | null) => {
 		if (!date) return "Present";
-		const [year, month] = date.split("-");
+		const parts = date.split("-");
+		const year = parts[0];
+		const month = parts[1];
+		if (!year || !month) return "Present";
 		const monthNames = [
 			"Jan",
 			"Feb",
@@ -97,38 +105,40 @@ export function ExperienceCard({ experience, index }: ExperienceCardProps) {
 			"Nov",
 			"Dec",
 		];
-		return `${monthNames[parseInt(month) - 1]} ${year}`;
+		const monthIndex = parseInt(month, 10) - 1;
+		if (monthIndex < 0 || monthIndex >= monthNames.length) return "Present";
+		return `${monthNames[monthIndex]} ${year}`;
 	};
 
 	return (
 		<div
+			className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6 transition-colors hover:border-[var(--accent)]"
 			ref={cardRef}
-			className="p-6 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border)] hover:border-[var(--accent)] transition-colors"
 			style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 		>
-			<div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
+			<div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
 				<div>
-					<h3 className="text-xl font-semibold text-[var(--accent)]">
+					<h3 className="font-semibold text-[var(--accent)] text-xl">
 						{experience.title}
 					</h3>
-					<p className="text-lg font-medium">{experience.company}</p>
-					<p className="text-sm text-[var(--text-secondary)]">
+					<p className="font-medium text-lg">{experience.company}</p>
+					<p className="text-[var(--text-secondary)] text-sm">
 						{experience.location}
 					</p>
 				</div>
-				<div className="text-sm text-[var(--text-secondary)] whitespace-nowrap">
+				<div className="whitespace-nowrap text-[var(--text-secondary)] text-sm">
 					{formatDate(experience.startDate)} - {formatDate(experience.endDate)}
 				</div>
 			</div>
 
-			<ul ref={bulletsRef} className="space-y-2 mb-4">
+			<ul className="mb-4 space-y-2" ref={bulletsRef}>
 				{experience.bullets.map((bullet, idx) => (
 					<li
+						className="flex items-start gap-2 text-[var(--text-secondary)]"
 						key={idx}
-						className="text-[var(--text-secondary)] flex items-start gap-2"
 						style={{ opacity: prefersReducedMotion() ? 1 : 0.7 }}
 					>
-						<span className="text-[var(--accent)] mt-1.5">•</span>
+						<span className="mt-1.5 text-[var(--accent)]">•</span>
 						<span>{bullet}</span>
 					</li>
 				))}
@@ -137,8 +147,8 @@ export function ExperienceCard({ experience, index }: ExperienceCardProps) {
 			<div className="flex flex-wrap gap-2">
 				{experience.technologies.map((tech, idx) => (
 					<span
+						className="rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/20 px-3 py-1 text-[var(--accent)] text-xs"
 						key={idx}
-						className="px-3 py-1 text-xs rounded-full bg-[var(--accent)]/20 text-[var(--accent)] border border-[var(--accent)]/30"
 					>
 						{tech}
 					</span>

@@ -1,7 +1,6 @@
-import { z } from "zod";
+import { fallbackProjects } from "~/lib/data/fallback-projects";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { fetchGitHubRepos } from "../github";
-import { fallbackProjects } from "~/lib/data/fallback-projects";
 
 export const projectsRouter = createTRPCRouter({
 	getProjects: publicProcedure.query(async () => {

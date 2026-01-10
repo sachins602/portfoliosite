@@ -1,8 +1,8 @@
 "use client";
 
 import { useScrollTrigger } from "~/hooks/use-anime";
-import { prefersReducedMotion, timing, easing } from "~/lib/animations";
-import anime from "animejs";
+import { easing, prefersReducedMotion, timing } from "~/lib/animations";
+import anime from "~/lib/anime";
 import { api } from "~/trpc/react";
 import { ProjectCard } from "../project-card";
 
@@ -22,32 +22,36 @@ export function Projects() {
 		}
 	});
 
-	const { data: projects, isLoading, error } = api.projects.getProjects.useQuery();
+	const {
+		data: projects,
+		isLoading,
+		error,
+	} = api.projects.getProjects.useQuery();
 
 	return (
 		<section
-			ref={sectionRef}
+			className="bg-[var(--bg-primary)] py-20 md:py-32"
 			id="projects"
-			className="py-20 md:py-32 bg-[var(--bg-primary)]"
+			ref={sectionRef}
 		>
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
 				<h2
-					className="section-title text-4xl md:text-5xl font-bold mb-16 text-center"
+					className="section-title mb-16 text-center font-bold text-4xl md:text-5xl"
 					style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 				>
 					Projects
 				</h2>
 
 				{isLoading && (
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					<div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
 						{Array.from({ length: 6 }).map((_, i) => (
 							<div
+								className="animate-pulse rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6"
 								key={i}
-								className="p-6 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border)] animate-pulse"
 							>
-								<div className="h-6 bg-[var(--border)] rounded mb-4" />
-								<div className="h-4 bg-[var(--border)] rounded mb-2" />
-								<div className="h-4 bg-[var(--border)] rounded w-3/4" />
+								<div className="mb-4 h-6 rounded bg-[var(--border)]" />
+								<div className="mb-2 h-4 rounded bg-[var(--border)]" />
+								<div className="h-4 w-3/4 rounded bg-[var(--border)]" />
 							</div>
 						))}
 					</div>
@@ -60,9 +64,9 @@ export function Projects() {
 				)}
 
 				{projects && projects.length > 0 && (
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					<div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
 						{projects.map((project, index) => (
-							<ProjectCard key={project.id} project={project} index={index} />
+							<ProjectCard index={index} key={project.id} project={project} />
 						))}
 					</div>
 				)}

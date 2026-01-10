@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
 import { Moon, Sun } from "lucide-react";
-import anime from "animejs";
+import { useEffect, useRef, useState } from "react";
 import { prefersReducedMotion } from "~/lib/animations";
+import anime from "~/lib/anime";
 
 export function ThemeToggle() {
 	const [theme, setTheme] = useState<"light" | "dark">("dark");
@@ -18,7 +18,10 @@ export function ThemeToggle() {
 		).matches;
 		const initialTheme = stored ?? (systemPrefersDark ? "dark" : "light");
 		setTheme(initialTheme);
-		document.documentElement.classList.toggle("light", initialTheme === "light");
+		document.documentElement.classList.toggle(
+			"light",
+			initialTheme === "light",
+		);
 		document.documentElement.classList.toggle("dark", initialTheme === "dark");
 	}, []);
 
@@ -46,27 +49,27 @@ export function ThemeToggle() {
 	if (!mounted) {
 		return (
 			<button
-				type="button"
-				className="p-2 rounded-lg hover:bg-[var(--bg-secondary)] transition-colors"
 				aria-label="Toggle theme"
+				className="rounded-lg p-2 transition-colors hover:bg-[var(--bg-secondary)]"
+				type="button"
 			>
-				<Moon className="w-5 h-5" />
+				<Moon className="h-5 w-5" />
 			</button>
 		);
 	}
 
 	return (
 		<button
-			type="button"
-			onClick={toggleTheme}
-			className="p-2 rounded-lg hover:bg-[var(--bg-secondary)] transition-colors"
 			aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+			className="rounded-lg p-2 transition-colors hover:bg-[var(--bg-secondary)]"
+			onClick={toggleTheme}
+			type="button"
 		>
-			<div ref={iconRef} className="relative w-5 h-5">
+			<div className="relative h-5 w-5" ref={iconRef}>
 				{theme === "dark" ? (
-					<Moon className="w-5 h-5 absolute inset-0" />
+					<Moon className="absolute inset-0 h-5 w-5" />
 				) : (
-					<Sun className="w-5 h-5 absolute inset-0" />
+					<Sun className="absolute inset-0 h-5 w-5" />
 				)}
 			</div>
 		</button>

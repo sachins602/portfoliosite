@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { CheckCircle, XCircle, Loader2 } from "lucide-react";
-import anime from "animejs";
+import { CheckCircle, Loader2, XCircle } from "lucide-react";
+import { useRef, useState } from "react";
+import { easing, prefersReducedMotion, timing } from "~/lib/animations";
+import anime from "~/lib/anime";
 import { api } from "~/trpc/react";
-import { prefersReducedMotion, timing, easing } from "~/lib/animations";
 
 export function ContactForm() {
 	const [name, setName] = useState("");
@@ -42,7 +42,9 @@ export function ContactForm() {
 		},
 		onError: (error) => {
 			setSubmitStatus("error");
-			setSubmitMessage(error.message || "Something went wrong. Please try again.");
+			setSubmitMessage(
+				error.message || "Something went wrong. Please try again.",
+			);
 
 			if (!prefersReducedMotion() && errorRef.current) {
 				anime({
@@ -102,7 +104,9 @@ export function ContactForm() {
 		submitMutation.mutate({ name, email, message });
 	};
 
-	const handleInputFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+	const handleInputFocus = (
+		e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+	) => {
 		if (!prefersReducedMotion()) {
 			anime({
 				targets: e.target,
@@ -113,7 +117,9 @@ export function ContactForm() {
 		}
 	};
 
-	const handleInputBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+	const handleInputBlur = (
+		e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+	) => {
 		if (!prefersReducedMotion()) {
 			anime({
 				targets: e.target,
@@ -125,93 +131,93 @@ export function ContactForm() {
 	};
 
 	return (
-		<form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+		<form className="space-y-6" onSubmit={handleSubmit} ref={formRef}>
 			<div>
 				<label
+					className="mb-2 block font-medium text-[var(--text-secondary)] text-sm"
 					htmlFor="name"
-					className="block text-sm font-medium mb-2 text-[var(--text-secondary)]"
 				>
 					Name
 				</label>
 				<input
-					type="text"
-					id="name"
-					value={name}
-					onChange={(e) => setName(e.target.value)}
-					onFocus={handleInputFocus}
-					onBlur={handleInputBlur}
-					className={`w-full px-4 py-3 rounded-lg bg-[var(--bg-secondary)] border ${
+					className={`w-full rounded-lg border bg-[var(--bg-secondary)] px-4 py-3 ${
 						errors.name
 							? "border-red-500"
 							: "border-[var(--border)] focus:border-[var(--accent)]"
-					} focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/20 transition-all`}
+					} transition-all focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/20`}
+					id="name"
+					onBlur={handleInputBlur}
+					onChange={(e) => setName(e.target.value)}
+					onFocus={handleInputFocus}
 					placeholder="Your name"
+					type="text"
+					value={name}
 				/>
 				{errors.name && (
-					<p className="mt-1 text-sm text-red-500">{errors.name}</p>
+					<p className="mt-1 text-red-500 text-sm">{errors.name}</p>
 				)}
 			</div>
 
 			<div>
 				<label
+					className="mb-2 block font-medium text-[var(--text-secondary)] text-sm"
 					htmlFor="email"
-					className="block text-sm font-medium mb-2 text-[var(--text-secondary)]"
 				>
 					Email
 				</label>
 				<input
-					type="email"
-					id="email"
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
-					onFocus={handleInputFocus}
-					onBlur={handleInputBlur}
-					className={`w-full px-4 py-3 rounded-lg bg-[var(--bg-secondary)] border ${
+					className={`w-full rounded-lg border bg-[var(--bg-secondary)] px-4 py-3 ${
 						errors.email
 							? "border-red-500"
 							: "border-[var(--border)] focus:border-[var(--accent)]"
-					} focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/20 transition-all`}
+					} transition-all focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/20`}
+					id="email"
+					onBlur={handleInputBlur}
+					onChange={(e) => setEmail(e.target.value)}
+					onFocus={handleInputFocus}
 					placeholder="your.email@example.com"
+					type="email"
+					value={email}
 				/>
 				{errors.email && (
-					<p className="mt-1 text-sm text-red-500">{errors.email}</p>
+					<p className="mt-1 text-red-500 text-sm">{errors.email}</p>
 				)}
 			</div>
 
 			<div>
 				<label
+					className="mb-2 block font-medium text-[var(--text-secondary)] text-sm"
 					htmlFor="message"
-					className="block text-sm font-medium mb-2 text-[var(--text-secondary)]"
 				>
 					Message
 				</label>
 				<textarea
-					id="message"
-					value={message}
-					onChange={(e) => setMessage(e.target.value)}
-					onFocus={handleInputFocus}
-					onBlur={handleInputBlur}
-					rows={6}
-					className={`w-full px-4 py-3 rounded-lg bg-[var(--bg-secondary)] border ${
+					className={`w-full rounded-lg border bg-[var(--bg-secondary)] px-4 py-3 ${
 						errors.message
 							? "border-red-500"
 							: "border-[var(--border)] focus:border-[var(--accent)]"
-					} focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/20 transition-all resize-none`}
+					} resize-none transition-all focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/20`}
+					id="message"
+					onBlur={handleInputBlur}
+					onChange={(e) => setMessage(e.target.value)}
+					onFocus={handleInputFocus}
 					placeholder="Your message..."
+					rows={6}
+					value={message}
 				/>
 				{errors.message && (
-					<p className="mt-1 text-sm text-red-500">{errors.message}</p>
+					<p className="mt-1 text-red-500 text-sm">{errors.message}</p>
 				)}
 			</div>
 
 			<button
-				type="submit"
+				className="flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-8 py-4 font-semibold text-white transition-colors hover:bg-[var(--accent-hover)] disabled:cursor-not-allowed disabled:opacity-50"
 				disabled={isSubmitting}
-				className="w-full px-8 py-4 bg-[var(--accent)] text-white rounded-lg font-semibold hover:bg-[var(--accent-hover)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+				type="submit"
 			>
 				{isSubmitting ? (
 					<>
-						<Loader2 className="w-5 h-5 animate-spin" />
+						<Loader2 className="h-5 w-5 animate-spin" />
 						<span>Sending...</span>
 					</>
 				) : (
@@ -221,22 +227,22 @@ export function ContactForm() {
 
 			{submitStatus === "success" && (
 				<div
+					className="flex items-center gap-3 rounded-lg border border-green-500/50 bg-green-500/20 p-4"
 					ref={successRef}
-					className="p-4 rounded-lg bg-green-500/20 border border-green-500/50 flex items-center gap-3"
 					style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 				>
-					<CheckCircle className="w-5 h-5 text-green-500" />
+					<CheckCircle className="h-5 w-5 text-green-500" />
 					<p className="text-green-500">{submitMessage}</p>
 				</div>
 			)}
 
 			{submitStatus === "error" && (
 				<div
+					className="flex items-center gap-3 rounded-lg border border-red-500/50 bg-red-500/20 p-4"
 					ref={errorRef}
-					className="p-4 rounded-lg bg-red-500/20 border border-red-500/50 flex items-center gap-3"
 					style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 				>
-					<XCircle className="w-5 h-5 text-red-500" />
+					<XCircle className="h-5 w-5 text-red-500" />
 					<p className="text-red-500">{submitMessage}</p>
 				</div>
 			)}

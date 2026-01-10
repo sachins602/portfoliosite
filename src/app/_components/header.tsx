@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
-import anime from "animejs";
+import { useEffect, useRef, useState } from "react";
 import { useElasticHover } from "~/hooks/use-anime";
 import { prefersReducedMotion, timing } from "~/lib/animations";
-import { ThemeToggle } from "./theme-toggle";
+import anime from "~/lib/anime";
 import { MobileMenu } from "./mobile-menu";
+import { ThemeToggle } from "./theme-toggle";
 
 const navLinks = [
 	{ href: "#about", label: "About" },
@@ -67,7 +67,10 @@ export function Header() {
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
 
-	const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+	const handleNavClick = (
+		e: React.MouseEvent<HTMLAnchorElement>,
+		href: string,
+	) => {
 		e.preventDefault();
 		const targetId = href.slice(1);
 		const element = document.getElementById(targetId);
@@ -77,33 +80,33 @@ export function Header() {
 	};
 
 	return (
-		<header className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg-primary)]/80 backdrop-blur-md border-b border-[var(--border)]">
+		<header className="fixed top-0 right-0 left-0 z-50 border-[var(--border)] border-b bg-[var(--bg-primary)]/80 backdrop-blur-md">
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
-				<div className="flex items-center justify-between h-16 md:h-20">
+				<div className="flex h-16 items-center justify-between md:h-20">
 					{/* Logo */}
 					<Link
-						ref={logoContainerRef}
+						className="flex items-center gap-2 font-bold text-xl md:text-2xl"
 						href="#"
 						onClick={(e) => {
 							e.preventDefault();
 							window.scrollTo({ top: 0, behavior: "smooth" });
 						}}
-						className="flex items-center gap-2 font-bold text-xl md:text-2xl"
+						ref={logoContainerRef}
 					>
 						<svg
-							width="32"
+							className="text-[var(--accent)]"
 							height="32"
 							viewBox="0 0 100 100"
-							className="text-[var(--accent)]"
+							width="32"
 						>
 							<path
-								ref={logoRef}
 								d="M20,20 L20,80 L80,80 L80,20 Z M30,30 L30,70 L70,70 L70,30 Z"
-								stroke="currentColor"
-								strokeWidth="3"
 								fill="none"
+								ref={logoRef}
+								stroke="currentColor"
 								strokeLinecap="round"
 								strokeLinejoin="round"
+								strokeWidth="3"
 							/>
 						</svg>
 						<span className="hidden sm:inline">Sachin Sapkota</span>
@@ -111,22 +114,22 @@ export function Header() {
 					</Link>
 
 					{/* Desktop Navigation */}
-					<nav className="hidden md:flex items-center gap-8">
+					<nav className="hidden items-center gap-8 md:flex">
 						{navLinks.map((link) => {
 							const sectionId = link.href.slice(1);
 							const isActive = activeSection === sectionId;
 							return (
 								<Link
-									key={link.href}
-									href={link.href}
-									onClick={(e) => handleNavClick(e, link.href)}
 									className={`relative font-medium transition-colors hover:text-[var(--accent)] ${
 										isActive ? "text-[var(--accent)]" : ""
 									}`}
+									href={link.href}
+									key={link.href}
+									onClick={(e) => handleNavClick(e, link.href)}
 								>
 									{link.label}
 									{isActive && (
-										<span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[var(--accent)]" />
+										<span className="absolute right-0 -bottom-1 left-0 h-0.5 bg-[var(--accent)]" />
 									)}
 								</Link>
 							);

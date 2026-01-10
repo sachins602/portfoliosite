@@ -1,10 +1,10 @@
 "use client";
 
-import { useScrollTrigger } from "~/hooks/use-anime";
-import { prefersReducedMotion, timing, easing } from "~/lib/animations";
-import anime from "animejs";
+import { ArrowUp, Github, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
-import { Github, Linkedin, Mail, ArrowUp } from "lucide-react";
+import { useScrollTrigger } from "~/hooks/use-anime";
+import { easing, prefersReducedMotion, timing } from "~/lib/animations";
+import anime from "~/lib/anime";
 
 const navLinks = [
 	{ href: "#about", label: "About" },
@@ -32,29 +32,29 @@ export function Footer() {
 
 	return (
 		<footer
+			className="border-[var(--border)] border-t bg-[var(--bg-primary)] py-12"
 			ref={footerRef}
-			className="py-12 bg-[var(--bg-primary)] border-t border-[var(--border)]"
 			style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 		>
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
-				<div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+				<div className="mb-8 grid grid-cols-1 gap-8 md:grid-cols-3">
 					{/* Brand */}
 					<div>
-						<h3 className="text-xl font-bold mb-4">Sachin Sapkota</h3>
-						<p className="text-sm text-[var(--text-secondary)]">
+						<h3 className="mb-4 font-bold text-xl">Sachin Sapkota</h3>
+						<p className="text-[var(--text-secondary)] text-sm">
 							Full-Stack Developer building scalable web applications.
 						</p>
 					</div>
 
 					{/* Quick Links */}
 					<div>
-						<h4 className="text-sm font-semibold mb-4">Quick Links</h4>
+						<h4 className="mb-4 font-semibold text-sm">Quick Links</h4>
 						<nav className="flex flex-col gap-2">
 							{navLinks.map((link) => (
 								<Link
-									key={link.href}
+									className="text-[var(--text-secondary)] text-sm transition-colors hover:text-[var(--accent)]"
 									href={link.href}
-									className="text-sm text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
+									key={link.href}
 								>
 									{link.label}
 								</Link>
@@ -64,48 +64,48 @@ export function Footer() {
 
 					{/* Social */}
 					<div>
-						<h4 className="text-sm font-semibold mb-4">Connect</h4>
+						<h4 className="mb-4 font-semibold text-sm">Connect</h4>
 						<div className="flex gap-4">
 							<a
-								href="https://github.com/sachins602"
-								target="_blank"
-								rel="noopener noreferrer"
-								className="p-2 rounded-lg hover:bg-[var(--bg-secondary)] transition-colors"
 								aria-label="GitHub"
-							>
-								<Github className="w-5 h-5 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors" />
-							</a>
-							<a
-								href="https://linkedin.com/in/sachin-sapkota"
-								target="_blank"
+								className="rounded-lg p-2 transition-colors hover:bg-[var(--bg-secondary)]"
+								href="https://github.com/sachins602"
 								rel="noopener noreferrer"
-								className="p-2 rounded-lg hover:bg-[var(--bg-secondary)] transition-colors"
-								aria-label="LinkedIn"
+								target="_blank"
 							>
-								<Linkedin className="w-5 h-5 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors" />
+								<Github className="h-5 w-5 text-[var(--text-secondary)] transition-colors hover:text-[var(--accent)]" />
 							</a>
 							<a
-								href="mailto:sachinsapkota4@gmail.com"
-								className="p-2 rounded-lg hover:bg-[var(--bg-secondary)] transition-colors"
-								aria-label="Email"
+								aria-label="LinkedIn"
+								className="rounded-lg p-2 transition-colors hover:bg-[var(--bg-secondary)]"
+								href="https://linkedin.com/in/sachin-sapkota"
+								rel="noopener noreferrer"
+								target="_blank"
 							>
-								<Mail className="w-5 h-5 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors" />
+								<Linkedin className="h-5 w-5 text-[var(--text-secondary)] transition-colors hover:text-[var(--accent)]" />
+							</a>
+							<a
+								aria-label="Email"
+								className="rounded-lg p-2 transition-colors hover:bg-[var(--bg-secondary)]"
+								href="mailto:sachinsapkota4@gmail.com"
+							>
+								<Mail className="h-5 w-5 text-[var(--text-secondary)] transition-colors hover:text-[var(--accent)]" />
 							</a>
 						</div>
 					</div>
 				</div>
 
-				<div className="pt-8 border-t border-[var(--border)] flex flex-col sm:flex-row items-center justify-between gap-4">
-					<p className="text-sm text-[var(--text-secondary)]">
+				<div className="flex flex-col items-center justify-between gap-4 border-[var(--border)] border-t pt-8 sm:flex-row">
+					<p className="text-[var(--text-secondary)] text-sm">
 						© {new Date().getFullYear()} Sachin Sapkota. All rights reserved.
 					</p>
 					<button
-						type="button"
-						onClick={scrollToTop}
-						className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-[var(--bg-secondary)] transition-colors text-sm text-[var(--text-secondary)] hover:text-[var(--accent)]"
 						aria-label="Back to top"
+						className="flex items-center gap-2 rounded-lg px-4 py-2 text-[var(--text-secondary)] text-sm transition-colors hover:bg-[var(--bg-secondary)] hover:text-[var(--accent)]"
+						onClick={scrollToTop}
+						type="button"
 					>
-						<ArrowUp className="w-4 h-4" />
+						<ArrowUp className="h-4 w-4" />
 						<span>Back to top</span>
 					</button>
 				</div>

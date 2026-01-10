@@ -12,7 +12,7 @@ export const env = createEnv({
 			.enum(["development", "test", "production"])
 			.default("development"),
 		GITHUB_TOKEN: z.string().optional(),
-		RESEND_API_KEY: z.string().min(1),
+		RESEND_API_KEY: z.string().min(1).optional(),
 		CONTACT_EMAIL: z.string().email().default("sachinsapkota4@gmail.com"),
 	},
 

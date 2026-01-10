@@ -53,7 +53,11 @@ export default function RootLayout({
 	children,
 }: Readonly<{ children: React.ReactNode }>) {
 	return (
-		<html className={`${geist.variable} dark`} lang="en" suppressHydrationWarning>
+		<html
+			className={`${geist.variable} dark`}
+			lang="en"
+			suppressHydrationWarning
+		>
 			<head>
 				<script
 					dangerouslySetInnerHTML={{
@@ -70,9 +74,7 @@ export default function RootLayout({
 			</head>
 			<body>
 				<TRPCReactProvider>
-					<Suspense fallback={null}>
-						{children}
-					</Suspense>
+					<Suspense fallback={null}>{children}</Suspense>
 				</TRPCReactProvider>
 			</body>
 		</html>

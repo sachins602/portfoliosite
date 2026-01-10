@@ -100,15 +100,14 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
 		const isDev =
 			typeof window !== "undefined"
 				? window.location.hostname === "localhost" ||
-				  window.location.hostname === "127.0.0.1"
+					window.location.hostname === "127.0.0.1"
 				: process.env.NEXT_PUBLIC_NODE_ENV === "development";
 
 		const client = api.createClient({
 			links: [
 				loggerLink({
 					enabled: (op) =>
-						isDev ||
-						(op.direction === "down" && op.result instanceof Error),
+						isDev || (op.direction === "down" && op.result instanceof Error),
 				}),
 				httpBatchStreamLink({
 					transformer: SuperJSON,

@@ -1,10 +1,15 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
-import anime from "animejs";
-import { prefersReducedMotion, timing, easing, stagger } from "~/lib/animations";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import {
+	easing,
+	prefersReducedMotion,
+	stagger,
+	timing,
+} from "~/lib/animations";
+import anime from "~/lib/anime";
 
 const navLinks = [
 	{ href: "#about", label: "About" },
@@ -83,39 +88,35 @@ export function MobileMenu() {
 	return (
 		<>
 			<button
-				type="button"
-				onClick={() => setIsOpen(!isOpen)}
-				className="md:hidden p-2 rounded-lg hover:bg-[var(--bg-secondary)] transition-colors"
-				aria-label="Toggle menu"
 				aria-expanded={isOpen}
+				aria-label="Toggle menu"
+				className="rounded-lg p-2 transition-colors hover:bg-[var(--bg-secondary)] md:hidden"
+				onClick={() => setIsOpen(!isOpen)}
+				type="button"
 			>
-				{isOpen ? (
-					<X className="w-6 h-6" />
-				) : (
-					<Menu className="w-6 h-6" />
-				)}
+				{isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
 			</button>
 
 			{isOpen && (
 				<>
 					<div
-						ref={overlayRef}
-						className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
-						onClick={handleOverlayClick}
 						aria-hidden="true"
+						className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
+						onClick={handleOverlayClick}
+						ref={overlayRef}
 					/>
 					<div
+						className="fixed top-0 right-0 z-50 h-full w-80 max-w-[85vw] bg-[var(--bg-secondary)] shadow-2xl md:hidden"
 						ref={menuRef}
-						className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-[var(--bg-secondary)] z-50 md:hidden shadow-2xl"
 					>
 						<div className="p-8 pt-20">
-							<nav ref={linksRef} className="flex flex-col gap-6">
+							<nav className="flex flex-col gap-6" ref={linksRef}>
 								{navLinks.map((link) => (
 									<Link
-										key={link.href}
+										className="font-medium text-xl transition-colors hover:text-[var(--accent)]"
 										href={link.href}
+										key={link.href}
 										onClick={handleLinkClick}
-										className="text-xl font-medium hover:text-[var(--accent)] transition-colors"
 									>
 										{link.label}
 									</Link>

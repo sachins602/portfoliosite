@@ -1,6 +1,6 @@
+import { contactRouter } from "~/server/api/routers/contact";
 import { postRouter } from "~/server/api/routers/post";
 import { projectsRouter } from "~/server/api/routers/projects";
-import { contactRouter } from "~/server/api/routers/contact";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 
 /**

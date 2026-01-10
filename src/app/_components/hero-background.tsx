@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import anime from "animejs";
-import { prefersReducedMotion, timing } from "~/lib/animations";
+import { prefersReducedMotion } from "~/lib/animations";
+import anime from "~/lib/anime";
 
 export function HeroBackground() {
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -41,11 +41,7 @@ export function HeroBackground() {
 					{ value: Math.random() * 200 - 100 },
 					{ value: Math.random() * 200 - 100 },
 				],
-				opacity: [
-					{ value: 0.1 },
-					{ value: 0.3 },
-					{ value: 0.1 },
-				],
+				opacity: [{ value: 0.1 }, { value: 0.3 }, { value: 0.1 }],
 				duration,
 				delay,
 				easing: "easeInOutSine",
@@ -61,9 +57,9 @@ export function HeroBackground() {
 
 	return (
 		<div
-			ref={containerRef}
-			className="absolute inset-0 overflow-hidden pointer-events-none"
 			aria-hidden="true"
+			className="pointer-events-none absolute inset-0 overflow-hidden"
+			ref={containerRef}
 		/>
 	);
 }

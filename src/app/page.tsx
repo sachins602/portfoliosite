@@ -1,10 +1,10 @@
-import { Header } from "~/app/_components/header";
-import { Hero } from "~/app/_components/sections/hero";
-import { About } from "~/app/_components/sections/about";
-import { Experience } from "~/app/_components/sections/experience";
-import { Projects } from "~/app/_components/sections/projects";
-import { Contact } from "~/app/_components/sections/contact";
 import { Footer } from "~/app/_components/footer";
+import { Header } from "~/app/_components/header";
+import { About } from "~/app/_components/sections/about";
+import { Contact } from "~/app/_components/sections/contact";
+import { Experience } from "~/app/_components/sections/experience";
+import { Hero } from "~/app/_components/sections/hero";
+import { Projects } from "~/app/_components/sections/projects";
 
 export default function Home() {
 	return (

@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import anime from "animejs";
 import { prefersReducedMotion, timing } from "~/lib/animations";
+import anime from "~/lib/anime";
 
 interface TimelineProps {
 	itemCount: number;
@@ -66,40 +66,38 @@ export function Timeline({ itemCount }: TimelineProps) {
 				observer.unobserve(nodesRef.current);
 			}
 		};
-	}, [itemCount]);
+	}, []);
 
 	return (
 		<div className="relative">
 			{/* SVG Line */}
 			<svg
-				className="absolute left-8 top-0 bottom-0 w-0.5 md:left-1/2 md:-translate-x-0.5"
+				className="absolute top-0 bottom-0 left-8 w-0.5 md:left-1/2 md:-translate-x-0.5"
 				style={{ height: "100%" }}
 			>
 				<line
 					ref={lineRef}
-					x1="0"
-					y1="0"
-					x2="0"
-					y2="100%"
 					stroke="var(--accent)"
-					strokeWidth="2"
 					strokeDasharray="0"
 					strokeDashoffset="0"
+					strokeWidth="2"
+					x1="0"
+					x2="0"
+					y1="0"
+					y2="100%"
 				/>
 			</svg>
 
 			{/* Nodes */}
-			<div ref={nodesRef} className="relative">
+			<div className="relative" ref={nodesRef}>
 				{Array.from({ length: itemCount }).map((_, index) => (
 					<div
+						className="absolute left-6 z-10 h-4 w-4 rounded-full border-4 border-[var(--bg-primary)] bg-[var(--accent)] md:left-1/2 md:-translate-x-1/2"
 						key={index}
-						className="absolute left-6 md:left-1/2 md:-translate-x-1/2 w-4 h-4 rounded-full bg-[var(--accent)] border-4 border-[var(--bg-primary)] z-10"
 						style={{
 							top: `${(index / (itemCount - 1)) * 100}%`,
 							opacity: prefersReducedMotion() ? 1 : 0,
-							transform: prefersReducedMotion()
-								? "scale(1)"
-								: "scale(0)",
+							transform: prefersReducedMotion() ? "scale(1)" : "scale(0)",
 						}}
 					/>
 				))}

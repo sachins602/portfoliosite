@@ -1,10 +1,10 @@
 "use client";
 
+import { ExternalLink, GitFork, Github, Star } from "lucide-react";
 import { useEffect, useRef } from "react";
-import { ExternalLink, Github, Star, GitFork } from "lucide-react";
-import anime from "animejs";
+import { easing, prefersReducedMotion, timing } from "~/lib/animations";
+import anime from "~/lib/anime";
 import type { Project } from "~/lib/data/fallback-projects";
-import { prefersReducedMotion, timing, easing } from "~/lib/animations";
 
 interface ProjectCardProps {
 	project: Project;
@@ -103,48 +103,48 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 
 	return (
 		<div
-			ref={cardRef}
+			className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6 shadow-lg transition-all duration-300 hover:border-[var(--accent)] hover:shadow-xl"
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
-			className="p-6 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border)] hover:border-[var(--accent)] transition-all duration-300 shadow-lg hover:shadow-xl"
+			ref={cardRef}
 			style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 		>
-			<div className="flex items-start justify-between mb-4">
-				<h3 className="text-xl font-semibold text-[var(--accent)] flex-1">
+			<div className="mb-4 flex items-start justify-between">
+				<h3 className="flex-1 font-semibold text-[var(--accent)] text-xl">
 					{project.name}
 				</h3>
 				<div className="flex gap-2">
 					<a
-						href={project.html_url}
-						target="_blank"
-						rel="noopener noreferrer"
-						className="p-2 hover:bg-[var(--bg-primary)] rounded transition-colors"
 						aria-label="View on GitHub"
+						className="rounded p-2 transition-colors hover:bg-[var(--bg-primary)]"
+						href={project.html_url}
+						rel="noopener noreferrer"
+						target="_blank"
 					>
-						<Github className="w-5 h-5" />
+						<Github className="h-5 w-5" />
 					</a>
 					{project.homepage && (
 						<a
-							href={project.homepage}
-							target="_blank"
-							rel="noopener noreferrer"
-							className="p-2 hover:bg-[var(--bg-primary)] rounded transition-colors"
 							aria-label="View live demo"
+							className="rounded p-2 transition-colors hover:bg-[var(--bg-primary)]"
+							href={project.homepage}
+							rel="noopener noreferrer"
+							target="_blank"
 						>
-							<ExternalLink className="w-5 h-5" />
+							<ExternalLink className="h-5 w-5" />
 						</a>
 					)}
 				</div>
 			</div>
 
-			<p className="text-[var(--text-secondary)] mb-4 line-clamp-3">
+			<p className="mb-4 line-clamp-3 text-[var(--text-secondary)]">
 				{project.description}
 			</p>
 
-			<div className="flex items-center gap-4 mb-4 text-sm text-[var(--text-secondary)]">
+			<div className="mb-4 flex items-center gap-4 text-[var(--text-secondary)] text-sm">
 				<div className="flex items-center gap-1">
 					<span
-						className="w-3 h-3 rounded-full"
+						className="h-3 w-3 rounded-full"
 						style={{
 							backgroundColor:
 								languageColors[project.language] ?? languageColors.Other,
@@ -153,21 +153,21 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 					<span>{project.language}</span>
 				</div>
 				<div className="flex items-center gap-1">
-					<Star className="w-4 h-4" />
+					<Star className="h-4 w-4" />
 					<span>{project.stargazers_count}</span>
 				</div>
 				<div className="flex items-center gap-1">
-					<GitFork className="w-4 h-4" />
+					<GitFork className="h-4 w-4" />
 					<span>{project.forks_count}</span>
 				</div>
 			</div>
 
 			{project.topics.length > 0 && (
-				<div ref={tagsRef} className="flex flex-wrap gap-2">
+				<div className="flex flex-wrap gap-2" ref={tagsRef}>
 					{project.topics.slice(0, 5).map((topic, idx) => (
 						<span
+							className="rounded border border-[var(--accent)]/30 bg-[var(--accent)]/20 px-2 py-1 text-[var(--accent)] text-xs"
 							key={idx}
-							className="px-2 py-1 text-xs rounded bg-[var(--accent)]/20 text-[var(--accent)] border border-[var(--accent)]/30"
 							style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 						>
 							{topic}

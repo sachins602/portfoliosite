@@ -1,14 +1,19 @@
 "use client";
 
-import { useEffect, useRef, type RefObject } from "react";
-import anime from "animejs";
-import { prefersReducedMotion, timing, easing, stagger } from "~/lib/animations";
+import { type RefObject, useEffect, useRef } from "react";
+import {
+	easing,
+	prefersReducedMotion,
+	stagger,
+	timing,
+} from "~/lib/animations";
+import anime from "~/lib/anime";
 
 /**
  * Hook for staggered reveal animations on lists
  */
 export function useStaggerReveal<T extends HTMLElement>(
-	items: unknown[],
+	_items: unknown[],
 	options?: {
 		duration?: number;
 		delay?: number;
@@ -37,7 +42,7 @@ export function useStaggerReveal<T extends HTMLElement>(
 			delay: anime.stagger(options?.staggerDelay ?? stagger.normal),
 			easing: easing.easeOut,
 		});
-	}, [items, options]);
+	}, [options]);
 
 	return ref as RefObject<T>;
 }
@@ -176,12 +181,10 @@ export function useElasticHover<T extends HTMLElement>() {
 /**
  * Hook for SVG path drawing animation
  */
-export function usePathDraw<T extends SVGPathElement>(
-	options?: {
-		duration?: number;
-		delay?: number;
-	},
-) {
+export function usePathDraw<T extends SVGPathElement>(options?: {
+	duration?: number;
+	delay?: number;
+}) {
 	const ref = useRef<T>(null);
 	const hasAnimated = useRef(false);
 
