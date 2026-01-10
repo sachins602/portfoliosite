@@ -12,13 +12,13 @@ import { ScrollProgress } from "./_components/scroll-progress";
 export const metadata: Metadata = {
 	title: "Sachin Sapkota | Full-Stack Developer",
 	description:
-		"Full-Stack Developer specializing in Next.js, .NET, and TypeScript. Building scalable web applications from Brampton, Ontario, Canada.",
+		"Full-Stack Developer specializing in Next.js, .NET, and TypeScript. Building scalable web applications from Ontario, Canada.",
 	keywords: [
 		"Full-Stack Developer",
 		"Next.js",
 		".NET",
 		"TypeScript",
-		"Brampton Ontario",
+		"Ontario, Canada",
 		"React",
 		"Web Development",
 		"Software Engineer",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 		url: "https://sachinsapkota.dev",
 		title: "Sachin Sapkota | Full-Stack Developer",
 		description:
-			"Full-Stack Developer specializing in Next.js, .NET, and TypeScript. Building scalable web applications from Brampton, Ontario, Canada.",
+			"Full-Stack Developer specializing in Next.js, .NET, and TypeScript. Building scalable web applications from Ontario, Canada.",
 		siteName: "Sachin Sapkota Portfolio",
 	},
 	twitter: {

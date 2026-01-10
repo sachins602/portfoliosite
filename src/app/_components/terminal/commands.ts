@@ -51,7 +51,7 @@ export function processCommand(input: string): string[] {
 		return [
 			"Sachin Sapkota",
 			"Full-Stack Developer | Next.js & .NET Specialist",
-			"Building scalable web apps from Brampton, Ontario",
+			"Building scalable web apps from Ontario, Canada",
 		];
 	}
 
@@ -99,7 +99,7 @@ export function processCommand(input: string): string[] {
 			"  Email: sachinsapkota4@gmail.com",
 			"  GitHub: github.com/sachins602",
 			"  LinkedIn: linkedin.com/in/sachin-sapkota",
-			"  Location: Brampton, Ontario, Canada",
+			"  Location: Ontario, Canada",
 		];
 	}
 
@@ -152,7 +152,7 @@ export function processCommand(input: string): string[] {
 			"",
 			"## About",
 			"Passionate Full-Stack Developer specializing in Next.js, React,",
-			"TypeScript, and .NET. Based in Brampton, Ontario, Canada.",
+			"TypeScript, and .NET. Based in Ontario, Canada.",
 			"",
 			"## Skills",
 			"Expert in modern web technologies, cloud integrations, and",

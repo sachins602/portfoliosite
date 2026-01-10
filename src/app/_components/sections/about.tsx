@@ -79,7 +79,7 @@ export function About() {
 								integrations, database design, and DevOps practices.
 							</p>
 							<p>
-								Based in Brampton, Ontario, Canada, I'm open to remote
+								Based in Ontario, Canada, I'm open to remote
 								opportunities and ready to contribute to innovative projects
 								that push the boundaries of web development.
 							</p>
@@ -89,7 +89,7 @@ export function About() {
 						<div className="mt-8 space-y-4">
 							<div className="flex items-center gap-3 text-[var(--text-secondary)]">
 								<MapPin className="h-5 w-5 text-[var(--accent)]" />
-								<span>Brampton, Ontario, Canada</span>
+								<span>Ontario, Canada</span>
 							</div>
 							<a
 								className="flex items-center gap-3 text-[var(--text-secondary)] transition-colors hover:text-[var(--accent)]"

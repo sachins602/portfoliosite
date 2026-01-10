@@ -58,7 +58,7 @@
    - Large animated text reveal:
      - "Sachin Sapkota" — letters stagger in with elastic easing
      - Subtitle "Full-Stack Developer | Next.js & .NET Specialist" — typing effect via anime.js
-   - Tagline: "Building scalable web apps from Brampton, Ontario"
+   - Tagline: "Building scalable web apps from Ontario"
    - Animated CTA buttons: "View Projects" (scrolls down) and "Contact Me" with hover pulse/morph
    - Background: Subtle animated gradient or particle field (anime.js)
 

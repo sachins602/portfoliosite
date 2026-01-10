@@ -71,7 +71,7 @@
     - Add theme initialization script to prevent flash
     - Add dark class to html element by default
     - Update metadata with comprehensive SEO (title, description, Open Graph, Twitter cards)
-    - Add keywords: "Full-Stack Developer", "Next.js", ".NET", "TypeScript", "Brampton Ontario"
+    - Add keywords: "Full-Stack Developer", "Next.js", ".NET", "TypeScript", "Ontario"
 
 - [x] **1.1.5 Create reusable anime.js hooks**
   - **File**: `src/hooks/use-anime.ts`
@@ -177,7 +177,7 @@
 
 - [x] **1.3.4 Add tagline text**
   - **File**: `src/app/_components/sections/hero.tsx`
-  - **Context**: "Building scalable web apps from Brampton, Ontario"
+  - **Context**: "Building scalable web apps from Ontario"
   - **Details**:
     - Fade in after subtitle completes
     - Subtle translateY animation
@@ -229,7 +229,7 @@
   - **File**: `src/app/_components/sections/about.tsx`
   - **Context**: Location, email, phone, social links
   - **Details**:
-    - Location: Brampton, Ontario, Canada
+    - Location: Ontario, Canada
     - Email: sachinsapkota4@gmail.com
     - GitHub: github.com/sachins602
     - LinkedIn: (add if available)
