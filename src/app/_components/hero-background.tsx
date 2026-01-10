@@ -17,7 +17,7 @@ export function HeroBackground() {
 		const particles: HTMLDivElement[] = [];
 		for (let i = 0; i < particleCount; i++) {
 			const particle = document.createElement("div");
-			particle.className = "absolute rounded-full bg-[var(--accent)]/20";
+			particle.className = "absolute rounded-full bg-(--accent)/20";
 			particle.style.width = `${Math.random() * 4 + 2}px`;
 			particle.style.height = particle.style.width;
 			particle.style.left = `${Math.random() * 100}%`;

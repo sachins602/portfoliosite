@@ -80,7 +80,7 @@ export function Testimonials() {
 				<h2 className="section-title mb-12 text-center font-bold text-4xl">
 					<span className="relative inline-block">
 						Testimonials
-						<span className="absolute bottom-0 left-0 h-1 w-full origin-left bg-gradient-to-r from-[var(--accent)] to-transparent" />
+						<span className="absolute bottom-0 left-0 h-1 w-full origin-left bg-linear-to-r from-(--accent) to-transparent" />
 					</span>
 				</h2>
 
@@ -109,19 +109,19 @@ export function Testimonials() {
 						<>
 							<button
 								aria-label="Previous testimonial"
-								className="absolute top-1/2 left-0 -translate-x-full -translate-y-1/2 rounded-full border border-[var(--border)] bg-[var(--bg-secondary)] p-2 transition-colors hover:border-[var(--accent)] hover:bg-[var(--bg-primary)]"
+								className="absolute top-1/2 left-0 -translate-x-full -translate-y-1/2 rounded-full border border-(--border) bg-(--bg-secondary) p-2 transition-colors hover:border-(--accent) hover:bg-(--bg-primary)"
 								onClick={goToPrevious}
 								type="button"
 							>
-								<ChevronLeft className="h-6 w-6 text-[var(--accent)]" />
+								<ChevronLeft className="h-6 w-6 text-(--accent)" />
 							</button>
 							<button
 								aria-label="Next testimonial"
-								className="absolute top-1/2 right-0 -translate-x-full -translate-y-1/2 rounded-full border border-[var(--border)] bg-[var(--bg-secondary)] p-2 transition-colors hover:border-[var(--accent)] hover:bg-[var(--bg-primary)]"
+								className="absolute top-1/2 right-0 -translate-x-full -translate-y-1/2 rounded-full border border-(--border) bg-(--bg-secondary) p-2 transition-colors hover:border-(--accent) hover:bg-(--bg-primary)"
 								onClick={goToNext}
 								type="button"
 							>
-								<ChevronRight className="h-6 w-6 text-[var(--accent)]" />
+								<ChevronRight className="h-6 w-6 text-(--accent)" />
 							</button>
 						</>
 					)}
@@ -133,8 +133,8 @@ export function Testimonials() {
 									aria-label={`Go to testimonial ${index + 1}`}
 									className={`h-2 rounded-full transition-all ${
 										index === currentIndex
-											? "w-8 bg-[var(--accent)]"
-											: "w-2 bg-[var(--border)]"
+											? "w-8 bg-(--accent)"
+											: "w-2 bg-(--border)"
 									}`}
 									key={`testimonial-dot-${testimonial.id}`}
 									onClick={() => {

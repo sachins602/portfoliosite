@@ -84,7 +84,7 @@ export function ProjectFilter({
 		<div className="mb-8 space-y-6">
 			{/* Languages */}
 			<div>
-				<h3 className="mb-3 font-semibold text-[var(--text-secondary)] text-sm">
+				<h3 className="mb-3 font-semibold text-(--text-secondary) text-sm">
 					Languages
 				</h3>
 				<div className="flex flex-wrap gap-2">
@@ -95,8 +95,8 @@ export function ProjectFilter({
 							<button
 								className={`rounded-full border px-4 py-2 text-sm transition-all ${
 									isActive
-										? "border-[var(--accent)] bg-[var(--accent)]/20 text-[var(--accent)]"
-										: "border-[var(--border)] bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:border-[var(--accent)]/50"
+										? "border-(--accent) bg-(--accent)/20 text-(--accent)"
+										: "border-(--border) bg-(--bg-secondary) text-(--text-secondary) hover:border-(--accent)/50"
 								}`}
 								key={lang}
 								onClick={(e) => {
@@ -121,7 +121,7 @@ export function ProjectFilter({
 
 			{/* Tags */}
 			<div>
-				<h3 className="mb-3 font-semibold text-[var(--text-secondary)] text-sm">
+				<h3 className="mb-3 font-semibold text-(--text-secondary) text-sm">
 					Tech Stack
 				</h3>
 				<div className="flex flex-wrap gap-2">
@@ -132,8 +132,8 @@ export function ProjectFilter({
 							<button
 								className={`rounded-full border px-4 py-2 text-sm transition-all ${
 									isActive
-										? "border-[var(--accent)] bg-[var(--accent)]/20 text-[var(--accent)]"
-										: "border-[var(--border)] bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:border-[var(--accent)]/50"
+										? "border-(--accent) bg-(--accent)/20 text-(--accent)"
+										: "border-(--border) bg-(--bg-secondary) text-(--text-secondary) hover:border-(--accent)/50"
 								}`}
 								key={tag}
 								onClick={(e) => {
@@ -158,7 +158,7 @@ export function ProjectFilter({
 
 			{/* Years */}
 			<div>
-				<h3 className="mb-3 font-semibold text-[var(--text-secondary)] text-sm">
+				<h3 className="mb-3 font-semibold text-(--text-secondary) text-sm">
 					Year
 				</h3>
 				<div className="flex flex-wrap gap-2">
@@ -169,8 +169,8 @@ export function ProjectFilter({
 							<button
 								className={`rounded-full border px-4 py-2 text-sm transition-all ${
 									isActive
-										? "border-[var(--accent)] bg-[var(--accent)]/20 text-[var(--accent)]"
-										: "border-[var(--border)] bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:border-[var(--accent)]/50"
+										? "border-(--accent) bg-(--accent)/20 text-(--accent)"
+										: "border-(--border) bg-(--bg-secondary) text-(--text-secondary) hover:border-(--accent)/50"
 								}`}
 								key={year}
 								onClick={(e) => {
@@ -196,7 +196,7 @@ export function ProjectFilter({
 			{/* Clear Filters */}
 			{hasActiveFilters && (
 				<button
-					className="flex items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] px-4 py-2 text-[var(--text-secondary)] text-sm transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+					className="flex items-center gap-2 rounded-lg border border-(--border) bg-(--bg-secondary) px-4 py-2 text-(--text-secondary) text-sm transition-colors hover:border-(--accent) hover:text-(--accent)"
 					onClick={clearFilters}
 					type="button"
 				>

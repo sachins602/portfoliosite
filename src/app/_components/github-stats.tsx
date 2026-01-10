@@ -152,14 +152,14 @@ export function GitHubStats() {
 
 	if (isLoading) {
 		return (
-			<div className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6">
+			<div className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6">
 				<h3 className="mb-6 text-center font-semibold text-xl">
 					GitHub Statistics
 				</h3>
 				<div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
 					{Array.from({ length: 5 }).map((_, i) => (
 						<div
-							className="h-24 animate-pulse rounded-lg bg-[var(--border)]"
+							className="h-24 animate-pulse rounded-lg bg-(--border)"
 							key={`skeleton-${i + Math.random()}`}
 						/>
 					))}
@@ -170,11 +170,11 @@ export function GitHubStats() {
 
 	if (error) {
 		return (
-			<div className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6">
+			<div className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6">
 				<h3 className="mb-4 text-center font-semibold text-xl">
 					GitHub Statistics
 				</h3>
-				<p className="text-center text-[var(--text-secondary)]">
+				<p className="text-center text-(--text-secondary)">
 					Unable to load GitHub statistics. Please check your GitHub token.
 				</p>
 			</div>
@@ -226,16 +226,14 @@ export function GitHubStats() {
 
 	return (
 		<div
-			className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6"
+			className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6"
 			ref={containerRef}
 		>
 			<div className="mb-6 flex items-center justify-between">
 				<h3 className="flex-1 text-center font-semibold text-xl">
 					GitHub Statistics
 				</h3>
-				<span className="text-[var(--text-secondary)] text-xs">
-					Last 12 months
-				</span>
+				<span className="text-(--text-secondary) text-xs">Last 12 months</span>
 			</div>
 
 			<div
@@ -246,7 +244,7 @@ export function GitHubStats() {
 					const Icon = stat.icon;
 					return (
 						<div
-							className={`stat-card group relative overflow-hidden rounded-xl border border-[var(--border)] bg-gradient-to-br ${stat.gradient} p-4 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent)] hover:shadow-[var(--accent)]/10 hover:shadow-lg`}
+							className={`stat-card group relative overflow-hidden rounded-xl border border-(--border) bg-linear-to-br ${stat.gradient} p-4 transition-all duration-300 hover:-translate-y-1 hover:border-(--accent) hover:shadow-(--accent)/10 hover:shadow-lg`}
 							key={stat.id}
 							style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 						>
@@ -263,10 +261,10 @@ export function GitHubStats() {
 									className="mb-2 h-5 w-5 transition-transform duration-300 group-hover:scale-110"
 									style={{ color: stat.color }}
 								/>
-								<div className="font-bold text-2xl text-[var(--text-primary)]">
+								<div className="font-bold text-(--text-primary) text-2xl">
 									<AnimatedNumber value={stat.value} />
 								</div>
-								<div className="mt-1 text-[var(--text-secondary)] text-xs">
+								<div className="mt-1 text-(--text-secondary) text-xs">
 									{stat.label}
 								</div>
 							</div>

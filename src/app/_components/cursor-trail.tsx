@@ -99,7 +99,7 @@ export function CursorTrail() {
 		<div className="pointer-events-none fixed inset-0 z-[9999]">
 			{particles.map((particle) => (
 				<div
-					className="absolute rounded-full bg-[var(--accent)]"
+					className="absolute rounded-full bg-(--accent)"
 					key={particle.id}
 					style={{
 						left: `${particle.x}px`,

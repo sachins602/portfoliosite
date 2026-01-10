@@ -204,7 +204,7 @@ export function Header() {
 	};
 
 	return (
-		<header className="fixed top-0 right-0 left-0 z-50 border-[var(--border)] border-b bg-[var(--bg-primary)]/80 backdrop-blur-md">
+		<header className="fixed top-0 right-0 left-0 z-50 border-(--border) border-b bg-(--bg-primary)/80 backdrop-blur-md">
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="flex h-16 items-center justify-between md:h-20">
 					{/* Logo */}
@@ -216,7 +216,7 @@ export function Header() {
 					>
 						<svg
 							aria-label="Portfolio logo"
-							className="text-[var(--accent)]"
+							className="text-(--accent)"
 							height="32"
 							role="img"
 							viewBox="0 0 100 100"
@@ -243,8 +243,8 @@ export function Header() {
 							const isActive = activeSection === sectionId;
 							return (
 								<Link
-									className={`relative font-medium transition-colors hover:text-[var(--accent)] ${
-										isActive ? "text-[var(--accent)]" : ""
+									className={`relative font-medium transition-colors hover:text-(--accent) ${
+										isActive ? "text-(--accent)" : ""
 									}`}
 									href={link.href}
 									key={link.href}
@@ -252,7 +252,7 @@ export function Header() {
 								>
 									{link.label}
 									{isActive && (
-										<span className="absolute right-0 -bottom-1 left-0 h-0.5 bg-[var(--accent)]" />
+										<span className="absolute right-0 -bottom-1 left-0 h-0.5 bg-(--accent)" />
 									)}
 								</Link>
 							);

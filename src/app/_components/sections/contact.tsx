@@ -42,7 +42,7 @@ export function Contact() {
 
 	return (
 		<section
-			className="bg-[var(--bg-secondary)] py-20 md:py-32"
+			className="bg-(--bg-secondary) py-20 md:py-32"
 			id="contact"
 			ref={sectionRef}
 		>
@@ -64,7 +64,7 @@ export function Contact() {
 					<div className="space-y-8">
 						<div>
 							<h3 className="mb-4 font-semibold text-2xl">Get in Touch</h3>
-							<p className="mb-6 text-[var(--text-secondary)]">
+							<p className="mb-6 text-(--text-secondary)">
 								I'm always open to discussing new projects, creative ideas, or
 								opportunities to be part of your visions. Feel free to reach out
 								through the form or any of the links below.
@@ -73,46 +73,46 @@ export function Contact() {
 
 						<div className="space-y-4">
 							<a
-								className="group flex items-center gap-4 rounded-lg bg-[var(--bg-primary)] p-4 transition-colors hover:bg-[var(--bg-primary)]/80"
+								className="group flex items-center gap-4 rounded-lg bg-(--bg-primary) p-4 transition-colors hover:bg-(--bg-primary)/80"
 								href="mailto:sachinsapkota4@gmail.com"
 								ref={emailRef}
 							>
-								<Mail className="h-6 w-6 text-[var(--accent)] transition-transform group-hover:scale-110" />
+								<Mail className="h-6 w-6 text-(--accent) transition-transform group-hover:scale-110" />
 								<div>
 									<p className="font-medium">Email</p>
-									<p className="text-[var(--text-secondary)] text-sm">
+									<p className="text-(--text-secondary) text-sm">
 										sachinsapkota4@gmail.com
 									</p>
 								</div>
 							</a>
 
 							<a
-								className="group flex items-center gap-4 rounded-lg bg-[var(--bg-primary)] p-4 transition-colors hover:bg-[var(--bg-primary)]/80"
+								className="group flex items-center gap-4 rounded-lg bg-(--bg-primary) p-4 transition-colors hover:bg-(--bg-primary)/80"
 								href="https://github.com/sachins602"
 								ref={githubRef}
 								rel="noopener noreferrer"
 								target="_blank"
 							>
-								<Github className="h-6 w-6 text-[var(--accent)] transition-transform group-hover:scale-110" />
+								<Github className="h-6 w-6 text-(--accent) transition-transform group-hover:scale-110" />
 								<div>
 									<p className="font-medium">GitHub</p>
-									<p className="text-[var(--text-secondary)] text-sm">
+									<p className="text-(--text-secondary) text-sm">
 										github.com/sachins602
 									</p>
 								</div>
 							</a>
 
 							<a
-								className="group flex items-center gap-4 rounded-lg bg-[var(--bg-primary)] p-4 transition-colors hover:bg-[var(--bg-primary)]/80"
+								className="group flex items-center gap-4 rounded-lg bg-(--bg-primary) p-4 transition-colors hover:bg-(--bg-primary)/80"
 								href="https://www.linkedin.com/in/sachin-sapkota-97b467107/"
 								ref={linkedinRef}
 								rel="noopener noreferrer"
 								target="_blank"
 							>
-								<Linkedin className="h-6 w-6 text-[var(--accent)] transition-transform group-hover:scale-110" />
+								<Linkedin className="h-6 w-6 text-(--accent) transition-transform group-hover:scale-110" />
 								<div>
 									<p className="font-medium">LinkedIn</p>
-									<p className="text-[var(--text-secondary)] text-sm">
+									<p className="text-(--text-secondary) text-sm">
 										Connect with me
 									</p>
 								</div>
@@ -120,7 +120,7 @@ export function Contact() {
 						</div>
 
 						<a
-							className="group flex items-center justify-center gap-3 rounded-lg bg-[var(--accent)] px-6 py-4 font-semibold text-white transition-colors hover:bg-[var(--accent-hover)]"
+							className="group flex items-center justify-center gap-3 rounded-lg bg-(--accent) px-6 py-4 font-semibold text-white transition-colors hover:bg-(--accent-hover)"
 							download
 							href="/resume.pdf"
 							ref={resumeRef}

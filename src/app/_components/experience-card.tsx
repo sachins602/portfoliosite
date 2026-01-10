@@ -111,23 +111,23 @@ export function ExperienceCard({ experience, index }: ExperienceCardProps) {
 
 	return (
 		<div
-			className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6 shadow-sm transition-all duration-300 hover:border-[var(--accent)] hover:shadow-md"
+			className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6 shadow-sm transition-all duration-300 hover:border-(--accent) hover:shadow-md"
 			ref={cardRef}
 			style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 		>
 			<div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
 				<div>
-					<h3 className="mb-1 font-semibold text-[var(--accent)] text-xl">
+					<h3 className="mb-1 font-semibold text-(--accent) text-xl">
 						{experience.title}
 					</h3>
-					<p className="mb-1 font-medium text-[var(--text-primary)] text-lg">
+					<p className="mb-1 font-medium text-(--text-primary) text-lg">
 						{experience.company}
 					</p>
-					<p className="text-[var(--text-secondary)] text-sm">
+					<p className="text-(--text-secondary) text-sm">
 						{experience.location}
 					</p>
 				</div>
-				<div className="whitespace-nowrap text-[var(--text-secondary)] text-sm">
+				<div className="whitespace-nowrap text-(--text-secondary) text-sm">
 					{formatDate(experience.startDate)} - {formatDate(experience.endDate)}
 				</div>
 			</div>
@@ -135,11 +135,11 @@ export function ExperienceCard({ experience, index }: ExperienceCardProps) {
 			<ul className="mb-4 space-y-2.5" ref={bulletsRef}>
 				{experience.bullets.map((bullet, idx) => (
 					<li
-						className="flex items-start gap-2.5 text-[var(--text-secondary)] leading-relaxed"
+						className="flex items-start gap-2.5 text-(--text-secondary) leading-relaxed"
 						key={`bullet-${idx}-${bullet.slice(0, 10)}`}
 						style={{ opacity: prefersReducedMotion() ? 1 : 0.7 }}
 					>
-						<span className="mt-1.5 shrink-0 text-[var(--accent)]">•</span>
+						<span className="mt-1.5 shrink-0 text-(--accent)">•</span>
 						<span className="flex-1">{bullet}</span>
 					</li>
 				))}
@@ -148,7 +148,7 @@ export function ExperienceCard({ experience, index }: ExperienceCardProps) {
 			<div className="flex flex-wrap gap-2">
 				{experience.technologies.map((tech) => (
 					<span
-						className="rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/20 px-2.5 py-1 font-medium text-[var(--accent)] text-xs"
+						className="rounded-full border border-(--accent)/30 bg-(--accent)/20 px-2.5 py-1 font-medium text-(--accent) text-xs"
 						key={`tech-${tech}`}
 					>
 						{tech}

@@ -50,7 +50,7 @@ export function TestimonialCard({
 
 	return (
 		<div
-			className={`absolute inset-0 flex flex-col justify-between rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6 shadow-lg transition-all ${
+			className={`absolute inset-0 flex flex-col justify-between rounded-lg border border-(--border) bg-(--bg-secondary) p-6 shadow-lg transition-all ${
 				isActive
 					? "pointer-events-auto opacity-100"
 					: "pointer-events-none opacity-0"
@@ -61,10 +61,10 @@ export function TestimonialCard({
 			}}
 		>
 			<div>
-				<div className="mb-4 text-[var(--accent)]">
+				<div className="mb-4 text-(--accent)">
 					<Quote className="h-8 w-8" />
 				</div>
-				<blockquote className="mb-4 text-[var(--text-primary)] text-lg italic">
+				<blockquote className="mb-4 text-(--text-primary) text-lg italic">
 					"{testimonial.quote}"
 				</blockquote>
 			</div>
@@ -79,27 +79,27 @@ export function TestimonialCard({
 						width={48}
 					/>
 				) : (
-					<div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--accent)]/20 font-semibold text-[var(--accent)]">
+					<div className="flex h-12 w-12 items-center justify-center rounded-full bg-(--accent)/20 font-semibold text-(--accent)">
 						{testimonial.author.charAt(0).toUpperCase()}
 					</div>
 				)}
 				<div className="flex-1">
-					<div className="font-semibold text-[var(--text-primary)]">
+					<div className="font-semibold text-(--text-primary)">
 						{testimonial.author}
 					</div>
-					<div className="text-[var(--text-secondary)] text-sm">
+					<div className="text-(--text-secondary) text-sm">
 						{testimonial.title} at {testimonial.company}
 					</div>
 				</div>
 				{testimonial.linkedInUrl && (
 					<a
 						aria-label="View LinkedIn recommendation"
-						className="rounded p-2 transition-colors hover:bg-[var(--bg-primary)]"
+						className="rounded p-2 transition-colors hover:bg-(--bg-primary)"
 						href={testimonial.linkedInUrl}
 						rel="noopener noreferrer"
 						target="_blank"
 					>
-						<ExternalLink className="h-5 w-5 text-[var(--accent)]" />
+						<ExternalLink className="h-5 w-5 text-(--accent)" />
 					</a>
 				)}
 			</div>

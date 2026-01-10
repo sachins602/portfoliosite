@@ -14,45 +14,45 @@ export default function AdminDashboard() {
 
 			{/* Stats Cards */}
 			<div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-3">
-				<div className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6">
+				<div className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6">
 					<div className="mb-2 flex items-center gap-2">
-						<MessageSquare className="h-5 w-5 text-[var(--accent)]" />
+						<MessageSquare className="h-5 w-5 text-(--accent)" />
 						<h2 className="font-semibold text-lg">Total Submissions</h2>
 					</div>
-					<p className="font-bold text-3xl text-[var(--text-primary)]">
+					<p className="font-bold text-(--text-primary) text-3xl">
 						{isLoading ? "..." : (stats?.total ?? 0)}
 					</p>
 				</div>
 
-				<div className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6">
+				<div className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6">
 					<div className="mb-2 flex items-center gap-2">
-						<Mail className="h-5 w-5 text-[var(--accent)]" />
+						<Mail className="h-5 w-5 text-(--accent)" />
 						<h2 className="font-semibold text-lg">Unread</h2>
 					</div>
-					<p className="font-bold text-3xl text-[var(--text-primary)]">
+					<p className="font-bold text-(--text-primary) text-3xl">
 						{isLoading ? "..." : (stats?.unread ?? 0)}
 					</p>
 				</div>
 
-				<div className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6">
+				<div className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6">
 					<div className="mb-2 flex items-center gap-2">
-						<TrendingUp className="h-5 w-5 text-[var(--accent)]" />
+						<TrendingUp className="h-5 w-5 text-(--accent)" />
 						<h2 className="font-semibold text-lg">Read</h2>
 					</div>
-					<p className="font-bold text-3xl text-[var(--text-primary)]">
+					<p className="font-bold text-(--text-primary) text-3xl">
 						{isLoading ? "..." : (stats?.read ?? 0)}
 					</p>
 				</div>
 			</div>
 
 			{/* Availability Status */}
-			<div className="mb-8 rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6">
+			<div className="mb-8 rounded-lg border border-(--border) bg-(--bg-secondary) p-6">
 				<h2 className="mb-4 font-semibold text-lg">Availability Status</h2>
-				<p className="mb-4 text-[var(--text-secondary)]">
+				<p className="mb-4 text-(--text-secondary)">
 					Current status: <strong>{status ?? "Not set"}</strong>
 				</p>
 				<Link
-					className="inline-block rounded bg-[var(--accent)] px-4 py-2 text-white transition-colors hover:opacity-90"
+					className="inline-block rounded bg-(--accent) px-4 py-2 text-white transition-colors hover:opacity-90"
 					href="/admin/settings"
 				>
 					Update Status
@@ -60,11 +60,11 @@ export default function AdminDashboard() {
 			</div>
 
 			{/* Quick Actions */}
-			<div className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6">
+			<div className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6">
 				<h2 className="mb-4 font-semibold text-lg">Quick Actions</h2>
 				<div className="flex flex-wrap gap-4">
 					<Link
-						className="rounded border border-[var(--border)] bg-[var(--bg-primary)] px-4 py-2 text-[var(--text-primary)] transition-colors hover:bg-[var(--bg-secondary)]"
+						className="rounded border border-(--border) bg-(--bg-primary) px-4 py-2 text-(--text-primary) transition-colors hover:bg-(--bg-secondary)"
 						href="/admin/submissions"
 					>
 						View All Submissions

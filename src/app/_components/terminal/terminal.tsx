@@ -150,18 +150,18 @@ export function Terminal() {
 	};
 
 	return (
-		<div className="w-full overflow-hidden rounded-lg border border-[var(--border)] bg-[#1e1e1e] shadow-xl md:w-[600px]">
+		<div className="w-full overflow-hidden rounded-lg border border-(--border) bg-[#1e1e1e] shadow-xl md:w-[600px]">
 			{/* Window Chrome */}
-			<div className="flex items-center gap-2 border-[var(--border)] border-b bg-[#2d2d2d] px-4 py-2">
+			<div className="flex items-center gap-2 border-(--border) border-b bg-[#2d2d2d] px-4 py-2">
 				<div className="flex gap-2">
 					<div className="h-3 w-3 rounded-full bg-[#ff5f56]" />
 					<div className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
 					<div className="h-3 w-3 rounded-full bg-[#27c93f]" />
 				</div>
 				<div className="ml-auto flex gap-2">
-					<Minus className="h-4 w-4 text-[var(--text-secondary)]" />
-					<Square className="h-4 w-4 text-[var(--text-secondary)]" />
-					<X className="h-4 w-4 text-[var(--text-secondary)]" />
+					<Minus className="h-4 w-4 text-(--text-secondary)" />
+					<Square className="h-4 w-4 text-(--text-secondary)" />
+					<X className="h-4 w-4 text-(--text-secondary)" />
 				</div>
 			</div>
 
@@ -172,7 +172,7 @@ export function Terminal() {
 				style={{ scrollbarWidth: "thin" }}
 			>
 				{lines.length === 0 && (
-					<div className="text-[var(--text-secondary)]">
+					<div className="text-(--text-secondary)">
 						<p>Welcome to my portfolio terminal!</p>
 						<p>Type 'help' to see available commands.</p>
 						<p className="mt-2 text-xs opacity-70">
@@ -193,14 +193,14 @@ export function Terminal() {
 						{line.type === "command" ? (
 							<div>
 								<span className="text-[#4ec9b0]">sachin@portfolio</span>
-								<span className="text-[var(--text-secondary)]">:</span>
+								<span className="text-(--text-secondary)">:</span>
 								<span className="text-[#4fc1ff]">~</span>
-								<span className="text-[var(--text-secondary)]">$ </span>
+								<span className="text-(--text-secondary)">$ </span>
 								<span className="text-white">{line.content}</span>
 							</div>
 						) : (
 							<div
-								className="text-[var(--text-secondary)]"
+								className="text-(--text-secondary)"
 								style={{ whiteSpace: "pre-wrap" }}
 							>
 								{line.content || " "}
@@ -212,13 +212,13 @@ export function Terminal() {
 
 			{/* Input Area */}
 			<form
-				className="flex items-center gap-2 border-[var(--border)] border-t bg-[#1e1e1e] px-4 py-2"
+				className="flex items-center gap-2 border-(--border) border-t bg-[#1e1e1e] px-4 py-2"
 				onSubmit={handleSubmit}
 			>
 				<span className="text-[#4ec9b0]">sachin@portfolio</span>
-				<span className="text-[var(--text-secondary)]">:</span>
+				<span className="text-(--text-secondary)">:</span>
 				<span className="text-[#4fc1ff]">~</span>
-				<span className="text-[var(--text-secondary)]">$ </span>
+				<span className="text-(--text-secondary)">$ </span>
 				<input
 					className="flex-1 bg-transparent text-white outline-none"
 					onChange={(e) => setInput(e.target.value)}
@@ -227,7 +227,7 @@ export function Terminal() {
 					type="text"
 					value={input}
 				/>
-				<span className="h-4 w-0.5 bg-[var(--accent)]" ref={cursorRef} />
+				<span className="h-4 w-0.5 bg-(--accent)" ref={cursorRef} />
 			</form>
 		</div>
 	);

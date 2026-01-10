@@ -43,7 +43,7 @@ export default function AdminLayout({
 	if (isLoading) {
 		return (
 			<div className="flex min-h-screen items-center justify-center">
-				<div className="text-[var(--text-secondary)]">Loading...</div>
+				<div className="text-(--text-secondary)">Loading...</div>
 			</div>
 		);
 	}
@@ -51,18 +51,18 @@ export default function AdminLayout({
 	if (!isAuthenticated) {
 		return (
 			<div className="flex min-h-screen items-center justify-center">
-				<div className="w-full max-w-md rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-8">
+				<div className="w-full max-w-md rounded-lg border border-(--border) bg-(--bg-secondary) p-8">
 					<h1 className="mb-6 text-center font-bold text-2xl">Admin Login</h1>
 					<form onSubmit={handleLogin}>
 						<div className="mb-4">
 							<label
-								className="mb-2 block font-medium text-[var(--text-primary)] text-sm"
+								className="mb-2 block font-medium text-(--text-primary) text-sm"
 								htmlFor="password"
 							>
 								Password
 							</label>
 							<input
-								className="w-full rounded border border-[var(--border)] bg-[var(--bg-primary)] px-4 py-2 text-[var(--text-primary)] focus:border-[var(--accent)] focus:outline-none"
+								className="w-full rounded border border-(--border) bg-(--bg-primary) px-4 py-2 text-(--text-primary) focus:border-(--accent) focus:outline-none"
 								id="password"
 								onChange={(e) => {
 									setPassword(e.target.value);
@@ -72,7 +72,7 @@ export default function AdminLayout({
 							/>
 						</div>
 						<button
-							className="w-full rounded bg-[var(--accent)] px-4 py-2 font-medium text-white transition-colors hover:opacity-90"
+							className="w-full rounded bg-(--accent) px-4 py-2 font-medium text-white transition-colors hover:opacity-90"
 							type="submit"
 						>
 							Login
@@ -84,22 +84,22 @@ export default function AdminLayout({
 	}
 
 	return (
-		<div className="min-h-screen bg-[var(--bg-primary)]">
-			<nav className="border-[var(--border)] border-b bg-[var(--bg-secondary)]">
+		<div className="min-h-screen bg-(--bg-primary)">
+			<nav className="border-(--border) border-b bg-(--bg-secondary)">
 				<div className="container mx-auto flex items-center justify-between px-4 py-4">
 					<h1 className="font-bold text-xl">Admin Dashboard</h1>
 					<div className="flex gap-4">
-						<a className="text-[var(--accent)] hover:underline" href="/admin">
+						<a className="text-(--accent) hover:underline" href="/admin">
 							Dashboard
 						</a>
 						<a
-							className="text-[var(--accent)] hover:underline"
+							className="text-(--accent) hover:underline"
 							href="/admin/submissions"
 						>
 							Submissions
 						</a>
 						<button
-							className="text-[var(--text-secondary)] hover:underline"
+							className="text-(--text-secondary) hover:underline"
 							onClick={() => {
 								sessionStorage.removeItem("admin_authenticated");
 								window.location.href = "/admin";

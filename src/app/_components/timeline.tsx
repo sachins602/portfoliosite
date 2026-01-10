@@ -185,7 +185,7 @@ export function Timeline({ itemCount }: TimelineProps) {
 			{/* SVG Line */}
 			<svg
 				aria-label="Timeline line"
-				className="absolute top-0 bottom-0 left-[1.875rem] w-1 md:left-1/2 md:-translate-x-1/2"
+				className="absolute top-0 bottom-0 left-7.5 w-1 md:left-1/2 md:-translate-x-1/2"
 				role="img"
 				style={{ height: "100%" }}
 			>

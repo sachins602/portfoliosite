@@ -25,7 +25,7 @@ export function Experience() {
 
 	return (
 		<section
-			className="bg-[var(--bg-secondary)] py-20 md:py-32"
+			className="bg-(--bg-secondary) py-20 md:py-32"
 			id="experience"
 			ref={sectionRef}
 		>

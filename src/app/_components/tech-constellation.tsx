@@ -173,7 +173,7 @@ export function TechConstellation() {
 	return (
 		<div className="relative w-full" ref={sectionRef}>
 			<div
-				className="relative h-[600px] w-full overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)]"
+				className="relative h-[600px] w-full overflow-hidden rounded-lg border border-(--border) bg-(--bg-secondary)"
 				ref={containerRef}
 			>
 				<svg
@@ -299,7 +299,7 @@ export function TechConstellation() {
 				{/* Tooltip */}
 				{hoveredNode && (
 					<div
-						className="pointer-events-none absolute z-10 rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] p-3 shadow-lg"
+						className="pointer-events-none absolute z-10 rounded-lg border border-(--border) bg-(--bg-primary) p-3 shadow-lg"
 						style={{
 							left: `${hoveredNode.x + 10}px`,
 							top: `${hoveredNode.y + 10}px`,
@@ -307,11 +307,11 @@ export function TechConstellation() {
 						}}
 					>
 						<div className="font-semibold">{hoveredNode.node.name}</div>
-						<div className="text-[var(--text-secondary)] text-sm">
+						<div className="text-(--text-secondary) text-sm">
 							Proficiency: {hoveredNode.node.proficiency}%
 						</div>
 						{hoveredNode.node.relatedProjects.length > 0 && (
-							<div className="mt-2 text-[var(--text-secondary)] text-xs">
+							<div className="mt-2 text-(--text-secondary) text-xs">
 								Projects: {hoveredNode.node.relatedProjects.join(", ")}
 							</div>
 						)}
@@ -320,18 +320,18 @@ export function TechConstellation() {
 
 				{/* Selected node details */}
 				{selectedNode && (
-					<div className="absolute right-4 bottom-4 left-4 rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] p-4 shadow-lg">
+					<div className="absolute right-4 bottom-4 left-4 rounded-lg border border-(--border) bg-(--bg-primary) p-4 shadow-lg">
 						<div className="mb-2 flex items-center justify-between">
 							<h4 className="font-semibold text-lg">{selectedNode.name}</h4>
 							<button
-								className="text-[var(--text-secondary)] hover:text-[var(--accent)]"
+								className="text-(--text-secondary) hover:text-(--accent)"
 								onClick={() => setSelectedNode(null)}
 								type="button"
 							>
 								×
 							</button>
 						</div>
-						<div className="text-[var(--text-secondary)] text-sm">
+						<div className="text-(--text-secondary) text-sm">
 							<p>Category: {selectedNode.category}</p>
 							<p>Proficiency: {selectedNode.proficiency}%</p>
 							{selectedNode.relatedProjects.length > 0 && (

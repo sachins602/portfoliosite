@@ -43,13 +43,13 @@ export function AvailabilityBadge() {
 
 	return (
 		<div
-			className="flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--bg-secondary)] px-4 py-2"
+			className="flex items-center gap-2 rounded-full border border-(--border) bg-(--bg-secondary) px-4 py-2"
 			ref={badgeRef}
 		>
 			<div
 				className={`h-2 w-2 rounded-full ${statusColors[status] ?? statusColors["Open to opportunities"]}`}
 			/>
-			<span className="font-medium text-[var(--text-primary)] text-sm">
+			<span className="font-medium text-(--text-primary) text-sm">
 				{statusLabels[status] ?? status}
 			</span>
 		</div>

@@ -126,7 +126,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 
 	return (
 		<article
-			className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6 shadow-lg transition-all duration-300 hover:border-[var(--accent)] hover:shadow-xl"
+			className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6 shadow-lg transition-all duration-300 hover:border-(--accent) hover:shadow-xl"
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
 			onMouseMove={handleMouseMove}
@@ -134,13 +134,13 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 			style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 		>
 			<div className="mb-4 flex items-start justify-between">
-				<h3 className="flex-1 font-semibold text-[var(--accent)] text-xl">
+				<h3 className="flex-1 font-semibold text-(--accent) text-xl">
 					{project.name}
 				</h3>
 				<div className="flex gap-2">
 					<a
 						aria-label="View on GitHub"
-						className="rounded p-2 transition-colors hover:bg-[var(--bg-primary)]"
+						className="rounded p-2 transition-colors hover:bg-(--bg-primary)"
 						href={project.html_url}
 						rel="noopener noreferrer"
 						target="_blank"
@@ -150,7 +150,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 					{project.homepage && (
 						<a
 							aria-label="View live demo"
-							className="rounded p-2 transition-colors hover:bg-[var(--bg-primary)]"
+							className="rounded p-2 transition-colors hover:bg-(--bg-primary)"
 							href={project.homepage}
 							rel="noopener noreferrer"
 							target="_blank"
@@ -161,11 +161,11 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 				</div>
 			</div>
 
-			<p className="mb-4 line-clamp-3 text-[var(--text-secondary)]">
+			<p className="mb-4 line-clamp-3 text-(--text-secondary)">
 				{project.description}
 			</p>
 
-			<div className="mb-4 flex items-center gap-4 text-[var(--text-secondary)] text-sm">
+			<div className="mb-4 flex items-center gap-4 text-(--text-secondary) text-sm">
 				<div className="flex items-center gap-1">
 					<span
 						className="h-3 w-3 rounded-full"
@@ -190,7 +190,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 				<div className="flex flex-wrap gap-2" ref={tagsRef}>
 					{project.topics.slice(0, 5).map((topic) => (
 						<span
-							className="rounded border border-[var(--accent)]/30 bg-[var(--accent)]/20 px-2 py-1 text-[var(--accent)] text-xs"
+							className="rounded border border-(--accent)/30 bg-(--accent)/20 px-2 py-1 text-(--accent) text-xs"
 							key={`topic-${topic}`}
 							style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 						>

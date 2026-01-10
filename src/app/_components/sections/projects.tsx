@@ -164,19 +164,19 @@ export function Projects() {
 					<div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
 						{Array.from({ length: 6 }).map((_, i) => (
 							<div
-								className="animate-pulse rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6"
+								className="animate-pulse rounded-lg border border-(--border) bg-(--bg-secondary) p-6"
 								key={`project-skeleton-${i + Math.random()}`}
 							>
-								<div className="mb-4 h-6 rounded bg-[var(--border)]" />
-								<div className="mb-2 h-4 rounded bg-[var(--border)]" />
-								<div className="h-4 w-3/4 rounded bg-[var(--border)]" />
+								<div className="mb-4 h-6 rounded bg-(--border)" />
+								<div className="mb-2 h-4 rounded bg-(--border)" />
+								<div className="h-4 w-3/4 rounded bg-(--border)" />
 							</div>
 						))}
 					</div>
 				)}
 
 				{error && (
-					<div className="text-center text-[var(--text-secondary)]">
+					<div className="text-center text-(--text-secondary)">
 						<p>Failed to load projects. Please try again later.</p>
 					</div>
 				)}
@@ -197,12 +197,12 @@ export function Projects() {
 
 						{hasMore && (
 							<div className="mt-12 flex flex-col items-center gap-4">
-								<p className="text-[var(--text-secondary)] text-sm">
+								<p className="text-(--text-secondary) text-sm">
 									Showing {displayedProjects.length} of{" "}
 									{filteredProjects.length} projects
 								</p>
 								<button
-									className="rounded-lg border border-[var(--accent)] bg-[var(--accent)]/10 px-6 py-3 font-semibold text-[var(--accent)] transition-all duration-300 hover:bg-[var(--accent)]/20 hover:shadow-lg"
+									className="rounded-lg border border-(--accent) bg-(--accent)/10 px-6 py-3 font-semibold text-(--accent) transition-all duration-300 hover:bg-(--accent)/20 hover:shadow-lg"
 									onClick={handleLoadMore}
 									type="button"
 								>
@@ -213,7 +213,7 @@ export function Projects() {
 
 						{!hasMore && filteredProjects.length > INITIAL_DISPLAY_COUNT && (
 							<div className="mt-8 text-center">
-								<p className="text-[var(--text-secondary)] text-sm">
+								<p className="text-(--text-secondary) text-sm">
 									Showing all {filteredProjects.length} projects
 								</p>
 							</div>
@@ -226,14 +226,14 @@ export function Projects() {
 					projects &&
 					projects.length > 0 &&
 					filteredProjects.length === 0 && (
-						<div className="text-center text-[var(--text-secondary)]">
+						<div className="text-center text-(--text-secondary)">
 							<p className="mb-4 text-lg">No projects match your filters.</p>
 							<p className="text-sm">Try adjusting your search or filters.</p>
 						</div>
 					)}
 
 				{!isLoading && !error && (!projects || projects.length === 0) && (
-					<div className="text-center text-[var(--text-secondary)]">
+					<div className="text-center text-(--text-secondary)">
 						<p>No projects found.</p>
 					</div>
 				)}

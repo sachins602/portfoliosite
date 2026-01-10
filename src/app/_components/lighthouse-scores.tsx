@@ -141,7 +141,7 @@ export function LighthouseScores() {
 
 	return (
 		<div
-			className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6"
+			className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6"
 			ref={containerRef}
 		>
 			<h3 className="mb-6 text-center font-semibold text-xl">
@@ -162,15 +162,15 @@ export function LighthouseScores() {
 								/>
 								<div className="absolute inset-0 flex items-center justify-center">
 									<div className="text-center">
-										<div className="font-bold text-[var(--text-primary)] text-lg">
+										<div className="font-bold text-(--text-primary) text-lg">
 											{score.value}
 										</div>
 									</div>
 								</div>
 							</div>
 							<div className="flex items-center gap-2">
-								<Icon className="h-4 w-4 text-[var(--accent)]" />
-								<div className="font-medium text-[var(--text-primary)] text-sm">
+								<Icon className="h-4 w-4 text-(--accent)" />
+								<div className="font-medium text-(--text-primary) text-sm">
 									{score.label}
 								</div>
 							</div>

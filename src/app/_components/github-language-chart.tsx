@@ -57,10 +57,10 @@ export function GitHubLanguageChart() {
 
 	if (isLoading) {
 		return (
-			<div className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6">
+			<div className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6">
 				<h3 className="mb-4 font-semibold text-lg">Language Distribution</h3>
 				<div className="flex items-center justify-center">
-					<div className="h-32 w-32 animate-pulse rounded-full bg-[var(--border)]" />
+					<div className="h-32 w-32 animate-pulse rounded-full bg-(--border)" />
 				</div>
 			</div>
 		);
@@ -68,9 +68,9 @@ export function GitHubLanguageChart() {
 
 	if (error || !languages || languages.length === 0) {
 		return (
-			<div className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6">
+			<div className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6">
 				<h3 className="mb-4 font-semibold text-lg">Language Distribution</h3>
-				<p className="text-center text-[var(--text-secondary)] text-sm">
+				<p className="text-center text-(--text-secondary) text-sm">
 					No language data available
 				</p>
 			</div>
@@ -89,7 +89,7 @@ export function GitHubLanguageChart() {
 
 	return (
 		<div
-			className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6"
+			className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6"
 			ref={containerRef}
 		>
 			<h3 className="mb-6 text-center font-semibold text-xl">
@@ -143,12 +143,10 @@ export function GitHubLanguageChart() {
 
 					{/* Center text */}
 					<div className="absolute inset-0 flex flex-col items-center justify-center">
-						<span className="font-bold text-2xl text-[var(--text-primary)]">
+						<span className="font-bold text-(--text-primary) text-2xl">
 							{languages.length}
 						</span>
-						<span className="text-[var(--text-secondary)] text-xs">
-							Languages
-						</span>
+						<span className="text-(--text-secondary) text-xs">Languages</span>
 					</div>
 				</div>
 
@@ -160,10 +158,10 @@ export function GitHubLanguageChart() {
 								className="h-3 w-3 rounded-full"
 								style={{ backgroundColor: lang.color }}
 							/>
-							<span className="font-medium text-[var(--text-primary)] text-sm">
+							<span className="font-medium text-(--text-primary) text-sm">
 								{lang.name}
 							</span>
-							<span className="text-[var(--text-secondary)] text-xs">
+							<span className="text-(--text-secondary) text-xs">
 								{lang.percentage.toFixed(1)}%
 							</span>
 						</div>

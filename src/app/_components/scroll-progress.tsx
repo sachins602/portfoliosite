@@ -75,16 +75,16 @@ export function ScrollProgress() {
 	}, [progress]);
 
 	return (
-		<div className="fixed top-0 right-0 left-0 z-50 h-1 bg-[var(--bg-secondary)]">
+		<div className="fixed top-0 right-0 left-0 z-50 h-1 bg-(--bg-secondary)">
 			<div
-				className="h-full bg-[var(--accent)] transition-all"
+				className="h-full bg-(--accent) transition-all"
 				ref={progressRef}
 				style={{
 					width: prefersReducedMotion() ? `${progress}%` : "0%",
 				}}
 			/>
 			{currentSection && (
-				<div className="absolute top-2 right-4 text-[var(--text-secondary)] text-xs">
+				<div className="absolute top-2 right-4 text-(--text-secondary) text-xs">
 					{currentSection}
 				</div>
 			)}

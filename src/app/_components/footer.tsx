@@ -32,7 +32,7 @@ export function Footer() {
 
 	return (
 		<footer
-			className="border-[var(--border)] border-t bg-[var(--bg-primary)] py-12"
+			className="border-(--border) border-t bg-(--bg-primary) py-12"
 			ref={footerRef}
 			style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 		>
@@ -41,7 +41,7 @@ export function Footer() {
 					{/* Brand */}
 					<div>
 						<h3 className="mb-4 font-bold text-xl">Sachin Sapkota</h3>
-						<p className="text-[var(--text-secondary)] text-sm">
+						<p className="text-(--text-secondary) text-sm">
 							Full-Stack Developer building scalable web applications.
 						</p>
 					</div>
@@ -52,7 +52,7 @@ export function Footer() {
 						<nav className="flex flex-col gap-2">
 							{navLinks.map((link) => (
 								<Link
-									className="text-[var(--text-secondary)] text-sm transition-colors hover:text-[var(--accent)]"
+									className="text-(--text-secondary) text-sm transition-colors hover:text-(--accent)"
 									href={link.href}
 									key={link.href}
 								>
@@ -68,40 +68,40 @@ export function Footer() {
 						<div className="flex gap-4">
 							<a
 								aria-label="GitHub"
-								className="rounded-lg p-2 transition-colors hover:bg-[var(--bg-secondary)]"
+								className="rounded-lg p-2 transition-colors hover:bg-(--bg-secondary)"
 								href="https://github.com/sachins602"
 								rel="noopener noreferrer"
 								target="_blank"
 							>
-								<Github className="h-5 w-5 text-[var(--text-secondary)] transition-colors hover:text-[var(--accent)]" />
+								<Github className="h-5 w-5 text-(--text-secondary) transition-colors hover:text-(--accent)" />
 							</a>
 							<a
 								aria-label="LinkedIn"
-								className="rounded-lg p-2 transition-colors hover:bg-[var(--bg-secondary)]"
+								className="rounded-lg p-2 transition-colors hover:bg-(--bg-secondary)"
 								href="https://www.linkedin.com/in/sachin-sapkota-97b467107/"
 								rel="noopener noreferrer"
 								target="_blank"
 							>
-								<Linkedin className="h-5 w-5 text-[var(--text-secondary)] transition-colors hover:text-[var(--accent)]" />
+								<Linkedin className="h-5 w-5 text-(--text-secondary) transition-colors hover:text-(--accent)" />
 							</a>
 							<a
 								aria-label="Email"
-								className="rounded-lg p-2 transition-colors hover:bg-[var(--bg-secondary)]"
+								className="rounded-lg p-2 transition-colors hover:bg-(--bg-secondary)"
 								href="mailto:sachinsapkota4@gmail.com"
 							>
-								<Mail className="h-5 w-5 text-[var(--text-secondary)] transition-colors hover:text-[var(--accent)]" />
+								<Mail className="h-5 w-5 text-(--text-secondary) transition-colors hover:text-(--accent)" />
 							</a>
 						</div>
 					</div>
 				</div>
 
-				<div className="flex flex-col items-center justify-between gap-4 border-[var(--border)] border-t pt-8 sm:flex-row">
-					<p className="text-[var(--text-secondary)] text-sm">
+				<div className="flex flex-col items-center justify-between gap-4 border-(--border) border-t pt-8 sm:flex-row">
+					<p className="text-(--text-secondary) text-sm">
 						© {new Date().getFullYear()} Sachin Sapkota. All rights reserved.
 					</p>
 					<button
 						aria-label="Back to top"
-						className="flex items-center gap-2 rounded-lg px-4 py-2 text-[var(--text-secondary)] text-sm transition-colors hover:bg-[var(--bg-secondary)] hover:text-[var(--accent)]"
+						className="flex items-center gap-2 rounded-lg px-4 py-2 text-(--text-secondary) text-sm transition-colors hover:bg-(--bg-secondary) hover:text-(--accent)"
 						onClick={scrollToTop}
 						type="button"
 					>

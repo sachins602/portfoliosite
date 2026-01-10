@@ -77,24 +77,24 @@ export function ContributionHeatmap() {
 
 	if (isLoading) {
 		return (
-			<div className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6">
+			<div className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6">
 				<div className="mb-4 flex items-center gap-2">
-					<Github className="h-5 w-5 text-[var(--accent)]" />
+					<Github className="h-5 w-5 text-(--accent)" />
 					<h3 className="font-semibold text-lg">GitHub Contributions</h3>
 				</div>
-				<div className="h-32 animate-pulse rounded bg-[var(--border)]" />
+				<div className="h-32 animate-pulse rounded bg-(--border)" />
 			</div>
 		);
 	}
 
 	if (error) {
 		return (
-			<div className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6">
+			<div className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6">
 				<div className="mb-4 flex items-center gap-2">
-					<Github className="h-5 w-5 text-[var(--accent)]" />
+					<Github className="h-5 w-5 text-(--accent)" />
 					<h3 className="font-semibold text-lg">GitHub Contributions</h3>
 				</div>
-				<p className="py-8 text-center text-[var(--text-secondary)]">
+				<p className="py-8 text-center text-(--text-secondary)">
 					Unable to load contributions. Please check your GitHub token
 					configuration.
 				</p>
@@ -104,12 +104,12 @@ export function ContributionHeatmap() {
 
 	if (!contributions || contributions.weeks.length === 0) {
 		return (
-			<div className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6">
+			<div className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6">
 				<div className="mb-4 flex items-center gap-2">
-					<Github className="h-5 w-5 text-[var(--accent)]" />
+					<Github className="h-5 w-5 text-(--accent)" />
 					<h3 className="font-semibold text-lg">GitHub Contributions</h3>
 				</div>
-				<p className="py-8 text-center text-[var(--text-secondary)]">
+				<p className="py-8 text-center text-(--text-secondary)">
 					No contribution data available. Add a GITHUB_TOKEN to your .env file
 					to see your contributions.
 				</p>
@@ -145,16 +145,16 @@ export function ContributionHeatmap() {
 
 	return (
 		<div
-			className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6"
+			className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6"
 			ref={containerRef}
 		>
 			<div className="mb-4 flex items-center justify-between">
 				<div className="flex items-center gap-2">
-					<Github className="h-5 w-5 text-[var(--accent)]" />
+					<Github className="h-5 w-5 text-(--accent)" />
 					<h3 className="font-semibold text-lg">GitHub Contributions</h3>
 				</div>
 				<a
-					className="text-[var(--accent)] text-sm transition-colors hover:underline"
+					className="text-(--accent) text-sm transition-colors hover:underline"
 					href="https://github.com/sachins602"
 					rel="noopener noreferrer"
 					target="_blank"
@@ -163,10 +163,10 @@ export function ContributionHeatmap() {
 				</a>
 			</div>
 
-			<div className="mb-4 flex items-center gap-4 text-[var(--text-secondary)] text-xs">
+			<div className="mb-4 flex items-center gap-4 text-(--text-secondary) text-xs">
 				<span>Less</span>
 				<div className="flex gap-1">
-					<div className="h-3 w-3 rounded bg-[var(--bg-secondary)]" />
+					<div className="h-3 w-3 rounded bg-(--bg-secondary)" />
 					<div
 						className="h-3 w-3 rounded"
 						style={{ backgroundColor: "rgba(13, 71, 161, 0.3)" }}
@@ -196,7 +196,7 @@ export function ContributionHeatmap() {
 							return (
 								<button
 									aria-label={`${day.count} contributions on ${day.date}`}
-									className="contribution-cell group relative h-3 w-3 rounded transition-all hover:scale-125 hover:ring-2 hover:ring-[var(--accent)]"
+									className="contribution-cell group relative h-3 w-3 rounded transition-all hover:scale-125 hover:ring-(--accent) hover:ring-2"
 									key={`${day.date}-${dayIndex}`}
 									onMouseEnter={(e) => {
 										const rect = e.currentTarget.getBoundingClientRect();
@@ -224,7 +224,7 @@ export function ContributionHeatmap() {
 				{/* Tooltip */}
 				{hoveredCell && (
 					<div
-						className="pointer-events-none fixed z-50 rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-2 text-xs shadow-lg"
+						className="pointer-events-none fixed z-50 rounded-lg border border-(--border) bg-(--bg-primary) px-3 py-2 text-xs shadow-lg"
 						style={{
 							left: `${hoveredCell.x}px`,
 							top: `${hoveredCell.y}px`,
@@ -235,15 +235,15 @@ export function ContributionHeatmap() {
 							{hoveredCell.count} contribution
 							{hoveredCell.count !== 1 ? "s" : ""}
 						</div>
-						<div className="text-[var(--text-secondary)]">
+						<div className="text-(--text-secondary)">
 							{formatDate(hoveredCell.date)}
 						</div>
 					</div>
 				)}
 			</div>
 
-			<div className="mt-4 text-center text-[var(--text-secondary)] text-sm">
-				<span className="font-semibold text-[var(--text-primary)]">
+			<div className="mt-4 text-center text-(--text-secondary) text-sm">
+				<span className="font-semibold text-(--text-primary)">
 					{contributions.totalContributions}
 				</span>{" "}
 				contributions in the last year

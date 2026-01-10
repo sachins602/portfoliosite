@@ -51,7 +51,7 @@ export function About() {
 
 	return (
 		<section
-			className="bg-[var(--bg-primary)] py-20 md:py-32"
+			className="bg-(--bg-primary) py-20 md:py-32"
 			id="about"
 			ref={sectionRef}
 		>
@@ -66,7 +66,7 @@ export function About() {
 				<div className="section-content grid gap-12 md:grid-cols-2">
 					{/* Bio */}
 					<div>
-						<div className="space-y-4 text-[var(--text-secondary)]">
+						<div className="space-y-4 text-(--text-secondary)">
 							<p>
 								I'm a passionate Full-Stack Developer with expertise in building
 								scalable web applications using modern technologies. My primary
@@ -88,36 +88,36 @@ export function About() {
 
 						{/* Contact Info */}
 						<div className="mt-8 space-y-4">
-							<div className="flex items-center gap-3 text-[var(--text-secondary)]">
-								<MapPin className="h-5 w-5 text-[var(--accent)]" />
+							<div className="flex items-center gap-3 text-(--text-secondary)">
+								<MapPin className="h-5 w-5 text-(--accent)" />
 								<span>Ontario, Canada</span>
 							</div>
 							<a
-								className="flex items-center gap-3 text-[var(--text-secondary)] transition-colors hover:text-[var(--accent)]"
+								className="flex items-center gap-3 text-(--text-secondary) transition-colors hover:text-(--accent)"
 								href="mailto:sachinsapkota4@gmail.com"
 								ref={emailRef}
 							>
-								<Mail className="h-5 w-5 text-[var(--accent)]" />
+								<Mail className="h-5 w-5 text-(--accent)" />
 								<span>sachinsapkota4@gmail.com</span>
 							</a>
 							<a
-								className="flex items-center gap-3 text-[var(--text-secondary)] transition-colors hover:text-[var(--accent)]"
+								className="flex items-center gap-3 text-(--text-secondary) transition-colors hover:text-(--accent)"
 								href="https://github.com/sachins602"
 								ref={githubRef}
 								rel="noopener noreferrer"
 								target="_blank"
 							>
-								<Github className="h-5 w-5 text-[var(--accent)]" />
+								<Github className="h-5 w-5 text-(--accent)" />
 								<span>github.com/sachins602</span>
 							</a>
 							<a
-								className="flex items-center gap-3 text-[var(--text-secondary)] transition-colors hover:text-[var(--accent)]"
+								className="flex items-center gap-3 text-(--text-secondary) transition-colors hover:text-(--accent)"
 								href="https://www.linkedin.com/in/sachin-sapkota-97b467107/"
 								ref={linkedinRef}
 								rel="noopener noreferrer"
 								target="_blank"
 							>
-								<Linkedin className="h-5 w-5 text-[var(--accent)]" />
+								<Linkedin className="h-5 w-5 text-(--accent)" />
 								<span>LinkedIn Profile</span>
 							</a>
 						</div>
@@ -128,7 +128,7 @@ export function About() {
 						<div className="mb-6 flex items-center justify-between">
 							<h3 className="font-semibold text-2xl">Skills & Technologies</h3>
 							<button
-								className="flex items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] px-3 py-1.5 text-sm transition-colors hover:border-[var(--accent)] hover:bg-[var(--accent)]/10"
+								className="flex items-center gap-2 rounded-lg border border-(--border) bg-(--bg-secondary) px-3 py-1.5 text-sm transition-colors hover:border-(--accent) hover:bg-(--accent)/10"
 								onClick={() => setShowConstellation(!showConstellation)}
 								type="button"
 							>

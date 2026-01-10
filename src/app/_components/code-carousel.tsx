@@ -127,24 +127,24 @@ export function CodeCarousel() {
 	}
 
 	return (
-		<div className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6">
+		<div className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6">
 			<div className="mb-4 flex items-center justify-between">
 				<h4 className="font-semibold text-lg">{currentSnippet.title}</h4>
 				<div className="flex items-center gap-2">
 					<button
 						aria-label="Previous snippet"
-						className="rounded p-2 transition-colors hover:bg-[var(--bg-primary)]"
+						className="rounded p-2 transition-colors hover:bg-(--bg-primary)"
 						onClick={goToPrevious}
 						type="button"
 					>
 						<ChevronLeft className="h-5 w-5" />
 					</button>
-					<span className="text-[var(--text-secondary)] text-sm">
+					<span className="text-(--text-secondary) text-sm">
 						{currentIndex + 1} / {snippets.length}
 					</span>
 					<button
 						aria-label="Next snippet"
-						className="rounded p-2 transition-colors hover:bg-[var(--bg-primary)]"
+						className="rounded p-2 transition-colors hover:bg-(--bg-primary)"
 						onClick={goToNext}
 						type="button"
 					>
@@ -153,10 +153,8 @@ export function CodeCarousel() {
 				</div>
 			</div>
 			<div className="relative" ref={containerRef}>
-				<pre className="code-block overflow-x-auto rounded-lg bg-[var(--bg-primary)] p-4 text-sm">
-					<code className="text-[var(--text-primary)]">
-						{currentSnippet.code}
-					</code>
+				<pre className="code-block overflow-x-auto rounded-lg bg-(--bg-primary) p-4 text-sm">
+					<code className="text-(--text-primary)">{currentSnippet.code}</code>
 				</pre>
 			</div>
 		</div>
