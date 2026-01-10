@@ -69,7 +69,7 @@ export function About() {
 							<p>
 								I'm a passionate Full-Stack Developer with expertise in building
 								scalable web applications using modern technologies. My primary
-								focus is on Next.js, React, TypeScript, and .NET, creating
+								focus is on Next.js, React, TypeScript, and Golang, creating
 								performant and user-friendly solutions.
 							</p>
 							<p>

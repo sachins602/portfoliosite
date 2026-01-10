@@ -60,7 +60,7 @@ export default async function Image() {
 						marginTop: "10px",
 					}}
 				>
-					Next.js & .NET Specialist
+					Next.js, TypeScript & Golang
 				</p>
 			</div>
 		</div>,

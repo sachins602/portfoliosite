@@ -21,9 +21,9 @@ const skills = [
 	{ name: "TypeScript", category: "Frontend", icon: Type },
 	{ name: "Tailwind CSS", category: "Frontend", icon: Code },
 	// Backend
-	{ name: ".NET", category: "Backend", icon: Server },
 	{ name: "Golang", category: "Backend", icon: Server },
 	{ name: "Node.js", category: "Backend", icon: Server },
+	{ name: ".NET", category: "Backend", icon: Server },
 	// Database
 	{ name: "SQL", category: "Database", icon: Database },
 	{ name: "MongoDB", category: "Database", icon: Database },

@@ -13,7 +13,7 @@ const techFaces = [
 	{ icon: Globe, label: "Next.js", color: "text-blue-500" },
 	{ icon: Type, label: "TypeScript", color: "text-blue-600" },
 	{ icon: Code, label: "React", color: "text-cyan-500" },
-	{ icon: Server, label: ".NET", color: "text-purple-500" },
+	{ icon: Server, label: "Golang", color: "text-cyan-400" },
 	{ icon: Database, label: "SQL", color: "text-green-500" },
 	{ icon: Wrench, label: "Tools", color: "text-orange-500" },
 ];

@@ -50,7 +50,7 @@ export function processCommand(input: string): string[] {
 	if (command === "whoami") {
 		return [
 			"Sachin Sapkota",
-			"Full-Stack Developer | Next.js & .NET Specialist",
+			"Full-Stack Developer | Next.js, TypeScript & Golang",
 			"Building scalable web apps from Ontario, Canada",
 		];
 	}
@@ -152,7 +152,7 @@ export function processCommand(input: string): string[] {
 			"",
 			"## About",
 			"Passionate Full-Stack Developer specializing in Next.js, React,",
-			"TypeScript, and .NET. Based in Ontario, Canada.",
+			"TypeScript, and Golang. Based in Ontario, Canada.",
 			"",
 			"## Skills",
 			"Expert in modern web technologies, cloud integrations, and",

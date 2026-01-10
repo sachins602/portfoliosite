@@ -8,7 +8,7 @@ import anime from "~/lib/anime";
 import { HeroBackground } from "../hero-background";
 
 const name = "Sachin Sapkota";
-const subtitle = "Full-Stack Developer | Next.js & .NET Specialist";
+const subtitle = "Full-Stack Developer | Next.js, TypeScript, Golang and more";
 const tagline = "Building scalable web apps from Ontario";
 
 function getGreeting(): string {

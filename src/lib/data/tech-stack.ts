@@ -70,7 +70,7 @@ export const techNodes: TechNode[] = [
 		name: ".NET",
 		icon: Server,
 		category: "Backend",
-		proficiency: 90,
+		proficiency: 75,
 		relatedProjects: ["WPF Employee Management System"],
 	},
 	{
