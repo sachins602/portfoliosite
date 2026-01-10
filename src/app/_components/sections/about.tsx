@@ -80,9 +80,9 @@ export function About() {
 								integrations, database design, and DevOps practices.
 							</p>
 							<p>
-								Based in Ontario, Canada, I'm open to remote
-								opportunities and ready to contribute to innovative projects
-								that push the boundaries of web development.
+								Based in Ontario, Canada, I'm open to remote opportunities and
+								ready to contribute to innovative projects that push the
+								boundaries of web development.
 							</p>
 						</div>
 

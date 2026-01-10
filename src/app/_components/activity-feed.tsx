@@ -105,7 +105,7 @@ export function ActivityFeed() {
 					<Github className="h-5 w-5 text-[var(--accent)]" />
 					<h3 className="font-semibold text-lg">Recent Activity</h3>
 				</div>
-				<p className="text-center text-[var(--text-secondary)] py-4">
+				<p className="py-4 text-center text-[var(--text-secondary)]">
 					Unable to load activity. Please check your GitHub token.
 				</p>
 			</div>
@@ -119,8 +119,9 @@ export function ActivityFeed() {
 					<Github className="h-5 w-5 text-[var(--accent)]" />
 					<h3 className="font-semibold text-lg">Recent Activity</h3>
 				</div>
-				<p className="text-center text-[var(--text-secondary)] py-4">
-					No recent activity found. Add a GITHUB_TOKEN to your .env to see activity.
+				<p className="py-4 text-center text-[var(--text-secondary)]">
+					No recent activity found. Add a GITHUB_TOKEN to your .env to see
+					activity.
 				</p>
 			</div>
 		);

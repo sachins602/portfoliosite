@@ -199,8 +199,8 @@ export function Projects() {
 						{hasMore && (
 							<div className="mt-12 flex flex-col items-center gap-4">
 								<p className="text-[var(--text-secondary)] text-sm">
-									Showing {displayedProjects.length} of {filteredProjects.length}{" "}
-									projects
+									Showing {displayedProjects.length} of{" "}
+									{filteredProjects.length} projects
 								</p>
 								<button
 									className="rounded-lg border border-[var(--accent)] bg-[var(--accent)]/10 px-6 py-3 font-semibold text-[var(--accent)] transition-all duration-300 hover:bg-[var(--accent)]/20 hover:shadow-lg"

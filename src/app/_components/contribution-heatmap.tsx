@@ -94,8 +94,9 @@ export function ContributionHeatmap() {
 					<Github className="h-5 w-5 text-[var(--accent)]" />
 					<h3 className="font-semibold text-lg">GitHub Contributions</h3>
 				</div>
-				<p className="text-center text-[var(--text-secondary)] py-8">
-					Unable to load contributions. Please check your GitHub token configuration.
+				<p className="py-8 text-center text-[var(--text-secondary)]">
+					Unable to load contributions. Please check your GitHub token
+					configuration.
 				</p>
 			</div>
 		);
@@ -108,8 +109,9 @@ export function ContributionHeatmap() {
 					<Github className="h-5 w-5 text-[var(--accent)]" />
 					<h3 className="font-semibold text-lg">GitHub Contributions</h3>
 				</div>
-				<p className="text-center text-[var(--text-secondary)] py-8">
-					No contribution data available. Add a GITHUB_TOKEN to your .env file to see your contributions.
+				<p className="py-8 text-center text-[var(--text-secondary)]">
+					No contribution data available. Add a GITHUB_TOKEN to your .env file
+					to see your contributions.
 				</p>
 			</div>
 		);
@@ -183,7 +185,7 @@ export function ContributionHeatmap() {
 
 			<div className="relative overflow-x-auto pb-2">
 				<div
-					className="grid gap-1 min-w-[600px]"
+					className="grid min-w-[600px] gap-1"
 					ref={gridRef}
 					style={{
 						gridTemplateColumns: `repeat(${weeks.length}, minmax(0, 1fr))`,

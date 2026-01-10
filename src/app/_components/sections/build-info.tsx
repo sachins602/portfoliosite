@@ -194,7 +194,6 @@ export function BuildInfo() {
 						<CodeCarousel />
 					</div>
 
-
 					{/* GitHub Link */}
 					<div className="flex justify-center">
 						<a
