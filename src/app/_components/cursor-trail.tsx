@@ -94,7 +94,7 @@ export function CursorTrail() {
 	if (!isEnabled || prefersReducedMotion()) return null;
 
 	return (
-		<div className="pointer-events-none fixed inset-0 z-[9999]">
+		<div className="pointer-events-none fixed inset-0 z-9999">
 			{particles.map((particle) => (
 				<div
 					className="absolute rounded-full bg-(--accent)"
