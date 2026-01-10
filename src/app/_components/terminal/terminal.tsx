@@ -114,8 +114,7 @@ export function Terminal() {
 		if (outputRef.current) {
 			outputRef.current.scrollTop = outputRef.current.scrollHeight;
 		}
-		// biome-ignore lint/correctness/useExhaustiveDependencies: lines.length is intentionally used to trigger scroll
-	}, [lines.length]);
+	});
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();

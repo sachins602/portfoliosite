@@ -48,11 +48,13 @@ const scores: Score[] = [
 function CircularProgress({
 	score,
 	color,
+	label,
 	size = 80,
 	strokeWidth = 6,
 }: {
 	score: number;
 	color: string;
+	label: string;
 	size?: number;
 	strokeWidth?: number;
 }) {
@@ -153,6 +155,7 @@ export function LighthouseScores() {
 							<div className="relative mb-4">
 								<CircularProgress
 									color={score.color}
+									label={score.label}
 									score={score.value}
 									size={100}
 									strokeWidth={8}

@@ -228,24 +228,12 @@ export function TechConstellation() {
 							<g key={node.id}>
 								{/* Node circle */}
 								<circle
-									aria-label={`${node.name} technology node`}
-									className="cursor-pointer"
+									className="pointer-events-none"
 									cx={pos.x}
 									cy={pos.y}
 									data-node-id={node.id}
 									fill="var(--bg-primary)"
-									onClick={() => handleNodeClick(node)}
-									onKeyDown={(e) => {
-										if (e.key === "Enter" || e.key === " ") {
-											e.preventDefault();
-											handleNodeClick(node);
-										}
-									}}
-									onMouseEnter={(e) => handleNodeHover(node, e)}
-									onMouseLeave={handleNodeLeave}
 									r={isHovered || isSelected ? 35 : 30}
-									// biome-ignore lint/a11y/useSemanticElements: SVG circle cannot be replaced with button element
-									role="button"
 									stroke="var(--accent)"
 									strokeWidth={isHovered || isSelected ? 3 : 2}
 									style={{
@@ -254,7 +242,6 @@ export function TechConstellation() {
 											? "none"
 											: "r 0.3s, stroke-width 0.3s",
 									}}
-									tabIndex={0}
 								/>
 								{/* Icon */}
 								<foreignObject
@@ -281,6 +268,29 @@ export function TechConstellation() {
 								>
 									{node.name}
 								</text>
+								{/* Interactive button overlay */}
+								<foreignObject
+									height="80"
+									width="80"
+									x={pos.x - 40}
+									y={pos.y - 40}
+								>
+									<button
+										aria-label={`${node.name} technology node`}
+										className="h-full w-full cursor-pointer bg-transparent"
+										onClick={() => handleNodeClick(node)}
+										onKeyDown={(e) => {
+											if (e.key === "Enter" || e.key === " ") {
+												e.preventDefault();
+												handleNodeClick(node);
+											}
+										}}
+										onMouseEnter={(e) => handleNodeHover(node, e)}
+										onMouseLeave={handleNodeLeave}
+										style={{ border: "none", outline: "none" }}
+										type="button"
+									/>
+								</foreignObject>
 							</g>
 						);
 					})}
