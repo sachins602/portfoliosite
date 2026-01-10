@@ -111,16 +111,18 @@ export function ExperienceCard({ experience, index }: ExperienceCardProps) {
 
 	return (
 		<div
-			className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6 transition-colors hover:border-[var(--accent)]"
+			className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6 shadow-sm transition-all duration-300 hover:border-[var(--accent)] hover:shadow-md"
 			ref={cardRef}
 			style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 		>
 			<div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
 				<div>
-					<h3 className="font-semibold text-[var(--accent)] text-xl">
+					<h3 className="mb-1 font-semibold text-[var(--accent)] text-xl">
 						{experience.title}
 					</h3>
-					<p className="font-medium text-lg">{experience.company}</p>
+					<p className="mb-1 font-medium text-[var(--text-primary)] text-lg">
+						{experience.company}
+					</p>
 					<p className="text-[var(--text-secondary)] text-sm">
 						{experience.location}
 					</p>
@@ -130,15 +132,15 @@ export function ExperienceCard({ experience, index }: ExperienceCardProps) {
 				</div>
 			</div>
 
-			<ul className="mb-4 space-y-2" ref={bulletsRef}>
+			<ul className="mb-4 space-y-2.5" ref={bulletsRef}>
 				{experience.bullets.map((bullet, idx) => (
 					<li
-						className="flex items-start gap-2 text-[var(--text-secondary)]"
+						className="flex items-start gap-2.5 text-[var(--text-secondary)] leading-relaxed"
 						key={`bullet-${idx}-${bullet.slice(0, 10)}`}
 						style={{ opacity: prefersReducedMotion() ? 1 : 0.7 }}
 					>
-						<span className="mt-1.5 text-[var(--accent)]">•</span>
-						<span>{bullet}</span>
+						<span className="mt-1.5 shrink-0 text-[var(--accent)]">•</span>
+						<span className="flex-1">{bullet}</span>
 					</li>
 				))}
 			</ul>
@@ -146,7 +148,7 @@ export function ExperienceCard({ experience, index }: ExperienceCardProps) {
 			<div className="flex flex-wrap gap-2">
 				{experience.technologies.map((tech) => (
 					<span
-						className="rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/20 px-3 py-1 text-[var(--accent)] text-xs"
+						className="rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/20 px-2.5 py-1 text-[var(--accent)] text-xs font-medium"
 						key={`tech-${tech}`}
 					>
 						{tech}
