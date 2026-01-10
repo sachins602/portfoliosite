@@ -75,7 +75,7 @@ export function ScrollProgress() {
 	}, [progress]);
 
 	return (
-		<div className="fixed top-0 left-0 right-0 z-50 h-1 bg-[var(--bg-secondary)]">
+		<div className="fixed top-0 right-0 left-0 z-50 h-1 bg-[var(--bg-secondary)]">
 			<div
 				className="h-full bg-[var(--accent)] transition-all"
 				ref={progressRef}
@@ -84,7 +84,7 @@ export function ScrollProgress() {
 				}}
 			/>
 			{currentSection && (
-				<div className="absolute right-4 top-2 text-xs text-[var(--text-secondary)]">
+				<div className="absolute top-2 right-4 text-[var(--text-secondary)] text-xs">
 					{currentSection}
 				</div>
 			)}

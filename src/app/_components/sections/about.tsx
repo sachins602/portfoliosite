@@ -5,6 +5,10 @@ import { useState } from "react";
 import { useElasticHover, useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
+import { ActivityFeed } from "../activity-feed";
+import { ContributionHeatmap } from "../contribution-heatmap";
+import { LighthouseScores } from "../lighthouse-scores";
+import { PerformanceMetrics } from "../performance-metrics";
 import { SkillsGrid } from "../skills-grid";
 import { TechConstellation } from "../tech-constellation";
 import { Terminal } from "../terminal/terminal";
@@ -121,11 +125,9 @@ export function About() {
 					{/* Skills */}
 					<div>
 						<div className="mb-6 flex items-center justify-between">
-							<h3 className="font-semibold text-2xl">
-								Skills & Technologies
-							</h3>
+							<h3 className="font-semibold text-2xl">Skills & Technologies</h3>
 							<button
-								className="flex items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] px-3 py-1.5 text-sm transition-colors hover:bg-[var(--accent)]/10 hover:border-[var(--accent)]"
+								className="flex items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] px-3 py-1.5 text-sm transition-colors hover:border-[var(--accent)] hover:bg-[var(--accent)]/10"
 								onClick={() => setShowConstellation(!showConstellation)}
 								type="button"
 							>
@@ -149,6 +151,26 @@ export function About() {
 				{/* Terminal Component */}
 				<div className="mt-12 flex justify-center">
 					<Terminal />
+				</div>
+
+				{/* Performance Metrics */}
+				<div className="mt-12">
+					<PerformanceMetrics />
+				</div>
+
+				{/* Lighthouse Scores */}
+				<div className="mt-12">
+					<LighthouseScores />
+				</div>
+
+				{/* Contribution Heatmap */}
+				<div className="mt-12">
+					<ContributionHeatmap />
+				</div>
+
+				{/* Activity Feed */}
+				<div className="mt-12">
+					<ActivityFeed />
 				</div>
 			</div>
 		</section>

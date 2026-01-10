@@ -1,3 +1,4 @@
+import type { LucideIcon } from "lucide-react";
 import {
 	Box,
 	Cloud,
@@ -8,7 +9,6 @@ import {
 	Type,
 	Wrench,
 } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 
 export interface TechNode {
 	id: string;
@@ -171,9 +171,7 @@ export const techConnections: TechConnection[] = [
 ];
 
 // Get nodes by category
-export function getNodesByCategory(
-	category: TechNode["category"],
-): TechNode[] {
+export function getNodesByCategory(category: TechNode["category"]): TechNode[] {
 	return techNodes.filter((node) => node.category === category);
 }
 

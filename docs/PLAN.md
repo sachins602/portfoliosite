@@ -2,7 +2,7 @@
 
 **Project**: Sachin Sapkota — Full-Stack Developer Portfolio  
 **Created**: January 2026  
-**Status**: Phase 1 Complete
+**Status**: Phase 3 Complete
 
 ---
 
@@ -680,7 +680,7 @@
 
 ### 3.1 Real-Time GitHub Activity Feed
 
-- [ ] **3.1.1 Create GitHub Events API integration**
+- [x] **3.1.1 Create GitHub Events API integration**
   - **File**: `src/server/api/routers/github-activity.ts`
   - **Context**: Fetch recent GitHub activity
   - **Details**:
@@ -689,7 +689,7 @@
     - Format into readable messages
     - Cache with short revalidation (15-30 min)
 
-- [ ] **3.1.2 Create activity feed component**
+- [x] **3.1.2 Create activity feed component**
   - **File**: `src/app/_components/activity-feed.tsx`
   - **Context**: Display recent GitHub activity
   - **Details**:
@@ -698,7 +698,7 @@
     - Examples: "Pushed to [repo] 2 hours ago", "Starred [project]"
     - Limit to last 5-10 events
 
-- [ ] **3.1.3 Add feed animations**
+- [x] **3.1.3 Add feed animations**
   - **File**: `src/app/_components/activity-feed.tsx`
   - **Context**: Animated entry for activity items
   - **Details**:
@@ -707,7 +707,7 @@
     - New items slide in from top
     - Auto-refresh with subtle animation
 
-- [ ] **3.1.4 Integrate into layout**
+- [x] **3.1.4 Integrate into layout**
   - **File**: `src/app/_components/sections/about.tsx` or sidebar
   - **Context**: Position activity feed in UI
   - **Details**:
@@ -719,7 +719,7 @@
 
 ### 3.2 GitHub Contribution Heatmap
 
-- [ ] **3.2.1 Fetch contribution data**
+- [x] **3.2.1 Fetch contribution data**
   - **File**: `src/server/api/routers/github-contributions.ts`
   - **Context**: Get contribution graph data
   - **Details**:
@@ -728,7 +728,7 @@
     - Option C: Use third-party API/service
     - Return daily contribution counts for past year
 
-- [ ] **3.2.2 Create heatmap visualization component**
+- [x] **3.2.2 Create heatmap visualization component**
   - **File**: `src/app/_components/contribution-heatmap.tsx`
   - **Context**: Visual contribution calendar like GitHub profile
   - **Details**:
@@ -737,7 +737,7 @@
     - Tooltip showing date and count on hover
     - Responsive width handling
 
-- [ ] **3.2.3 Add heatmap animations**
+- [x] **3.2.3 Add heatmap animations**
   - **File**: `src/app/_components/contribution-heatmap.tsx`
   - **Context**: Animated reveal of contribution cells
   - **Details**:
@@ -746,7 +746,7 @@
     - Anime.js stagger with diagonal pattern
     - Hover: cell scale and tooltip appear
 
-- [ ] **3.2.4 Integrate into about section**
+- [x] **3.2.4 Integrate into about section**
   - **File**: `src/app/_components/sections/about.tsx`
   - **Context**: Add heatmap to showcase consistency
   - **Details**:
@@ -758,7 +758,7 @@
 
 ### 3.3 Performance Dashboard Section
 
-- [ ] **3.3.1 Create metrics display component**
+- [x] **3.3.1 Create metrics display component**
   - **File**: `src/app/_components/performance-metrics.tsx`
   - **Context**: Show impressive numbers/stats
   - **Details**:
@@ -770,7 +770,7 @@
       - Projects completed
     - Animated counter using anime.js (numbers count up)
 
-- [ ] **3.3.2 Add Lighthouse scores display**
+- [x] **3.3.2 Add Lighthouse scores display**
   - **File**: `src/app/_components/lighthouse-scores.tsx`
   - **Context**: Show portfolio performance scores
   - **Details**:
@@ -779,7 +779,7 @@
     - Anime.js draws the circular progress on scroll
     - Update manually after deployment or automate
 
-- [ ] **3.3.3 Integrate into page**
+- [x] **3.3.3 Integrate into page**
   - **File**: `src/app/_components/sections/about.tsx` or new section
   - **Context**: Position metrics showcase
   - **Details**:
@@ -791,7 +791,7 @@
 
 ### 3.4 "Build This Site" Section
 
-- [ ] **3.4.1 Create Build This Site section**
+- [x] **3.4.1 Create Build This Site section**
   - **File**: `src/app/_components/sections/build-info.tsx`
   - **Context**: Meta section about the portfolio itself
   - **Details**:
@@ -800,7 +800,7 @@
     - GitHub repo link for the portfolio
     - Design philosophy notes
 
-- [ ] **3.4.2 Add code snippet carousel**
+- [x] **3.4.2 Add code snippet carousel**
   - **File**: `src/app/_components/code-carousel.tsx`
   - **Context**: Show interesting implementation details
   - **Details**:
@@ -809,7 +809,7 @@
     - Snippets: anime.js hooks, GitHub integration, interesting components
     - Anime.js slide transitions between snippets
 
-- [ ] **3.4.3 Display live stats**
+- [x] **3.4.3 Display live stats**
   - **File**: `src/app/_components/sections/build-info.tsx`
   - **Context**: Real data about the portfolio
   - **Details**:

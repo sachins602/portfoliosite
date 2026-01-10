@@ -7,9 +7,9 @@ import anime from "~/lib/anime";
 import {
 	getConnectionsForNode,
 	getNodesByCategory,
+	type TechNode,
 	techConnections,
 	techNodes,
-	type TechNode,
 } from "~/lib/data/tech-stack";
 
 interface NodePosition {
@@ -25,13 +25,11 @@ interface HoveredNode {
 
 export function TechConstellation() {
 	const svgRef = useRef<SVGSVGElement>(null);
-	const [nodePositions, setNodePositions] = useState<
-		Map<string, NodePosition>
-	>(new Map());
+	const [nodePositions, setNodePositions] = useState<Map<string, NodePosition>>(
+		new Map(),
+	);
 	const [hoveredNode, setHoveredNode] = useState<HoveredNode | null>(null);
-	const [selectedNode, setSelectedNode] = useState<
-		TechNode | null
-	>(null);
+	const [selectedNode, setSelectedNode] = useState<TechNode | null>(null);
 	const containerRef = useRef<HTMLDivElement>(null);
 
 	// Calculate node positions in clusters
@@ -287,11 +285,11 @@ export function TechConstellation() {
 						}}
 					>
 						<div className="font-semibold">{hoveredNode.node.name}</div>
-						<div className="text-sm text-[var(--text-secondary)]">
+						<div className="text-[var(--text-secondary)] text-sm">
 							Proficiency: {hoveredNode.node.proficiency}%
 						</div>
 						{hoveredNode.node.relatedProjects.length > 0 && (
-							<div className="mt-2 text-xs text-[var(--text-secondary)]">
+							<div className="mt-2 text-[var(--text-secondary)] text-xs">
 								Projects: {hoveredNode.node.relatedProjects.join(", ")}
 							</div>
 						)}
@@ -300,7 +298,7 @@ export function TechConstellation() {
 
 				{/* Selected node details */}
 				{selectedNode && (
-					<div className="absolute bottom-4 left-4 right-4 rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] p-4 shadow-lg">
+					<div className="absolute right-4 bottom-4 left-4 rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] p-4 shadow-lg">
 						<div className="mb-2 flex items-center justify-between">
 							<h4 className="font-semibold text-lg">{selectedNode.name}</h4>
 							<button
@@ -311,7 +309,7 @@ export function TechConstellation() {
 								×
 							</button>
 						</div>
-						<div className="text-sm text-[var(--text-secondary)]">
+						<div className="text-[var(--text-secondary)] text-sm">
 							<p>Category: {selectedNode.category}</p>
 							<p>Proficiency: {selectedNode.proficiency}%</p>
 							{selectedNode.relatedProjects.length > 0 && (

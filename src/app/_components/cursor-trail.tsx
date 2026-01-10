@@ -20,7 +20,9 @@ export function CursorTrail() {
 
 	useEffect(() => {
 		// Check if enabled in localStorage
-		const enabled = typeof window !== "undefined" && localStorage.getItem("cursorTrailEnabled") === "true";
+		const enabled =
+			typeof window !== "undefined" &&
+			localStorage.getItem("cursorTrailEnabled") === "true";
 		setIsEnabled(enabled);
 
 		// Check if touch device
@@ -98,8 +100,8 @@ export function CursorTrail() {
 		<div className="pointer-events-none fixed inset-0 z-[9999]">
 			{particles.map((particle) => (
 				<div
-					key={particle.id}
 					className="absolute rounded-full bg-[var(--accent)]"
+					key={particle.id}
 					style={{
 						left: `${particle.x}px`,
 						top: `${particle.y}px`,

@@ -53,9 +53,7 @@ export function Projects() {
 				const matchesSearch =
 					project.name.toLowerCase().includes(query) ||
 					project.description.toLowerCase().includes(query) ||
-					project.topics.some((topic) =>
-						topic.toLowerCase().includes(query),
-					);
+					project.topics.some((topic) => topic.toLowerCase().includes(query));
 				if (!matchesSearch) return false;
 			}
 
@@ -89,7 +87,9 @@ export function Projects() {
 		const cards = document.querySelectorAll(".project-card");
 		cards.forEach((card, index) => {
 			const isVisible = filteredProjects.some(
-				(p) => p.id === Number.parseInt(card.getAttribute("data-project-id") ?? "0", 10),
+				(p) =>
+					p.id ===
+					Number.parseInt(card.getAttribute("data-project-id") ?? "0", 10),
 			);
 
 			if (isVisible) {

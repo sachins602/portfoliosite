@@ -98,7 +98,8 @@ function triggerMatrixEffect() {
 	});
 
 	// Create matrix characters
-	const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+	const chars =
+		"01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
 	const columns = Math.floor(window.innerWidth / 20);
 	const drops: number[] = Array(columns).fill(0);
 

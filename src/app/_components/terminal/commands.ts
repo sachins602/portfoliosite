@@ -57,11 +57,7 @@ export function processCommand(input: string): string[] {
 
 	// Skills command
 	if (command === "skills") {
-		return [
-			"Technical Skills:",
-			"",
-			...skills.map((skill) => `  • ${skill}`),
-		];
+		return ["Technical Skills:", "", ...skills.map((skill) => `  • ${skill}`)];
 	}
 
 	// Experience command
@@ -132,10 +128,7 @@ export function processCommand(input: string): string[] {
 				"Now let's make this a reality. Contact me! 📧",
 			];
 		}
-		return [
-			`[main abc1234] "${message}"`,
-			" 1 file changed, 1 insertion(+)",
-		];
+		return [`[main abc1234] "${message}"`, " 1 file changed, 1 insertion(+)"];
 	}
 
 	// Easter egg: ls

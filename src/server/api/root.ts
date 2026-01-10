@@ -1,4 +1,6 @@
 import { contactRouter } from "~/server/api/routers/contact";
+import { githubActivityRouter } from "~/server/api/routers/github-activity";
+import { githubContributionsRouter } from "~/server/api/routers/github-contributions";
 import { postRouter } from "~/server/api/routers/post";
 import { projectsRouter } from "~/server/api/routers/projects";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
@@ -12,6 +14,8 @@ export const appRouter = createTRPCRouter({
 	post: postRouter,
 	projects: projectsRouter,
 	contact: contactRouter,
+	githubActivity: githubActivityRouter,
+	githubContributions: githubContributionsRouter,
 });
 
 // export type definition of API
