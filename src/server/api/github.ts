@@ -371,7 +371,7 @@ export async function fetchGitHubContributions(): Promise<ContributionData> {
 		`;
 
 		const variables = {
-			username: "sachins602",
+			username: env.GITHUB_USERNAME,
 			from: startDate.toISOString(),
 			to: endDate.toISOString(),
 		};
@@ -467,7 +467,7 @@ export async function fetchGitHubUserStats(): Promise<GitHubUserStats> {
 		`;
 
 		const variables = {
-			username: "sachins602",
+			username: env.GITHUB_USERNAME,
 			from: startDate.toISOString(),
 			to: endDate.toISOString(),
 		};
@@ -511,7 +511,12 @@ export async function fetchGitHubUserStats(): Promise<GitHubUserStats> {
 			following: user.following?.totalCount ?? 0,
 		};
 	} catch (error) {
-		console.error("Error fetching GitHub user stats:", error);
+		const errorMessage = error instanceof Error ? error.message : String(error);
+		console.error("Error fetching GitHub user stats:", {
+			error: errorMessage,
+			username: env.GITHUB_USERNAME,
+			hasToken: !!env.GITHUB_TOKEN,
+		});
 		return {
 			totalCommits: 0,
 			totalPRs: 0,
