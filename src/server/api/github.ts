@@ -104,6 +104,155 @@ export interface ActivityItem {
 export async function fetchGitHubEvents(): Promise<ActivityItem[]> {
 	try {
 		const headers: HeadersInit = {
+			Accept: "application/vnd.github.v4+json",
+			"Content-Type": "application/json",
+		};
+
+		if (env.GITHUB_TOKEN) {
+			headers.Authorization = `Bearer ${env.GITHUB_TOKEN}`;
+		}
+
+		// Use GraphQL to fetch recent activity from repositories
+		// This is more reliable than the Events API which often returns empty
+		const query = `
+			query($username: String!) {
+				user(login: $username) {
+					repositories(
+						first: 2,
+						ownerAffiliations: OWNER,
+						orderBy: {field: UPDATED_AT, direction: DESC}
+					) {
+						nodes {
+							name
+							url
+							defaultBranchRef {
+								target {
+									... on Commit {
+										history(first: 3) {
+											nodes {
+												oid
+												messageHeadline
+												committedDate
+												url
+											}
+										}
+									}
+								}
+							}
+							updatedAt
+						}
+					}
+				}
+			}
+		`;
+
+		const variables = {
+			username: "sachins602",
+		};
+
+		const response = await fetch("https://api.github.com/graphql", {
+			method: "POST",
+			headers,
+			body: JSON.stringify({ query, variables }),
+			next: { revalidate: 0 }, // Cache for 30 minutes
+		});
+
+		if (!response.ok) {
+			throw new Error(`GitHub GraphQL API error: ${response.status}`);
+		}
+
+		const result = await response.json();
+
+		if (result.errors) {
+			console.error("GraphQL errors:", result.errors);
+			// Fallback to REST API if GraphQL fails
+			return await fetchGitHubEventsFallback();
+		}
+
+		const repos = result.data?.user?.repositories?.nodes ?? [];
+
+		const formatTimeAgo = (dateString: string): string => {
+			const date = new Date(dateString);
+			const now = new Date();
+			const diffMs = now.getTime() - date.getTime();
+			const diffMins = Math.floor(diffMs / 60000);
+			const diffHours = Math.floor(diffMs / 3600000);
+			const diffDays = Math.floor(diffMs / 86400000);
+
+			if (diffMins < 1) return "just now";
+			if (diffMins < 60)
+				return `${diffMins} minute${diffMins > 1 ? "s" : ""} ago`;
+			if (diffHours < 24)
+				return `${diffHours} hour${diffHours > 1 ? "s" : ""} ago`;
+			if (diffDays < 7) return `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
+			return date.toLocaleDateString();
+		};
+
+		const activities: ActivityItem[] = [];
+
+		// Collect commits, PRs, and issues from all repos
+		for (const repo of repos) {
+			const repoName = repo.name;
+			const repoUrl = repo.url;
+
+			// Add recent commits
+			const commits = repo.defaultBranchRef?.target?.history?.nodes ?? [];
+			for (const commit of commits) {
+				activities.push({
+					id: `commit-${commit.oid}`,
+					type: "PushEvent",
+					message: `Pushed to ${repoName}: ${commit.messageHeadline}`,
+					repoName,
+					repoUrl,
+					timestamp: commit.committedDate,
+					timeAgo: formatTimeAgo(commit.committedDate),
+				});
+			}
+
+			// Add recent pull requests
+			const prs = repo.pullRequests?.nodes ?? [];
+			for (const pr of prs) {
+				activities.push({
+					id: `pr-${repoName}-${pr.number}`,
+					type: "PullRequestEvent",
+					message: `${pr.state === "MERGED" ? "Merged" : "Updated"} pull request in ${repoName}: ${pr.title}`,
+					repoName,
+					repoUrl: pr.url,
+					timestamp: pr.updatedAt,
+					timeAgo: formatTimeAgo(pr.updatedAt),
+				});
+			}
+
+			// Add recent issues
+			const issues = repo.issues?.nodes ?? [];
+			for (const issue of issues) {
+				activities.push({
+					id: `issue-${repoName}-${issue.number}`,
+					type: "IssuesEvent",
+					message: `Opened issue in ${repoName}: ${issue.title}`,
+					repoName,
+					repoUrl: issue.url,
+					timestamp: issue.updatedAt,
+					timeAgo: formatTimeAgo(issue.updatedAt),
+				});
+			}
+		}
+
+		// Sort by timestamp (most recent first)
+		return activities.sort(
+			(a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+		);
+	} catch (error) {
+		console.error("Error fetching GitHub events:", error);
+		// Fallback to REST API
+		return await fetchGitHubEventsFallback();
+	}
+}
+
+// Fallback to REST API Events endpoint
+async function fetchGitHubEventsFallback(): Promise<ActivityItem[]> {
+	try {
+		const headers: HeadersInit = {
 			Accept: "application/vnd.github.v3+json",
 		};
 
@@ -112,10 +261,10 @@ export async function fetchGitHubEvents(): Promise<ActivityItem[]> {
 		}
 
 		const response = await fetch(
-			"https://api.github.com/users/sachins602/events?per_page=10",
+			"https://api.github.com/users/sachins602/events?per_page=6",
 			{
 				headers,
-				next: { revalidate: 1800 }, // Cache for 30 minutes
+				next: { revalidate: 1800 },
 			},
 		);
 
@@ -171,10 +320,8 @@ export async function fetchGitHubEvents(): Promise<ActivityItem[]> {
 
 		return events
 			.filter((event) => {
-				// Filter out private events or events we can't format
 				return event.repo?.name;
 			})
-			.slice(0, 10)
 			.map((event) => ({
 				id: event.id,
 				type: event.type,
@@ -185,7 +332,7 @@ export async function fetchGitHubEvents(): Promise<ActivityItem[]> {
 				timeAgo: formatTimeAgo(event.created_at),
 			}));
 	} catch (error) {
-		console.error("Error fetching GitHub events:", error);
+		console.error("Error in fallback GitHub events fetch:", error);
 		return [];
 	}
 }
@@ -456,7 +603,7 @@ export async function fetchLanguageStats(): Promise<LanguageStat[]> {
 		const languageTotals: Record<string, number> = {};
 
 		await Promise.all(
-			repos.slice(0, 30).map(async (repo) => {
+			repos.map(async (repo) => {
 				try {
 					const langResponse = await fetch(
 						`https://api.github.com/repos/sachins602/${repo.name}/languages`,
@@ -491,8 +638,7 @@ export async function fetchLanguageStats(): Promise<LanguageStat[]> {
 				percentage: totalBytes > 0 ? (bytes / totalBytes) * 100 : 0,
 				color: LANGUAGE_COLORS[name] ?? LANGUAGE_COLORS.Other ?? "#8b949e",
 			}))
-			.sort((a, b) => b.bytes - a.bytes)
-			.slice(0, 8); // Top 8 languages
+			.sort((a, b) => b.bytes - a.bytes);
 
 		return stats;
 	} catch (error) {
