@@ -2,7 +2,7 @@
 
 import { Code, Database, Globe, Server, Type, Wrench } from "lucide-react";
 import { useEffect, useRef } from "react";
-import { easing, prefersReducedMotion, timing } from "~/lib/animations";
+import { easing, prefersReducedMotion } from "~/lib/animations";
 import anime from "~/lib/anime";
 
 interface TechCubeProps {
@@ -66,7 +66,7 @@ export function TechCube({ size = 150 }: TechCubeProps) {
 			>
 				{/* Front face */}
 				<div
-					className="absolute flex items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)]/80 backdrop-blur-sm"
+					className="absolute flex items-center justify-center rounded-lg border border-(--border) bg-(--bg-secondary)/80 backdrop-blur-sm"
 					style={{
 						width: `${size}px`,
 						height: `${size}px`,
@@ -80,7 +80,7 @@ export function TechCube({ size = 150 }: TechCubeProps) {
 								<Icon className={`h-8 w-8 ${techFaces[0]?.color}`} />
 							) : null;
 						})()}
-						<span className="font-medium text-[var(--text-primary)] text-xs">
+						<span className="font-medium text-(--text-primary) text-xs">
 							{techFaces[0]?.label}
 						</span>
 					</div>
@@ -88,7 +88,7 @@ export function TechCube({ size = 150 }: TechCubeProps) {
 
 				{/* Back face */}
 				<div
-					className="absolute flex items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)]/80 backdrop-blur-sm"
+					className="absolute flex items-center justify-center rounded-lg border border-(--border) bg-(--bg-secondary)/80 backdrop-blur-sm"
 					style={{
 						width: `${size}px`,
 						height: `${size}px`,
@@ -102,7 +102,7 @@ export function TechCube({ size = 150 }: TechCubeProps) {
 								<Icon className={`h-8 w-8 ${techFaces[1]?.color}`} />
 							) : null;
 						})()}
-						<span className="font-medium text-[var(--text-primary)] text-xs">
+						<span className="font-medium text-(--text-primary) text-xs">
 							{techFaces[1]?.label}
 						</span>
 					</div>
@@ -110,7 +110,7 @@ export function TechCube({ size = 150 }: TechCubeProps) {
 
 				{/* Right face */}
 				<div
-					className="absolute flex items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)]/80 backdrop-blur-sm"
+					className="absolute flex items-center justify-center rounded-lg border border-(--border) bg-(--bg-secondary)/80 backdrop-blur-sm"
 					style={{
 						width: `${size}px`,
 						height: `${size}px`,
@@ -124,7 +124,7 @@ export function TechCube({ size = 150 }: TechCubeProps) {
 								<Icon className={`h-8 w-8 ${techFaces[2]?.color}`} />
 							) : null;
 						})()}
-						<span className="font-medium text-[var(--text-primary)] text-xs">
+						<span className="font-medium text-(--text-primary) text-xs">
 							{techFaces[2]?.label}
 						</span>
 					</div>
@@ -132,7 +132,7 @@ export function TechCube({ size = 150 }: TechCubeProps) {
 
 				{/* Left face */}
 				<div
-					className="absolute flex items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)]/80 backdrop-blur-sm"
+					className="absolute flex items-center justify-center rounded-lg border border-(--border) bg-(--bg-secondary)/80 backdrop-blur-sm"
 					style={{
 						width: `${size}px`,
 						height: `${size}px`,
@@ -146,7 +146,7 @@ export function TechCube({ size = 150 }: TechCubeProps) {
 								<Icon className={`h-8 w-8 ${techFaces[3]?.color}`} />
 							) : null;
 						})()}
-						<span className="font-medium text-[var(--text-primary)] text-xs">
+						<span className="font-medium text-(--text-primary) text-xs">
 							{techFaces[3]?.label}
 						</span>
 					</div>
@@ -154,7 +154,7 @@ export function TechCube({ size = 150 }: TechCubeProps) {
 
 				{/* Top face */}
 				<div
-					className="absolute flex items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)]/80 backdrop-blur-sm"
+					className="absolute flex items-center justify-center rounded-lg border border-(--border) bg-(--bg-secondary)/80 backdrop-blur-sm"
 					style={{
 						width: `${size}px`,
 						height: `${size}px`,
@@ -168,7 +168,7 @@ export function TechCube({ size = 150 }: TechCubeProps) {
 								<Icon className={`h-8 w-8 ${techFaces[4]?.color}`} />
 							) : null;
 						})()}
-						<span className="font-medium text-[var(--text-primary)] text-xs">
+						<span className="font-medium text-(--text-primary) text-xs">
 							{techFaces[4]?.label}
 						</span>
 					</div>
@@ -176,7 +176,7 @@ export function TechCube({ size = 150 }: TechCubeProps) {
 
 				{/* Bottom face */}
 				<div
-					className="absolute flex items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)]/80 backdrop-blur-sm"
+					className="absolute flex items-center justify-center rounded-lg border border-(--border) bg-(--bg-secondary)/80 backdrop-blur-sm"
 					style={{
 						width: `${size}px`,
 						height: `${size}px`,
@@ -190,7 +190,7 @@ export function TechCube({ size = 150 }: TechCubeProps) {
 								<Icon className={`h-8 w-8 ${techFaces[5]?.color}`} />
 							) : null;
 						})()}
-						<span className="font-medium text-[var(--text-primary)] text-xs">
+						<span className="font-medium text-(--text-primary) text-xs">
 							{techFaces[5]?.label}
 						</span>
 					</div>

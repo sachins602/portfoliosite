@@ -132,7 +132,7 @@ export function BuildInfo() {
 
 	return (
 		<section
-			className="bg-[var(--bg-primary)] py-20 md:py-32"
+			className="bg-(--bg-primary) py-20 md:py-32"
 			id="build-info"
 			ref={sectionRef}
 		>
@@ -151,7 +151,7 @@ export function BuildInfo() {
 						<div className="flex flex-wrap gap-2">
 							{techStack.map((tech) => (
 								<span
-									className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] px-3 py-1.5 text-sm"
+									className="rounded-lg border border-(--border) bg-(--bg-secondary) px-3 py-1.5 text-sm"
 									key={tech}
 								>
 									{tech}
@@ -168,18 +168,18 @@ export function BuildInfo() {
 								const Icon = stat.icon;
 								return (
 									<div
-										className="flex flex-col items-center rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-4"
+										className="flex flex-col items-center rounded-lg border border-(--border) bg-(--bg-secondary) p-4"
 										key={stat.id}
 									>
-										<Icon className="mb-2 h-6 w-6 text-[var(--accent)]" />
-										<div className="mb-1 font-bold text-[var(--text-primary)] text-xl">
+										<Icon className="mb-2 h-6 w-6 text-(--accent)" />
+										<div className="mb-1 font-bold text-(--text-primary) text-xl">
 											<AnimatedStatCounter
 												decimals={stat.id === "load-time" ? 1 : 0}
 												suffix={stat.suffix}
 												value={stat.value}
 											/>
 										</div>
-										<div className="text-center text-[var(--text-secondary)] text-xs">
+										<div className="text-center text-(--text-secondary) text-xs">
 											{stat.label}
 										</div>
 									</div>
@@ -197,7 +197,7 @@ export function BuildInfo() {
 					{/* Design Philosophy */}
 					<div>
 						<h3 className="mb-4 font-semibold text-2xl">Design Philosophy</h3>
-						<div className="space-y-3 text-[var(--text-secondary)]">
+						<div className="space-y-3 text-(--text-secondary)">
 							<p>
 								This portfolio was built with performance and user experience in
 								mind. Every animation respects user preferences, and the site is
@@ -215,7 +215,7 @@ export function BuildInfo() {
 					{/* GitHub Link */}
 					<div className="flex justify-center">
 						<a
-							className="flex items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] px-6 py-3 transition-all hover:border-[var(--accent)] hover:bg-[var(--accent)]/10"
+							className="flex items-center gap-2 rounded-lg border border-(--border) bg-(--bg-secondary) px-6 py-3 transition-all hover:border-(--accent) hover:bg-(--accent)/10"
 							href="https://github.com/sachins602"
 							rel="noopener noreferrer"
 							target="_blank"

@@ -119,7 +119,7 @@ export function PerformanceMetrics() {
 
 	return (
 		<div
-			className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6"
+			className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6"
 			ref={containerRef}
 		>
 			<h3 className="mb-6 text-center font-semibold text-xl">
@@ -130,15 +130,15 @@ export function PerformanceMetrics() {
 					const Icon = metric.icon;
 					return (
 						<div
-							className="flex flex-col items-center rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] p-4 transition-all hover:border-[var(--accent)] hover:shadow-lg"
+							className="flex flex-col items-center rounded-lg border border-(--border) bg-(--bg-primary) p-4 transition-all hover:border-(--accent) hover:shadow-lg"
 							key={metric.id}
 						>
-							<Icon className="mb-2 h-6 w-6 text-[var(--accent)]" />
-							<div className="mb-1 font-bold text-2xl text-[var(--text-primary)]">
+							<Icon className="mb-2 h-6 w-6 text-(--accent)" />
+							<div className="mb-1 font-bold text-(--text-primary) text-2xl">
 								<AnimatedCounter value={metric.value} />
 								{metric.suffix}
 							</div>
-							<div className="text-center text-[var(--text-secondary)] text-xs">
+							<div className="text-center text-(--text-secondary) text-xs">
 								{metric.label}
 							</div>
 						</div>
