@@ -20,39 +20,33 @@ export function Timeline({ itemCount }: TimelineProps) {
 			if (!containerRef.current) return;
 
 			const timelineContainer = containerRef.current;
-			const parentContainer = timelineContainer.parentElement as HTMLElement;
-			if (!parentContainer) return;
+			const wrapperDiv = timelineContainer.parentElement as HTMLElement;
+			if (!wrapperDiv) return;
 
-			// Get the cards container (the div with space-y-12)
-			const cardsContainer = parentContainer.querySelector(".space-y-12") as HTMLElement;
+			// Get the cards container (the div with space-y-12) - it's a sibling of timelineContainer
+			const cardsContainer = wrapperDiv.querySelector(".space-y-12") as HTMLElement;
 			if (!cardsContainer) return;
 
-			// Use offsetHeight for consistent measurement
-			const parentHeight = Math.max(
-				parentContainer.offsetHeight,
-				parentContainer.scrollHeight,
-				cardsContainer.offsetHeight,
-			);
+			// Set timeline container height to match cards container
+			const cardsContainerHeight = cardsContainer.scrollHeight || cardsContainer.offsetHeight;
+			if (cardsContainerHeight === 0) return;
 			
-			if (parentHeight === 0) return;
+			// Update timeline container height to match cards
+			timelineContainer.style.height = `${cardsContainerHeight}px`;
 
 			const positions: number[] = [];
 
-			// Find all experience card containers
+			// Find all experience card containers within the wrapper
 			const cards = Array.from(
-				parentContainer.querySelectorAll<HTMLElement>("[data-experience-card]"),
+				wrapperDiv.querySelectorAll<HTMLElement>("[data-experience-card]"),
 			);
 
-			// Get the offset of the cards container relative to parent
-			const cardsContainerOffset = cardsContainer.offsetTop;
-
 			cards.forEach((card) => {
-				// Calculate position relative to parent container
-				// card.offsetTop is relative to cardsContainer, so add cardsContainerOffset
-				const cardTop = cardsContainerOffset + card.offsetTop;
+				// Calculate position relative to cards container
+				const cardTop = card.offsetTop;
 				const cardHeight = card.offsetHeight;
 				const cardCenter = cardTop + cardHeight / 2;
-				const relativePosition = (cardCenter / parentHeight) * 100;
+				const relativePosition = (cardCenter / cardsContainerHeight) * 100;
 				positions.push(Math.max(0, Math.min(100, relativePosition)));
 			});
 
@@ -73,11 +67,11 @@ export function Timeline({ itemCount }: TimelineProps) {
 			resizeObserver.observe(containerRef.current);
 		}
 
-		const parentContainer = containerRef.current?.parentElement;
-		if (parentContainer) {
-			resizeObserver.observe(parentContainer);
+		const wrapperDiv = containerRef.current?.parentElement;
+		if (wrapperDiv) {
+			resizeObserver.observe(wrapperDiv);
 			// Also observe cards container
-			const cardsContainer = parentContainer.querySelector(".space-y-12");
+			const cardsContainer = wrapperDiv.querySelector(".space-y-12");
 			if (cardsContainer) {
 				resizeObserver.observe(cardsContainer);
 			}
@@ -158,7 +152,10 @@ export function Timeline({ itemCount }: TimelineProps) {
 	const lineEnd = nodePositions.length > 0 ? Math.max(...nodePositions) : 100;
 
 	return (
-		<div className="absolute inset-0" ref={containerRef}>
+		<div 
+			className="absolute left-0 right-0 top-0" 
+			ref={containerRef}
+		>
 			{/* SVG Line */}
 			<svg
 				aria-label="Timeline line"
@@ -180,7 +177,7 @@ export function Timeline({ itemCount }: TimelineProps) {
 			</svg>
 
 			{/* Nodes */}
-			<div className="relative" ref={nodesRef}>
+			<div className="absolute inset-0" ref={nodesRef} style={{ height: "100%" }}>
 				{nodePositions.length > 0
 					? nodePositions.map((position, index) => (
 							<div

@@ -38,9 +38,10 @@ export function Experience() {
 				</h2>
 
 				<div className="relative mx-auto max-w-4xl" data-timeline-container>
-					<Timeline itemCount={experiences.length} />
-
-					<div className="space-y-12">
+					<div className="relative">
+						<Timeline itemCount={experiences.length} />
+						
+						<div className="space-y-12">
 						{experiences.map((experience, index) => (
 							<div
 								className={`relative pl-20 md:flex md:items-center md:pl-0 ${
@@ -58,6 +59,7 @@ export function Experience() {
 								</div>
 							</div>
 						))}
+						</div>
 					</div>
 				</div>
 			</div>
