@@ -17,10 +17,17 @@ const navLinks = [
 
 export function Header() {
 	const [activeSection, setActiveSection] = useState("");
+	const [logoClickCount, setLogoClickCount] = useState(0);
 	const logoRef = useRef<SVGPathElement>(null);
 	const logoContainerRef = useElasticHover<HTMLAnchorElement>();
 
 	useEffect(() => {
+		// Load click count from localStorage
+		const savedCount = localStorage.getItem("logoClickCount");
+		if (savedCount) {
+			setLogoClickCount(Number.parseInt(savedCount, 10));
+		}
+
 		// Animate logo on load
 		if (logoRef.current && !prefersReducedMotion()) {
 			const path = logoRef.current;
@@ -79,6 +86,121 @@ export function Header() {
 		}
 	};
 
+	const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+		e.preventDefault();
+		window.scrollTo({ top: 0, behavior: "smooth" });
+
+		const newCount = logoClickCount + 1;
+		setLogoClickCount(newCount);
+		localStorage.setItem("logoClickCount", newCount.toString());
+
+		if (newCount === 10) {
+			triggerLogoSurprise();
+			setLogoClickCount(0);
+			localStorage.setItem("logoClickCount", "0");
+		}
+	};
+
+	const triggerLogoSurprise = () => {
+		if (prefersReducedMotion()) return;
+
+		// Create confetti effect
+		const colors = ["#818cf8", "#4fc1ff", "#4ec9b0", "#ffbd2e", "#ff5f56"];
+		const confetti: Array<{
+			element: HTMLDivElement;
+			x: number;
+			y: number;
+			vx: number;
+			vy: number;
+			color: string;
+		}> = [];
+
+		for (let i = 0; i < 50; i++) {
+			const particle = document.createElement("div");
+			particle.style.cssText = `
+				position: fixed;
+				width: 8px;
+				height: 8px;
+				background: ${colors[Math.floor(Math.random() * colors.length)]};
+				border-radius: 50%;
+				pointer-events: none;
+				z-index: 10000;
+			`;
+			document.body.appendChild(particle);
+
+			confetti.push({
+				element: particle,
+				x: window.innerWidth / 2,
+				y: 100,
+				vx: (Math.random() - 0.5) * 10,
+				vy: Math.random() * 5 + 2,
+				color: colors[Math.floor(Math.random() * colors.length)] ?? "#818cf8",
+			});
+		}
+
+		// Animate confetti
+		const animate = () => {
+			confetti.forEach((particle) => {
+				particle.x += particle.vx;
+				particle.y += particle.vy;
+				particle.vy += 0.3; // gravity
+
+				particle.element.style.left = `${particle.x}px`;
+				particle.element.style.top = `${particle.y}px`;
+				particle.element.style.opacity = String(
+					Math.max(0, 1 - (particle.y / window.innerHeight) * 2),
+				);
+			});
+
+			if (confetti.some((p) => p.y < window.innerHeight + 100)) {
+				requestAnimationFrame(animate);
+			} else {
+				confetti.forEach((p) => p.element.remove());
+			}
+		};
+
+		animate();
+
+		// Show message
+		const message = document.createElement("div");
+		message.style.cssText = `
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background: var(--bg-primary);
+			border: 2px solid var(--accent);
+			padding: 24px 32px;
+			border-radius: 12px;
+			color: var(--accent);
+			font-weight: bold;
+			font-size: 18px;
+			z-index: 10001;
+			box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+			text-align: center;
+		`;
+		message.textContent = "🎉 You found the easter egg! 🎉";
+		document.body.appendChild(message);
+
+		anime({
+			targets: message,
+			opacity: [0, 1],
+			scale: [0.5, 1],
+			duration: timing.normal,
+			easing: "spring(1, 80, 10, 0)",
+		});
+
+		setTimeout(() => {
+			anime({
+				targets: message,
+				opacity: [1, 0],
+				scale: [1, 0.8],
+				duration: timing.normal,
+				complete: () => message.remove(),
+			});
+		}, 3000);
+	};
+
 	return (
 		<header className="fixed top-0 right-0 left-0 z-50 border-[var(--border)] border-b bg-[var(--bg-primary)]/80 backdrop-blur-md">
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -87,10 +209,7 @@ export function Header() {
 					<Link
 						className="flex items-center gap-2 font-bold text-xl md:text-2xl"
 						href="#"
-						onClick={(e) => {
-							e.preventDefault();
-							window.scrollTo({ top: 0, behavior: "smooth" });
-						}}
+						onClick={handleLogoClick}
 						ref={logoContainerRef}
 					>
 						<svg

@@ -5,6 +5,9 @@ import { Geist } from "next/font/google";
 import { Suspense } from "react";
 
 import { TRPCReactProvider } from "~/trpc/react";
+import { CursorTrail } from "./_components/cursor-trail";
+import { KonamiHandler } from "./_components/konami-handler";
+import { ScrollProgress } from "./_components/scroll-progress";
 
 export const metadata: Metadata = {
 	title: "Sachin Sapkota | Full-Stack Developer",
@@ -74,6 +77,9 @@ export default function RootLayout({
 			</head>
 			<body>
 				<TRPCReactProvider>
+					<KonamiHandler />
+					<CursorTrail />
+					<ScrollProgress />
 					<Suspense fallback={null}>{children}</Suspense>
 				</TRPCReactProvider>
 			</body>

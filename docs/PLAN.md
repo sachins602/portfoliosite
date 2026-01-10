@@ -500,7 +500,7 @@
 
 ### 2.1 Interactive Terminal Component
 
-- [ ] **2.1.1 Create terminal UI component**
+- [x] **2.1.1 Create terminal UI component**
   - **File**: `src/app/_components/terminal/terminal.tsx`
   - **Context**: Mini interactive command-line interface in hero or about section
   - **Details**:
@@ -510,7 +510,7 @@
     - Blinking cursor animation
     - Window chrome (minimize, maximize, close buttons - decorative)
 
-- [ ] **2.1.2 Implement terminal command parser**
+- [x] **2.1.2 Implement terminal command parser**
   - **File**: `src/app/_components/terminal/commands.ts`
   - **Context**: Handle user commands and return responses
   - **Details**:
@@ -528,7 +528,7 @@
       - `ls` — list "files" (sections)
       - `cat readme` — display mini bio
 
-- [ ] **2.1.3 Add terminal output animations**
+- [x] **2.1.3 Add terminal output animations**
   - **File**: `src/app/_components/terminal/terminal.tsx`
   - **Context**: Animated text output like real terminal
   - **Details**:
@@ -537,7 +537,7 @@
     - Command echo before output
     - Scroll to bottom on new output
 
-- [ ] **2.1.4 Integrate terminal into page**
+- [x] **2.1.4 Integrate terminal into page**
   - **File**: `src/app/_components/sections/hero.tsx` or `about.tsx`
   - **Context**: Position terminal in layout
   - **Details**:
@@ -550,7 +550,7 @@
 
 ### 2.2 Tech Stack Visualization
 
-- [ ] **2.2.1 Create constellation/network graph component**
+- [x] **2.2.1 Create constellation/network graph component**
   - **File**: `src/app/_components/tech-constellation.tsx`
   - **Context**: Interactive visualization of tech skills as connected nodes
   - **Details**:
@@ -559,7 +559,7 @@
     - Connection lines between related techs
     - Nodes positioned in meaningful clusters (Frontend, Backend, etc.)
 
-- [ ] **2.2.2 Implement node interactions**
+- [x] **2.2.2 Implement node interactions**
   - **File**: `src/app/_components/tech-constellation.tsx`
   - **Context**: Hover and click interactions on tech nodes
   - **Details**:
@@ -568,7 +568,7 @@
     - Anime.js animations for all state changes
     - Nodes have subtle floating/pulsing idle animation
 
-- [ ] **2.2.3 Add constellation data structure**
+- [x] **2.2.3 Add constellation data structure**
   - **File**: `src/lib/data/tech-stack.ts`
   - **Context**: Define technologies and their relationships
   - **Details**:
@@ -576,7 +576,7 @@
     - Define connections between related techs
     - Categories: Frontend, Backend, Database, DevOps, Languages
 
-- [ ] **2.2.4 Integrate into about section**
+- [x] **2.2.4 Integrate into about section**
   - **File**: `src/app/_components/sections/about.tsx`
   - **Context**: Replace or complement skills grid with constellation
   - **Details**:
@@ -588,7 +588,7 @@
 
 ### 2.3 Micro-Interactions & Easter Eggs
 
-- [ ] **2.3.1 Implement Konami code easter egg**
+- [x] **2.3.1 Implement Konami code easter egg**
   - **File**: `src/hooks/use-konami.ts`
   - **Context**: Secret code triggers special animation
   - **Details**:
@@ -597,7 +597,7 @@
     - Use anime.js for the triggered effect
     - Show subtle notification that easter egg was found
 
-- [ ] **2.3.2 Add logo click counter easter egg**
+- [x] **2.3.2 Add logo click counter easter egg**
   - **File**: `src/app/_components/header.tsx`
   - **Context**: Hidden interaction on logo
   - **Details**:
@@ -606,7 +606,7 @@
     - Reset counter after reveal
     - Anime.js for the surprise animation
 
-- [ ] **2.3.3 Implement cursor trail effect**
+- [x] **2.3.3 Implement cursor trail effect**
   - **File**: `src/app/_components/cursor-trail.tsx`
   - **Context**: Optional particle trail following cursor
   - **Details**:
@@ -616,7 +616,7 @@
     - Performance optimized (limited particle count)
     - Disabled on touch devices
 
-- [ ] **2.3.4 Add time-based greetings**
+- [x] **2.3.4 Add time-based greetings**
   - **File**: `src/app/_components/sections/hero.tsx`
   - **Context**: Dynamic greeting based on visitor's time
   - **Details**:
@@ -625,7 +625,7 @@
     - Subtle addition to hero or greeting text
     - Animate the greeting on load
 
-- [ ] **2.3.5 Create scroll progress indicator**
+- [x] **2.3.5 Create scroll progress indicator**
   - **File**: `src/app/_components/scroll-progress.tsx`
   - **Context**: Visual indicator of page scroll progress
   - **Details**:
@@ -638,7 +638,7 @@
 
 ### 2.4 Project Filtering & Search
 
-- [ ] **2.4.1 Create filter bar component**
+- [x] **2.4.1 Create filter bar component**
   - **File**: `src/app/_components/project-filter.tsx`
   - **Context**: Filter projects by various criteria
   - **Details**:
@@ -647,7 +647,7 @@
     - Clear all filters button
     - Count indicator per filter option
 
-- [ ] **2.4.2 Implement search functionality**
+- [x] **2.4.2 Implement search functionality**
   - **File**: `src/app/_components/project-search.tsx`
   - **Context**: Live search through projects
   - **Details**:
@@ -656,7 +656,7 @@
     - Highlight matching text in results
     - Anime.js animation for result transitions
 
-- [ ] **2.4.3 Add filter/search animations**
+- [x] **2.4.3 Add filter/search animations**
   - **File**: `src/app/_components/sections/projects.tsx`
   - **Context**: Smooth transitions when filtering
   - **Details**:
@@ -665,7 +665,7 @@
     - No results state with animation
     - Filter pill selection: elastic pop
 
-- [ ] **2.4.4 Integrate filtering into projects section**
+- [x] **2.4.4 Integrate filtering into projects section**
   - **File**: `src/app/_components/sections/projects.tsx`
   - **Context**: Add filter UI above project grid
   - **Details**:

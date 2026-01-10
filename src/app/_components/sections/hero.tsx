@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowDown } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
@@ -11,13 +11,22 @@ const name = "Sachin Sapkota";
 const subtitle = "Full-Stack Developer | Next.js & .NET Specialist";
 const tagline = "Building scalable web apps from Brampton, Ontario";
 
+function getGreeting(): string {
+	const hour = new Date().getHours();
+	if (hour < 12) return "Good morning";
+	if (hour < 18) return "Good afternoon";
+	return "Good evening";
+}
+
 export function Hero() {
 	const nameRef = useRef<HTMLDivElement>(null);
 	const subtitleRef = useRef<HTMLDivElement>(null);
 	const taglineRef = useRef<HTMLDivElement>(null);
 	const buttonsRef = useRef<HTMLDivElement>(null);
+	const greetingRef = useRef<HTMLDivElement>(null);
 	const [subtitleText, setSubtitleText] = useState("");
 	const [showCursor, setShowCursor] = useState(true);
+	const [greeting] = useState(getGreeting);
 	const sectionRef = useScrollTrigger<HTMLElement>((_element) => {
 		if (prefersReducedMotion()) return;
 
@@ -92,6 +101,15 @@ export function Hero() {
 			<HeroBackground />
 			<div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="text-center">
+					{/* Greeting */}
+					<div
+						className="mb-4 text-[var(--text-secondary)] text-lg sm:text-xl"
+						ref={greetingRef}
+						style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
+					>
+						{greeting}!
+					</div>
+
 					{/* Name */}
 					<h1
 						className="mb-6 font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-8xl"

@@ -1,12 +1,17 @@
 "use client";
 
-import { Github, Linkedin, Mail, MapPin } from "lucide-react";
+import { Github, Grid3x3, Linkedin, Mail, MapPin, Network } from "lucide-react";
+import { useState } from "react";
 import { useElasticHover, useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
 import { SkillsGrid } from "../skills-grid";
+import { TechConstellation } from "../tech-constellation";
+import { Terminal } from "../terminal/terminal";
 
 export function About() {
+	const [showConstellation, setShowConstellation] = useState(false);
+
 	const sectionRef = useScrollTrigger<HTMLElement>((element) => {
 		if (prefersReducedMotion()) return;
 
@@ -115,11 +120,35 @@ export function About() {
 
 					{/* Skills */}
 					<div>
-						<h3 className="mb-6 font-semibold text-2xl">
-							Skills & Technologies
-						</h3>
-						<SkillsGrid />
+						<div className="mb-6 flex items-center justify-between">
+							<h3 className="font-semibold text-2xl">
+								Skills & Technologies
+							</h3>
+							<button
+								className="flex items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] px-3 py-1.5 text-sm transition-colors hover:bg-[var(--accent)]/10 hover:border-[var(--accent)]"
+								onClick={() => setShowConstellation(!showConstellation)}
+								type="button"
+							>
+								{showConstellation ? (
+									<>
+										<Grid3x3 className="h-4 w-4" />
+										<span>Grid View</span>
+									</>
+								) : (
+									<>
+										<Network className="h-4 w-4" />
+										<span>Network View</span>
+									</>
+								)}
+							</button>
+						</div>
+						{showConstellation ? <TechConstellation /> : <SkillsGrid />}
 					</div>
+				</div>
+
+				{/* Terminal Component */}
+				<div className="mt-12 flex justify-center">
+					<Terminal />
 				</div>
 			</div>
 		</section>
