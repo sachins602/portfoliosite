@@ -2,7 +2,7 @@
 
 **Project**: Sachin Sapkota — Full-Stack Developer Portfolio  
 **Created**: January 2026  
-**Status**: In Progress
+**Status**: Phase 1 Complete
 
 ---
 
@@ -34,7 +34,7 @@
 
 ### 1.1 Project Foundation & Configuration
 
-- [ ] **1.1.1 Update global CSS with theme variables**
+- [x] **1.1.1 Update global CSS with theme variables**
   - **File**: `src/styles/globals.css`
   - **Context**: Define CSS custom properties for the color scheme
   - **Details**:
@@ -45,7 +45,7 @@
     - Add font-weight variables for typography hierarchy
     - Include `prefers-reduced-motion` media query styles
 
-- [ ] **1.1.2 Configure environment variables**
+- [x] **1.1.2 Configure environment variables**
   - **File**: `src/env.ts`
   - **Context**: Add GitHub PAT and email service configuration
   - **Details**:
@@ -54,7 +54,7 @@
     - Add `CONTACT_EMAIL` for form submissions target (sachinsapkota4@gmail.com)
     - Validate all env vars using @t3-oss/env-nextjs
 
-- [ ] **1.1.3 Install additional dependencies**
+- [x] **1.1.3 Install additional dependencies**
   - **Command**: Run in terminal
   - **Context**: Add missing packages required for the portfolio
   - **Packages to install**:
@@ -63,7 +63,7 @@
     - `@types/animejs` — TypeScript types for anime.js (if needed)
   - **Command**: `bun add lucide-react resend`
 
-- [ ] **1.1.4 Update root layout with dark mode support**
+- [x] **1.1.4 Update root layout with dark mode support**
   - **File**: `src/app/layout.tsx`
   - **Context**: Add dark mode class handling and proper meta tags
   - **Details**:
@@ -73,7 +73,7 @@
     - Update metadata with comprehensive SEO (title, description, Open Graph, Twitter cards)
     - Add keywords: "Full-Stack Developer", "Next.js", ".NET", "TypeScript", "Brampton Ontario"
 
-- [ ] **1.1.5 Create reusable anime.js hooks**
+- [x] **1.1.5 Create reusable anime.js hooks**
   - **File**: `src/hooks/use-anime.ts`
   - **Context**: Create custom React hooks for anime.js animations to ensure consistency
   - **Details**:
@@ -84,7 +84,7 @@
     - `usePathDraw` — SVG path drawing animation
     - All hooks should respect `prefers-reduced-motion`
 
-- [ ] **1.1.6 Create anime.js utility functions**
+- [x] **1.1.6 Create anime.js utility functions**
   - **File**: `src/lib/animations.ts`
   - **Context**: Centralized animation configurations and presets
   - **Details**:
@@ -97,7 +97,7 @@
 
 ### 1.2 Navigation/Header Component
 
-- [ ] **1.2.1 Create Header component structure**
+- [x] **1.2.1 Create Header component structure**
   - **File**: `src/app/_components/header.tsx`
   - **Context**: Fixed navigation bar at the top of the page
   - **Details**:
@@ -106,7 +106,7 @@
     - Z-index high enough to stay above content
     - Transparent/semi-transparent background
 
-- [ ] **1.2.2 Implement animated logo**
+- [x] **1.2.2 Implement animated logo**
   - **File**: `src/app/_components/header.tsx`
   - **Context**: "Sachin Sapkota" or "SS" logo with draw-in animation on load
   - **Details**:
@@ -115,7 +115,7 @@
     - Link to top of page (smooth scroll)
     - Animation duration ~800ms with elastic easing
 
-- [ ] **1.2.3 Add navigation links with smooth scroll**
+- [x] **1.2.3 Add navigation links with smooth scroll**
   - **File**: `src/app/_components/header.tsx`
   - **Context**: Links to each section of the single-page app
   - **Details**:
@@ -124,7 +124,7 @@
     - Active state indicator based on scroll position
     - Hover animation (underline draw or color shift)
 
-- [ ] **1.2.4 Implement dark/light mode toggle**
+- [x] **1.2.4 Implement dark/light mode toggle**
   - **File**: `src/app/_components/theme-toggle.tsx`
   - **Context**: Animated sun/moon icon toggle
   - **Details**:
@@ -133,7 +133,7 @@
     - Persist preference in localStorage
     - System preference detection as default
 
-- [ ] **1.2.5 Create mobile hamburger menu**
+- [x] **1.2.5 Create mobile hamburger menu**
   - **File**: `src/app/_components/mobile-menu.tsx`
   - **Context**: Responsive menu for mobile devices
   - **Details**:
@@ -147,7 +147,7 @@
 
 ### 1.3 Hero Section
 
-- [ ] **1.3.1 Create Hero section container**
+- [x] **1.3.1 Create Hero section container**
   - **File**: `src/app/_components/sections/hero.tsx`
   - **Context**: Full viewport height opening section
   - **Details**:
@@ -156,7 +156,7 @@
     - Animated gradient or particle background
     - Responsive padding
 
-- [ ] **1.3.2 Implement animated name reveal**
+- [x] **1.3.2 Implement animated name reveal**
   - **File**: `src/app/_components/sections/hero.tsx`
   - **Context**: "Sachin Sapkota" with staggered letter animation
   - **Details**:
@@ -166,7 +166,7 @@
     - Delay after page load (~200ms)
     - Total animation duration ~1200ms
 
-- [ ] **1.3.3 Implement typing effect subtitle**
+- [x] **1.3.3 Implement typing effect subtitle**
   - **File**: `src/app/_components/sections/hero.tsx`
   - **Context**: "Full-Stack Developer | Next.js & .NET Specialist" with typing animation
   - **Details**:
@@ -175,7 +175,7 @@
     - Start after name animation completes
     - ~50ms per character
 
-- [ ] **1.3.4 Add tagline text**
+- [x] **1.3.4 Add tagline text**
   - **File**: `src/app/_components/sections/hero.tsx`
   - **Context**: "Building scalable web apps from Brampton, Ontario"
   - **Details**:
@@ -183,7 +183,7 @@
     - Subtle translateY animation
     - Muted/secondary text color
 
-- [ ] **1.3.5 Create animated CTA buttons**
+- [x] **1.3.5 Create animated CTA buttons**
   - **File**: `src/app/_components/sections/hero.tsx`
   - **Context**: "View Projects" and "Contact Me" buttons
   - **Details**:
@@ -193,7 +193,7 @@
     - Pulse animation on load completion
     - Primary and secondary button styles
 
-- [ ] **1.3.6 Implement animated background**
+- [x] **1.3.6 Implement animated background**
   - **File**: `src/app/_components/hero-background.tsx`
   - **Context**: Subtle particle field or wave SVG animation
   - **Details**:
@@ -207,7 +207,7 @@
 
 ### 1.4 About Section
 
-- [ ] **1.4.1 Create About section container**
+- [x] **1.4.1 Create About section container**
   - **File**: `src/app/_components/sections/about.tsx`
   - **Context**: Personal information and skills showcase
   - **Details**:
@@ -216,7 +216,7 @@
     - Two-column layout on desktop (bio left, skills right)
     - Scroll-triggered animations
 
-- [ ] **1.4.2 Add bio content**
+- [x] **1.4.2 Add bio content**
   - **File**: `src/app/_components/sections/about.tsx`
   - **Context**: Short professional biography
   - **Details**:
@@ -225,7 +225,7 @@
     - Mention remote work readiness and Canadian location
     - Fade in on scroll
 
-- [ ] **1.4.3 Add contact information display**
+- [x] **1.4.3 Add contact information display**
   - **File**: `src/app/_components/sections/about.tsx`
   - **Context**: Location, email, phone, social links
   - **Details**:
@@ -235,7 +235,7 @@
     - LinkedIn: (add if available)
     - Icon hover animations (scale + rotate using anime.js)
 
-- [ ] **1.4.4 Create skills grid with animated badges**
+- [x] **1.4.4 Create skills grid with animated badges**
   - **File**: `src/app/_components/skills-grid.tsx`
   - **Context**: Tech stack badges that animate on scroll
   - **Details**:
@@ -258,7 +258,7 @@
 
 ### 1.5 Experience Section
 
-- [ ] **1.5.1 Create Experience section container**
+- [x] **1.5.1 Create Experience section container**
   - **File**: `src/app/_components/sections/experience.tsx`
   - **Context**: Work history in timeline format
   - **Details**:
@@ -267,7 +267,7 @@
     - Vertical timeline layout
     - Responsive: timeline switches sides on mobile
 
-- [ ] **1.5.2 Create timeline component**
+- [x] **1.5.2 Create timeline component**
   - **File**: `src/app/_components/timeline.tsx`
   - **Context**: Vertical line with job nodes
   - **Details**:
@@ -276,7 +276,7 @@
     - Alternating left/right cards on desktop
     - All cards on one side for mobile
 
-- [ ] **1.5.3 Create experience card component**
+- [x] **1.5.3 Create experience card component**
   - **File**: `src/app/_components/experience-card.tsx`
   - **Context**: Individual job entry card
   - **Details**:
@@ -288,7 +288,7 @@
       - **Prodigitips Media Agency** — Full Stack Developer (include dates, location, key achievements)
       - **E-MultiTech Pvt. Ltd.** — (include dates, location, key achievements)
 
-- [ ] **1.5.4 Add experience data**
+- [x] **1.5.4 Add experience data**
   - **File**: `src/lib/data/experience.ts`
   - **Context**: Static data for work experience
   - **Details**:
@@ -300,7 +300,7 @@
 
 ### 1.6 Projects Section
 
-- [ ] **1.6.1 Create Projects section container**
+- [x] **1.6.1 Create Projects section container**
   - **File**: `src/app/_components/sections/projects.tsx`
   - **Context**: Main portfolio showcase with GitHub integration
   - **Details**:
@@ -308,7 +308,7 @@
     - Animated title with underline draw effect
     - Responsive grid layout (1 col mobile, 2 col tablet, 3 col desktop)
 
-- [ ] **1.6.2 Create GitHub API fetching function**
+- [x] **1.6.2 Create GitHub API fetching function**
   - **File**: `src/server/api/github.ts`
   - **Context**: Server-side GitHub API integration
   - **Details**:
@@ -319,7 +319,7 @@
     - Return top 6-8 repos
     - Include error handling for API failures
 
-- [ ] **1.6.3 Create tRPC router for projects**
+- [x] **1.6.3 Create tRPC router for projects**
   - **File**: `src/server/api/routers/projects.ts`
   - **Context**: Type-safe API endpoint for fetching projects
   - **Details**:
@@ -328,7 +328,7 @@
     - Return typed project data
     - Add to `src/server/api/root.ts` router
 
-- [ ] **1.6.4 Create project card component**
+- [x] **1.6.4 Create project card component**
   - **File**: `src/app/_components/project-card.tsx`
   - **Context**: Individual project display card
   - **Details**:
@@ -341,7 +341,7 @@
       - Tech tags stagger in
     - Optional: thumbnail image placeholder
 
-- [ ] **1.6.5 Implement project grid with animations**
+- [x] **1.6.5 Implement project grid with animations**
   - **File**: `src/app/_components/sections/projects.tsx`
   - **Context**: Animated grid of project cards
   - **Details**:
@@ -350,7 +350,7 @@
     - Loading skeleton while fetching
     - Error state with static fallback projects
 
-- [ ] **1.6.6 Create static fallback projects data**
+- [x] **1.6.6 Create static fallback projects data**
   - **File**: `src/lib/data/fallback-projects.ts`
   - **Context**: Backup data if GitHub API fails
   - **Details**:
@@ -366,7 +366,7 @@
 
 ### 1.7 Contact Section
 
-- [ ] **1.7.1 Create Contact section container**
+- [x] **1.7.1 Create Contact section container**
   - **File**: `src/app/_components/sections/contact.tsx`
   - **Context**: Contact form and social links
   - **Details**:
@@ -375,7 +375,7 @@
     - Two-column: form left, info/social right
     - Scroll-triggered animations
 
-- [ ] **1.7.2 Create database schema for contact submissions**
+- [x] **1.7.2 Create database schema for contact submissions**
   - **File**: `src/server/db/schema.ts`
   - **Context**: Store contact form submissions in SQLite
   - **Details**:
@@ -383,7 +383,7 @@
     - Fields: id, name, email, message, createdAt, isRead (boolean)
     - Remove or keep existing posts table as needed
 
-- [ ] **1.7.3 Create contact form tRPC router**
+- [x] **1.7.3 Create contact form tRPC router**
   - **File**: `src/server/api/routers/contact.ts`
   - **Context**: Handle form submission and email sending
   - **Details**:
@@ -394,7 +394,7 @@
     - Return success/error response
     - Add to root router
 
-- [ ] **1.7.4 Create contact form component**
+- [x] **1.7.4 Create contact form component**
   - **File**: `src/app/_components/contact-form.tsx`
   - **Context**: Name, Email, Message form fields
   - **Details**:
@@ -407,7 +407,7 @@
       - Error: shake animation + error message
     - Loading state during submission
 
-- [ ] **1.7.5 Add social links and resume download**
+- [x] **1.7.5 Add social links and resume download**
   - **File**: `src/app/_components/sections/contact.tsx`
   - **Context**: Additional contact options
   - **Details**:
@@ -421,7 +421,7 @@
 
 ### 1.8 Footer Component
 
-- [ ] **1.8.1 Create Footer component**
+- [x] **1.8.1 Create Footer component**
   - **File**: `src/app/_components/footer.tsx`
   - **Context**: Page footer with copyright and links
   - **Details**:
@@ -435,7 +435,7 @@
 
 ### 1.9 Main Page Assembly
 
-- [ ] **1.9.1 Update main page with all sections**
+- [x] **1.9.1 Update main page with all sections**
   - **File**: `src/app/page.tsx`
   - **Context**: Assemble all sections into single-page layout
   - **Details**:
@@ -444,7 +444,7 @@
     - Add smooth scrolling wrapper if using library (like lenis)
     - Ensure proper section spacing
 
-- [ ] **1.9.2 Implement scroll-triggered animations coordinator**
+- [x] **1.9.2 Implement scroll-triggered animations coordinator**
   - **File**: `src/app/page.tsx` or `src/hooks/use-scroll-animations.ts`
   - **Context**: Global Intersection Observer for all section animations
   - **Details**:
@@ -453,7 +453,7 @@
     - Only animate once (not on re-enter)
     - Cleanup observers on unmount
 
-- [ ] **1.9.3 Add page load animation sequence**
+- [x] **1.9.3 Add page load animation sequence**
   - **File**: `src/app/_components/page-loader.tsx`
   - **Context**: Coordinated animations on initial page load
   - **Details**:
@@ -466,7 +466,7 @@
 
 ### 1.10 SEO & Metadata
 
-- [ ] **1.10.1 Complete metadata configuration**
+- [x] **1.10.1 Complete metadata configuration**
   - **File**: `src/app/layout.tsx`
   - **Context**: Comprehensive SEO metadata
   - **Details**:
@@ -478,7 +478,7 @@
     - Canonical URL
     - Robots: index, follow
 
-- [ ] **1.10.2 Add Open Graph image**
+- [x] **1.10.2 Add Open Graph image**
   - **File**: `public/og-image.png` or generate via `src/app/opengraph-image.tsx`
   - **Context**: Social sharing preview image
   - **Details**:
@@ -486,7 +486,7 @@
     - Portfolio branding, name, title
     - Option: Use Next.js dynamic OG image generation
 
-- [ ] **1.10.3 Create robots.txt and sitemap**
+- [x] **1.10.3 Create robots.txt and sitemap**
   - **Files**: `public/robots.txt`, `src/app/sitemap.ts`
   - **Context**: Search engine optimization files
   - **Details**:
