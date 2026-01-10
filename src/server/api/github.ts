@@ -281,3 +281,222 @@ export async function fetchGitHubContributions(): Promise<ContributionData> {
 		};
 	}
 }
+
+// ============ GitHub User Stats ============
+
+export interface GitHubUserStats {
+	totalCommits: number;
+	totalPRs: number;
+	totalIssues: number;
+	totalStars: number;
+	totalRepos: number;
+	followers: number;
+	following: number;
+}
+
+export async function fetchGitHubUserStats(): Promise<GitHubUserStats> {
+	try {
+		const headers: HeadersInit = {
+			Accept: "application/vnd.github.v4+json",
+			"Content-Type": "application/json",
+		};
+
+		if (env.GITHUB_TOKEN) {
+			headers.Authorization = `Bearer ${env.GITHUB_TOKEN}`;
+		}
+
+		// Calculate date range (past year)
+		const endDate = new Date();
+		const startDate = new Date();
+		startDate.setFullYear(startDate.getFullYear() - 1);
+
+		const query = `
+			query($username: String!, $from: DateTime!, $to: DateTime!) {
+				user(login: $username) {
+					contributionsCollection(from: $from, to: $to) {
+						totalCommitContributions
+						totalPullRequestContributions
+						totalIssueContributions
+						totalPullRequestReviewContributions
+					}
+					repositories(first: 100, ownerAffiliations: OWNER, orderBy: {field: STARGAZERS, direction: DESC}) {
+						totalCount
+						nodes {
+							stargazerCount
+						}
+					}
+					followers {
+						totalCount
+					}
+					following {
+						totalCount
+					}
+				}
+			}
+		`;
+
+		const variables = {
+			username: "sachins602",
+			from: startDate.toISOString(),
+			to: endDate.toISOString(),
+		};
+
+		const response = await fetch("https://api.github.com/graphql", {
+			method: "POST",
+			headers,
+			body: JSON.stringify({ query, variables }),
+			next: { revalidate: 3600 }, // Cache for 1 hour
+		});
+
+		if (!response.ok) {
+			throw new Error(`GitHub GraphQL API error: ${response.status}`);
+		}
+
+		const result = await response.json();
+
+		if (result.errors) {
+			throw new Error(`GraphQL errors: ${JSON.stringify(result.errors)}`);
+		}
+
+		const user = result.data?.user;
+		if (!user) {
+			throw new Error("No user data found");
+		}
+
+		const contributions = user.contributionsCollection;
+		const totalStars =
+			user.repositories.nodes?.reduce(
+				(sum: number, repo: { stargazerCount: number }) =>
+					sum + (repo?.stargazerCount ?? 0),
+				0,
+			) ?? 0;
+
+		return {
+			totalCommits: contributions?.totalCommitContributions ?? 0,
+			totalPRs: contributions?.totalPullRequestContributions ?? 0,
+			totalIssues: contributions?.totalIssueContributions ?? 0,
+			totalStars,
+			totalRepos: user.repositories?.totalCount ?? 0,
+			followers: user.followers?.totalCount ?? 0,
+			following: user.following?.totalCount ?? 0,
+		};
+	} catch (error) {
+		console.error("Error fetching GitHub user stats:", error);
+		return {
+			totalCommits: 0,
+			totalPRs: 0,
+			totalIssues: 0,
+			totalStars: 0,
+			totalRepos: 0,
+			followers: 0,
+			following: 0,
+		};
+	}
+}
+
+// ============ Language Statistics ============
+
+export interface LanguageStat {
+	name: string;
+	percentage: number;
+	color: string;
+	bytes: number;
+}
+
+const LANGUAGE_COLORS: Record<string, string> = {
+	TypeScript: "#3178c6",
+	JavaScript: "#f1e05a",
+	Python: "#3572A5",
+	Go: "#00ADD8",
+	Rust: "#dea584",
+	Java: "#b07219",
+	"C++": "#f34b7d",
+	C: "#555555",
+	"C#": "#178600",
+	PHP: "#4F5D95",
+	Ruby: "#701516",
+	Swift: "#F05138",
+	Kotlin: "#A97BFF",
+	Dart: "#00B4AB",
+	HTML: "#e34c26",
+	CSS: "#563d7c",
+	SCSS: "#c6538c",
+	Vue: "#41b883",
+	Shell: "#89e051",
+	Dockerfile: "#384d54",
+	Other: "#8b949e",
+};
+
+export async function fetchLanguageStats(): Promise<LanguageStat[]> {
+	try {
+		const headers: HeadersInit = {
+			Accept: "application/vnd.github.v3+json",
+		};
+
+		if (env.GITHUB_TOKEN) {
+			headers.Authorization = `token ${env.GITHUB_TOKEN}`;
+		}
+
+		// First, get all repos
+		const reposResponse = await fetch(
+			"https://api.github.com/users/sachins602/repos?per_page=100",
+			{
+				headers,
+				next: { revalidate: 3600 },
+			},
+		);
+
+		if (!reposResponse.ok) {
+			throw new Error(`GitHub API error: ${reposResponse.status}`);
+		}
+
+		const repos: GitHubRepo[] = await reposResponse.json();
+
+		// Fetch languages for each repo and aggregate
+		const languageTotals: Record<string, number> = {};
+
+		await Promise.all(
+			repos.slice(0, 30).map(async (repo) => {
+				try {
+					const langResponse = await fetch(
+						`https://api.github.com/repos/sachins602/${repo.name}/languages`,
+						{
+							headers,
+							next: { revalidate: 3600 },
+						},
+					);
+
+					if (langResponse.ok) {
+						const languages: Record<string, number> = await langResponse.json();
+						for (const [lang, bytes] of Object.entries(languages)) {
+							languageTotals[lang] = (languageTotals[lang] ?? 0) + bytes;
+						}
+					}
+				} catch {
+					// Skip repos that fail
+				}
+			}),
+		);
+
+		// Convert to array and calculate percentages
+		const totalBytes = Object.values(languageTotals).reduce(
+			(sum, bytes) => sum + bytes,
+			0,
+		);
+
+		const stats: LanguageStat[] = Object.entries(languageTotals)
+			.map(([name, bytes]) => ({
+				name,
+				bytes,
+				percentage: totalBytes > 0 ? (bytes / totalBytes) * 100 : 0,
+				color: LANGUAGE_COLORS[name] ?? LANGUAGE_COLORS.Other ?? "#8b949e",
+			}))
+			.sort((a, b) => b.bytes - a.bytes)
+			.slice(0, 8); // Top 8 languages
+
+		return stats;
+	} catch (error) {
+		console.error("Error fetching language stats:", error);
+		return [];
+	}
+}

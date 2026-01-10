@@ -98,8 +98,32 @@ export function ActivityFeed() {
 		);
 	}
 
-	if (error || !activities || activities.length === 0) {
-		return null;
+	if (error) {
+		return (
+			<div className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-4">
+				<div className="mb-3 flex items-center gap-2">
+					<Github className="h-5 w-5 text-[var(--accent)]" />
+					<h3 className="font-semibold text-lg">Recent Activity</h3>
+				</div>
+				<p className="text-center text-[var(--text-secondary)] py-4">
+					Unable to load activity. Please check your GitHub token.
+				</p>
+			</div>
+		);
+	}
+
+	if (!activities || activities.length === 0) {
+		return (
+			<div className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-4">
+				<div className="mb-3 flex items-center gap-2">
+					<Github className="h-5 w-5 text-[var(--accent)]" />
+					<h3 className="font-semibold text-lg">Recent Activity</h3>
+				</div>
+				<p className="text-center text-[var(--text-secondary)] py-4">
+					No recent activity found. Add a GITHUB_TOKEN to your .env to see activity.
+				</p>
+			</div>
+		);
 	}
 
 	return (

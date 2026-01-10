@@ -2,6 +2,7 @@ import { adminRouter } from "~/server/api/routers/admin";
 import { contactRouter } from "~/server/api/routers/contact";
 import { githubActivityRouter } from "~/server/api/routers/github-activity";
 import { githubContributionsRouter } from "~/server/api/routers/github-contributions";
+import { githubStatsRouter } from "~/server/api/routers/github-stats";
 import { projectsRouter } from "~/server/api/routers/projects";
 import { settingsRouter } from "~/server/api/routers/settings";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
@@ -16,6 +17,7 @@ export const appRouter = createTRPCRouter({
 	contact: contactRouter,
 	githubActivity: githubActivityRouter,
 	githubContributions: githubContributionsRouter,
+	githubStats: githubStatsRouter,
 	settings: settingsRouter,
 	admin: adminRouter,
 });

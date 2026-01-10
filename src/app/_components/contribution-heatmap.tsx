@@ -87,8 +87,32 @@ export function ContributionHeatmap() {
 		);
 	}
 
-	if (error || !contributions || contributions.weeks.length === 0) {
-		return null;
+	if (error) {
+		return (
+			<div className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6">
+				<div className="mb-4 flex items-center gap-2">
+					<Github className="h-5 w-5 text-[var(--accent)]" />
+					<h3 className="font-semibold text-lg">GitHub Contributions</h3>
+				</div>
+				<p className="text-center text-[var(--text-secondary)] py-8">
+					Unable to load contributions. Please check your GitHub token configuration.
+				</p>
+			</div>
+		);
+	}
+
+	if (!contributions || contributions.weeks.length === 0) {
+		return (
+			<div className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6">
+				<div className="mb-4 flex items-center gap-2">
+					<Github className="h-5 w-5 text-[var(--accent)]" />
+					<h3 className="font-semibold text-lg">GitHub Contributions</h3>
+				</div>
+				<p className="text-center text-[var(--text-secondary)] py-8">
+					No contribution data available. Add a GITHUB_TOKEN to your .env file to see your contributions.
+				</p>
+			</div>
+		);
 	}
 
 	// Flatten weeks into days array
@@ -157,9 +181,9 @@ export function ContributionHeatmap() {
 				<span>More</span>
 			</div>
 
-			<div className="relative">
+			<div className="relative overflow-x-auto pb-2">
 				<div
-					className="grid gap-1"
+					className="grid gap-1 min-w-[600px]"
 					ref={gridRef}
 					style={{
 						gridTemplateColumns: `repeat(${weeks.length}, minmax(0, 1fr))`,

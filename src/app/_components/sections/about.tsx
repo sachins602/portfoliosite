@@ -7,7 +7,8 @@ import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
 import { ActivityFeed } from "../activity-feed";
 import { ContributionHeatmap } from "../contribution-heatmap";
-import { LighthouseScores } from "../lighthouse-scores";
+import { GitHubLanguageChart } from "../github-language-chart";
+import { GitHubStats } from "../github-stats";
 import { PerformanceMetrics } from "../performance-metrics";
 import { SkillsGrid } from "../skills-grid";
 import { TechConstellation } from "../tech-constellation";
@@ -158,9 +159,14 @@ export function About() {
 					<PerformanceMetrics />
 				</div>
 
-				{/* Lighthouse Scores */}
+				{/* GitHub Statistics */}
 				<div className="mt-12">
-					<LighthouseScores />
+					<GitHubStats />
+				</div>
+
+				{/* Language Distribution */}
+				<div className="mt-12">
+					<GitHubLanguageChart />
 				</div>
 
 				{/* Contribution Heatmap */}
