@@ -27,3 +27,15 @@ export const posts = createTable(
 	}),
 	(t) => [index("name_idx").on(t.name)],
 );
+
+export const contactSubmissions = createTable("contact_submission", (d) => ({
+	id: d.integer({ mode: "number" }).primaryKey({ autoIncrement: true }),
+	name: d.text({ length: 256 }).notNull(),
+	email: d.text({ length: 256 }).notNull(),
+	message: d.text().notNull(),
+	isRead: d.integer({ mode: "boolean" }).default(false).notNull(),
+	createdAt: d
+		.integer({ mode: "timestamp" })
+		.default(sql`(unixepoch())`)
+		.notNull(),
+}));
