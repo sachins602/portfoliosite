@@ -7,6 +7,7 @@ import anime from "~/lib/anime";
 import { ContactForm } from "../features/contact-form";
 
 import { Section } from "../ui/section";
+import { GhostText } from "../ui/ghost-text";
 
 export function Contact() {
 	const sectionRef = useScrollTrigger<HTMLElement>((element) => {
@@ -48,7 +49,7 @@ export function Contact() {
 				className="section-title mb-16 text-center font-bold text-4xl md:text-5xl"
 				style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 			>
-				Contact Me
+				<GhostText offsetDistance={6}>Contact Me</GhostText>
 			</h2>
 
 			<div className="section-content mx-auto grid max-w-5xl gap-12 md:grid-cols-2">

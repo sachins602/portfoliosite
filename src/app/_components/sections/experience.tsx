@@ -7,6 +7,7 @@ import { experiences } from "~/lib/data/experience";
 import { ExperienceCard } from "../ui/experience-card";
 import { Section } from "../ui/section";
 import { Timeline } from "../ui/timeline";
+import { GhostText } from "../ui/ghost-text";
 
 export function Experience() {
 	const sectionRef = useScrollTrigger<HTMLElement>((element) => {
@@ -30,7 +31,7 @@ export function Experience() {
 				className="section-title mb-16 text-center font-bold text-4xl md:text-5xl"
 				style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 			>
-				Experience
+				<GhostText offsetDistance={6}>Experience</GhostText>
 			</h2>
 
 			<div className="relative mx-auto max-w-4xl" data-timeline-container>

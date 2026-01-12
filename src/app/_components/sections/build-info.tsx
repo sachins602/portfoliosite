@@ -7,6 +7,7 @@ import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
 import { api } from "~/trpc/react";
 import { CodeCarousel } from "../features/code-carousel";
+import { GhostText } from "../ui/ghost-text";
 
 interface Stat {
 	id: string;
@@ -257,7 +258,7 @@ export function BuildInfo() {
 				className="section-title mb-12 text-center font-bold text-4xl md:text-5xl"
 				style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 			>
-				How This Site Was Built
+				<GhostText offsetDistance={8}>How This Site Was Built</GhostText>
 			</h2>
 
 			<div className="section-content space-y-12">

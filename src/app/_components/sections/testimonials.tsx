@@ -8,6 +8,7 @@ import anime from "~/lib/anime";
 import { testimonials } from "~/lib/data/testimonials";
 import { Section } from "../ui/section";
 import { TestimonialCard } from "../ui/testimonial-card";
+import { GhostText } from "../ui/ghost-text";
 
 export function Testimonials() {
 	const [currentIndex, setCurrentIndex] = useState(0);
@@ -73,7 +74,7 @@ export function Testimonials() {
 		<Section className="section-content min-h-screen" id="testimonials" ref={sectionRef}>
 			<h2 className="section-title mb-12 text-center font-bold text-4xl">
 				<span className="relative inline-block">
-					Testimonials
+					<GhostText offsetDistance={6}>Testimonials</GhostText>
 					<span className="absolute bottom-0 left-0 h-1 w-full origin-left bg-linear-to-r from-(--accent) to-transparent" />
 				</span>
 			</h2>

@@ -15,6 +15,7 @@ import { Terminal } from "../features/terminal/terminal";
 import { Section } from "../ui/section";
 import { Skeleton } from "../ui/skeleton";
 import { SkillsGrid } from "../ui/skills-grid";
+import { GhostText } from "../ui/ghost-text";
 
 export function About() {
 	const [showConstellation, setShowConstellation] = useState(false);
@@ -57,7 +58,7 @@ export function About() {
 				className="section-title mb-12 text-center font-bold text-4xl md:text-5xl"
 				style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 			>
-				About Me
+				<GhostText offsetDistance={6}>About Me</GhostText>
 			</h2>
 
 			<div className="section-content grid gap-12 md:grid-cols-2">

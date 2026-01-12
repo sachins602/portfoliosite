@@ -8,6 +8,7 @@ import { api } from "~/trpc/react";
 import { ProjectFilter } from "../features/project-filter";
 import { ProjectSearch } from "../features/project-search";
 import { ProjectCard } from "../ui/project-card";
+import { GhostText } from "../ui/ghost-text";
 
 const INITIAL_DISPLAY_COUNT = 12;
 const LOAD_MORE_COUNT = 12;
@@ -131,7 +132,7 @@ export function Projects() {
 				className="section-title mb-16 text-center font-bold text-4xl md:text-5xl"
 				style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 			>
-				Projects
+				<GhostText offsetDistance={6}>Projects</GhostText>
 			</h2>
 
 			{!isLoading && projects && projects.length > 0 && (
