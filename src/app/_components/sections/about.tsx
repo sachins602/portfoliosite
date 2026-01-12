@@ -1,7 +1,7 @@
 "use client";
 
 import { Github, Grid3x3, Linkedin, Mail, MapPin, Network } from "lucide-react";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useElasticHover, useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
@@ -13,6 +13,7 @@ import { PerformanceMetrics } from "../performance-metrics";
 import { SkillsGrid } from "../skills-grid";
 import { TechConstellation } from "../tech-constellation";
 import { Terminal } from "../terminal/terminal";
+import { Skeleton } from "../ui/skeleton";
 
 export function About() {
 	const [showConstellation, setShowConstellation] = useState(false);
@@ -149,27 +150,37 @@ export function About() {
 
 				{/* Performance Metrics */}
 				<div className="mt-12">
-					<PerformanceMetrics />
+					<Suspense fallback={<Skeleton className="h-[200px] w-full" />}>
+						<PerformanceMetrics />
+					</Suspense>
 				</div>
 
 				{/* GitHub Statistics */}
 				<div className="mt-12">
-					<GitHubStats />
+					<Suspense fallback={<Skeleton className="h-[200px] w-full" />}>
+						<GitHubStats />
+					</Suspense>
 				</div>
 
 				{/* Language Distribution */}
 				<div className="mt-12">
-					<GitHubLanguageChart />
+					<Suspense fallback={<Skeleton className="h-[300px] w-full" />}>
+						<GitHubLanguageChart />
+					</Suspense>
 				</div>
 
 				{/* Contribution Heatmap */}
 				<div className="mt-12">
-					<ContributionHeatmap />
+					<Suspense fallback={<Skeleton className="h-[200px] w-full" />}>
+						<ContributionHeatmap />
+					</Suspense>
 				</div>
 
 				{/* Activity Feed */}
 				<div className="mt-12">
-					<ActivityFeed />
+					<Suspense fallback={<Skeleton className="h-[400px] w-full" />}>
+						<ActivityFeed />
+					</Suspense>
 				</div>
 			</div>
 		</section>

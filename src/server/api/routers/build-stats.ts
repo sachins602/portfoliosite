@@ -75,7 +75,13 @@ async function countAnimations(dir: string): Promise<number> {
 
 			if (entry.isDirectory()) {
 				animationCount += await countAnimations(fullPath);
-			} else if (entry.isFile() && (entry.name.endsWith(".tsx") || entry.name.endsWith(".ts") || entry.name.endsWith(".jsx") || entry.name.endsWith(".js"))) {
+			} else if (
+				entry.isFile() &&
+				(entry.name.endsWith(".tsx") ||
+					entry.name.endsWith(".ts") ||
+					entry.name.endsWith(".jsx") ||
+					entry.name.endsWith(".js"))
+			) {
 				try {
 					const content = await readFile(fullPath, "utf-8");
 					// Count anime() calls, animation-related patterns
@@ -106,10 +112,7 @@ export const buildStatsRouter = createTRPCRouter({
 			// Get the project root directory (go up from server/api/routers)
 			const projectRoot = join(process.cwd(), "src");
 
-			const [linesOfCode, animations] = await Promise.all([
-				countLinesOfCode(projectRoot),
-				countAnimations(projectRoot),
-			]);
+			const [linesOfCode, animations] = await Promise.all([countLinesOfCode(projectRoot), countAnimations(projectRoot)]);
 
 			return {
 				linesOfCode,

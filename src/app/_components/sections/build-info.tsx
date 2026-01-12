@@ -17,7 +17,17 @@ interface Stat {
 	isLoading?: boolean;
 }
 
-function AnimatedStatCounter({ value, suffix, decimals = 0, isLoading = false }: { value: number | null; suffix?: string; decimals?: number; isLoading?: boolean }) {
+function AnimatedStatCounter({
+	value,
+	suffix,
+	decimals = 0,
+	isLoading = false,
+}: {
+	value: number | null;
+	suffix?: string;
+	decimals?: number;
+	isLoading?: boolean;
+}) {
 	const [displayValue, setDisplayValue] = useState(0);
 	const hasAnimated = useRef(false);
 	const previousValue = useRef<number | null>(null);
@@ -170,10 +180,7 @@ export function BuildInfo() {
 
 				// Sum up JavaScript and CSS file sizes
 				for (const resource of resources) {
-					if (
-						resource.name.includes("/_next/static") &&
-						(resource.name.endsWith(".js") || resource.name.endsWith(".css"))
-					) {
+					if (resource.name.includes("/_next/static") && (resource.name.endsWith(".js") || resource.name.endsWith(".css"))) {
 						// Use transferSize if available (actual bytes transferred), otherwise use decodedBodySize
 						const size = resource.transferSize || resource.decodedBodySize || 0;
 						totalSize += size;

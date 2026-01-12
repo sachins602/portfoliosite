@@ -13,9 +13,9 @@ This document serves as a master checklist for optimizing the portfolio. It is d
 
 ### Partial Prerendering (PPR) Readiness
 Next.js 15/16 introduces Partial Prerendering, which mixes static and dynamic content in the same route.
-- [ ] **Task**: Enable and configure Partial Prerendering (experimental).
-- [ ] **Subtask**: Identify dynamic holes (e.g., `performance-metrics.tsx`, `github-stats.tsx`) and wrap them in `<Suspense>`.
-- [ ] **Subtask**: Ensure static parts (Header, Footer, Hero text) render instantly.
+- [x] **Task**: Enable and configure Partial Prerendering (experimental).
+- [x] **Subtask**: Identify dynamic holes (e.g., `performance-metrics.tsx`, `github-stats.tsx`) and wrap them in `<Suspense>`.
+- [x] **Subtask**: Ensure static parts (Header, Footer, Hero text) render instantly.
 
 > **Context for AI**: 
 > Update `next.config.ts`:
