@@ -225,8 +225,8 @@ A highly intricate, mouse-reactive particle background that can replace or enhan
 
 **Why this over current implementation**: Your `hero-background.tsx` creates 30 simple particles with anime.js. A Canvas-based constellation can handle 100+ particles with better performance and real-time mouse interaction.
 
-- [ ] **Task**: Build `ConstellationBackground` component in `src/app/_components/ui/`
-- [ ] **Subtask**: Create Particle class with physics properties
+- [x] **Task**: Build `ConstellationBackground` component in `src/app/_components/ui/`
+- [x] **Subtask**: Create Particle class with physics properties
   ```tsx
   // Particle interface for type safety
   interface Particle {
@@ -240,7 +240,7 @@ A highly intricate, mouse-reactive particle background that can replace or enhan
     alpha: number;
   }
   ```
-- [ ] **Subtask**: Canvas setup with High DPI support (for Retina displays)
+- [x] **Subtask**: Canvas setup with High DPI support (for Retina displays)
   ```tsx
   // Scale canvas for retina displays
   const dpr = window.devicePixelRatio || 1;
@@ -250,7 +250,7 @@ A highly intricate, mouse-reactive particle background that can replace or enhan
   canvas.style.height = `${height}px`;
   ctx.scale(dpr, dpr);
   ```
-- [ ] **Subtask**: Initialize particles with random positions and velocities
+- [x] **Subtask**: Initialize particles with random positions and velocities
   ```tsx
   const initParticles = (count: number): Particle[] => {
     return Array.from({ length: count }, () => ({
@@ -265,7 +265,7 @@ A highly intricate, mouse-reactive particle background that can replace or enhan
     }));
   };
   ```
-- [ ] **Subtask**: Mouse interaction logic (particles flee from cursor with force falloff)
+- [x] **Subtask**: Mouse interaction logic (particles flee from cursor with force falloff)
   ```tsx
   const applyMouseForce = (particle: Particle, mouse: { x: number; y: number }) => {
     const dx = particle.x - mouse.x;
@@ -284,7 +284,7 @@ A highly intricate, mouse-reactive particle background that can replace or enhan
     }
   };
   ```
-- [ ] **Subtask**: Line drawing logic with distance threshold
+- [x] **Subtask**: Line drawing logic with distance threshold
   ```tsx
   const drawConnections = (ctx: CanvasRenderingContext2D, particles: Particle[]) => {
     const maxDistance = 120;
@@ -307,9 +307,9 @@ A highly intricate, mouse-reactive particle background that can replace or enhan
     }
   };
   ```
-- [ ] **Subtask**: Boundary wrapping (particles wrap around screen edges)
-- [ ] **Subtask**: Apply velocity damping to prevent infinite acceleration
-- [ ] **Optimization**: Use `requestAnimationFrame` with proper cleanup
+- [x] **Subtask**: Boundary wrapping (particles wrap around screen edges)
+- [x] **Subtask**: Apply velocity damping to prevent infinite acceleration
+- [x] **Optimization**: Use `requestAnimationFrame` with proper cleanup
   ```tsx
   useEffect(() => {
     let animationId: number;

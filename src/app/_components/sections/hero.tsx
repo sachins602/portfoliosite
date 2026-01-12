@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
-import { HeroBackground } from "../ui/hero-background";
+import { ConstellationBackground } from "../ui/constellation-background";
 import { Section } from "../ui/section";
 
 const name = "Sachin Sapkota";
@@ -135,7 +135,7 @@ export function Hero() {
 			id="hero"
 			ref={sectionRef}
 		>
-			<HeroBackground />
+			<ConstellationBackground />
 			<div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="text-center">
 					{/* Profile Image */}
