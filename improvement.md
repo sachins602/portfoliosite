@@ -73,8 +73,8 @@ Since `reactCompiler: true` is enabled, we should remove manual memoization that
 
 ### Strict Type Safety for Anime.js
 The current `src/lib/anime.ts` wrapper might use `any` or loose types.
-- [ ] **Task**: Improve `AnimeParams` type definition.
-- [ ] **Subtask**: Create strong types for `targets` (limited to HTML Elements, NodeList, or plain objects).
+- [x] **Task**: Improve `AnimeParams` type definition.
+- [x] **Subtask**: Create strong types for `targets` (limited to HTML Elements, NodeList, or plain objects).
 
 ### Folder Structure Reorganization
 Separate business logic from presentation.
