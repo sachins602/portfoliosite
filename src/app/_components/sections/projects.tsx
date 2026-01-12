@@ -5,9 +5,9 @@ import { useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
 import { api } from "~/trpc/react";
-import { ProjectCard } from "../project-card";
-import { ProjectFilter } from "../project-filter";
-import { ProjectSearch } from "../project-search";
+import { ProjectFilter } from "../features/project-filter";
+import { ProjectSearch } from "../features/project-search";
+import { ProjectCard } from "../ui/project-card";
 
 const INITIAL_DISPLAY_COUNT = 12;
 const LOAD_MORE_COUNT = 12;

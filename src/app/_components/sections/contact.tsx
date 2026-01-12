@@ -4,7 +4,7 @@ import { Download, Github, Linkedin, Mail } from "lucide-react";
 import { useElasticHover, useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
-import { ContactForm } from "../contact-form";
+import { ContactForm } from "../features/contact-form";
 
 export function Contact() {
 	const sectionRef = useScrollTrigger<HTMLElement>((element) => {

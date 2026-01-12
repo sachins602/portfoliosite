@@ -6,7 +6,7 @@ import { useElasticHover } from "~/hooks/use-anime";
 import { prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
 import { MobileMenu } from "./mobile-menu";
-import { ThemeToggle } from "./theme-toggle";
+import { ThemeToggle } from "./ui/theme-toggle";
 
 const navLinks = [
 	{ href: "#about", label: "About" },

@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
-import { HeroBackground } from "../hero-background";
+import { HeroBackground } from "../ui/hero-background";
 
 const name = "Sachin Sapkota";
 const subtitle = "Full-Stack Developer | Next.js, TypeScript, Golang and more";

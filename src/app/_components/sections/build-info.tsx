@@ -6,7 +6,7 @@ import { useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
 import { api } from "~/trpc/react";
-import { CodeCarousel } from "../code-carousel";
+import { CodeCarousel } from "../features/code-carousel";
 
 interface Stat {
 	id: string;

@@ -6,7 +6,7 @@ import { useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
 import { api } from "~/trpc/react";
-import { AnimatedNumber } from "./ui/animated-number";
+import { AnimatedNumber } from "../ui/animated-number";
 
 export interface StatCard {
 	id: string;

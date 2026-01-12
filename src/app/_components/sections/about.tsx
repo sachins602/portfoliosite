@@ -5,15 +5,15 @@ import { Suspense, useState } from "react";
 import { useElasticHover, useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
-import { ActivityFeed } from "../activity-feed";
-import { ContributionHeatmap } from "../contribution-heatmap";
-import { GitHubLanguageChart } from "../github-language-chart";
-import { GitHubStats } from "../github-stats";
-import { PerformanceMetrics } from "../performance-metrics";
-import { SkillsGrid } from "../skills-grid";
-import { TechConstellation } from "../tech-constellation";
-import { Terminal } from "../terminal/terminal";
+import { ActivityFeed } from "../features/activity-feed";
+import { ContributionHeatmap } from "../features/contribution-heatmap";
+import { GitHubLanguageChart } from "../features/github-language-chart";
+import { GitHubStats } from "../features/github-stats";
+import { PerformanceMetrics } from "../features/performance-metrics";
+import { TechConstellation } from "../features/tech-constellation";
+import { Terminal } from "../features/terminal/terminal";
 import { Skeleton } from "../ui/skeleton";
+import { SkillsGrid } from "../ui/skills-grid";
 
 export function About() {
 	const [showConstellation, setShowConstellation] = useState(false);

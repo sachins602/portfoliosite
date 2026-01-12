@@ -5,9 +5,9 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { Suspense } from "react";
 import { TRPCReactProvider } from "~/trpc/react";
-import { CursorTrail } from "./_components/cursor-trail";
-import { KonamiHandler } from "./_components/konami-handler";
-import { ScrollProgress } from "./_components/scroll-progress";
+import { KonamiHandler } from "./_components/features/konami-handler";
+import { CursorTrail } from "./_components/ui/cursor-trail";
+import { ScrollProgress } from "./_components/ui/scroll-progress";
 
 export const metadata: Metadata = {
 	title: "Sachin Sapkota | Full-Stack Developer",

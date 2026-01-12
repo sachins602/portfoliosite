@@ -6,7 +6,7 @@ import { useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
 import { testimonials } from "~/lib/data/testimonials";
-import { TestimonialCard } from "../testimonial-card";
+import { TestimonialCard } from "../ui/testimonial-card";
 
 export function Testimonials() {
 	const [currentIndex, setCurrentIndex] = useState(0);

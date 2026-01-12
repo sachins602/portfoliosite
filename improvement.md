@@ -78,9 +78,9 @@ The current `src/lib/anime.ts` wrapper might use `any` or loose types.
 
 ### Folder Structure Reorganization
 Separate business logic from presentation.
-- [ ] **Task**: Move complex feature components to `src/app/_components/features/` (e.g., `github-stats`, `terminal`).
-- [ ] **Task**: Move foundational UI to `src/app/_components/ui/` (e.g., `animated-number`, `button`).
-- [ ] **Task**: Create `src/app/_components/sections/` for page sections (Hero, About).
+- [x] **Task**: Move complex feature components to `src/app/_components/features/` (e.g., `github-stats`, `terminal`).
+- [x] **Task**: Move foundational UI to `src/app/_components/ui/` (e.g., `animated-number`, `button`).
+- [x] **Task**: Create `src/app/_components/sections/` for page sections (Hero, About).
 
 ### Component Composition Pattern
 - [ ] **Task**: Refactor Sections to use a `Section` wrapper.
