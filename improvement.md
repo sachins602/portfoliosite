@@ -1,157 +1,226 @@
 # Portfolio Improvement Plan
 
-This document tracks identified areas for improvement in the project, ranging from code quality and architecture to UI/UX and advanced animations.
+This document serves as a master checklist for optimizing the portfolio. It is designed to be executed by AI agents or developers.
+**Tech Stack Context**: Next.js 16 (Canary/Latest), React 19, Tailwind v4, Anime.js v4, Biome, TypeScript 5.
 
-- [ ] **Priority**: High - Critical fixes and improvements
-- [ ] **Priority**: Medium - UI/UX and Refactoring
-- [ ] **Priority**: Low - Polish and "Cool Stuff"
+- [ ] **Priority**: High - Critical Performance & Architecture
+- [ ] **Priority**: Medium - UI/UX & Refactoring
+- [ ] **Priority**: Low - Visual Polish & "Cool Stuff"
 
-## 1. Code Architecture & Refactoring
+---
 
-### Folder Structure Organization
-Currently, the `src/app/_components` directory is a mix of UI components, sections, and feature-specific components.
-- [ ] Create `src/app/_components/ui` for primitives (Button, Card, AnimatedNumber).
-- [ ] Create `src/app/_components/features` for complex widgets (GithubStats, Terminal).
-- [ ] Move `src/app/_components/sections` contents higher if preferred, or keep as is but strictly for page sections.
+## 1. Next.js 16 & React 19 Performance Optimizations
 
-### Component Standardization
-Many sections in `page.tsx` likely repeat container logic (padding, margins, constraints).
-- [ ] Create a `SectionWrapper` component to standardize basic section layout.
+### Partial Prerendering (PPR) Readiness
+Next.js 15/16 introduces Partial Prerendering, which mixes static and dynamic content in the same route.
+- [ ] **Task**: Enable and configure Partial Prerendering (experimental).
+- [ ] **Subtask**: Identify dynamic holes (e.g., `performance-metrics.tsx`, `github-stats.tsx`) and wrap them in `<Suspense>`.
+- [ ] **Subtask**: Ensure static parts (Header, Footer, Hero text) render instantly.
+
+> **Context for AI**: 
+> Update `next.config.ts`:
+> ```ts
+> const nextConfig: NextConfig = {
+>   experimental: {
+>     ppr: true, // Enable Partial Prerendering
+>     reactCompiler: true,
+>   }
+> };
+> ```
+> Wrap dynamic components in `page.tsx`:
+> ```tsx
+> import { Suspense } from 'react';
+> import { Skeleton } from './ui/skeleton';
+> 
+> export default function Page() {
+>   return (
+>     <main>
+>       <StaticComponent />
+>       <Suspense fallback={<Skeleton />}>
+>         <DynamicComponent />
+>       </Suspense>
+>     </main>
+>   );
+> }
+> ```
+
+### React Compiler Optimization
+Since `reactCompiler: true` is enabled, we should remove manual memoization that clutters the code.
+- [ ] **Task**: Scan codebase for `useMemo` and `useCallback`.
+- [ ] **Subtask**: Remove `useMemo` for simple derivations (React Compiler handles this).
+- [ ] **Subtask**: Remove `useCallback` for simple event handlers passed to children.
+- [ ] **Exception**: Keep them only if you are interfacing with external libraries that rely on reference equality (like some Anime.js hooks might, but usually Compiler is smart enough).
+
+### Image & Asset Optimization
+- [ ] **Task**: Implement AVIF/WebP strictness.
+- [ ] **Task**: Use `next/image`'s `sizes` prop correctly on the Project Card images to prevent loading 4k images on mobile.
+- [ ] **Task**: Verify `fetchPriority="high"` is used on the Hero LCP (Largest Contentful Paint) element.
+
+> **Context for AI**:
+> When using `<Image />`, ensure the `sizes` attribute matches the CSS layout.
+> ```tsx
+> // For a grid of 3 cards:
+> <Image 
+>   src={project.image} 
+>   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+>   alt="Project"
+> />
+> ```
+
+---
+
+## 2. Code Architecture & Refactoring
+
+### Strict Type Safety for Anime.js
+The current `src/lib/anime.ts` wrapper might use `any` or loose types.
+- [ ] **Task**: Improve `AnimeParams` type definition.
+- [ ] **Subtask**: Create strong types for `targets` (limited to HTML Elements, NodeList, or plain objects).
+
+### Folder Structure Reorganization
+Separate business logic from presentation.
+- [ ] **Task**: Move complex feature components to `src/app/_components/features/` (e.g., `github-stats`, `terminal`).
+- [ ] **Task**: Move foundational UI to `src/app/_components/ui/` (e.g., `animated-number`, `button`).
+- [ ] **Task**: Create `src/app/_components/sections/` for page sections (Hero, About).
+
+### Component Composition Pattern
+- [ ] **Task**: Refactor Sections to use a `Section` wrapper.
+- [ ] **Context**:
   ```tsx
-  // src/app/_components/ui/section-wrapper.tsx
-  export function SectionWrapper({ children, id, className }: WrapperProps) {
+  // src/app/_components/ui/section.tsx
+  interface SectionProps extends React.HTMLAttributes<HTMLElement> {
+    container?: boolean; // If true, wraps children in container
+  }
+  export function Section({ children, container = true, className, ...props }: SectionProps) {
+    const content = container ? (
+        <div className="container mx-auto px-4">{children}</div>
+    ) : children;
+    
     return (
-      <section id={id} className={cn("py-16 md:py-24", className)}>
-        <div className="container mx-auto px-4 md:px-6">
-          {children}
-        </div>
+      <section className={cn("py-20", className)} {...props}>
+        {content}
       </section>
     );
   }
   ```
 
-### Strict Mode & Hydration
-- [ ] Review `layout.tsx`: `suppressHydrationWarning` on `html` is a blunt instrument.
-  - While needed for next-themes, ensure it's not hiding real errors.
-  - Move the `dangerouslySetInnerHTML` script to a dedicated utils helper or custom Hook for cleaner code.
-- [ ] Consider using `next-themes` library instead of manual theme handling to avoid edge cases and simplify the `layout.tsx`.
+### Strict Mode & Hydration Audit
+- [ ] **Task**: Review `layout.tsx` for `suppressHydrationWarning`.
+- [ ] **Subtask**: Move the theme initialization script to a dedicated helper/constants file (`theme-script.tsx`) to keep layout clean and testable.
 
-### Hook Cleanup
-- [ ] `useTypewriter` in `use-anime.ts` uses `setTimeout` loops inside `useEffect`.
-  - **Improvement**: Re-implement using `anime.js` timeline or ensure strictly typed cleanup to prevent memory leaks if component unmounts rapidly.
+---
 
-## 2. UI/UX Improvements
+## 3. Advanced Animation Library (Ideas & Tasks)
 
-### Accessibility (a11y)
-- [ ] **Focus Management**: Ensure the mobile menu traps focus when open.
-- [ ] **Keyboard Nav**: Check that "Skip to content" link exists (or add one).
-- [ ] **Labels**: Ensure all icon-only buttons (like Theme Toggle, Github Icon) have `aria-label`.
+This section contains multiple "Gold Plating" ideas. **Choose one or mix them.**
 
-### Visual Consistency
-- [ ] **Mixed Animations**: We use `anime.js` for some things, `animate-spin` (Tailwind) for others, and `setTimeout` for others.
-  - **Task**: Standardize on `anime.js` for complex sequences and Tailwind `transition` for simple hover states. Avoid mixing `animate-bounce` with physics-based `anime.js` to keep the "feel" consistent.
+### Option A: Interactive "Constellation" Background
+A highly intricate, mouse-reactive background.
+- [ ] **Task**: Build `ConstellationBackground` component.
+- [ ] **Subtask**: Canvas setup with High DPI support (for Retina displays).
+- [ ] **Subtask**: Particle Class/Object structure (x, y, vx, vy, radius).
+- [ ] **Subtask**: Mouse interaction logic (particles flee or attract to cursor).
+- [ ] **Subtask**: Line drawing logic (draw line if distance < threshold).
+- [ ] **Optimization**: Use `requestAnimationFrame` for the loop, do NOT use React state for particle positions.
 
-### Loading States
-- [ ] Add Skeleton loaders for async components (Github Stats, Performance Metrics) instead of jumping content when data loads.
+> **Context for AI**:
+> Use a ref for the canvas and specific non-react state for particles.
+> ```tsx
+> const particles = useRef<Particle[]>([]);
+> const mouse = useRef({ x: 0, y: 0 });
+> 
+> // In animation loop:
+> context.clearRect(0, 0, width, height);
+> particles.current.forEach(p => {
+>   // Physics math here
+>   // Draw arc
+> });
+> // Nested loop for lines (optimize by checking only nearby particles)
+> ```
 
-## 3. "Cool Thing" - Advanced Animation
+### Option B: Interactive "Fluid Distortion" Image Hover
+**Concept**: A WebGL-like liquid distortion effect using **pure SVG Filters** and Anime.js.
+- [ ] **Task**: Create `DistortionImage` component.
+- [ ] **Subtask**: Embed a hidden SVG with a `<filter>` containing `<feDisplacementMap>` and `<feTurbulence>`.
+- [ ] **Subtask**: On hover, use Anime.js to animate the `baseFrequency` or `scale` attribute of the turbulence.
+- [ ] **Subtask**: Apply this filter via CSS `filter: url(#distortion-id)` to project cards or the hero image.
 
-**Goal**: Create a "complicated" looking highly interactive background using `anime.js`.
+> **Context for AI**:
+> ```tsx
+> // Function to animate filter attributes
+> function onEnter() {
+>    anime({
+>      targets: 'filter feDisplacementMap',
+>      scale: [0, 30], // Ramp up distortion
+>      baseFrequency: [0.01, 0.4], 
+>      duration: 500,
+>      easing: 'easeOutQuad'
+>    });
+> }
+> ```
 
-### Proposal: Interactive Constellation Field
-Replace the current random particles with a magnetically interactive grid.
-
-- [ ] **Task**: Create `src/app/_components/ui/constellation-background.tsx`
-- **Concept**:
-  - A field of points that softly drift.
-  - When Mouse moves near, points "gravitate" slightly away or toward the cursor.
-  - Lines connect points if they are within a certain distance, creating a dynamic mesh.
-  - Use `anime.js` to "stagger" the entrance of the points on load.
-
-#### Architecture Example:
-```tsx
-// Abstract concept code
-"use client";
-import { useEffect, useRef } from "react";
-import anime from "animejs/lib/anime.es.js";
-
-export function ConstellationBackground() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    // ... setup resize observer ...
-
-    // Particle System
-    const particles = Array.from({ length: 50 }).map(() => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.5,
-      vy: (Math.random() - 0.5) * 0.5
-    }));
-
-    // Anime.js Entrance
-    anime({
-      targets: particles,
-      x: (p) => p.x, // Just to register them if needed or animate radius
-      radius: [0, 2],
-      delay: anime.stagger(10),
-      easing: 'easeOutElastic(1, .8)'
-    });
-
-    function loop() {
-      // Update positions
-      // Draw lines between close particles
-      // Apply mouse force (optional)
-      requestAnimationFrame(loop);
-    }
-    loop();
-  }, []);
-
-  return <canvas ref={canvasRef} className="absolute inset-0 -z-10" />;
-}
-```
-
-## 4. Specific Code Improvements
-
-### `src/app/_components/sections/hero.tsx` Refactor
-- [ ] **Issue**: `typingTimeoutRef` mixed with `anime.js` callbacks creates a complex, hard-to-debug flow.
-- [ ] **Fix**: Create a `MasterTimeline` using `anime.timeline()`.
-  
-  **Pattern:**
-  ```typescript
-  useEffect(() => {
-    const tl = anime.timeline({
-      easing: 'easeOutExpo',
-      duration: 750
-    });
-
-    tl
-    .add({
-      targets: refs.greeting,
-      opacity: [0, 1],
-      translateY: [20, 0]
-    })
-    .add({
-      targets: refs.nameChars,
-      opacity: [0, 1],
-      translateY: [30, 0],
-      delay: anime.stagger(50)
-    })
-    .add({
-      // Replaces the setTimeout typewriter with opacity/width reveal
-      targets: refs.subtitle, 
-      opacity: [0, 1], 
-      change: () => { /* Logic to swap text if needed */ }
-    });
-  }, []);
+### Option C: Magnetic Buttons
+**Concept**: Buttons that physically move towards the cursor when hovered.
+- [ ] **Task**: Create a `MagneticButton` wrapper.
+- [ ] **Description**: When mouse hovers near the button, the button moves *towards* the cursor slightly using `translateX/Y`.
+- [ ] **Context**:
+  ```tsx
+  <MagneticButton>
+    <button>Hover Me</button>
+  </MagneticButton>
   ```
 
-### `src/hooks/use-anime.ts` Type Safety
-- [ ] `useStaggerReveal` currently takes `_items: unknown[]`.
-- [ ] Change to generic: `export function useStaggerReveal<T, E extends HTMLElement>(items: T[], ...)` to ensure better usage safety.
+### Option D: "Ghost Text" Stagger Effect
+**Concept**: Text that splits into RGB channels or blurs directionally.
+- [ ] **Task**: Create `GhostText` component.
+- [ ] **Subtask**: Render 3 copies of the text (Red, Green, Blue) absolutely positioned on top of each other.
+- [ ] **Subtask**: Use Anime.js `stagger` to move them slightly apart on hover.
 
-## 5. Future Polish
-- [ ] **Sound Design**: Add subtle sound effects (using `use-sound` or similar) on hover/click for that "premium" feel.
-- [ ] **Page Transitions**: Implement a "curtain" reveal or shared layout transition between pages (if more pages are added).
+---
+
+## 4. UI/UX Improvements
+
+### Accessibility (a11y) Audit
+- [ ] **Task**: Run a manual audit of tab ordering.
+- [ ] **Task**: Ensure `prefers-reduced-motion` completely disables the complex effects (return `null` or static image).
+
+### Scroll Progress Integration
+- [ ] **Task**: Enhance `ScrollProgress` bar.
+- [ ] **Subtask**: Add a "glow" effect to the tip of the progress bar using a pseudo-element and box-shadow, matching the theme accent.
+
+### Loading States
+- [ ] **Task**: Create generalized `Skeleton` components.
+- [ ] **Subtask**: Replace jarring layout shifts in `GithubStats` and `PerformanceMetrics` with smooth skeleton loaders that match the final dimensions.
+
+---
+
+## 5. Deployment & CI/CD Speed
+- [ ] **Task**: Verify `next.config.ts` has `swcMinify: true` (default in newer versions, but good to check).
+- [ ] **Task**: Check if `logging` is enabled in `next.config.ts` for fetcching (Next.js 15+ feature `logging: { fetches: { fullUrl: true } }`) to debug data fetching waterfalls during dev.
+
+## 6. Advanced Refactoring (AI Agent Specific)
+
+### Hero Animation Refactor
+- [ ] **Task**: Refactor `Hero.tsx` to use `anime.timeline()` master timeline.
+- [ ] **Reasoning**: Currently uses nested `setTimeout` which is hard to debug and race-condition prone.
+- [ ] **Context**:
+  ```ts
+  const tl = anime.timeline({ easing: 'easeOutExpo' });
+  tl.add({ targets: refs.greeting, ... })
+    .add({ targets: refs.name, ... }, '-=200'); // Overlap
+  ```
+
+### Dependency Injection for Data
+- [ ] **Task**: Refactor direct API calls in components to use a Custom Hook layer that explicitly calls TRPC.
+- [ ] **Reasoning**: Decouples UI from data fetching implementation, making testing easier.
+
+### Error Boundary Strategy
+- [ ] **Task**: Add `error.tsx` in `src/app/` to catch runtime errors gracefully.
+- [ ] **Task**: Create specific error boundaries for heavy components (e.g., `<GithubStats />`) so one API failure doesn't crash the page.
+- [ ] **Context**:
+  ```tsx
+  // src/app/_components/features/github-stats-error.tsx
+  'use client'; 
+  export default function GithubVisualError({ reset }: { reset: () => void }) {
+    return <div onClick={reset}>Failed to load GitHub stats. Retry?</div>
+  }
+  ```
