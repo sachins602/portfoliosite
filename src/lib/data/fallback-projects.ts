@@ -9,6 +9,7 @@ export interface Project {
 	homepage: string | null;
 	topics: string[];
 	updated_at: string;
+	image?: string;
 }
 
 export const fallbackProjects: Project[] = [

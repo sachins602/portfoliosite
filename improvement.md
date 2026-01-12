@@ -52,9 +52,9 @@ Since `reactCompiler: true` is enabled, we should remove manual memoization that
 - [x] **Exception**: Keep them only if you are interfacing with external libraries that rely on reference equality (like some Anime.js hooks might, but usually Compiler is smart enough).
 
 ### Image & Asset Optimization
-- [ ] **Task**: Implement AVIF/WebP strictness.
-- [ ] **Task**: Use `next/image`'s `sizes` prop correctly on the Project Card images to prevent loading 4k images on mobile.
-- [ ] **Task**: Verify `fetchPriority="high"` is used on the Hero LCP (Largest Contentful Paint) element.
+- [x] **Task**: Implement AVIF/WebP strictness.
+- [x] **Task**: Use `next/image`'s `sizes` prop correctly on the Project Card images to prevent loading 4k images on mobile.
+- [x] **Task**: Verify `fetchPriority="high"` is used on the Hero LCP (Largest Contentful Paint) element.
 
 > **Context for AI**:
 > When using `<Image />`, ensure the `sizes` attribute matches the CSS layout.

@@ -57,6 +57,7 @@ export async function fetchGitHubRepos(): Promise<Project[]> {
 				homepage: repo.homepage,
 				topics: repo.topics,
 				updated_at: repo.updated_at,
+				image: `https://opengraph.githubassets.com/1/${env.GITHUB_USERNAME}/${repo.name}`,
 			}));
 
 		return filtered;

@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowDown } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
@@ -131,6 +132,19 @@ export function Hero() {
 			<HeroBackground />
 			<div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="text-center">
+					{/* Profile Image */}
+					<div className="mb-8 flex justify-center">
+						<div className="relative h-24 w-24 overflow-hidden rounded-full border-(--accent) border-2 shadow-xl md:h-32 md:w-32">
+							<Image
+								alt={name}
+								fill
+								priority
+								sizes="(max-width: 768px) 96px, 128px"
+								src={`https://github.com/sachins602.png`}
+							/>
+						</div>
+					</div>
+
 					{/* Greeting */}
 					<div
 						className="mb-4 text-(--text-secondary) text-lg sm:text-xl"
