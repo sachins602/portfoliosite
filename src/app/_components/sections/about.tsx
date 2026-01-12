@@ -12,10 +12,11 @@ import { GitHubStats } from "../features/github-stats";
 import { PerformanceMetrics } from "../features/performance-metrics";
 import { TechConstellation } from "../features/tech-constellation";
 import { Terminal } from "../features/terminal/terminal";
+import { GhostText } from "../ui/ghost-text";
+import { ParallaxGroup, ParallaxLayer } from "../ui/parallax-reveal";
 import { Section } from "../ui/section";
 import { Skeleton } from "../ui/skeleton";
 import { SkillsGrid } from "../ui/skills-grid";
-import { GhostText } from "../ui/ghost-text";
 
 export function About() {
 	const [showConstellation, setShowConstellation] = useState(false);
@@ -53,7 +54,35 @@ export function About() {
 	const linkedinRef = useElasticHover<HTMLAnchorElement>();
 
 	return (
-		<Section className="bg-(--bg-primary) md:py-32" id="about" ref={sectionRef}>
+		<Section className="relative bg-(--bg-primary) md:py-32" id="about" ref={sectionRef}>
+			{/* Parallax background decorations */}
+			<ParallaxGroup className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+				<ParallaxLayer
+					className="absolute top-[20%] left-[10%] h-64 w-64 rounded-full bg-(--accent)/10 blur-3xl"
+					direction="up"
+					rootMargin="200px"
+					speed={0.2}
+				>
+					<div />
+				</ParallaxLayer>
+				<ParallaxLayer
+					className="absolute top-[60%] right-[15%] h-80 w-80 rounded-full bg-(--accent)/5 blur-3xl"
+					direction="down"
+					rootMargin="200px"
+					speed={0.4}
+				>
+					<div />
+				</ParallaxLayer>
+				<ParallaxLayer
+					className="absolute bottom-[10%] left-[5%] h-48 w-48 rounded-full bg-(--accent)/8 blur-3xl"
+					direction="left"
+					rootMargin="200px"
+					speed={0.3}
+				>
+					<div />
+				</ParallaxLayer>
+			</ParallaxGroup>
+
 			<h2
 				className="section-title mb-12 text-center font-bold text-4xl md:text-5xl"
 				style={{ opacity: prefersReducedMotion() ? 1 : 0 }}

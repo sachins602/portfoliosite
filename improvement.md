@@ -718,14 +718,14 @@ A highly intricate, mouse-reactive particle background that can replace or enhan
 
 ---
 
-### Option E: Parallax Scroll Reveal (NEW)
+### Option E: Parallax Scroll Reveal
 
 **Concept**: Elements reveal with a parallax depth effect as they scroll into view. Layered elements move at different speeds.
 
 **Integration Note**: Enhances your existing `useScrollTrigger` hook usage in sections like About and Projects.
 
-- [ ] **Task**: Create `ParallaxReveal` wrapper component
-- [ ] **Subtask**: Track scroll position relative to viewport
+- [x] **Task**: Create `ParallaxReveal` wrapper component
+- [x] **Subtask**: Track scroll position relative to viewport
   ```tsx
   // src/app/_components/ui/parallax-reveal.tsx
   "use client";
@@ -805,7 +805,7 @@ A highly intricate, mouse-reactive particle background that can replace or enhan
     );
   }
   ```
-- [ ] **Subtask**: Create `ParallaxGroup` for layered parallax effect
+- [x] **Subtask**: Create `ParallaxGroup` for layered parallax effect
   ```tsx
   // Multiple children at different speeds
   <ParallaxGroup>
@@ -814,9 +814,9 @@ A highly intricate, mouse-reactive particle background that can replace or enhan
     <ParallaxLayer speed={0.8}><Foreground /></ParallaxLayer>
   </ParallaxGroup>
   ```
-- [ ] **Subtask**: Add opacity fade tied to scroll progress
-- [ ] **Subtask**: Integrate with About section background decorations
-- [ ] **Subtask**: Add `rootMargin` option to start animation before element enters viewport
+- [x] **Subtask**: Add opacity fade tied to scroll progress
+- [x] **Subtask**: Integrate with About section background decorations
+- [x] **Subtask**: Add `rootMargin` option to start animation before element enters viewport
 
 ---
 
