@@ -3,7 +3,7 @@ import "~/styles/globals.css";
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { Suspense } from "react";
-
+import { Analytics } from "@vercel/analytics/next"
 import { TRPCReactProvider } from "~/trpc/react";
 import { CursorTrail } from "./_components/cursor-trail";
 import { KonamiHandler } from "./_components/konami-handler";
@@ -76,6 +76,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 					<ScrollProgress />
 					<Suspense fallback={null}>{children}</Suspense>
 				</TRPCReactProvider>
+				<Analytics />
 			</body>
 		</html>
 	);

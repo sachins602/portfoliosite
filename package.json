@@ -24,6 +24,7 @@
 		"@trpc/client": "^11.0.0",
 		"@trpc/react-query": "^11.0.0",
 		"@trpc/server": "^11.0.0",
+		"@vercel/analytics": "^1.6.1",
 		"@vercel/og": "^0.8.6",
 		"animejs": "^4.2.2",
 		"drizzle-orm": "^0.45.1",
