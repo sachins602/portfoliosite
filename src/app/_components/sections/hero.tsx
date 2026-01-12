@@ -183,7 +183,7 @@ export function Hero() {
 					</div>
 
 					{/* Name */}
-					<h1 className="mb-6 font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-8xl" ref={nameRef}>
+					<h1 className="mb-6 whitespace-nowrap font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl" ref={nameRef}>
 						{name.split("").map((char, index) => {
 							const uniqueKey = `char-${index}-${char.charCodeAt(0)}`;
 							return (
