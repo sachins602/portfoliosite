@@ -5,9 +5,8 @@ import { useElasticHover, useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
 import { ContactForm } from "../features/contact-form";
-
-import { Section } from "../ui/section";
 import { GhostText } from "../ui/ghost-text";
+import { Section } from "../ui/section";
 
 export function Contact() {
 	const sectionRef = useScrollTrigger<HTMLElement>((element) => {

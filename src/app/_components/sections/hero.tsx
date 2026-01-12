@@ -9,6 +9,7 @@ import anime from "~/lib/anime";
 import { ConstellationBackground } from "../ui/constellation-background";
 import { GhostText } from "../ui/ghost-text";
 import { Section } from "../ui/section";
+import { TextScramble } from "../ui/text-scramble";
 
 const name = "Sachin Sapkota";
 const subtitle = "Full-Stack Developer | Next.js, TypeScript, Golang and more";
@@ -153,14 +154,8 @@ export function Hero() {
 					</div>
 
 					{/* Greeting */}
-					<div
-						className="mb-4 text-(--text-secondary) text-lg sm:text-xl"
-						ref={greetingRef}
-						style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
-					>
-						<GhostText offsetDistance={4} variant="blur">
-							{greeting}!
-						</GhostText>
+					<div className="mb-4 text-(--text-secondary) text-lg sm:text-xl" ref={greetingRef}>
+						<TextScramble text={`${greeting}!`} speed={50} delay={200} />
 					</div>
 
 					{/* Name */}
@@ -168,11 +163,7 @@ export function Hero() {
 						{name.split("").map((char, index) => {
 							const uniqueKey = `char-${index}-${char.charCodeAt(0)}`;
 							return (
-								<GhostText
-									key={uniqueKey}
-									offsetDistance={8}
-									style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
-								>
+								<GhostText key={uniqueKey} offsetDistance={8} style={{ opacity: prefersReducedMotion() ? 1 : 0 }}>
 									{char === " " ? "\u00A0" : char}
 								</GhostText>
 							);

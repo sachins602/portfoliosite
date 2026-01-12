@@ -5,9 +5,9 @@ import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
 import { experiences } from "~/lib/data/experience";
 import { ExperienceCard } from "../ui/experience-card";
+import { GhostText } from "../ui/ghost-text";
 import { Section } from "../ui/section";
 import { Timeline } from "../ui/timeline";
-import { GhostText } from "../ui/ghost-text";
 
 export function Experience() {
 	const sectionRef = useScrollTrigger<HTMLElement>((element) => {

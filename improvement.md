@@ -820,14 +820,14 @@ A highly intricate, mouse-reactive particle background that can replace or enhan
 
 ---
 
-### Option F: Text Scramble Effect (NEW)
+### Option F: Text Scramble Effect 
 
 **Concept**: Text characters scramble through random characters before settling on the final value. Great for headings and emphasis text.
 
 **Similar to**: Terminal boot sequences, hacker movie aesthetics
 
-- [ ] **Task**: Create `TextScramble` component
-- [ ] **Subtask**: Implement character-by-character reveal with random substitution
+- [x] **Task**: Create `TextScramble` component
+- [x] **Subtask**: Implement character-by-character reveal with random substitution
   ```tsx
   // src/app/_components/ui/text-scramble.tsx
   "use client";
@@ -918,8 +918,8 @@ A highly intricate, mouse-reactive particle background that can replace or enhan
     );
   }
   ```
-- [ ] **Subtask**: Add `delay` prop for staggered reveals across multiple elements
-- [ ] **Subtask**: Add `loop` mode for continuous scrambling (for loading states)
+- [x] **Subtask**: Add `delay` prop for staggered reveals across multiple elements
+- [x] **Subtask**: Add `loop` mode for continuous scrambling (for loading states)
   ```tsx
   // Continuous scramble mode
   const loopInterval = setInterval(() => {
@@ -928,7 +928,7 @@ A highly intricate, mouse-reactive particle background that can replace or enhan
     ).join(""));
   }, 100);
   ```
-- [ ] **Subtask**: Create `ScrambleLink` variant (scrambles on hover)
+- [x] **Subtask**: Create `ScrambleLink` variant (scrambles on hover)
   ```tsx
   export function ScrambleLink({ children, href }: { children: string; href: string }) {
     const [displayText, setDisplayText] = useState(children);
@@ -943,12 +943,12 @@ A highly intricate, mouse-reactive particle background that can replace or enhan
     );
   }
   ```
-- [ ] **Subtask**: Integrate with Hero greeting or section titles
-- [ ] **Subtask**: Ensure font is monospace or has consistent character widths to prevent layout shift
+- [x] **Subtask**: Integrate with Hero greeting or section titles
+- [x] **Subtask**: Ensure font is monospace or has consistent character widths to prevent layout shift
 
 ---
 
-### Option G: Morphing Shapes Background (NEW)
+### Option G: Morphing Shapes Background 
 
 **Concept**: Smooth, organic blob shapes in the background that continuously morph and float.
 

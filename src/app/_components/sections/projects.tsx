@@ -7,8 +7,8 @@ import anime from "~/lib/anime";
 import { api } from "~/trpc/react";
 import { ProjectFilter } from "../features/project-filter";
 import { ProjectSearch } from "../features/project-search";
-import { ProjectCard } from "../ui/project-card";
 import { GhostText } from "../ui/ghost-text";
+import { ProjectCard } from "../ui/project-card";
 
 const INITIAL_DISPLAY_COUNT = 12;
 const LOAD_MORE_COUNT = 12;
