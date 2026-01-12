@@ -2,23 +2,14 @@
 
 import { Calendar, Mail, Trash2 } from "lucide-react";
 import { useState } from "react";
+import { useDeleteSubmission, useMarkAsRead, useSubmissions } from "~/hooks/use-admin";
 import { api } from "~/trpc/react";
 
 export default function SubmissionsPage() {
 	const utils = api.useUtils();
-	const { data: submissions, isLoading } = api.admin.getSubmissions.useQuery();
-	const markAsReadMutation = api.admin.markAsRead.useMutation({
-		onSuccess: () => {
-			utils.admin.getSubmissions.invalidate();
-			utils.admin.getSubmissionStats.invalidate();
-		},
-	});
-	const deleteMutation = api.admin.deleteSubmission.useMutation({
-		onSuccess: () => {
-			utils.admin.getSubmissions.invalidate();
-			utils.admin.getSubmissionStats.invalidate();
-		},
-	});
+	const { data: submissions, isLoading } = useSubmissions();
+	const markAsReadMutation = useMarkAsRead();
+	const deleteMutation = useDeleteSubmission();
 
 	const [selectedSubmission, setSelectedSubmission] = useState<number | null>(null);
 
@@ -72,7 +63,15 @@ export default function SubmissionsPage() {
 										<button
 											className="rounded border border-(--border) bg-(--bg-primary) px-3 py-1 text-sm transition-colors hover:bg-(--bg-secondary)"
 											onClick={() => {
-												markAsReadMutation.mutate({ id: submission.id });
+												markAsReadMutation.mutate(
+													{ id: submission.id },
+													{
+														onSuccess: () => {
+															utils.admin.getSubmissions.invalidate();
+															utils.admin.getSubmissionStats.invalidate();
+														},
+													},
+												);
 											}}
 											type="button"
 										>
@@ -83,7 +82,15 @@ export default function SubmissionsPage() {
 										className="rounded border border-red-500 bg-red-500/10 px-3 py-1 text-red-500 text-sm transition-colors hover:bg-red-500/20"
 										onClick={() => {
 											if (confirm("Are you sure you want to delete this submission?")) {
-												deleteMutation.mutate({ id: submission.id });
+												deleteMutation.mutate(
+													{ id: submission.id },
+													{
+														onSuccess: () => {
+															utils.admin.getSubmissions.invalidate();
+															utils.admin.getSubmissionStats.invalidate();
+														},
+													},
+												);
 											}
 										}}
 										type="button"

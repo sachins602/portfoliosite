@@ -2,12 +2,12 @@
 
 import { useEffect, useRef } from "react";
 import { useScrollTrigger } from "~/hooks/use-anime";
+import { useGitHubLanguageStats } from "~/hooks/use-github-language-stats";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
-import { api } from "~/trpc/react";
 
 export function GitHubLanguageChart() {
-	const { data: languages, isLoading, error } = api.githubStats.getLanguageStats.useQuery();
+	const { data: languages, isLoading, error } = useGitHubLanguageStats();
 
 	const containerRef = useScrollTrigger<HTMLDivElement>((element) => {
 		if (prefersReducedMotion()) return;

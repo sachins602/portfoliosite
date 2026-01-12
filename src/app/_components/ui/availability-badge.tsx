@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useAvailabilityStatus } from "~/hooks/use-settings";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
-import { api } from "~/trpc/react";
 
 const statusColors: Record<string, string> = {
 	"Available for hire": "bg-green-500",
@@ -19,7 +19,7 @@ const statusLabels: Record<string, string> = {
 
 export function AvailabilityBadge() {
 	const badgeRef = useRef<HTMLDivElement>(null);
-	const { data: status } = api.settings.getAvailabilityStatus.useQuery();
+	const { data: status } = useAvailabilityStatus();
 
 	useEffect(() => {
 		if (!badgeRef.current || prefersReducedMotion() || !status) {

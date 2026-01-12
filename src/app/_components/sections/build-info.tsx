@@ -3,9 +3,9 @@
 import { Code2, FileCode, Github, Package, Zap } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useScrollTrigger } from "~/hooks/use-anime";
+import { useBuildStats } from "~/hooks/use-build-stats";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
-import { api } from "~/trpc/react";
 import { CodeCarousel } from "../features/code-carousel";
 import { GhostText } from "../ui/ghost-text";
 
@@ -145,7 +145,7 @@ export function BuildInfo() {
 	});
 
 	// Fetch build stats from API
-	const { data: buildStats, isLoading: isLoadingBuildStats } = api.buildStats.getBuildStats.useQuery();
+	const { data: buildStats, isLoading: isLoadingBuildStats } = useBuildStats();
 
 	// Client-side performance metrics
 	const [performanceMetrics, setPerformanceMetrics] = useState<{

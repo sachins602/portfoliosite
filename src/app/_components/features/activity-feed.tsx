@@ -3,9 +3,9 @@
 import { GitBranch, Github, GitMerge, Plus, Star } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { useScrollTrigger, useStaggerReveal } from "~/hooks/use-anime";
+import { useGitHubActivity } from "~/hooks/use-github-activity";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
-import { api } from "~/trpc/react";
 
 const getEventIcon = (type: string) => {
 	switch (type) {
@@ -23,7 +23,7 @@ const getEventIcon = (type: string) => {
 };
 
 export function ActivityFeed() {
-	const { data: activities, isLoading, error } = api.githubActivity.getActivity.useQuery();
+	const { data: activities, isLoading, error } = useGitHubActivity();
 
 	const containerRef = useScrollTrigger<HTMLDivElement>((element) => {
 		if (prefersReducedMotion()) return;

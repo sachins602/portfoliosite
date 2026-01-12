@@ -1,10 +1,10 @@
 "use client";
 
 import { CheckCircle, Loader2, XCircle } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useContactSubmit } from "~/hooks/use-contact";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
-import { api } from "~/trpc/react";
 
 export function ContactForm() {
 	const [name, setName] = useState("");
@@ -19,10 +19,13 @@ export function ContactForm() {
 	const successRef = useRef<HTMLDivElement>(null);
 	const errorRef = useRef<HTMLDivElement>(null);
 
-	const submitMutation = api.contact.submitContact.useMutation({
-		onSuccess: (data) => {
+	const submitMutation = useContactSubmit();
+
+	// Handle mutation success
+	useEffect(() => {
+		if (submitMutation.isSuccess && submitMutation.data) {
 			setSubmitStatus("success");
-			setSubmitMessage(data.message);
+			setSubmitMessage(submitMutation.data.message);
 			setName("");
 			setEmail("");
 			setMessage("");
@@ -37,10 +40,14 @@ export function ContactForm() {
 					easing: easing.elasticOut,
 				});
 			}
-		},
-		onError: (error) => {
+		}
+	}, [submitMutation.isSuccess, submitMutation.data]);
+
+	// Handle mutation error
+	useEffect(() => {
+		if (submitMutation.isError && submitMutation.error) {
 			setSubmitStatus("error");
-			setSubmitMessage(error.message || "Something went wrong. Please try again.");
+			setSubmitMessage(submitMutation.error.message || "Something went wrong. Please try again.");
 
 			if (!prefersReducedMotion() && errorRef.current) {
 				anime({
@@ -51,11 +58,15 @@ export function ContactForm() {
 					easing: easing.easeOut,
 				});
 			}
-		},
-		onSettled: () => {
+		}
+	}, [submitMutation.isError, submitMutation.error]);
+
+	// Handle mutation settled
+	useEffect(() => {
+		if (submitMutation.isSuccess || submitMutation.isError) {
 			setIsSubmitting(false);
-		},
-	});
+		}
+	}, [submitMutation.isSuccess, submitMutation.isError]);
 
 	const validate = () => {
 		const newErrors: Record<string, string> = {};

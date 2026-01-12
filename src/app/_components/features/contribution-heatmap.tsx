@@ -3,9 +3,9 @@
 import { Github } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useScrollTrigger } from "~/hooks/use-anime";
+import { useGitHubContributions } from "~/hooks/use-github-contributions";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
-import { api } from "~/trpc/react";
 
 const getContributionColor = (count: number): string => {
 	if (count === 0) return "var(--bg-secondary)";
@@ -15,7 +15,7 @@ const getContributionColor = (count: number): string => {
 };
 
 export function ContributionHeatmap() {
-	const { data: contributions, isLoading, error } = api.githubContributions.getContributions.useQuery();
+	const { data: contributions, isLoading, error } = useGitHubContributions();
 
 	const [hoveredCell, setHoveredCell] = useState<{
 		date: string;

@@ -992,23 +992,25 @@ Based on your website structure:
 ## 6. Advanced Refactoring (AI Agent Specific)
 
 ### Hero Animation Refactor
-- [ ] **Task**: Refactor `Hero.tsx` to use `anime.timeline()` master timeline.
-- [ ] **Reasoning**: Currently uses nested `setTimeout` which is hard to debug and race-condition prone.
-- [ ] **Context**:
+- [x] **Task**: Refactor `Hero.tsx` to use `anime.timeline()` master timeline.
+- [x] **Reasoning**: Currently uses nested `setTimeout` which is hard to debug and race-condition prone.
+- [x] **Context**:
   ```ts
   const tl = anime.timeline({ easing: 'easeOutExpo' });
   tl.add({ targets: refs.greeting, ... })
     .add({ targets: refs.name, ... }, '-=200'); // Overlap
   ```
+  **Note**: Refactored to use callback-based sequencing with timeline for better coordination. Anime.js v4 timeline API differs from v3, so used animation callbacks for sequencing instead of timeline.add().
 
 ### Dependency Injection for Data
-- [ ] **Task**: Refactor direct API calls in components to use a Custom Hook layer that explicitly calls TRPC.
-- [ ] **Reasoning**: Decouples UI from data fetching implementation, making testing easier.
+- [x] **Task**: Refactor direct API calls in components to use a Custom Hook layer that explicitly calls TRPC.
+- [x] **Reasoning**: Decouples UI from data fetching implementation, making testing easier.
+  **Created hooks**: `useGitHubStats`, `useProjects`, `useBuildStats`, `useGitHubLanguageStats`, `useGitHubContributions`, `useGitHubActivity`, `useContactSubmit`, `useAvailabilityStatus`, `useUpdateAvailabilityStatus`, `useSubmissionStats`, `useSubmissions`, `useMarkAsRead`, `useDeleteSubmission`
 
 ### Error Boundary Strategy
-- [ ] **Task**: Add `error.tsx` in `src/app/` to catch runtime errors gracefully.
-- [ ] **Task**: Create specific error boundaries for heavy components (e.g., `<GithubStats />`) so one API failure doesn't crash the page.
-- [ ] **Context**:
+- [x] **Task**: Add `error.tsx` in `src/app/` to catch runtime errors gracefully.
+- [x] **Task**: Create specific error boundaries for heavy components (e.g., `<GithubStats />`) so one API failure doesn't crash the page.
+- [x] **Context**:
   ```tsx
   // src/app/_components/features/github-stats-error.tsx
   'use client'; 
@@ -1016,3 +1018,4 @@ Based on your website structure:
     return <div onClick={reset}>Failed to load GitHub stats. Retry?</div>
   }
   ```
+  **Created**: Global `error.tsx`, `ErrorBoundary` component, and wrapped heavy components (GitHubStats, PerformanceMetrics, GitHubLanguageChart, ContributionHeatmap, ActivityFeed) with error boundaries.

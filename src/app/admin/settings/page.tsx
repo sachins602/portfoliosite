@@ -1,22 +1,23 @@
 "use client";
 
 import { useState } from "react";
+import { useAvailabilityStatus, useUpdateAvailabilityStatus } from "~/hooks/use-settings";
 import { api } from "~/trpc/react";
 
 export default function SettingsPage() {
 	const utils = api.useUtils();
-	const { data: currentStatus } = api.settings.getAvailabilityStatus.useQuery();
-	const updateMutation = api.settings.updateAvailabilityStatus.useMutation({
-		onSuccess: () => {
-			utils.settings.getAvailabilityStatus.invalidate();
-			alert("Status updated successfully!");
-		},
-	});
+	const { data: currentStatus } = useAvailabilityStatus();
+	const updateMutation = useUpdateAvailabilityStatus();
 
 	const [selectedStatus, setSelectedStatus] = useState<string>(currentStatus ?? "Open to opportunities");
 
 	const handleUpdate = () => {
-		updateMutation.mutate(selectedStatus as "Available for hire" | "Open to opportunities" | "Currently employed");
+		updateMutation.mutate(selectedStatus as "Available for hire" | "Open to opportunities" | "Currently employed", {
+			onSuccess: () => {
+				utils.settings.getAvailabilityStatus.invalidate();
+				alert("Status updated successfully!");
+			},
+		});
 	};
 
 	return (

@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useScrollTrigger } from "~/hooks/use-anime";
+import { useProjects } from "~/hooks/use-projects";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
-import { api } from "~/trpc/react";
 import { ProjectFilter } from "../features/project-filter";
 import { ProjectSearch } from "../features/project-search";
 import { GhostText } from "../ui/ghost-text";
@@ -43,7 +43,7 @@ export function Projects() {
 		}
 	});
 
-	const { data: projects, isLoading, error } = api.projects.getProjects.useQuery();
+	const { data: projects, isLoading, error } = useProjects();
 
 	// Filter projects
 	const filteredProjects = projects

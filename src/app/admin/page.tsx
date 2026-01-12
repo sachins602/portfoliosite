@@ -2,11 +2,12 @@
 
 import { Mail, MessageSquare, TrendingUp } from "lucide-react";
 import Link from "next/link";
-import { api } from "~/trpc/react";
+import { useSubmissionStats } from "~/hooks/use-admin";
+import { useAvailabilityStatus } from "~/hooks/use-settings";
 
 export default function AdminDashboard() {
-	const { data: stats, isLoading } = api.admin.getSubmissionStats.useQuery();
-	const { data: status } = api.settings.getAvailabilityStatus.useQuery();
+	const { data: stats, isLoading } = useSubmissionStats();
+	const { data: status } = useAvailabilityStatus();
 
 	return (
 		<div className="container mx-auto px-4 py-8">

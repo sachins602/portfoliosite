@@ -3,9 +3,10 @@
 import { Code, FolderGit2, GitCommit, GitPullRequest } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useScrollTrigger } from "~/hooks/use-anime";
+import { useGitHubStats } from "~/hooks/use-github-stats";
+import { useProjects } from "~/hooks/use-projects";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
-import { api } from "~/trpc/react";
 import { Skeleton } from "../ui/skeleton";
 
 interface Metric {
@@ -43,7 +44,7 @@ function AnimatedCounter({ value, duration = 2000 }: { value: number; duration?:
 }
 
 export function PerformanceMetrics() {
-	const { data: projects, isLoading: isLoadingProjects } = api.projects.getProjects.useQuery();
+	const { data: projects, isLoading: isLoadingProjects } = useProjects();
 
 	const containerRef = useScrollTrigger<HTMLDivElement>((element) => {
 		if (prefersReducedMotion()) return;
@@ -58,7 +59,7 @@ export function PerformanceMetrics() {
 	});
 
 	// Calculate metrics
-	const { data: githubStats, isLoading: isLoadingStats } = api.githubStats.getUserStats.useQuery();
+	const { data: githubStats, isLoading: isLoadingStats } = useGitHubStats();
 	const totalRepos = projects?.length ?? 0;
 	const totalCommits = githubStats?.totalCommits ?? 0;
 	const totalPRs = githubStats?.totalPRs ?? 0;

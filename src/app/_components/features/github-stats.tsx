@@ -3,9 +3,9 @@
 import { FolderGit2, GitBranch, GitPullRequest, type Star as StarIcon, UserPlus, Users } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { useScrollTrigger } from "~/hooks/use-anime";
+import { useGitHubStats } from "~/hooks/use-github-stats";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
-import { api } from "~/trpc/react";
 import { AnimatedNumber } from "../ui/animated-number";
 import { Skeleton } from "../ui/skeleton";
 
@@ -19,7 +19,7 @@ export interface StatCard {
 }
 
 export function GitHubStats() {
-	const { data: stats, isLoading, error } = api.githubStats.getUserStats.useQuery();
+	const { data: stats, isLoading, error } = useGitHubStats();
 
 	const containerRef = useScrollTrigger<HTMLDivElement>((element) => {
 		if (prefersReducedMotion()) return;

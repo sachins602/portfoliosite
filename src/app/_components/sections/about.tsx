@@ -9,9 +9,11 @@ import { ActivityFeed } from "../features/activity-feed";
 import { ContributionHeatmap } from "../features/contribution-heatmap";
 import { GitHubLanguageChart } from "../features/github-language-chart";
 import { GitHubStats } from "../features/github-stats";
+import GitHubStatsError from "../features/github-stats-error";
 import { PerformanceMetrics } from "../features/performance-metrics";
 import { TechConstellation } from "../features/tech-constellation";
 import { Terminal } from "../features/terminal/terminal";
+import { ErrorBoundary } from "../ui/error-boundary";
 import { GhostText } from "../ui/ghost-text";
 import { ParallaxGroup, ParallaxLayer } from "../ui/parallax-reveal";
 import { Section } from "../ui/section";
@@ -181,35 +183,45 @@ export function About() {
 			{/* Performance Metrics */}
 			<div className="mt-12">
 				<Suspense fallback={<Skeleton className="h-[200px] w-full" />}>
-					<PerformanceMetrics />
+					<ErrorBoundary>
+						<PerformanceMetrics />
+					</ErrorBoundary>
 				</Suspense>
 			</div>
 
 			{/* GitHub Statistics */}
 			<div className="mt-12">
 				<Suspense fallback={<Skeleton className="h-[200px] w-full" />}>
-					<GitHubStats />
+					<ErrorBoundary fallback={<GitHubStatsError reset={() => window.location.reload()} />}>
+						<GitHubStats />
+					</ErrorBoundary>
 				</Suspense>
 			</div>
 
 			{/* Language Distribution */}
 			<div className="mt-12">
 				<Suspense fallback={<Skeleton className="h-[300px] w-full" />}>
-					<GitHubLanguageChart />
+					<ErrorBoundary>
+						<GitHubLanguageChart />
+					</ErrorBoundary>
 				</Suspense>
 			</div>
 
 			{/* Contribution Heatmap */}
 			<div className="mt-12">
 				<Suspense fallback={<Skeleton className="h-[200px] w-full" />}>
-					<ContributionHeatmap />
+					<ErrorBoundary>
+						<ContributionHeatmap />
+					</ErrorBoundary>
 				</Suspense>
 			</div>
 
 			{/* Activity Feed */}
 			<div className="mt-12">
 				<Suspense fallback={<Skeleton className="h-[400px] w-full" />}>
-					<ActivityFeed />
+					<ErrorBoundary>
+						<ActivityFeed />
+					</ErrorBoundary>
 				</Suspense>
 			</div>
 		</Section>

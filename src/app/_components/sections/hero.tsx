@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
-import anime from "~/lib/anime";
+import anime, { type Timeline } from "~/lib/anime";
 import { ConstellationBackground } from "../ui/constellation-background";
 import { GhostText } from "../ui/ghost-text";
 import { Section } from "../ui/section";
@@ -32,16 +32,68 @@ export function Hero() {
 	const [showCursor, setShowCursor] = useState(true);
 	const [greeting, setGreeting] = useState("Hello");
 	const hasAnimated = useRef(false);
-	const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+	const timelineRef = useRef<Timeline | null>(null);
+	const typingIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
 	useEffect(() => {
 		setGreeting(getGreeting());
 	}, []);
 
-	// The animation callback
+	// The animation callback using timeline
 	const animationCallback = (_element: HTMLElement) => {
 		if (prefersReducedMotion() || hasAnimated.current) return;
 		hasAnimated.current = true;
+
+		// Cleanup any existing timeline
+		if (timelineRef.current) {
+			timelineRef.current.pause();
+			timelineRef.current = null;
+		}
+
+		// Helper function to start typing effect
+		const startTyping = () => {
+			if (!subtitleRef.current) return;
+			let currentIndex = 0;
+			const chars = subtitle.split("");
+
+			const typeChar = () => {
+				if (currentIndex < chars.length) {
+					setSubtitleText(subtitle.slice(0, currentIndex + 1));
+					currentIndex++;
+					typingIntervalRef.current = setTimeout(typeChar, 50);
+				} else {
+					setShowCursor(false);
+					// Animate tagline and buttons after typing completes
+					if (taglineRef.current) {
+						anime({
+							targets: taglineRef.current,
+							opacity: [0, 1],
+							translateY: [20, 0],
+							duration: timing.normal,
+							easing: easing.easeOut,
+						});
+					}
+					// Animate buttons
+					if (buttonsRef.current) {
+						anime({
+							targets: buttonsRef.current.children,
+							opacity: [0, 1],
+							scale: [0.8, 1],
+							delay: anime.stagger(100),
+							duration: timing.normal,
+							easing: easing.elasticOut,
+						});
+					}
+				}
+			};
+
+			typeChar();
+		};
+
+		// Create master timeline for coordinated sequencing
+		const tl = anime.timeline({
+			autoplay: true,
+		});
 
 		// Animate greeting
 		if (greetingRef.current) {
@@ -51,62 +103,30 @@ export function Hero() {
 				translateY: [20, 0],
 				duration: timing.normal,
 				easing: easing.easeOut,
-			});
-		}
-
-		// Animate name letters
-		if (nameRef.current) {
-			const letters = nameRef.current.children;
-			anime({
-				targets: letters,
-				opacity: [0, 1],
-				translateY: [30, 0],
-				delay: anime.stagger(50, { start: 200 }),
-				duration: timing.normal,
-				easing: easing.elasticOut,
-			});
-		}
-
-		// Start typing effect after name animation
-		typingTimeoutRef.current = setTimeout(() => {
-			if (subtitleRef.current) {
-				let currentIndex = 0;
-				const chars = subtitle.split("");
-
-				const typeChar = () => {
-					if (currentIndex < chars.length) {
-						setSubtitleText(subtitle.slice(0, currentIndex + 1));
-						currentIndex++;
-						typingTimeoutRef.current = setTimeout(typeChar, 50);
-					} else {
-						setShowCursor(false);
-						// Animate tagline
-						if (taglineRef.current) {
-							anime({
-								targets: taglineRef.current,
-								opacity: [0, 1],
-								translateY: [20, 0],
-								duration: timing.normal,
-								easing: easing.easeOut,
-							});
-						}
-						// Animate buttons
-						if (buttonsRef.current) {
-							anime({
-								targets: buttonsRef.current.children,
-								opacity: [0, 1],
-								scale: [0.8, 1],
-								delay: anime.stagger(100),
-								duration: timing.normal,
-								easing: easing.elasticOut,
-							});
-						}
+				complete: () => {
+					// Animate name letters after greeting starts (with overlap)
+					if (nameRef.current) {
+						const letters = nameRef.current.children;
+						anime({
+							targets: letters,
+							opacity: [0, 1],
+							translateY: [30, 0],
+							delay: anime.stagger(50),
+							duration: timing.normal,
+							easing: easing.elasticOut,
+							complete: () => {
+								// Start typing after name animation completes
+								setTimeout(() => {
+									startTyping();
+								}, 600);
+							},
+						});
 					}
-				};
+				},
+			});
+		}
 
-				typeChar();
-			}
-		}, 600);
+		timelineRef.current = tl;
 	};
 
 	const sectionRef = useScrollTrigger<HTMLElement>(animationCallback, {
@@ -114,11 +134,15 @@ export function Hero() {
 		threshold: 0.1,
 	});
 
-	// Cleanup typing timeout on unmount
+	// Cleanup timeline and typing interval on unmount
 	useEffect(() => {
 		return () => {
-			if (typingTimeoutRef.current) {
-				clearTimeout(typingTimeoutRef.current);
+			if (timelineRef.current) {
+				timelineRef.current.pause();
+				timelineRef.current = null;
+			}
+			if (typingIntervalRef.current) {
+				clearTimeout(typingIntervalRef.current);
 			}
 		};
 	}, []);
