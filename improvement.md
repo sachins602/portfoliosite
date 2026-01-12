@@ -122,9 +122,9 @@ This section contains comprehensive "Gold Plating" ideas for animation enhanceme
 
 Before implementing fancy animations, enhance the core infrastructure:
 
-- [ ] **Task**: Create `useAnimationTimeline` hook for coordinated multi-step animations
-- [ ] **Subtask**: Wrap `anime.timeline()` with React lifecycle management
-- [ ] **Subtask**: Add cleanup on unmount to prevent memory leaks
+- [x] **Task**: Create `useAnimationTimeline` hook for coordinated multi-step animations
+- [x] **Subtask**: Wrap `anime.timeline()` with React lifecycle management
+- [x] **Subtask**: Add cleanup on unmount to prevent memory leaks
 - [ ] **Code Reference**:
   ```tsx
   // src/hooks/use-animation-timeline.ts
@@ -160,7 +160,7 @@ Before implementing fancy animations, enhance the core infrastructure:
   }
   ```
 
-- [ ] **Task**: Create `useMouse` hook for mouse position tracking (reusable across components)
+- [x] **Task**: Create `useMouse` hook for mouse position tracking (reusable across components)
   ```tsx
   // src/hooks/use-mouse.ts
   import { useEffect, useRef } from "react";
@@ -198,7 +198,7 @@ Before implementing fancy animations, enhance the core infrastructure:
   }
   ```
 
-- [ ] **Task**: Add animation performance utilities to `lib/animations.ts`
+- [x] **Task**: Add animation performance utilities to `lib/animations.ts`
   ```tsx
   // Add to src/lib/animations.ts
   

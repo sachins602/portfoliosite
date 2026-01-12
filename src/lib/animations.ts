@@ -69,3 +69,19 @@ export function createElasticHover() {
 		easing: easing.elasticOut,
 	};
 }
+/**
+ * Check if device is low-powered (for throttling animations)
+ */
+export function isLowPowerDevice(): boolean {
+	if (typeof navigator === "undefined") return false;
+	return navigator.hardwareConcurrency <= 4 || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
+/**
+ * Get animation frame budget based on device capability
+ */
+export function getParticleCount(desired: number): number {
+	if (prefersReducedMotion()) return 0;
+	if (isLowPowerDevice()) return Math.floor(desired * 0.5);
+	return desired;
+}
