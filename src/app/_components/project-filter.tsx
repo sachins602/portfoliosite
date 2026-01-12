@@ -1,7 +1,6 @@
 "use client";
 
 import { X } from "lucide-react";
-import { useMemo } from "react";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
 import type { Project } from "~/lib/data/fallback-projects";
@@ -18,20 +17,13 @@ interface ProjectFilterProps {
 
 export function ProjectFilter({ projects, activeFilters, onFiltersChange }: ProjectFilterProps) {
 	// Extract unique filter options from projects
-	const availableLanguages = useMemo(() => {
-		const langs = new Set(projects.map((p) => p.language));
-		return Array.from(langs).sort();
-	}, [projects]);
+	const availableLanguages = Array.from(new Set(projects.map((p) => p.language))).sort();
 
-	const availableTags = useMemo(() => {
-		const tags = new Set(projects.flatMap((p) => p.topics));
-		return Array.from(tags).sort();
-	}, [projects]);
+	const availableTags = Array.from(new Set(projects.flatMap((p) => p.topics))).sort();
 
-	const availableYears = useMemo(() => {
-		const years = new Set(projects.map((p) => new Date(p.updated_at).getFullYear()));
-		return Array.from(years).sort((a, b) => b - a);
-	}, [projects]);
+	const availableYears = Array.from(new Set(projects.map((p) => new Date(p.updated_at).getFullYear()))).sort(
+		(a, b) => b - a,
+	);
 
 	// Count projects per filter
 	const getCount = (type: "language" | "tag" | "year", value: string | number) => {

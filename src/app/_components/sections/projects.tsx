@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
@@ -43,40 +43,38 @@ export function Projects() {
 	const { data: projects, isLoading, error } = api.projects.getProjects.useQuery();
 
 	// Filter projects
-	const filteredProjects = useMemo(() => {
-		if (!projects) return [];
+	const filteredProjects = projects
+		? projects.filter((project) => {
+				// Search filter
+				if (searchQuery) {
+					const query = searchQuery.toLowerCase();
+					const matchesSearch =
+						project.name.toLowerCase().includes(query) ||
+						project.description.toLowerCase().includes(query) ||
+						project.topics.some((topic) => topic.toLowerCase().includes(query));
+					if (!matchesSearch) return false;
+				}
 
-		return projects.filter((project) => {
-			// Search filter
-			if (searchQuery) {
-				const query = searchQuery.toLowerCase();
-				const matchesSearch =
-					project.name.toLowerCase().includes(query) ||
-					project.description.toLowerCase().includes(query) ||
-					project.topics.some((topic) => topic.toLowerCase().includes(query));
-				if (!matchesSearch) return false;
-			}
+				// Language filter
+				if (filters.languages.length > 0) {
+					if (!filters.languages.includes(project.language)) return false;
+				}
 
-			// Language filter
-			if (filters.languages.length > 0) {
-				if (!filters.languages.includes(project.language)) return false;
-			}
+				// Tag filter
+				if (filters.tags.length > 0) {
+					const hasMatchingTag = filters.tags.some((tag) => project.topics.includes(tag));
+					if (!hasMatchingTag) return false;
+				}
 
-			// Tag filter
-			if (filters.tags.length > 0) {
-				const hasMatchingTag = filters.tags.some((tag) => project.topics.includes(tag));
-				if (!hasMatchingTag) return false;
-			}
+				// Year filter
+				if (filters.years.length > 0) {
+					const projectYear = new Date(project.updated_at).getFullYear();
+					if (!filters.years.includes(projectYear)) return false;
+				}
 
-			// Year filter
-			if (filters.years.length > 0) {
-				const projectYear = new Date(project.updated_at).getFullYear();
-				if (!filters.years.includes(projectYear)) return false;
-			}
-
-			return true;
-		});
-	}, [projects, searchQuery, filters]);
+				return true;
+			})
+		: [];
 
 	// Reset display count when filters change
 	// biome-ignore lint/correctness/useExhaustiveDependencies: We need to reset when searchQuery or filters change
@@ -85,9 +83,7 @@ export function Projects() {
 	}, [searchQuery, filters]);
 
 	// Get projects to display (paginated)
-	const displayedProjects = useMemo(() => {
-		return filteredProjects.slice(0, displayCount);
-	}, [filteredProjects, displayCount]);
+	const displayedProjects = filteredProjects.slice(0, displayCount);
 
 	const hasMore = filteredProjects.length > displayCount;
 
@@ -96,11 +92,11 @@ export function Projects() {
 	};
 
 	// Animate project cards on filter change or load more
-	useMemo(() => {
+	useEffect(() => {
 		if (prefersReducedMotion() || !projects) return;
 
 		const cards = document.querySelectorAll(".project-card");
-		cards.forEach((card, index) => {
+		for (const [index, card] of cards.entries()) {
 			const isVisible = displayedProjects.some(
 				(p) => p.id === Number.parseInt(card.getAttribute("data-project-id") ?? "0", 10),
 			);
@@ -124,7 +120,7 @@ export function Projects() {
 					easing: easing.easeOut,
 				});
 			}
-		});
+		}
 	}, [displayedProjects, projects]);
 
 	return (

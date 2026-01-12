@@ -1,7 +1,7 @@
 "use client";
 
 import { Minus, Square, X } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
 import { processCommand } from "./commands";
@@ -23,7 +23,7 @@ export function Terminal() {
 	const cursorRef = useRef<HTMLSpanElement>(null);
 	const hasInitialized = useRef(false);
 
-	const handleCommand = useCallback((cmd: string) => {
+	const handleCommand = (cmd: string) => {
 		if (!cmd.trim()) return;
 
 		const commandLine: TerminalLine = {
@@ -49,7 +49,7 @@ export function Terminal() {
 		// Animate output lines
 		if (!prefersReducedMotion() && outputLines.length > 0) {
 			setTimeout(() => {
-				outputLines.forEach((line, idx) => {
+				for (const [idx, line] of outputLines.entries()) {
 					const element = document.getElementById(line.id);
 					if (element) {
 						anime({
@@ -61,10 +61,10 @@ export function Terminal() {
 							easing: easing.easeOut,
 						});
 					}
-				});
+				}
 			}, 100);
 		}
-	}, []);
+	};
 
 	// Initial demo animation
 	useEffect(() => {
@@ -92,6 +92,7 @@ export function Terminal() {
 		};
 
 		setTimeout(runDemo, 1000);
+		// biome-ignore lint/correctness/useExhaustiveDependencies: React Compiler handles function stability
 	}, [handleCommand]);
 
 	// Cursor blink animation

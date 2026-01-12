@@ -11,9 +11,9 @@ This document serves as a master checklist for optimizing the portfolio. It is d
 
 ## 1. Next.js 16 & React 19 Performance Optimizations
 
-### Partial Prerendering (PPR) Readiness
-Next.js 15/16 introduces Partial Prerendering, which mixes static and dynamic content in the same route.
-- [x] **Task**: Enable and configure Partial Prerendering (experimental).
+### cacheComponents Readiness
+Next.js 16 introduces cacheComponents, which mixes static and dynamic content in the same route.
+- [x] **Task**: Enable and configure cacheComponents.
 - [x] **Subtask**: Identify dynamic holes (e.g., `performance-metrics.tsx`, `github-stats.tsx`) and wrap them in `<Suspense>`.
 - [x] **Subtask**: Ensure static parts (Header, Footer, Hero text) render instantly.
 
@@ -46,10 +46,10 @@ Next.js 15/16 introduces Partial Prerendering, which mixes static and dynamic co
 
 ### React Compiler Optimization
 Since `reactCompiler: true` is enabled, we should remove manual memoization that clutters the code.
-- [ ] **Task**: Scan codebase for `useMemo` and `useCallback`.
-- [ ] **Subtask**: Remove `useMemo` for simple derivations (React Compiler handles this).
-- [ ] **Subtask**: Remove `useCallback` for simple event handlers passed to children.
-- [ ] **Exception**: Keep them only if you are interfacing with external libraries that rely on reference equality (like some Anime.js hooks might, but usually Compiler is smart enough).
+- [x] **Task**: Scan codebase for `useMemo` and `useCallback`.
+- [x] **Subtask**: Remove `useMemo` for simple derivations (React Compiler handles this).
+- [x] **Subtask**: Remove `useCallback` for simple event handlers passed to children.
+- [x] **Exception**: Keep them only if you are interfacing with external libraries that rely on reference equality (like some Anime.js hooks might, but usually Compiler is smart enough).
 
 ### Image & Asset Optimization
 - [ ] **Task**: Implement AVIF/WebP strictness.

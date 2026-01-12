@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowDown } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
@@ -30,8 +30,8 @@ export function Hero() {
 	const hasAnimated = useRef(false);
 	const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-	// Memoize the animation callback to prevent re-triggering
-	const animationCallback = useCallback((_element: HTMLElement) => {
+	// The animation callback
+	const animationCallback = (_element: HTMLElement) => {
 		if (prefersReducedMotion() || hasAnimated.current) return;
 		hasAnimated.current = true;
 
@@ -99,7 +99,7 @@ export function Hero() {
 				typeChar();
 			}
 		}, 600);
-	}, []);
+	};
 
 	const sectionRef = useScrollTrigger<HTMLElement>(animationCallback, {
 		once: true,
