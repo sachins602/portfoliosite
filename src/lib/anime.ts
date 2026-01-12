@@ -2,7 +2,7 @@
  * Compatibility wrapper for anime.js v4
  * Provides the same API as anime.js v3 for easier migration
  */
-import { type AnimationParams, animate, type TargetsParam } from "animejs";
+import { type AnimationParams, animate, createTimeline, type TargetsParam, type Timeline } from "animejs";
 import { stagger } from "animejs/utils";
 
 export type StrictAnimeTargets =
@@ -32,12 +32,13 @@ function animeWrapper(params: AnimeParams) {
 	return animate(targets as TargetsParam, animationParams as AnimationParams);
 }
 
-// Attach stagger to the function for compatibility (anime.stagger)
-// Use type assertion to add the stagger property
+// Attach stagger and createTimeline to the function for compatibility
 const animeWithStagger = animeWrapper as typeof animeWrapper & {
 	stagger: typeof stagger;
+	timeline: typeof createTimeline;
 };
 animeWithStagger.stagger = stagger;
+animeWithStagger.timeline = createTimeline;
 
 export default animeWithStagger;
-export { stagger };
+export { stagger, createTimeline, type Timeline };

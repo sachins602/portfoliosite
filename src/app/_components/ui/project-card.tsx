@@ -6,6 +6,7 @@ import { useEffect, useRef } from "react";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
 import type { Project } from "~/lib/data/fallback-projects";
+import { DistortionImage } from "./distortion-image";
 
 interface ProjectCardProps {
 	project: Project;
@@ -134,7 +135,10 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 			style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 		>
 			{project.image && (
-				<div className="relative mb-6 aspect-video overflow-hidden rounded-md border border-(--border)">
+				<DistortionImage
+					className="relative mb-6 aspect-video overflow-hidden rounded-md border border-(--border)"
+					intensity={14}
+				>
 					<Image
 						alt={project.name}
 						className="object-cover transition-transform duration-500 hover:scale-110"
@@ -142,7 +146,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 						sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 						src={project.image}
 					/>
-				</div>
+				</DistortionImage>
 			)}
 			<div className="mb-4 flex items-start justify-between">
 				<h3 className="flex-1 font-semibold text-(--accent) text-xl">{project.name}</h3>

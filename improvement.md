@@ -348,8 +348,8 @@ A highly intricate, mouse-reactive particle background that can replace or enhan
 
 **Concept**: A WebGL-like liquid distortion effect using **pure SVG Filters** and Anime.js. Perfect for your `ProjectCard` images.
 
-- [ ] **Task**: Create `DistortionImage` wrapper component
-- [ ] **Subtask**: Create reusable SVG filter definition
+- [x] **Task**: Create `DistortionImage` wrapper component
+- [x] **Subtask**: Create reusable SVG filter definition
   ```tsx
   // src/app/_components/ui/distortion-filter.tsx
   export function DistortionFilter({ id }: { id: string }) {
@@ -378,7 +378,7 @@ A highly intricate, mouse-reactive particle background that can replace or enhan
     );
   }
   ```
-- [ ] **Subtask**: Create `DistortionImage` component with hover animation
+- [x] **Subtask**: Create `DistortionImage` component with hover animation
   ```tsx
   // src/app/_components/ui/distortion-image.tsx
   "use client";
@@ -468,15 +468,15 @@ A highly intricate, mouse-reactive particle background that can replace or enhan
     );
   }
   ```
-- [ ] **Subtask**: Integrate with `ProjectCard` image section
+- [x] **Subtask**: Integrate with `ProjectCard` image section
   ```tsx
   // In project-card.tsx, wrap the Image:
   <DistortionImage intensity={20}>
     <Image src={project.image} alt={project.name} fill />
   </DistortionImage>
   ```
-- [ ] **Subtask**: Add `data-reduce-motion` fallback (show simple zoom instead)
-- [ ] **Subtask**: Performance test on mobile (disable if laggy)
+- [x] **Subtask**: Add `data-reduce-motion` fallback (show simple zoom instead)
+- [x] **Subtask**: Performance test on mobile (disable if laggy)
 
 ---
 
