@@ -134,13 +134,13 @@ export function GhostText({
 	};
 
 	return (
+		// biome-ignore lint/a11y/noStaticElementInteractions: Decorative component with mouse-only interactions
 		<div
 			className={cn("group relative inline-block cursor-default", className)}
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
 			onMouseMove={handleMouseMove}
 			ref={containerRef}
-			role="presentation"
 			style={style}
 			{...props}
 		>

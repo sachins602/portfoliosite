@@ -986,8 +986,8 @@ Based on your website structure:
 ---
 
 ## 5. Deployment & CI/CD Speed
-- [ ] **Task**: Verify `next.config.ts` has `swcMinify: true` (default in newer versions, but good to check).
-- [ ] **Task**: Check if `logging` is enabled in `next.config.ts` for fetcching (Next.js 15+ feature `logging: { fetches: { fullUrl: true } }`) to debug data fetching waterfalls during dev.
+- [x] **Task**: Verify `next.config.ts` has `swcMinify: true` (default in newer versions, but good to check).
+- [x] **Task**: Check if `logging` is enabled in `next.config.ts` for fetcching (Next.js 15+ feature `logging: { fetches: { fullUrl: true } }`) to debug data fetching waterfalls during dev.
 
 ## 6. Advanced Refactoring (AI Agent Specific)
 

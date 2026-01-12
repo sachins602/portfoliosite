@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
 	/* config options here */
 	reactCompiler: true,
 	cacheComponents: true,
+	// SWC minification is enabled by default in Next.js 13+
 	images: {
 		formats: ["image/avif", "image/webp"],
 		remotePatterns: [
@@ -25,6 +26,11 @@ const nextConfig: NextConfig = {
 				hostname: "avatars.githubusercontent.com",
 			},
 		],
+	},
+	logging: {
+		fetches: {
+			fullUrl: true, // Enable full URL logging for debugging data fetching waterfalls
+		},
 	},
 	experimental: {
 		turbopackFileSystemCacheForDev: true,
