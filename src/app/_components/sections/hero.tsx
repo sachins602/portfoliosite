@@ -7,6 +7,7 @@ import { useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
 import { ConstellationBackground } from "../ui/constellation-background";
+import { GhostText } from "../ui/ghost-text";
 import { Section } from "../ui/section";
 
 const name = "Sachin Sapkota";
@@ -157,18 +158,23 @@ export function Hero() {
 						ref={greetingRef}
 						style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
 					>
-						{greeting}!
+						<GhostText offsetDistance={4} variant="blur">
+							{greeting}!
+						</GhostText>
 					</div>
 
 					{/* Name */}
 					<h1 className="mb-6 font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-8xl" ref={nameRef}>
 						{name.split("").map((char, index) => {
-							// Use position-based key since each character position is unique
 							const uniqueKey = `char-${index}-${char.charCodeAt(0)}`;
 							return (
-								<span className="inline-block" key={uniqueKey} style={{ opacity: prefersReducedMotion() ? 1 : 0 }}>
+								<GhostText
+									key={uniqueKey}
+									offsetDistance={8}
+									style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
+								>
 									{char === " " ? "\u00A0" : char}
-								</span>
+								</GhostText>
 							);
 						})}
 					</h1>

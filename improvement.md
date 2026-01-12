@@ -480,7 +480,7 @@ A highly intricate, mouse-reactive particle background that can replace or enhan
 
 ---
 
-### Option C: Magnetic Buttons
+### Option C: Magnetic Buttons (does not work)
 
 **Concept**: Buttons that physically move towards the cursor when hovered, creating a "magnetic" pull effect. Perfect for CTA buttons in Hero section.
 
@@ -581,8 +581,8 @@ A highly intricate, mouse-reactive particle background that can replace or enhan
 
 **Concept**: Text that splits into RGB channels or blurs directionally on hover, creating a glitchy/chromatic aberration effect.
 
-- [ ] **Task**: Create `GhostText` component
-- [ ] **Subtask**: Render 3 offset copies of the text (Red, Green, Blue channels)
+- [x] **Task**: Create `GhostText` component
+- [x] **Subtask**: Render 3 offset copies of the text (Red, Green, Blue channels)
   ```tsx
   // src/app/_components/ui/ghost-text.tsx
   "use client";
@@ -688,7 +688,7 @@ A highly intricate, mouse-reactive particle background that can replace or enhan
     );
   }
   ```
-- [ ] **Subtask**: Add direction-aware offset (offset follows mouse direction)
+- [x] **Subtask**: Add direction-aware offset (offset follows mouse direction)
   ```tsx
   const handleMouseMove = (e: React.MouseEvent) => {
     const rect = containerRef.current?.getBoundingClientRect();
@@ -705,7 +705,7 @@ A highly intricate, mouse-reactive particle background that can replace or enhan
     // ... similar for green and blue
   };
   ```
-- [ ] **Subtask**: Create variant with blur instead of color split
+- [x] **Subtask**: Create variant with blur instead of color split
   ```tsx
   // GhostTextBlur variant - uses directional blur
   <span 
@@ -713,8 +713,8 @@ A highly intricate, mouse-reactive particle background that can replace or enhan
     style={{ filter: "blur(2px) brightness(1.2)" }} 
   />
   ```
-- [ ] **Subtask**: Integrate with Hero name or section headings
-- [ ] **Subtask**: Ensure accessibility (original text remains readable)
+- [x] **Subtask**: Integrate with Hero name or section headings
+- [x] **Subtask**: Ensure accessibility (original text remains readable)
 
 ---
 

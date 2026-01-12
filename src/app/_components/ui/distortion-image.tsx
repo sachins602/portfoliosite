@@ -33,43 +33,41 @@ export function DistortionImage({ children, intensity = 20, className }: Distort
 		const turbulence = document.querySelector(`#${filterId} [data-turbulence]`);
 
 		if (filter && turbulence) {
-			const tl = anime.timeline({
-				defaults: { easing: easing.easeOut },
-			});
+			const tl = anime.timeline();
 
 			// Phase 1: Peak distortion (slower entry)
-			tl
-				.add(filter, {
-					scale: [0, intensity],
+			tl.add(filter, {
+				scale: [0, intensity],
+				duration: timing.slow,
+				easing: easing.easeOut,
+			}).add(
+				turbulence,
+				{
+					baseFrequency: [0.01, 0.03],
 					duration: timing.slow,
-				})
-				.add(
-					turbulence,
-					{
-						baseFrequency: [0.01, 0.03],
-						duration: timing.slow,
-					},
-					0, // Parallel with previous
-				);
+					easing: easing.easeOut,
+				},
+				0, // Parallel with previous
+			);
 
 			// Phase 2: Reverse (faster than before but still gradual)
-			tl
-				.add(
-					filter,
-					{
-						scale: 0,
-						duration: timing.slow * 1.5,
-					},
-					"+=100", // Shorter hold at peak
-				)
-				.add(
-					turbulence,
-					{
-						baseFrequency: 0.01,
-						duration: timing.slow * 1.5,
-					},
-					"<", // Synchronize with the previous add
-				);
+			tl.add(
+				filter,
+				{
+					scale: 0,
+					duration: timing.slow * 1.5,
+					easing: easing.easeOut,
+				},
+				"+=100", // Shorter hold at peak
+			).add(
+				turbulence,
+				{
+					baseFrequency: 0.01,
+					duration: timing.slow * 1.5,
+					easing: easing.easeOut,
+				},
+				"<", // Synchronize with the previous add
+			);
 
 			timelineRef.current = tl;
 		}
