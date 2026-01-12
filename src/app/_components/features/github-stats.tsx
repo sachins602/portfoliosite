@@ -7,6 +7,7 @@ import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
 import { api } from "~/trpc/react";
 import { AnimatedNumber } from "../ui/animated-number";
+import { Skeleton } from "../ui/skeleton";
 
 export interface StatCard {
 	id: string;
@@ -58,10 +59,21 @@ export function GitHubStats() {
 	if (isLoading) {
 		return (
 			<div className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6">
-				<h3 className="mb-6 text-center font-semibold text-xl">GitHub Statistics</h3>
+				<div className="mb-6 flex items-center justify-between">
+					<Skeleton className="mx-auto h-7 w-48" variant="text" />
+					<Skeleton className="h-4 w-24" variant="text" />
+				</div>
 				<div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
-					{Array.from({ length: 5 }).map((_, i) => (
-						<div className="h-24 animate-pulse rounded-lg bg-(--border)" key={`skeleton-${i + Math.random()}`} />
+					{Array.from({ length: 5 }, (_, i) => (
+						<div
+							className="flex flex-col items-center rounded-xl border border-(--border) bg-linear-to-br p-4"
+							// biome-ignore lint/suspicious/noArrayIndexKey: Static skeleton loaders, order never changes
+							key={`github-stats-skeleton-${i}`}
+						>
+							<Skeleton className="mb-2 h-5 w-5" variant="circular" />
+							<Skeleton className="mb-1 h-8 w-16" variant="text" />
+							<Skeleton className="h-4 w-20" variant="text" />
+						</div>
 					))}
 				</div>
 			</div>

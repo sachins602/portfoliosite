@@ -73,12 +73,20 @@ export function ScrollProgress() {
 	return (
 		<div className="fixed top-0 right-0 left-0 z-50 h-1 bg-(--bg-secondary)">
 			<div
-				className="h-full bg-(--accent) transition-all"
+				className="relative h-full bg-(--accent) transition-all"
 				ref={progressRef}
 				style={{
 					width: prefersReducedMotion() ? `${progress}%` : "0%",
 				}}
-			/>
+			>
+				{/* Glow effect at the tip */}
+				<div
+					className="absolute top-1/2 right-0 h-3 w-3 -translate-y-1/2 rounded-full bg-(--accent) blur-sm"
+					style={{
+						boxShadow: "0 0 12px var(--accent), 0 0 24px var(--accent)",
+					}}
+				/>
+			</div>
 			{currentSection && <div className="absolute top-2 right-4 text-(--text-secondary) text-xs">{currentSection}</div>}
 		</div>
 	);

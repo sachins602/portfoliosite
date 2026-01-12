@@ -155,7 +155,7 @@ export function Hero() {
 
 					{/* Greeting */}
 					<div className="mb-4 text-(--text-secondary) text-lg sm:text-xl" ref={greetingRef}>
-						<TextScramble text={`${greeting}!`} speed={50} delay={200} />
+						<TextScramble delay={200} speed={50} text={`${greeting}!`} />
 					</div>
 
 					{/* Name */}

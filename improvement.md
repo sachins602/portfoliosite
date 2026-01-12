@@ -972,16 +972,16 @@ Based on your website structure:
 ## 4. UI/UX Improvements
 
 ### Accessibility (a11y) Audit
-- [ ] **Task**: Run a manual audit of tab ordering.
-- [ ] **Task**: Ensure `prefers-reduced-motion` completely disables the complex effects (return `null` or static image).
+- [x] **Task**: Run a manual audit of tab ordering.
+- [x] **Task**: Ensure `prefers-reduced-motion` completely disables the complex effects (return `null` or static image).
 
 ### Scroll Progress Integration
-- [ ] **Task**: Enhance `ScrollProgress` bar.
-- [ ] **Subtask**: Add a "glow" effect to the tip of the progress bar using a pseudo-element and box-shadow, matching the theme accent.
+- [x] **Task**: Enhance `ScrollProgress` bar.
+- [x] **Subtask**: Add a "glow" effect to the tip of the progress bar using a pseudo-element and box-shadow, matching the theme accent.
 
 ### Loading States
-- [ ] **Task**: Create generalized `Skeleton` components.
-- [ ] **Subtask**: Replace jarring layout shifts in `GithubStats` and `PerformanceMetrics` with smooth skeleton loaders that match the final dimensions.
+- [x] **Task**: Create generalized `Skeleton` components.
+- [x] **Subtask**: Replace jarring layout shifts in `GithubStats` and `PerformanceMetrics` with smooth skeleton loaders that match the final dimensions.
 
 ---
 

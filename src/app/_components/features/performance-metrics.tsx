@@ -6,6 +6,7 @@ import { useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
 import { api } from "~/trpc/react";
+import { Skeleton } from "../ui/skeleton";
 
 interface Metric {
 	id: string;
@@ -42,7 +43,7 @@ function AnimatedCounter({ value, duration = 2000 }: { value: number; duration?:
 }
 
 export function PerformanceMetrics() {
-	const { data: projects } = api.projects.getProjects.useQuery();
+	const { data: projects, isLoading: isLoadingProjects } = api.projects.getProjects.useQuery();
 
 	const containerRef = useScrollTrigger<HTMLDivElement>((element) => {
 		if (prefersReducedMotion()) return;
@@ -57,12 +58,13 @@ export function PerformanceMetrics() {
 	});
 
 	// Calculate metrics
+	const { data: githubStats, isLoading: isLoadingStats } = api.githubStats.getUserStats.useQuery();
 	const totalRepos = projects?.length ?? 0;
-	const { data: githubStats } = api.githubStats.getUserStats.useQuery();
 	const totalCommits = githubStats?.totalCommits ?? 0;
 	const totalPRs = githubStats?.totalPRs ?? 0;
 
 	const projectsCompleted = totalRepos;
+	const isLoading = isLoadingProjects || isLoadingStats;
 
 	const metrics: Metric[] = [
 		{
@@ -90,6 +92,27 @@ export function PerformanceMetrics() {
 			icon: Code,
 		},
 	];
+
+	if (isLoading) {
+		return (
+			<div className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6" ref={containerRef}>
+				<Skeleton className="mx-auto mb-6 h-7 w-48" variant="text" />
+				<div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+					{Array.from({ length: 4 }, (_, i) => (
+						<div
+							className="flex flex-col items-center rounded-lg border border-(--border) bg-(--bg-primary) p-4"
+							// biome-ignore lint/suspicious/noArrayIndexKey: Static skeleton loaders, order never changes
+							key={`performance-metrics-skeleton-${i}`}
+						>
+							<Skeleton className="mb-2 h-6 w-6" variant="circular" />
+							<Skeleton className="mb-1 h-8 w-16" variant="text" />
+							<Skeleton className="h-4 w-24" variant="text" />
+						</div>
+					))}
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<div className="rounded-lg border border-(--border) bg-(--bg-secondary) p-6" ref={containerRef}>

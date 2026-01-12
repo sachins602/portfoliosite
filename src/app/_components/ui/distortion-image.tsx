@@ -105,6 +105,11 @@ export function DistortionImage({ children, intensity = 20, className }: Distort
 		}
 	};
 
+	// Return static content for reduced motion preference
+	if (prefersReducedMotion()) {
+		return <figure className={className}>{children}</figure>;
+	}
+
 	return (
 		<figure
 			className={className}

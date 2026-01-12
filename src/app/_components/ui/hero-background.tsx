@@ -51,5 +51,8 @@ export function HeroBackground() {
 		};
 	}, []);
 
+	// Return null for reduced motion preference
+	if (prefersReducedMotion()) return null;
+
 	return <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden" ref={containerRef} />;
 }

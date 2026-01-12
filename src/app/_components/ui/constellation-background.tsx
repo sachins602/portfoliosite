@@ -184,6 +184,9 @@ export function ConstellationBackground() {
 		};
 	}, []);
 
+	// Return null for reduced motion preference
+	if (prefersReducedMotion()) return null;
+
 	return (
 		<div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" ref={containerRef}>
 			<canvas className="block h-full w-full opacity-60" ref={canvasRef} />
