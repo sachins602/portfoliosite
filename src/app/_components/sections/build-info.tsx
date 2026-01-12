@@ -112,6 +112,8 @@ function AnimatedStatCounter({
 	);
 }
 
+import { Section } from "../ui/section";
+
 export function BuildInfo() {
 	const sectionRef = useScrollTrigger<HTMLElement>((element) => {
 		if (prefersReducedMotion()) return;
@@ -250,75 +252,73 @@ export function BuildInfo() {
 	];
 
 	return (
-		<section className="bg-(--bg-primary) py-20 md:py-32" id="build-info" ref={sectionRef}>
-			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
-				<h2
-					className="section-title mb-12 text-center font-bold text-4xl md:text-5xl"
-					style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
-				>
-					How This Site Was Built
-				</h2>
+		<Section className="bg-(--bg-primary) md:py-32" id="build-info" ref={sectionRef}>
+			<h2
+				className="section-title mb-12 text-center font-bold text-4xl md:text-5xl"
+				style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
+			>
+				How This Site Was Built
+			</h2>
 
-				<div className="section-content space-y-12">
-					{/* Tech Stack */}
-					<div>
-						<h3 className="mb-4 font-semibold text-2xl">Tech Stack</h3>
-						<div className="flex flex-wrap gap-2">
-							{techStack.map((tech) => (
-								<span className="rounded-lg border border-(--border) bg-(--bg-secondary) px-3 py-1.5 text-sm" key={tech}>
-									{tech}
-								</span>
-							))}
-						</div>
-					</div>
-
-					{/* Live Stats */}
-					<div>
-						<h3 className="mb-4 font-semibold text-2xl">Live Stats</h3>
-						<div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-							{stats.map((stat) => {
-								const Icon = stat.icon;
-								return (
-									<div
-										className="flex flex-col items-center rounded-lg border border-(--border) bg-(--bg-secondary) p-4"
-										key={stat.id}
-									>
-										<Icon className="mb-2 h-6 w-6 text-(--accent)" />
-										<div className="mb-1 font-bold text-(--text-primary) text-xl">
-											<AnimatedStatCounter
-												decimals={stat.id === "load-time" ? 1 : 0}
-												isLoading={stat.isLoading}
-												suffix={stat.suffix}
-												value={stat.value}
-											/>
-										</div>
-										<div className="text-center text-(--text-secondary) text-xs">{stat.label}</div>
-									</div>
-								);
-							})}
-						</div>
-					</div>
-
-					{/* Code Carousel */}
-					<div>
-						<h3 className="mb-4 font-semibold text-2xl">Code Snippets</h3>
-						<CodeCarousel />
-					</div>
-
-					{/* GitHub Link */}
-					<div className="flex justify-center">
-						<a
-							className="flex items-center gap-2 rounded-lg border border-(--border) bg-(--bg-secondary) px-6 py-3 transition-all hover:border-(--accent) hover:bg-(--accent)/10"
-							href="https://github.com/sachins602"
-							rel="noopener noreferrer"
-							target="_blank"
-						>
-							<Github className="h-5 w-5" />
-							<span>View on GitHub</span>
-						</a>
+			<div className="section-content space-y-12">
+				{/* Tech Stack */}
+				<div>
+					<h3 className="mb-4 font-semibold text-2xl">Tech Stack</h3>
+					<div className="flex flex-wrap gap-2">
+						{techStack.map((tech) => (
+							<span className="rounded-lg border border-(--border) bg-(--bg-secondary) px-3 py-1.5 text-sm" key={tech}>
+								{tech}
+							</span>
+						))}
 					</div>
 				</div>
+
+				{/* Live Stats */}
+				<div>
+					<h3 className="mb-4 font-semibold text-2xl">Live Stats</h3>
+					<div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+						{stats.map((stat) => {
+							const Icon = stat.icon;
+							return (
+								<div
+									className="flex flex-col items-center rounded-lg border border-(--border) bg-(--bg-secondary) p-4"
+									key={stat.id}
+								>
+									<Icon className="mb-2 h-6 w-6 text-(--accent)" />
+									<div className="mb-1 font-bold text-(--text-primary) text-xl">
+										<AnimatedStatCounter
+											decimals={stat.id === "load-time" ? 1 : 0}
+											isLoading={stat.isLoading}
+											suffix={stat.suffix}
+											value={stat.value}
+										/>
+									</div>
+									<div className="text-center text-(--text-secondary) text-xs">{stat.label}</div>
+								</div>
+							);
+						})}
+					</div>
+				</div>
+
+				{/* Code Carousel */}
+				<div>
+					<h3 className="mb-4 font-semibold text-2xl">Code Snippets</h3>
+					<CodeCarousel />
+				</div>
+
+				{/* GitHub Link */}
+				<div className="flex justify-center">
+					<a
+						className="flex items-center gap-2 rounded-lg border border-(--border) bg-(--bg-secondary) px-6 py-3 transition-all hover:border-(--accent) hover:bg-(--accent)/10"
+						href="https://github.com/sachins602"
+						rel="noopener noreferrer"
+						target="_blank"
+					>
+						<Github className="h-5 w-5" />
+						<span>View on GitHub</span>
+					</a>
+				</div>
 			</div>
-		</section>
+		</Section>
 	);
 }

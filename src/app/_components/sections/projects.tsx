@@ -12,6 +12,8 @@ import { ProjectCard } from "../ui/project-card";
 const INITIAL_DISPLAY_COUNT = 12;
 const LOAD_MORE_COUNT = 12;
 
+import { Section } from "../ui/section";
+
 export function Projects() {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [filters, setFilters] = useState<{
@@ -124,89 +126,87 @@ export function Projects() {
 	}, [displayedProjects, projects]);
 
 	return (
-		<section className="bg-(--bg-primary) py-20 md:py-32" id="projects" ref={sectionRef}>
-			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
-				<h2
-					className="section-title mb-16 text-center font-bold text-4xl md:text-5xl"
-					style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
-				>
-					Projects
-				</h2>
+		<Section className="bg-(--bg-primary) md:py-32" id="projects" ref={sectionRef}>
+			<h2
+				className="section-title mb-16 text-center font-bold text-4xl md:text-5xl"
+				style={{ opacity: prefersReducedMotion() ? 1 : 0 }}
+			>
+				Projects
+			</h2>
 
-				{!isLoading && projects && projects.length > 0 && (
-					<>
-						<ProjectSearch onSearchChange={setSearchQuery} />
-						<ProjectFilter activeFilters={filters} onFiltersChange={setFilters} projects={projects} />
-					</>
-				)}
+			{!isLoading && projects && projects.length > 0 && (
+				<>
+					<ProjectSearch onSearchChange={setSearchQuery} />
+					<ProjectFilter activeFilters={filters} onFiltersChange={setFilters} projects={projects} />
+				</>
+			)}
 
-				{isLoading && (
+			{isLoading && (
+				<div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+					{Array.from({ length: 6 }).map((_, i) => (
+						<div
+							className="animate-pulse rounded-lg border border-(--border) bg-(--bg-secondary) p-6"
+							key={`project-skeleton-${i + Math.random()}`}
+						>
+							<div className="mb-4 h-6 rounded bg-(--border)" />
+							<div className="mb-2 h-4 rounded bg-(--border)" />
+							<div className="h-4 w-3/4 rounded bg-(--border)" />
+						</div>
+					))}
+				</div>
+			)}
+
+			{error && (
+				<div className="text-center text-(--text-secondary)">
+					<p>Failed to load projects. Please try again later.</p>
+				</div>
+			)}
+
+			{displayedProjects && displayedProjects.length > 0 && (
+				<>
 					<div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-						{Array.from({ length: 6 }).map((_, i) => (
-							<div
-								className="animate-pulse rounded-lg border border-(--border) bg-(--bg-secondary) p-6"
-								key={`project-skeleton-${i + Math.random()}`}
-							>
-								<div className="mb-4 h-6 rounded bg-(--border)" />
-								<div className="mb-2 h-4 rounded bg-(--border)" />
-								<div className="h-4 w-3/4 rounded bg-(--border)" />
+						{displayedProjects.map((project, index) => (
+							<div className="project-card" data-project-id={project.id} key={project.id}>
+								<ProjectCard index={index} project={project} />
 							</div>
 						))}
 					</div>
-				)}
 
-				{error && (
-					<div className="text-center text-(--text-secondary)">
-						<p>Failed to load projects. Please try again later.</p>
-					</div>
-				)}
-
-				{displayedProjects && displayedProjects.length > 0 && (
-					<>
-						<div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-							{displayedProjects.map((project, index) => (
-								<div className="project-card" data-project-id={project.id} key={project.id}>
-									<ProjectCard index={index} project={project} />
-								</div>
-							))}
+					{hasMore && (
+						<div className="mt-12 flex flex-col items-center gap-4">
+							<p className="text-(--text-secondary) text-sm">
+								Showing {displayedProjects.length} of {filteredProjects.length} projects
+							</p>
+							<button
+								className="rounded-lg border border-(--accent) bg-(--accent)/10 px-6 py-3 font-semibold text-(--accent) transition-all duration-300 hover:bg-(--accent)/20 hover:shadow-lg"
+								onClick={handleLoadMore}
+								type="button"
+							>
+								Load More Projects
+							</button>
 						</div>
+					)}
 
-						{hasMore && (
-							<div className="mt-12 flex flex-col items-center gap-4">
-								<p className="text-(--text-secondary) text-sm">
-									Showing {displayedProjects.length} of {filteredProjects.length} projects
-								</p>
-								<button
-									className="rounded-lg border border-(--accent) bg-(--accent)/10 px-6 py-3 font-semibold text-(--accent) transition-all duration-300 hover:bg-(--accent)/20 hover:shadow-lg"
-									onClick={handleLoadMore}
-									type="button"
-								>
-									Load More Projects
-								</button>
-							</div>
-						)}
+					{!hasMore && filteredProjects.length > INITIAL_DISPLAY_COUNT && (
+						<div className="mt-8 text-center">
+							<p className="text-(--text-secondary) text-sm">Showing all {filteredProjects.length} projects</p>
+						</div>
+					)}
+				</>
+			)}
 
-						{!hasMore && filteredProjects.length > INITIAL_DISPLAY_COUNT && (
-							<div className="mt-8 text-center">
-								<p className="text-(--text-secondary) text-sm">Showing all {filteredProjects.length} projects</p>
-							</div>
-						)}
-					</>
-				)}
+			{!isLoading && !error && projects && projects.length > 0 && filteredProjects.length === 0 && (
+				<div className="text-center text-(--text-secondary)">
+					<p className="mb-4 text-lg">No projects match your filters.</p>
+					<p className="text-sm">Try adjusting your search or filters.</p>
+				</div>
+			)}
 
-				{!isLoading && !error && projects && projects.length > 0 && filteredProjects.length === 0 && (
-					<div className="text-center text-(--text-secondary)">
-						<p className="mb-4 text-lg">No projects match your filters.</p>
-						<p className="text-sm">Try adjusting your search or filters.</p>
-					</div>
-				)}
-
-				{!isLoading && !error && (!projects || projects.length === 0) && (
-					<div className="text-center text-(--text-secondary)">
-						<p>No projects found.</p>
-					</div>
-				)}
-			</div>
-		</section>
+			{!isLoading && !error && (!projects || projects.length === 0) && (
+				<div className="text-center text-(--text-secondary)">
+					<p>No projects found.</p>
+				</div>
+			)}
+		</Section>
 	);
 }

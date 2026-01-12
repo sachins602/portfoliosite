@@ -7,6 +7,7 @@ import { useScrollTrigger } from "~/hooks/use-anime";
 import { easing, prefersReducedMotion, timing } from "~/lib/animations";
 import anime from "~/lib/anime";
 import { HeroBackground } from "../ui/hero-background";
+import { Section } from "../ui/section";
 
 const name = "Sachin Sapkota";
 const subtitle = "Full-Stack Developer | Next.js, TypeScript, Golang and more";
@@ -27,9 +28,13 @@ export function Hero() {
 	const greetingRef = useRef<HTMLDivElement>(null);
 	const [subtitleText, setSubtitleText] = useState("");
 	const [showCursor, setShowCursor] = useState(true);
-	const [greeting] = useState(getGreeting);
+	const [greeting, setGreeting] = useState("Hello");
 	const hasAnimated = useRef(false);
 	const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+	useEffect(() => {
+		setGreeting(getGreeting());
+	}, []);
 
 	// The animation callback
 	const animationCallback = (_element: HTMLElement) => {
@@ -124,8 +129,9 @@ export function Hero() {
 	};
 
 	return (
-		<section
-			className="relative flex min-h-screen items-center justify-center overflow-hidden"
+		<Section
+			className="relative flex min-h-screen items-center justify-center overflow-hidden py-0"
+			container={false}
 			id="hero"
 			ref={sectionRef}
 		>
@@ -211,6 +217,6 @@ export function Hero() {
 					</div>
 				</div>
 			</div>
-		</section>
+		</Section>
 	);
 }

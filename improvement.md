@@ -83,7 +83,7 @@ Separate business logic from presentation.
 - [x] **Task**: Create `src/app/_components/sections/` for page sections (Hero, About).
 
 ### Component Composition Pattern
-- [ ] **Task**: Refactor Sections to use a `Section` wrapper.
+- [x] **Task**: Refactor Sections to use a `Section` wrapper.
 - [ ] **Context**:
   ```tsx
   // src/app/_components/ui/section.tsx
@@ -104,8 +104,8 @@ Separate business logic from presentation.
   ```
 
 ### Strict Mode & Hydration Audit
-- [ ] **Task**: Review `layout.tsx` for `suppressHydrationWarning`.
-- [ ] **Subtask**: Move the theme initialization script to a dedicated helper/constants file (`theme-script.tsx`) to keep layout clean and testable.
+- [x] **Task**: Review `layout.tsx` for `suppressHydrationWarning`.
+- [x] **Subtask**: Move the theme initialization script to a dedicated helper/constants file (`theme-script.tsx`) to keep layout clean and testable.
 
 ---
 
